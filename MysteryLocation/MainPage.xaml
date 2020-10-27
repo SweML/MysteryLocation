@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MysteryLocation.MainPage">
+    <StackLayout>
+        <StackLayout Orientation="Horizontal">
+
+        <Button Text="Settings"
+                VerticalOptions="CenterAndExpand"
+               HorizontalOptions="Center"
+                Clicked="SettingsButtonClicked"/>
+               
+        <Button Text="Feed"
+                VerticalOptions="CenterAndExpand"
+               HorizontalOptions="Center"
+                Clicked="FeedButtonClicked"/>
+        <Button Text="Marked"
+                VerticalOptions="CenterAndExpand"
+               HorizontalOptions="Center"
+                Clicked="MarkedButtonClicked"/>
+                
+        <Button Text="Unlocked"
+                VerticalOptions="CenterAndExpand"
+               HorizontalOptions="Center"
+                Clicked="UnlockedButtonClicked"/>
+                
+
+            </StackLayout>
+
+        <Button Text="Create a new post"
+                VerticalOptions="Start"
+                HorizontalOptions="Center"
+                Clicked="NewButtonClicked"
+                />
+
+        <Button Text="Write GPS"
+                VerticalOptions="Start"
+                HorizontalOptions="Center"
+                Clicked="getLocation"
+                />
+        <ScrollView>
+
+            <!--Here we put posts from server-->
+            <ActivityIndicator x:Name="defaultActivityIndicator"
+                           VerticalOptions="CenterAndExpand"
+                           HorizontalOptions="Fill" />
+            <Label x:Name="Content"
+                   Text="Campus Helsingborg LTH &#10; Maecenas et tempor eros. Aenean vel urna vel sapien elementum commodo. Nunc et laoreet neque, at ultricies ipsum. Curabitur aliquam malesuada iaculis. Aenean id lectus sapien. Curabitur tempus neque a ex consectetur pretium. Mauris sit amet mi dolor."
+                   VerticalOptions="StartAndExpand"
+                   HorizontalOptions="Center"
+                                 />
+        </ScrollView>
+
+        <Grid>
+<Grid.RowDefinitions>
+<RowDefinition Height="*" />
+<RowDefinition Height="Auto" />
+</Grid.RowDefinitions>
+
+<Image x:Name="imgCam" Grid.Row="0" Grid.Column="0"/>
+
+<Button x:Name="btnCam" Text="SNAP A PIC" Grid.Row="1" Grid.Column="0" Margin="2" Clicked="BtnCam_Clicked"
+BackgroundColor="#00a4fc" TextColor="#FFF"/>
+</Grid>
+    </StackLayout>
+</ContentPage>
