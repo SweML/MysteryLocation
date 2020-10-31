@@ -31,4 +31,4 @@ using Android.App;
 
 // Camera permissions
 [assembly: UsesFeature("android.hardware.camera", Required = true)]
-[assembly: UsesFeature("android.hardware.camera.autofocus", Required = false)]
+[assembly: UsesFeature("android.hardware.camera.autofocus", Required = true)]

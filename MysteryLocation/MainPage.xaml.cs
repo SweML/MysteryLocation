@@ -17,7 +17,9 @@ namespace MysteryLocation
         {
             InitializeComponent();
             APIConnection api = new APIConnection(Content);
+            defaultActivityIndicator.IsRunning = true;
             api.RefreshDataAsync();
+            //defaultActivityIndicator.IsRunning = false;
         }
 
         async void FeedButtonClicked(object sender, EventArgs args)
@@ -79,11 +81,14 @@ namespace MysteryLocation
 
         private async void BtnCam_Clicked(object sender, EventArgs e)
         {
+            Console.WriteLine("Camera button works at least");
             try
             {
+                await CrossMedia.Current.Initialize();
+
                 var photo = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions()
                 {
-                    DefaultCamera = Plugin.Media.Abstractions.CameraDevice.Rear,
+                    DefaultCamera = CameraDevice.Rear,
                     Directory = "Xamarin",
                     SaveToAlbum = true
                 });
