@@ -13,6 +13,7 @@ namespace MysteryLocation
 {
     public partial class MainPage : ContentPage
     {
+        ViewCompass vm;
         public MainPage()
         {
             InitializeComponent();
@@ -20,6 +21,8 @@ namespace MysteryLocation
             defaultActivityIndicator.IsRunning = true;
             api.RefreshDataAsync();
             //defaultActivityIndicator.IsRunning = false;
+            BindingContext = vm = new ViewCompass();
+            vm.Start();
         }
 
         async void FeedButtonClicked(object sender, EventArgs args)
@@ -42,6 +45,10 @@ namespace MysteryLocation
         {
             Console.WriteLine("Unlocked button works.");
         }
+
+        
+
+       
 
         async void NewButtonClicked(object sender, EventArgs args)
         {
@@ -78,6 +85,8 @@ namespace MysteryLocation
                 // Unable to get location
             }
         }
+
+
 
         private async void BtnCam_Clicked(object sender, EventArgs e)
         {

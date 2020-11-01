@@ -5,27 +5,52 @@
     <StackLayout>
         <StackLayout Orientation="Horizontal">
 
-        <Button Text="Settings"
+            <Button Text="Settings"
                 VerticalOptions="CenterAndExpand"
                HorizontalOptions="Center"
                 Clicked="SettingsButtonClicked"/>
-               
-        <Button Text="Feed"
+
+            <Button Text="Feed"
                 VerticalOptions="CenterAndExpand"
                HorizontalOptions="Center"
                 Clicked="FeedButtonClicked"/>
-        <Button Text="Marked"
+            <Button Text="Marked"
                 VerticalOptions="CenterAndExpand"
                HorizontalOptions="Center"
                 Clicked="MarkedButtonClicked"/>
-                
-        <Button Text="Unlocked"
+
+            <Button Text="Unlocked"
                 VerticalOptions="CenterAndExpand"
                HorizontalOptions="Center"
                 Clicked="UnlockedButtonClicked"/>
-                
 
-            </StackLayout>
+
+
+        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Image HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand" 
+                   Rotation="{Binding Heading}"
+               Source="compass.png"/>
+
+            <Image HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Source="arrow.png"
+               Margin="75"
+               x:Name="ImageArrow"/>
+
+            <Label Grid.Row="1" 
+            Text="{Binding HeadingDisplay}" 
+           x:Name="LabelInfo"
+           VerticalOptions="Center" 
+           HorizontalOptions="Center" />
+
+        </Grid>
 
         <Button Text="Create a new post"
                 VerticalOptions="Start"
