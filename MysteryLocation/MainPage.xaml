@@ -29,7 +29,7 @@
         </StackLayout>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="300"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
@@ -41,14 +41,16 @@
             <Image HorizontalOptions="Center"
                VerticalOptions="Center"
                Source="arrow.png"
-               Margin="75"
+               
                x:Name="ImageArrow"/>
 
-            <Label Grid.Row="1" 
+            <Label 
             Text="{Binding HeadingDisplay}" 
            x:Name="LabelInfo"
            VerticalOptions="Center" 
-           HorizontalOptions="Center" />
+           HorizontalOptions="Center" 
+                TextColor="Black"
+                FontSize="Large"/>
 
         </Grid>
 

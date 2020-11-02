@@ -91,9 +91,6 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\arrow.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\MysteryLocation\MysteryLocation.csproj">
       <Project>{E607246E-226B-46AF-BF4F-CB25E74B21AF}</Project>
       <Name>MysteryLocation</Name>
@@ -101,6 +98,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\compass.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\arrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>

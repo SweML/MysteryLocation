@@ -62,7 +62,8 @@ namespace MysteryLocation
         void Compass_ReadingChanged(object sender, CompassChangedEventArgs e)
         {
             Heading = e.Reading.HeadingMagneticNorth;
-            HeadingDisplay = $"Heading: {Heading.ToString()}";
+            int huvud = (int)Heading;
+            HeadingDisplay = $" {huvud.ToString()}°";
         }
 
         bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
