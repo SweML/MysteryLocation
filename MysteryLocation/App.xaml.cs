@@ -12,11 +12,13 @@ namespace MysteryLocation
 
              MainPage = new MainPage();
 
+             MainPage = new SettingsPage();
+
             //MainPage = new PhotoPage();
 
             //NavigationPage navigation = new NavigationPage(new MainPage());
-            
-            
+
+
         }
 
         protected override void OnStart()

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:MysteryLocation.ViewModel"
+             x:Class="MysteryLocation.SettingsPage">
+    <ContentPage.BindingContext>
+        <local:CategoryViewModel></local:CategoryViewModel>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Picker ItemDisplayBinding="{Binding CategoryName}" x:Name="CategoryEntry" Title="Select Category" ItemsSource="{Binding CatList}"/>
+
+            <Slider Maximum="10000"
+                    Minimum="100"
+                ValueChanged="OnSliderValueChanged" />
+
+            <Label x:Name="displayLabel"
+               Text="(uninitialized)"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand" />
+
+            <Button Text="Save Settings"
+                VerticalOptions="End"
+                HorizontalOptions="Center"
+                Clicked="SavedButtonClicked"
+                />
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
