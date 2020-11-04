@@ -20,6 +20,7 @@ namespace MysteryLocation
             APIConnection api = new APIConnection(Content);
             defaultActivityIndicator.IsRunning = true;
             api.RefreshDataAsync();
+            api.CreateNewPost();
             //defaultActivityIndicator.IsRunning = false;
             BindingContext = vm = new ViewCompass();
             vm.Start();
