@@ -3,23 +3,27 @@ namespace MysteryLocation
 {
     public class Post
     {
-        private int id { get; }
-        private String subject { get; }
-        private String body { get; }
-        //private String image { get; }
-        private String created;
-        private String lastUpdated;
-        private String position;
+        private int id { get; set; }
+        private String subject { get; set; }
+        private String body { get; set; }
+        private String created { get; set; }
+        private String lastUpdated { get; set; }
+        private Coordinate position { get; set; }
 
-public Post(String subject, String body, String image, String created, String lastUpdated, String position)
+public Post(int id, String subject, String body, String image, String created, String lastUpdated, Coordinate position)
         {
+            this.id = id;
             this.subject = subject;
             this.body = body;
-            //this.image = image;
             this.created = created;
             this.lastUpdated = lastUpdated;
             this.position = position;
 
+        }
+
+        public int getId()
+        {
+            return id;
         }
 
 
@@ -31,6 +35,12 @@ public Post(String subject, String body, String image, String created, String la
         public void lockImage()
         {
 
+        }
+
+        public String toString()
+        {
+            string toReturn = id + "\n" + subject + "\n" + body + "\n" + created + "\n" + lastUpdated + "\n" + position.toString() + "\n";
+            return toReturn;
         }
     }
 }
