@@ -12,6 +12,7 @@ namespace MysteryLocation
     {
         private HttpClient client;
         private Label label;
+        private List<Post> currentPosts;
 
         public APIConnection(Label label)
         {
@@ -66,6 +67,26 @@ namespace MysteryLocation
 
         }
 
+        /**
+         * Use this method to populate the list variable in this class.
+         */
+        public async void GetPostsAsync() 
+        {
+            List<Post> posts = null;
+            Uri uri = new Uri(string.Format("https://saabstudent2020.azurewebsites.net/observation", string.Empty));
+            HttpResponseMessage response = await client.GetAsync(uri);
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                posts = JsonConvert.DeserializeObject<List<Post>>(content);
+                currentPosts = posts;
+            }
+        }
+
+        public List<Post> getCurrentPosts()
+        {
+            return currentPosts;
+        }
 
     }
 }
