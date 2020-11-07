@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using MysteryLocation.Model;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 
@@ -13,11 +14,13 @@ namespace MysteryLocation
         private HttpClient client;
         private Label label;
         private List<Post> currentPosts;
+        User user;
 
-        public APIConnection(Label label)
+        public APIConnection(Label label, User user)
         {
             client = new HttpClient();
             this.label = label;
+            this.user = user;
         }
 
         public async void RefreshDataAsync() // Get 
@@ -81,6 +84,13 @@ namespace MysteryLocation
                 posts = JsonConvert.DeserializeObject<List<Post>>(content);
                 currentPosts = posts;
             }
+           /* foreach (Post p in currentPosts)
+            {
+                if (!user.category.Equals(p.subject))
+                {
+                    currentPosts.Remove(p);
+                }
+            }*/ //Code to filter the list
         }
 
         public List<Post> getCurrentPosts()

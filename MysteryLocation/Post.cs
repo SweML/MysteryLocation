@@ -4,7 +4,7 @@ namespace MysteryLocation
     public class Post
     {
         private int id { get; set; }
-        private String subject { get; set; }
+        public String subject { get; set; }
         private String body { get; set; }
         private String created { get; set; }
         private String lastUpdated { get; set; }

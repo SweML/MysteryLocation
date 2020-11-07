@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MysteryLocation.Model
 {
-    class User
+    public class User
     {
         private List<Post> feed { get; set; }
         private List<Post> marked { get; set; }
@@ -12,16 +12,24 @@ namespace MysteryLocation.Model
         private Coordinate lastPosition { get; set; }
         private bool newUser { get; set; }
 
-        private Category category { get; set; }
-        public User(List<Post> feed, List<Post> marked, List<Post> unlocked, Coordinate lastPosition, bool newUser, Category category)
+        public Category category { get; set; }
+        public User(List<Post> feed, List<Post> marked, List<Post> unlocked,  bool newUser, Category category)
         {
             this.feed = feed;
             this.marked = marked;
             this.unlocked = unlocked;
-            this.lastPosition = lastPosition;
             this.newUser = newUser;
             this.category = category;
         }
+        /**
+         * Reads the cookie file for information about the user.
+         */
+        public void ReadUser()
+        {
+
+        }
+
+
 
 
     }

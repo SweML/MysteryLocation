@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MysteryLocation.Model;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Xamarin.Essentials;
@@ -14,9 +15,13 @@ namespace MysteryLocation
     public partial class MainPage : ContentPage
     {
         ViewCompass vm;
+        User user;
         public MainPage()
         {
             InitializeComponent();
+            // Creates a new user, reads from cookie file if it exists, else update User variables during execution.
+            user = new User(null, null, null, false, null);
+            user.ReadUser();
             APIConnection api = new APIConnection(Content);
             defaultActivityIndicator.IsRunning = true;
             api.RefreshDataAsync();
