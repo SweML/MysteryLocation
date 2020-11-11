@@ -42,6 +42,24 @@ namespace MysteryLocation
 
 
         }
+        /** Method to delete an observation.
+         *  Currently not supported by the API.
+         *  The response returns an errorcode 405
+         * */
+        /*public async void deleteItem(int observationID)
+        {
+           // Uri uri = new Uri(string.Format("https://saabstudent2020.azurewebsites.net/observation", string.Empty));
+            Uri uri = new Uri(string.Format("https://saabstudent2020.azurewebsites.net/observation/", observationID));
+            HttpResponseMessage response = await client.DeleteAsync(uri);
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine(@"\tTodoItem successfully deleted.");
+            }
+            else
+            {
+                Console.WriteLine("Delete failed " + response);
+            }
+        }*/
 
         public async void CreateNewPost()
         {

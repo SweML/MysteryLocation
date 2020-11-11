@@ -22,10 +22,14 @@ namespace MysteryLocation
             // Creates a new user, reads from cookie file if it exists, else update User variables during execution.
             user = new User(null, null, null, false, null);
             user.ReadUser();
-            APIConnection api = new APIConnection(Content);
+            APIConnection api = new APIConnection(Content, user);
             defaultActivityIndicator.IsRunning = true;
             api.RefreshDataAsync();
-            api.CreateNewPost();
+           // api.deleteItem(106);
+            //api.CreateNewPost();
+           // Coordinate p1 = new Coordinate(55, 13);
+           // Coordinate p2 = new Coordinate(55, 14);
+           // p1.getDistance(p2);
             //defaultActivityIndicator.IsRunning = false;
             BindingContext = vm = new ViewCompass();
             vm.Start();
