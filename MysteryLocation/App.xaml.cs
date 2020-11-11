@@ -12,7 +12,7 @@ namespace MysteryLocation
 
              MainPage = new MainPage();
 
-             MainPage = new SettingsPage();
+            // MainPage = new SettingsPage();
 
             //MainPage = new PhotoPage();
 

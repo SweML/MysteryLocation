@@ -33,6 +33,8 @@ namespace MysteryLocation
             //defaultActivityIndicator.IsRunning = false;
             BindingContext = vm = new ViewCompass();
             vm.Start();
+           // GPSUpdater gps = new GPSUpdater(Content);
+           // gps.startTimer(3);
         }
 
         async void FeedButtonClicked(object sender, EventArgs args)
