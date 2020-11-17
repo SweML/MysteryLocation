@@ -28,7 +28,11 @@
                 Clicked="CompassButtonClicked"/>
         </StackLayout>
        -->
-
+        <Label x:Name="currentGPS"
+               Text=""
+               VerticalOptions="StartAndExpand"
+               HorizontalOptions="Center"/>
+        
         <Button Text="Create a new post"
                 VerticalOptions="Start"
                 HorizontalOptions="Center"

@@ -1,4 +1,5 @@
 ﻿
+using MysteryLocation.Model;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,6 +11,9 @@ namespace MysteryLocation
         public App()
         {
             InitializeComponent();
+
+            UserHolder.user = new User(null, null, null, true, 329);
+            Console.WriteLine("The user has been created.");
 
             MainPage = new NavigationBar();
 

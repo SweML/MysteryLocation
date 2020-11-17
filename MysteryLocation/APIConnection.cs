@@ -14,13 +14,12 @@ namespace MysteryLocation
         private HttpClient client;
         private Label label;
         private List<Post> currentPosts;
-        User user;
+        
 
-        public APIConnection(Label label, User user)
+        public APIConnection(Label label)
         {
             client = new HttpClient();
             this.label = label;
-            this.user = user;
         }
 
         public async void RefreshDataAsync() // Get 
@@ -37,6 +36,7 @@ namespace MysteryLocation
                 var posts = ConvertJsonToPosts(content);
                 label.Text = posts.ToString();
                 Console.WriteLine(posts);
+                UserHolder.user.populateLists(ConvertJsonToPostsUser(content));
 
             }
 
@@ -86,6 +86,13 @@ namespace MysteryLocation
             }
             return everything;
 
+        }
+
+        private List<Post> ConvertJsonToPostsUser(string JsonString)
+        {
+            List<Post> posts;
+            posts = JsonConvert.DeserializeObject<List<Post>>(JsonString);
+            return posts;
         }
 
         /**

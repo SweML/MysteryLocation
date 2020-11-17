@@ -14,24 +14,26 @@ namespace MysteryLocation
 {
     public partial class MainPage : ContentPage
     {
-        User user;
+       // User user;
         public MainPage()
         {
             InitializeComponent();
             // Creates a new user, reads from cookie file if it exists, else update User variables during execution.
-            user = new User(null, null, null, false, null);
-            user.ReadUser();
-            APIConnection api = new APIConnection(Content, user);
+            //user = new User(null, null, null, false, null);
+            //user.ReadUser();
+            APIConnection api = new APIConnection(Content);
             defaultActivityIndicator.IsRunning = true;
             api.RefreshDataAsync();
+            Console.WriteLine("The user's category is: " + UserHolder.user.category);
+            
            // api.deleteItem(106);
             //api.CreateNewPost();
            // Coordinate p1 = new Coordinate(55, 13);
            // Coordinate p2 = new Coordinate(55, 14);
            // p1.getDistance(p2);
             //defaultActivityIndicator.IsRunning = false;
-           // GPSUpdater gps = new GPSUpdater(Content);
-           // gps.startTimer(3);
+            GPSUpdater gps = new GPSUpdater(currentGPS);
+            gps.startTimer(30);
         }
 
         async void FeedButtonClicked(object sender, EventArgs args)

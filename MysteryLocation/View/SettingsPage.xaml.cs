@@ -14,6 +14,7 @@ namespace MysteryLocation
 {
     public partial class SettingsPage : ContentPage
     {
+        
         public SettingsPage()
         {
             InitializeComponent();
@@ -22,6 +23,8 @@ namespace MysteryLocation
         void SavedButtonClicked(object sender, EventArgs args)
         {
             int CategoryId = ((Category)CategoryEntry.SelectedItem).CategoryId;
+            UserHolder.user.setCategory(CategoryId);
+            Console.WriteLine();
             Console.WriteLine("Saved");
         }
 
