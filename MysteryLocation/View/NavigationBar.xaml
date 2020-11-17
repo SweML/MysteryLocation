@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:MysteryLocation" 
+            x:Class="MysteryLocation.NavigationBar"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            BarBackgroundColor="#000000"
+            android:TabbedPage.BarItemColor="#FFFFFF"
+            android:TabbedPage.BarSelectedItemColor="Red"
+            >
+
+    <NavigationPage Title="Settings" IconImageSource="settingsIcon.png" >
+        <x:Arguments>
+            <local:SettingsPage />
+        </x:Arguments>
+    </NavigationPage>
+    
+    <!-- Temporary compass-->
+    <NavigationPage Title="Compass" IconImageSource="compassIcon">
+        <x:Arguments>
+            <local:CompassPage />
+        </x:Arguments>
+    </NavigationPage>
+    
+    <NavigationPage Title="Home" IconImageSource="homeIcon" >
+        <x:Arguments>
+            <local:MainPage />
+        </x:Arguments>
+    </NavigationPage>
+    
+   
+</TabbedPage>
