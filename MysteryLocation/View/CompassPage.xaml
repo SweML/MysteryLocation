@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MysteryLocation.CompassPage"
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.BackButtonTitle="False">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+                <!--Here we put compass for fun -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="500"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Image HorizontalOptions="FillAndExpand"
+               VerticalOptions="FillAndExpand" 
+                   Rotation="{Binding Heading}"
+               Source="compass.png"/>
+
+                <Image HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Source="compassArrow.png" 
+               x:Name="CompassArrow"/>
+
+                <Image HorizontalOptions="Center"
+               VerticalOptions="Center"
+               Rotation="{Binding Beta}"
+               Source="arrow.png" 
+               x:Name="ImageArrow"/>
+
+                <Label 
+            Text="{Binding HeadingDisplay}" 
+           x:Name="LabelInfo"
+           VerticalOptions="Center" 
+           HorizontalOptions="Center" 
+                TextColor="Black"
+                FontSize="30"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -14,7 +14,6 @@ namespace MysteryLocation
 {
     public partial class MainPage : ContentPage
     {
-        ViewCompass vm;
         User user;
         public MainPage()
         {
@@ -31,8 +30,6 @@ namespace MysteryLocation
            // Coordinate p2 = new Coordinate(55, 14);
            // p1.getDistance(p2);
             //defaultActivityIndicator.IsRunning = false;
-            BindingContext = vm = new ViewCompass();
-            vm.Start();
            // GPSUpdater gps = new GPSUpdater(Content);
            // gps.startTimer(3);
         }

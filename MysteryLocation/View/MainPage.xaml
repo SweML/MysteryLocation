@@ -1,14 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MysteryLocation.MainPage">
+             x:Class="MysteryLocation.MainPage"
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.BackButtonTitle="False">
     <StackLayout>
+        <!--Here we put compass for fun 
         <StackLayout Orientation="Horizontal">
 
             <Button Text="Settings"
                 VerticalOptions="CenterAndExpand"
                HorizontalOptions="Center"
-                Clicked="SettingsButtonClicked"/>
+               Clicked="SettingsButtonClicked"/>
 
             <Button Text="Feed"
                 VerticalOptions="CenterAndExpand"
@@ -22,37 +25,9 @@
             <Button Text="Unlocked"
                 VerticalOptions="CenterAndExpand"
                HorizontalOptions="Center"
-                Clicked="UnlockedButtonClicked"/>
-
-
-
+                Clicked="CompassButtonClicked"/>
         </StackLayout>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="300"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <Image HorizontalOptions="FillAndExpand"
-               VerticalOptions="FillAndExpand" 
-                   Rotation="{Binding Heading}"
-               Source="compass.png"/>
-
-            <Image HorizontalOptions="Center"
-               VerticalOptions="Center"
-               Source="arrow.png"
-               
-               x:Name="ImageArrow"/>
-
-            <Label 
-            Text="{Binding HeadingDisplay}" 
-           x:Name="LabelInfo"
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" 
-                TextColor="Black"
-                FontSize="Large"/>
-
-        </Grid>
+       -->
 
         <Button Text="Create a new post"
                 VerticalOptions="Start"
@@ -77,19 +52,18 @@
                    VerticalOptions="StartAndExpand"
                    HorizontalOptions="Center"
                                  />
-            
         </ScrollView>
 
         <Grid>
-<Grid.RowDefinitions>
-<RowDefinition Height="*" />
-<RowDefinition Height="Auto" />
-</Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-<Image x:Name="imgCam" Grid.Row="0" Grid.Column="0"/>
+            <Image x:Name="imgCam" Grid.Row="0" Grid.Column="0"/>
 
-<Button x:Name="btnCam" Text="SNAP A PIC" Grid.Row="1" Grid.Column="0" Margin="2" Clicked="BtnCam_Clicked"
+            <Button x:Name="btnCam" Text="SNAP A PIC" Grid.Row="1" Grid.Column="0" Margin="2" Clicked="BtnCam_Clicked"
 BackgroundColor="#00a4fc" TextColor="#FFF"/>
-</Grid>
+        </Grid>
     </StackLayout>
 </ContentPage>
