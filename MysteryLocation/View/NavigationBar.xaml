@@ -29,5 +29,15 @@
         </x:Arguments>
     </NavigationPage>
     
-   
+    <NavigationPage Title="Marked" IconImageSource="feedIcon" >
+        <x:Arguments>
+            <local:MarkedPostsPage />
+        </x:Arguments>
+    </NavigationPage>
+    
+    <NavigationPage Title="Unlocked" IconImageSource="unlockedIcon" >
+        <x:Arguments>
+            <local:UnlockedPostsPage />
+        </x:Arguments>
+    </NavigationPage>
 </TabbedPage>
