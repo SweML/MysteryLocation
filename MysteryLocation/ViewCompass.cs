@@ -70,11 +70,10 @@ namespace MysteryLocation
 
             try
             {
-                var my = await Geolocation.GetLocationAsync();
-                if (my != null)
-                {
-                    Beta = Heading + Bearing(my.Latitude, my.Longitude, 21.422512, 39.826198);
-                }
+                var location = await Geolocation.GetLastKnownLocationAsync();
+
+                Beta = Heading + Bearing(location.Latitude, location.Longitude, 21.422512, 39.826198);
+               
             }
             catch (FeatureNotSupportedException fnsEx)
             {

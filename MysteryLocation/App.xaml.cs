@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,9 +11,9 @@ namespace MysteryLocation
         {
             InitializeComponent();
 
-             MainPage = new MainPage();
+            MainPage = new NavigationBar();
 
-            // MainPage = new SettingsPage();
+            //MainPage = new SettingsPage();
 
             //MainPage = new PhotoPage();
 
