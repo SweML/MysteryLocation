@@ -82,8 +82,8 @@ namespace MysteryLocation
             String everything = "";
             foreach (Post p in posts)
             {
-                Console.WriteLine(p.toString());
-                everything += p.toString();
+               // Console.WriteLine(p.toString());
+               // everything += p.toString();
             }
             return everything;
 

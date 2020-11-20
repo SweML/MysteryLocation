@@ -37,7 +37,7 @@ public Post(int id, String subject, String body, String image, String created, S
 
         }
 
-        public String toString()
+        public String ToString()
         {
             string toReturn = id + "\n" + subject + "\n" + body + "\n" + created + "\n" + lastUpdated + "\n" + position.toString() + "\n";
             return toReturn;

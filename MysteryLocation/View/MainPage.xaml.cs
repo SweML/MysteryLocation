@@ -23,11 +23,7 @@ namespace MysteryLocation
             //user = new User(null, null, null, false, null);
             //user.ReadUser();
             this.user = user;
-            APIConnection api = new APIConnection(Content);
             defaultActivityIndicator.IsRunning = true;
-            api.RefreshDataAsync();
-            
-            
            // api.deleteItem(106);
             //api.CreateNewPost();
            // Coordinate p1 = new Coordinate(55, 13);
@@ -64,6 +60,19 @@ namespace MysteryLocation
 
             await Navigation.PushAsync(new PublishPage(user), false);
             Console.WriteLine("Createbutton works.");
+        }
+
+        async void UpdatePosts(object sender, EventArgs args)
+        {
+            user.updatePosts();
+            List<Post> posts = user.getFeed();
+            String postData = "";
+            Console.WriteLine("posts size is " + posts.Count);
+            foreach(Post x in posts)
+            {
+                postData += x.ToString();
+            }
+            Content.Text = postData;
         }
 
         async void getLocation(object sender, EventArgs args)

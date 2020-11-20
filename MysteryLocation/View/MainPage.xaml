@@ -39,10 +39,10 @@
                 Clicked="CreateButtonClicked"
                 />
 
-        <Button Text="Write GPS"
+        <Button Text="Update posts"
                 VerticalOptions="Start"
                 HorizontalOptions="Center"
-                Clicked="getLocation"
+                Clicked="UpdatePosts"
                 />
         <ScrollView>
 
