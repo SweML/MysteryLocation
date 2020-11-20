@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MysteryLocation.Model
 {
@@ -28,7 +29,7 @@ namespace MysteryLocation.Model
         /**
          * Method to forcefully tell the user to update Posts.
          */
-        void updatePosts();
+        Task updatePosts();
 
         List<Post> getFeed();
 

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using MysteryLocation.Model;
 using Newtonsoft.Json;
 using Xamarin.Forms;
@@ -19,18 +20,23 @@ namespace MysteryLocation
         public APIConnection()
         {
             client = new HttpClient();
+            currentPosts = new List<Post>();
           
         }
 
-        public async void RefreshDataAsync() // Get 
+        public async Task RefreshDataAsync() // Get 
         {
             Console.WriteLine("Trying to connect to API");
             Uri uri = new Uri(string.Format("https://saabstudent2020.azurewebsites.net/observation", string.Empty));
+            Console.WriteLine("Trying to connect to API2");
             // ActivityIndicator activityIndicator = new ActivityIndicator { Color = Color.Orange };
             HttpResponseMessage response = await client.GetAsync(uri);
+            Console.WriteLine("Trying to connect to API3");
             if (response.IsSuccessStatusCode)
             {
+                Console.WriteLine("Trying to connect to API4");
                 string content = await response.Content.ReadAsStringAsync();
+                Console.WriteLine("Trying to connect to API5");
                 Console.WriteLine(content);
                 Console.WriteLine("In if statement in RefreshDataAsync");
                 currentPosts = ConvertJsonToPostsUser(content);

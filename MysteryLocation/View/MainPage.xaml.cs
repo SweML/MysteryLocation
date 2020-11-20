@@ -31,6 +31,7 @@ namespace MysteryLocation
            // p1.getDistance(p2);
             //defaultActivityIndicator.IsRunning = false;
             GPSUpdater gps = new GPSUpdater(currentGPS);
+           // user.updatePosts();
             gps.startTimer(30);
         }
 
@@ -64,15 +65,25 @@ namespace MysteryLocation
 
         async void UpdatePosts(object sender, EventArgs args)
         {
-            user.updatePosts();
-            List<Post> posts = user.getFeed();
-            String postData = "";
-            Console.WriteLine("posts size is " + posts.Count);
-            foreach(Post x in posts)
+            try
             {
-                postData += x.ToString();
+                user.updatePosts();
+                List<Post> posts = user.getFeed();
+                if (posts != null)
+                {
+                    String postData = "";
+                    Console.WriteLine("posts size is " + posts.Count);
+                    foreach (Post x in posts)
+                    {
+                        postData += x.ToString();
+                    }
+                    Content.Text = postData;
+                }
             }
-            Content.Text = postData;
+            catch (Exception ex)
+            {
+                // Unable to get location
+            }
         }
 
         async void getLocation(object sender, EventArgs args)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace MysteryLocation.Model
 {
@@ -30,6 +31,7 @@ namespace MysteryLocation.Model
             unlockedSet = new HashSet<int>();
             markedSet = new HashSet<int>();
             conn = new APIConnection();
+           // conn.RefreshDataAsync();
         }
 
         public bool isNewUser()
@@ -116,9 +118,10 @@ namespace MysteryLocation.Model
             }
         }
 
-        public void updatePosts()
+        public async Task updatePosts()
         {
-            conn.RefreshDataAsync();
+            await conn.RefreshDataAsync();
+            
             List<Post> fromAPI = conn.getCurrentPosts();
             if (!newUser)
             {
