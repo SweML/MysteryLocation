@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MysteryLocation.Model;
+using MysteryLocation.View;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Xamarin.Essentials;
@@ -57,14 +58,11 @@ namespace MysteryLocation
             Console.WriteLine("Unlocked button works.");
         }
 
-        
-
-       
-
-        async void NewButtonClicked(object sender, EventArgs args)
+        async void CreateButtonClicked(object sender, EventArgs args)
         {
-            Console.WriteLine("New button works.");
 
+            await Navigation.PushAsync(new PublishPage(), false);
+            Console.WriteLine("Createbutton works.");
         }
 
         async void getLocation(object sender, EventArgs args)
@@ -94,32 +92,6 @@ namespace MysteryLocation
             catch (Exception ex)
             {
                 // Unable to get location
-            }
-        }
-
-
-
-        private async void BtnCam_Clicked(object sender, EventArgs e)
-        {
-            Console.WriteLine("Camera button works at least");
-            try
-            {
-                await CrossMedia.Current.Initialize();
-
-                var photo = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions()
-                {
-                    DefaultCamera = CameraDevice.Rear,
-                    Directory = "Xamarin",
-                    SaveToAlbum = true
-                });
-
-                if (photo != null)
-                    imgCam.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
-
-            }
-            catch (Exception ex)
-            {
-                await DisplayAlert("Error", ex.Message.ToString(), "Ok");
             }
         }
 

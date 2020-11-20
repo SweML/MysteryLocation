@@ -36,7 +36,7 @@
         <Button Text="Create a new post"
                 VerticalOptions="Start"
                 HorizontalOptions="Center"
-                Clicked="NewButtonClicked"
+                Clicked="CreateButtonClicked"
                 />
 
         <Button Text="Write GPS"
@@ -58,16 +58,5 @@
                                  />
         </ScrollView>
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-
-            <Image x:Name="imgCam" Grid.Row="0" Grid.Column="0"/>
-
-            <Button x:Name="btnCam" Text="SNAP A PIC" Grid.Row="1" Grid.Column="0" Margin="2" Clicked="BtnCam_Clicked"
-BackgroundColor="#00a4fc" TextColor="#FFF"/>
-        </Grid>
     </StackLayout>
 </ContentPage>

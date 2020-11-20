@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MysteryLocation.View.PublishPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Entry Text="Write subject here (obligatory)"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Image x:Name="imgCam" Grid.Row="0" Grid.Column="0"/>
+                
+                <Entry Text="Write appropriate text here (voluntary)"/>
+
+                <Button x:Name="btnCam" Text="SNAP A PIC" Grid.Row="1" Grid.Column="0" Margin="2" Clicked="BtnCam_Clicked"
+BackgroundColor="#00a4fc" TextColor="#FFF"/>
+                
+            </Grid>
+            <Button x:Name="btnPublish" Text="Publish post!" Grid.Row="1" Grid.Column="0" Margin="2" Clicked="PublishButton_Clicked"
+BackgroundColor="#00a4fc" TextColor="#FFF"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
