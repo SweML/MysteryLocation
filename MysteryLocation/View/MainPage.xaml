@@ -43,14 +43,24 @@
                 VerticalOptions="Start"
                 HorizontalOptions="Center"
                 Clicked="UpdatePosts"
+                      
                 />
+
+
+
+        <ActivityIndicator x:Name="defaultActivityIndicator"
+                               IsRunning="False" 
+                               Color="CornflowerBlue"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="FillAndExpand" 
+                               HeightRequest="80" 
+                               WidthRequest="80"
+                               />
+
         <ScrollView>
 
             <!--Here we put posts from server-->
-            <ActivityIndicator x:Name="defaultActivityIndicator"
-                           VerticalOptions="CenterAndExpand"
-                           HorizontalOptions="Fill" 
-                               IsRunning ="False"/>
+        
             <Label x:Name="Content"
                    Text="Campus Helsingborg LTH &#10; Maecenas et tempor eros. Aenean vel urna vel sapien elementum commodo. Nunc et laoreet neque, at ultricies ipsum. Curabitur aliquam malesuada iaculis. Aenean id lectus sapien. Curabitur tempus neque a ex consectetur pretium. Mauris sit amet mi dolor."
                    VerticalOptions="StartAndExpand"

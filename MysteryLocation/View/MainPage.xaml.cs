@@ -88,6 +88,7 @@ namespace MysteryLocation
 
         async void getLocation(object sender, EventArgs args)
         {
+            spin();
             try
             {
                 var location = await Geolocation.GetLastKnownLocationAsync();
@@ -115,6 +116,18 @@ namespace MysteryLocation
                 // Unable to get location
             }
         }
+
+
+        public async void spin()
+        {
+
+            defaultActivityIndicator.IsRunning = true;
+            await Task.Delay(1000);
+            defaultActivityIndicator.IsRunning = false;
+        }
+
+
+
 
     }
 

@@ -35,6 +35,18 @@ namespace MysteryLocation
             displayLabel.Text = String.Format("Maximum distance {0}", value, "m");
         }
 
+
+
+        public async void spin()
+        {
+
+            defaultActivityIndicator.IsRunning = true;
+            await Task.Delay(2000);
+            defaultActivityIndicator.IsRunning = false;
+        }
+
+
+
     }
 
 }

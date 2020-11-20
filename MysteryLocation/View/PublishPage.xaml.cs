@@ -23,6 +23,7 @@ namespace MysteryLocation.View
         }
         private async void BtnCam_Clicked(object sender, EventArgs e)
         {
+            spin();
             Console.WriteLine("Camera button works at least");
             try
             {
@@ -46,11 +47,20 @@ namespace MysteryLocation.View
         }
         private async void PublishButton_Clicked(object sender, EventArgs e)
         {
-
+            spin();
             Console.WriteLine("Publish button works");
             await Navigation.PopAsync(false);
-
-
         }
+
+
+
+        public async void spin()
+        {
+            defaultActivityIndicator.IsRunning = true;
+            await Task.Delay(1000);
+            defaultActivityIndicator.IsRunning = false;
+        }
+
+
     }
 }

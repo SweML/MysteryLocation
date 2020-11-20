@@ -21,6 +21,18 @@ BackgroundColor="#00a4fc" TextColor="#FFF"/>
             </Grid>
             <Button x:Name="btnPublish" Text="Publish post!" Grid.Row="1" Grid.Column="0" Margin="2" Clicked="PublishButton_Clicked"
 BackgroundColor="#00a4fc" TextColor="#FFF"/>
+
+
+
+            <ActivityIndicator x:Name="defaultActivityIndicator"
+                               IsRunning="False" 
+                               Color="CornflowerBlue"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="FillAndExpand" 
+                               HeightRequest="80" 
+                               WidthRequest="80"
+                               />
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
