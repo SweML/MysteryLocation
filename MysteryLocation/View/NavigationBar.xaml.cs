@@ -1,4 +1,5 @@
 ﻿using MysteryLocation.Model;
+using MysteryLocation.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,10 +46,15 @@ namespace MysteryLocation
             marked.Title = "Marked";
             Children.Add(marked);
 
-            NavigationPage unlocked = new NavigationPage(new UnlockedPostsPage());
+           /* NavigationPage unlocked = new NavigationPage(new UnlockedPostsPage());
             unlocked.IconImageSource = "unlockedIcon.png";
             unlocked.Title = "Unlocked";
             Children.Add(unlocked);
+           */
+            NavigationPage publish = new NavigationPage(new PublishPage());
+            publish.IconImageSource = "unlockedIcon.png";
+            publish.Title = "Publish";
+            Children.Add(publish);
 
 
         }
