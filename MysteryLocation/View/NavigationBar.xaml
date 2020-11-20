@@ -10,14 +10,14 @@
             android:TabbedPage.BarSelectedItemColor="Red"
             >
 
-    <NavigationPage Title="Settings" IconImageSource="settingsIcon.png" >
+  <!--  <NavigationPage Title="Settings" IconImageSource="settingsIcon.png" >
         <x:Arguments>
             <local:SettingsPage />
         </x:Arguments>
-    </NavigationPage>
+    </NavigationPage>-->
     
     <!-- Temporary compass-->
-    <NavigationPage Title="Compass" IconImageSource="compassIcon">
+ <!--   <NavigationPage Title="Compass" IconImageSource="compassIcon">
         <x:Arguments>
             <local:CompassPage />
         </x:Arguments>
@@ -39,5 +39,5 @@
         <x:Arguments>
             <local:UnlockedPostsPage />
         </x:Arguments>
-    </NavigationPage>
+    </NavigationPage>-->
 </TabbedPage>
