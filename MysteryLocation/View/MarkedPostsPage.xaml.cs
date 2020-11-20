@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MysteryLocation.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,8 +13,10 @@ namespace MysteryLocation
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MarkedPostsPage : ContentPage
     {
-        public MarkedPostsPage()
+        User user;
+        public MarkedPostsPage(User user)
         {
+            this.user = user;
             InitializeComponent();
         }
     }

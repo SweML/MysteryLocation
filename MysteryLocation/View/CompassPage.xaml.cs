@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MysteryLocation.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,8 +14,10 @@ namespace MysteryLocation
     public partial class CompassPage : ContentPage
     {
         ViewCompass vm;
-        public CompassPage()
+        User user;
+        public CompassPage(User user)
         {
+            this.user = user;
             InitializeComponent();
             BindingContext = vm = new ViewCompass();
             vm.Start();

@@ -1,4 +1,5 @@
-﻿using Plugin.Media;
+﻿using MysteryLocation.Model;
+using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,10 @@ namespace MysteryLocation.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class PublishPage : ContentPage
     {
-        public PublishPage()
+        User user;
+        public PublishPage(User user)
         {
+            this.user = user;
             InitializeComponent();
         }
         private async void BtnCam_Clicked(object sender, EventArgs e)

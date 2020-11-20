@@ -12,10 +12,10 @@ namespace MysteryLocation
         {
             InitializeComponent();
 
-            UserHolder.user = new User(null, null, null, true, 329);
+            User user = new User(true, 329);
             Console.WriteLine("The user has been created.");
 
-            MainPage = new NavigationBar();
+            MainPage = new NavigationBar(user);
 
             //MainPage = new SettingsPage();
 

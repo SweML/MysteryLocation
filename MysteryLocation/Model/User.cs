@@ -4,7 +4,7 @@ using System.IO;
 
 namespace MysteryLocation.Model
 {
-    public class User
+    public class User : IUser
     {
         private List<Post> feed { get; set; }
         private List<Post> marked { get; set; }
@@ -19,7 +19,8 @@ namespace MysteryLocation.Model
 
         private Post tracking { get; set; }
         private int tracker;
-        public User(List<Post> feed, List<Post> marked, List<Post> unlocked, bool newUser, int category)
+        private APIConnection conn;
+        public User(bool newUser, int category)
         {
             this.feed = feed;
             this.marked = marked;
@@ -28,6 +29,7 @@ namespace MysteryLocation.Model
             this.category = category;
             unlockedSet = new HashSet<int>();
             markedSet = new HashSet<int>();
+            conn = new APIConnection();
         }
 
         public bool isNewUser()
@@ -114,8 +116,10 @@ namespace MysteryLocation.Model
             }
         }
 
-        public void populateLists(List<Post> fromAPI)
+        public void updatePosts()
         {
+            conn.RefreshDataAsync();
+            List<Post> fromAPI = conn.getCurrentPosts();
             if (!newUser)
             {
                 if (markedSet.Count > 0 || unlockedSet.Count > 0)
@@ -150,11 +154,22 @@ namespace MysteryLocation.Model
             }
 
             Console.WriteLine("User now holds " + feed.Count + " posts");
-            
+
         }
 
+        public List<Post> getFeed()
+        {
+            return feed;
+        }
 
+        public List<Post> getUnlocked()
+        {
+            return unlocked;
+        }
 
-
+        public List<Post> getMarked()
+        {
+            return marked;
+        }
     }
 }

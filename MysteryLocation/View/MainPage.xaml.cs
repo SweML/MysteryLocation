@@ -15,17 +15,18 @@ namespace MysteryLocation
 {
     public partial class MainPage : ContentPage
     {
-       // User user;
-        public MainPage()
+        User user;
+        public MainPage(User user)
         {
             InitializeComponent();
             // Creates a new user, reads from cookie file if it exists, else update User variables during execution.
             //user = new User(null, null, null, false, null);
             //user.ReadUser();
+            this.user = user;
             APIConnection api = new APIConnection(Content);
             defaultActivityIndicator.IsRunning = true;
             api.RefreshDataAsync();
-            Console.WriteLine("The user's category is: " + UserHolder.user.category);
+            
             
            // api.deleteItem(106);
             //api.CreateNewPost();
@@ -61,7 +62,7 @@ namespace MysteryLocation
         async void CreateButtonClicked(object sender, EventArgs args)
         {
 
-            await Navigation.PushAsync(new PublishPage(), false);
+            await Navigation.PushAsync(new PublishPage(user), false);
             Console.WriteLine("Createbutton works.");
         }
 

@@ -12,14 +12,14 @@ namespace MysteryLocation
     public class APIConnection
     {
         private HttpClient client;
-        private Label label;
+     
         private List<Post> currentPosts;
         
 
-        public APIConnection(Label label)
+        public APIConnection()
         {
             client = new HttpClient();
-            this.label = label;
+          
         }
 
         public async void RefreshDataAsync() // Get 
@@ -33,15 +33,16 @@ namespace MysteryLocation
                 string content = await response.Content.ReadAsStringAsync();
                 Console.WriteLine(content);
                 Console.WriteLine("In if statement in RefreshDataAsync");
-                var posts = ConvertJsonToPosts(content);
-                label.Text = posts.ToString();
-                Console.WriteLine(posts);
-                UserHolder.user.populateLists(ConvertJsonToPostsUser(content));
+                currentPosts = ConvertJsonToPostsUser(content);
+                //Console.WriteLine(posts);
+                //UserHolder.user.populateLists(ConvertJsonToPostsUser(content));
 
             }
 
 
         }
+
+
         /** Method to delete an observation.
          *  Currently not supported by the API.
          *  The response returns an errorcode 405

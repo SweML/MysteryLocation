@@ -6,6 +6,6 @@ namespace MysteryLocation.Model
 {
     static class UserHolder
     {
-        public static User user;
+        //public static User user;
     }
 }

@@ -14,16 +14,17 @@ namespace MysteryLocation
 {
     public partial class SettingsPage : ContentPage
     {
-        
-        public SettingsPage()
+        User user;
+        public SettingsPage(User user)
         {
+            this.user = user;
             InitializeComponent();
         }
 
         void SavedButtonClicked(object sender, EventArgs args)
         {
             int CategoryId = ((Category)CategoryEntry.SelectedItem).CategoryId;
-            UserHolder.user.setCategory(CategoryId);
+            user.setCategory(CategoryId);
             Console.WriteLine();
             Console.WriteLine("Saved");
         }
