@@ -8,6 +8,19 @@
     <ContentPage.Content>
         <StackLayout>
 
+            <!--<Grid x:Name="Output" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">
+                <Popup VerticalOffset="10" HorizontalOffset="200" x:Name="StandardPopup">
+                    <Border BorderBrush="{StaticResource ApplicationForegroundThemeBrush}" 
+                Background="{StaticResource ApplicationPageBackgroundThemeBrush}"
+                BorderThickness="2" Width="200" Height="200">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <TextBlock Text="Choose a category" FontSize="24.667" HorizontalAlignment="Center"/>
+                            <Button Content="Close" Click="ClosePopupClicked" HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </Popup>
+            </Grid>-->
+
             <Picker ItemDisplayBinding="{Binding CategoryName}" x:Name="CategoryEntry" Title="Select Category" ItemsSource="{Binding CatList}"/>
 
             <Slider Maximum="10000"

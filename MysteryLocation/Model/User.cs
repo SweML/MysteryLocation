@@ -17,6 +17,7 @@ namespace MysteryLocation.Model
 
 
         public int category;
+        public int distance;
 
         private Post tracking { get; set; }
         private int tracker;
@@ -43,6 +44,11 @@ namespace MysteryLocation.Model
         {
             category = cat;
             Console.WriteLine("The user category has been changed to " + category.ToString());
+        }
+        public void setDistance(int dist)
+        {
+            distance = dist;
+            Console.WriteLine("The user distance has been changed to " + distance.ToString());
         }
         /**
          * Reads the cookie file for information about the user.
