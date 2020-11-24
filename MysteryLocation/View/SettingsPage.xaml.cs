@@ -22,7 +22,7 @@ namespace MysteryLocation
 
         User user;
 
-        public object PickerError { get; private set; }
+        //public object PickerError { get; private set; }
 
         public SettingsPage(User user)
         {
@@ -36,31 +36,32 @@ namespace MysteryLocation
             if ((Category)CategoryEntry.SelectedItem == null)
             {
 
-             /*   PickerError.Text = "Choose a category";
-                //if (!StandardPopup.IsOpen) { StandardPopup.IsOpen = true; }
-                //Console.WriteLine("popup");
+                /*   PickerError.Text = "Choose a category";
+                   //if (!StandardPopup.IsOpen) { StandardPopup.IsOpen = true; }
+                   //Console.WriteLine("popup");
 
-                if (value == 0)
-                {
-                    SliderError.Text = "Choose a distance";
-                    return;
-                }
-                SliderError.Text = "";
-                return;
+                   if (value == 0)
+                   {
+                       SliderError.Text = "Choose a distance";
+                       return;
+                   }
+                   SliderError.Text = "";
+                   return;
+               }
+               if (value == 0)
+               {
+                   PickerError.Text = "";
+                   SliderError.Text = "Choose a distance";
+                   return;
+               }
+               PickerError.Text = "";
+               SliderError.Text = "";
+               CategoryId = ((Category)CategoryEntry.SelectedItem).CategoryId;
+               user.setCategory(CategoryId);
+               user.setDistance(value);
+               Console.WriteLine();
+               Console.WriteLine("Saved");*/
             }
-            if (value == 0)
-            {
-                PickerError.Text = "";
-                SliderError.Text = "Choose a distance";
-                return;
-            }
-            PickerError.Text = "";
-            SliderError.Text = "";
-            CategoryId = ((Category)CategoryEntry.SelectedItem).CategoryId;
-            user.setCategory(CategoryId);
-            user.setDistance(value);
-            Console.WriteLine();
-            Console.WriteLine("Saved");*/
         }
 
         //private void ClosePopupClicked(object sender, RoutedEventArgs e)
