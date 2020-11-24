@@ -33,13 +33,11 @@ namespace MysteryLocation
 
         void SavedButtonClicked(object sender, EventArgs args)
         {
-            if ((Category)CategoryEntry.SelectedItem == null)
-            {
-
-                /*   PickerError.Text = "Choose a category";
+               if ((Category)CategoryEntry.SelectedItem == null)
+               {
+                   PickerError.Text = "Choose a category";
                    //if (!StandardPopup.IsOpen) { StandardPopup.IsOpen = true; }
                    //Console.WriteLine("popup");
-
                    if (value == 0)
                    {
                        SliderError.Text = "Choose a distance";
@@ -60,9 +58,8 @@ namespace MysteryLocation
                user.setCategory(CategoryId);
                user.setDistance(value);
                Console.WriteLine();
-               Console.WriteLine("Saved");*/
+               Console.WriteLine("Saved");
             }
-        }
 
         //private void ClosePopupClicked(object sender, RoutedEventArgs e)
         //{
