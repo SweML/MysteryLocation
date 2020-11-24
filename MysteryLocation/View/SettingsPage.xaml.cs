@@ -14,8 +14,12 @@ namespace MysteryLocation
 {
     public partial class SettingsPage : ContentPage
     {
-        private double value;
+        public String PickerErrorMessage;
+        public String SliderErrorMessage;
+
+        private double value = 0;
         private int CategoryId = 0;
+
         User user;
         public SettingsPage(User user)
         {
@@ -25,17 +29,34 @@ namespace MysteryLocation
 
         void SavedButtonClicked(object sender, EventArgs args)
         {
-            int CategoryId = ((Category)CategoryEntry.SelectedItem).CategoryId;
-            if (CategoryId != 0)
+            if ((Category)CategoryEntry.SelectedItem == null)
             {
-                user.setCategory(CategoryId);
-                Console.WriteLine();
-                Console.WriteLine("Saved");
-            }
-            else
-            {
+
+                PickerError.Text = "Choose a category";
                 //if (!StandardPopup.IsOpen) { StandardPopup.IsOpen = true; }
+                //Console.WriteLine("popup");
+
+                if (value == 0)
+                {
+                    SliderError.Text = "Choose a distance";
+                    return;
+                }
+                SliderError.Text = "";
+                return;
             }
+            if (value == 0)
+            {
+                PickerError.Text = "";
+                SliderError.Text = "Choose a distance";
+                return;
+            }
+            PickerError.Text = "";
+            SliderError.Text = "";
+            CategoryId = ((Category)CategoryEntry.SelectedItem).CategoryId;
+            user.setCategory(CategoryId);
+            user.setDistance(value);
+            Console.WriteLine();
+            Console.WriteLine("Saved");
         }
 
         //private void ClosePopupClicked(object sender, RoutedEventArgs e)

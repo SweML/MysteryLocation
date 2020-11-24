@@ -23,9 +23,22 @@
 
             <Picker ItemDisplayBinding="{Binding CategoryName}" x:Name="CategoryEntry" Title="Select Category" ItemsSource="{Binding CatList}"/>
 
+            <Label x:Name="PickerError"
+               TextColor="Red"
+               Text=""
+               HorizontalOptions="Center" />
+
             <Slider Maximum="10000"
                     Minimum="100"
+                    VerticalOptions="CenterAndExpand"
+                    MaximumTrackColor="Blue"
+                    MinimumTrackColor="Red"
                 ValueChanged="OnSliderValueChanged" />
+            
+            <Label x:Name="SliderError"
+               TextColor="Red"
+               Text=""
+               HorizontalOptions="Center" />
 
             <Label x:Name="displayLabel"
                Text="(uninitialized)"
@@ -37,7 +50,6 @@
                 HorizontalOptions="Center"
                 Clicked="SavedButtonClicked"
                 />
-
 
             <ActivityIndicator x:Name="defaultActivityIndicator"
                                IsRunning="False" 
