@@ -29,7 +29,7 @@
         </StackLayout>
        -->
         <Label x:Name="currentGPS"
-               Text=""
+               Text="{Binding Position}"
                VerticalOptions="StartAndExpand"
                HorizontalOptions="Center"/>
         

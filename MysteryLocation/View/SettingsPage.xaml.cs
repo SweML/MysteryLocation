@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MysteryLocation.Model;
+using MysteryLocation.ViewModel;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Xamarin.Essentials;
@@ -21,6 +22,7 @@ namespace MysteryLocation
         {
             this.user = user;
             InitializeComponent();
+          //  currentGPS.BindingContext = new LocationViewModel(user);
         }
 
         void SavedButtonClicked(object sender, EventArgs args)

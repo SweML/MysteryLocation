@@ -7,7 +7,12 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-
+<!--
+            <Label x:Name="currentGPS"
+               Text="{Binding Position}"
+               VerticalOptions="StartAndExpand"
+               HorizontalOptions="Center"/>
+-->
             <!--<Grid x:Name="Output" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">
                 <Popup VerticalOffset="10" HorizontalOffset="200" x:Name="StandardPopup">
                     <Border BorderBrush="{StaticResource ApplicationForegroundThemeBrush}" 

@@ -18,28 +18,45 @@ namespace MysteryLocation.Model
 
         public int category;
         public int distance;
+        public Coordinate currentPos { get; set; }
+
+        public String currPos { get; set; }
 
         private Post tracking { get; set; }
         private int tracker;
         private APIConnection conn;
-        public User(bool newUser, int category)
+        public User(bool newUser, int category, APIConnection conn)
         {
             this.feed = feed;
             this.marked = marked;
             this.unlocked = unlocked;
             this.newUser = newUser;
             this.category = category;
+            this.conn = conn;
+            currPos = "Loading";
             unlockedSet = new HashSet<int>();
             markedSet = new HashSet<int>();
-            conn = new APIConnection();
-           // conn.RefreshDataAsync();
         }
 
+       
         public bool isNewUser()
         {
             return newUser;
         }
 
+        public String getCoordinate()
+        {
+            if (currentPos != null)
+                return currentPos.toString();
+            return "Loading";
+        }
+
+        public void setPosition(Coordinate newCoord)
+        {
+            Console.WriteLine("New coordinate");
+            currentPos = newCoord;
+            currPos = currentPos.toString();
+        }
         public void setCategory(int cat)
         {
             category = cat;

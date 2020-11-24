@@ -1,4 +1,5 @@
 ﻿using MysteryLocation.Model;
+using MysteryLocation.ViewModel;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System;
@@ -20,6 +21,7 @@ namespace MysteryLocation.View
         {
             this.user = user;
             InitializeComponent();
+            currentGPS.BindingContext = new LocationViewModel(user);
         }
         private async void BtnCam_Clicked(object sender, EventArgs e)
         {

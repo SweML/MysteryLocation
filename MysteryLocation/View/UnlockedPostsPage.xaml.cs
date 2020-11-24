@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MysteryLocation.Model;
+using MysteryLocation.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +14,12 @@ namespace MysteryLocation
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class UnlockedPostsPage : ContentPage
     {
-        public UnlockedPostsPage()
+        public User user;
+        public UnlockedPostsPage(User user)
         {
+            this.user = user;
             InitializeComponent();
+            currentGPS.BindingContext = new LocationViewModel(user);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MysteryLocation.Model;
+using System;
 using System.Collections.Generic;
 using System.Net.Mime;
 using System.Text;
@@ -11,10 +12,12 @@ namespace MysteryLocation
         Label gpsLabel;
         System.Threading.Timer myTimer;
         static int counter;
+        User user;
 
-        public GPSUpdater(Label gpsLabel)
+        public GPSUpdater(Label gpsLabel, User user)
         {
             this.gpsLabel = gpsLabel;
+            this.user = user;
             counter = 0;
         }
 
@@ -25,7 +28,6 @@ namespace MysteryLocation
                 getLocation();
                 counter++;
                 gpsLabel.Text += "  Counter is; " + counter.ToString();
-
             }, null,
             TimeSpan.FromSeconds(0),
             TimeSpan.FromSeconds(interval));
@@ -41,11 +43,13 @@ namespace MysteryLocation
             try
             {
                 var location = await Xamarin.Essentials.Geolocation.GetLastKnownLocationAsync();
+                Console.WriteLine("Trying to get new position");
 
                 if (location != null)
                 {
                     Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
                     gpsLabel.Text = $"{location.Latitude}, {location.Longitude}";
+                    user.setPosition(new Coordinate(location.Longitude, location.Latitude));
                 }
             }
             catch(Exception ex)

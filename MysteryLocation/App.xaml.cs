@@ -11,11 +11,14 @@ namespace MysteryLocation
         public App()
         {
             InitializeComponent();
-
-            User user = new User(true, 329);
+            Label gpsLabel = new Label();
+            APIConnection conn = new APIConnection();
+            User user = new User(true, 329, conn);
+            GPSUpdater gps = new GPSUpdater(gpsLabel, user);
+            gps.startTimer(1);
             Console.WriteLine("The user has been created.");
 
-            MainPage = new NavigationBar(user);
+            MainPage = new NavigationBar(user, gpsLabel, conn);
 
             //MainPage = new SettingsPage();
 

@@ -4,6 +4,12 @@
              x:Class="MysteryLocation.View.PublishPage">
     <ContentPage.Content>
         <StackLayout>
+
+            <Label x:Name="currentGPS"
+               Text="{Binding Position}"
+               VerticalOptions="StartAndExpand"
+               HorizontalOptions="Center"/>
+            
             <Entry Text="Write subject here (obligatory)"/>
             <Grid>
                 <Grid.RowDefinitions>

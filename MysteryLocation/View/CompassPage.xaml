@@ -5,7 +5,13 @@
              NavigationPage.HasNavigationBar="False"
              NavigationPage.BackButtonTitle="False">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout x:Name="layout">
+
+            <Label x:Name="currentGPS"
+               Text="{Binding Position}"
+               VerticalOptions="StartAndExpand"
+               HorizontalOptions="Center"/>
+
             <Grid>
                 <!--Here we put compass for fun -->
                 <Grid.RowDefinitions>

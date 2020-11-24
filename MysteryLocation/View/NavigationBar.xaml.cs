@@ -14,9 +14,13 @@ namespace MysteryLocation
     public partial class NavigationBar : TabbedPage
     {
         public User user;
-        public NavigationBar(User user)
+        public Label GPSLabel;
+        public APIConnection conn;
+        public NavigationBar(User user, Label GPSLabel, APIConnection conn)
         {
             this.user = user;
+            this.GPSLabel = GPSLabel;
+            this.conn = conn;
             pageCreation();
             InitializeComponent();
 

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MysteryLocation.Model;
 using MysteryLocation.View;
+using MysteryLocation.ViewModel;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Xamarin.Essentials;
@@ -19,21 +20,22 @@ namespace MysteryLocation
         public MainPage(User user)
         {
             InitializeComponent();
-            // Creates a new user, reads from cookie file if it exists, else update User variables during execution.
-            //user = new User(null, null, null, false, null);
-            //user.ReadUser();
             this.user = user;
             defaultActivityIndicator.IsRunning = true;
-           // api.deleteItem(106);
-            //api.CreateNewPost();
-           // Coordinate p1 = new Coordinate(55, 13);
-           // Coordinate p2 = new Coordinate(55, 14);
-           // p1.getDistance(p2);
+            // api.deleteItem(106);
+            //api.CreateNewPost();+		base	{System.ApplicationException}	System.ApplicationException
+
+            // Coordinate p1 = new Coordinate(55, 13);
+            // Coordinate p2 = new Coordinate(55, 14);
+            // p1.getDistance(p2);
             //defaultActivityIndicator.IsRunning = false;
-            GPSUpdater gps = new GPSUpdater(currentGPS);
-           // user.updatePosts();
-            gps.startTimer(30);
+            //GPSUpdater gps = new GPSUpdater(currentGPS);
+            // user.updatePosts();
+            // gps.startTimer(30);
+            currentGPS.BindingContext = new LocationViewModel(user);
         }
+
+        
 
         async void FeedButtonClicked(object sender, EventArgs args)
         {
