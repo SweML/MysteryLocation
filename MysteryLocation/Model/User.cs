@@ -17,10 +17,14 @@ namespace MysteryLocation.Model
 
 
         public int category;
-        public int distance;
+
+ 
         public Coordinate currentPos { get; set; }
 
         public String currPos { get; set; }
+
+        public double distance;
+
 
         private Post tracking { get; set; }
         private int tracker;
@@ -62,7 +66,7 @@ namespace MysteryLocation.Model
             category = cat;
             Console.WriteLine("The user category has been changed to " + category.ToString());
         }
-        public void setDistance(int dist)
+        public void setDistance(double dist)
         {
             distance = dist;
             Console.WriteLine("The user distance has been changed to " + distance.ToString());
