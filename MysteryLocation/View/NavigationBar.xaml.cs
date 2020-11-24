@@ -54,7 +54,7 @@ namespace MysteryLocation
             unlocked.Title = "Unlocked";
             Children.Add(unlocked);
            */
-            NavigationPage publish = new NavigationPage(new PublishPage(user));
+            NavigationPage publish = new NavigationPage(new PublishPage(user, conn));
             publish.IconImageSource = "unlockedIcon.png";
             publish.Title = "Publish";
             Children.Add(publish);

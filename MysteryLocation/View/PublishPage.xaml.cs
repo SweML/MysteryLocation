@@ -17,9 +17,11 @@ namespace MysteryLocation.View
     public partial class PublishPage : ContentPage
     {
         User user;
-        public PublishPage(User user)
+        APIConnection conn;
+        public PublishPage(User user, APIConnection conn)
         {
             this.user = user;
+            this.conn = conn;
             InitializeComponent();
             currentGPS.BindingContext = user;
         }

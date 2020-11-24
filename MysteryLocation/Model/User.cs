@@ -94,8 +94,10 @@ namespace MysteryLocation.Model
             counter++;
            // Console.WriteLine("New coordinate");
             currentPos = newCoord; // Sätter rätt koordinat
+
             //currentPosition = currentPos.toString() + counter;
             CurrentPosition = newCoord.toString() + counter; // Uppdaterar labels i views
+
           //  Console.WriteLine(CurrentPosition + "Testingdfdgdg");
         }
 
