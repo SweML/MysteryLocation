@@ -22,17 +22,17 @@ namespace MysteryLocation
         {
             this.user = user;
             InitializeComponent();
-            // BindingContext = vm = new ViewCompass();
+            BindingContext = vm = new ViewCompass();
             try
             {
                 Console.WriteLine(user.getCoordinate() + "1337");
-                currentGPS.BindingContext = new LocationViewModel(user);
+                currentGPS.BindingContext = user;
             }
             catch(Exception e) {
                 if(e.InnerException != null)
                 Console.WriteLine(e.InnerException.Message + "        testing1234");
             }
-           // vm.Start();
+           vm.Start();
 
         }
     }

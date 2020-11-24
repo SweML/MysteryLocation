@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
 
 namespace MysteryLocation.Model
 {
-    public class User : IUser
+    public class User : IUser, INotifyPropertyChanged
     {
         private List<Post> feed { get; set; }
         private List<Post> marked { get; set; }
@@ -18,10 +19,38 @@ namespace MysteryLocation.Model
 
         public int category;
 
- 
-        public Coordinate currentPos { get; set; }
+        public Coordinate currentPos;
 
-        public String currPos { get; set; }
+        public String currentPosition;
+
+        public String CurrentPosition
+        {
+            get
+            {
+                return currentPosition;
+            }
+            set
+            {
+                if (currentPosition != value)
+                {
+                    currentPosition = value;
+                    this.OnPropertyChanged("CurrentPosition");
+                }
+            }
+        }
+    
+
+    public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this,
+                    new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+
 
         public double distance;
 
@@ -29,6 +58,10 @@ namespace MysteryLocation.Model
         private Post tracking { get; set; }
         private int tracker;
         private APIConnection conn;
+        private int counter;
+
+        
+
         public User(bool newUser, int category, APIConnection conn)
         {
             this.feed = feed;
@@ -37,9 +70,10 @@ namespace MysteryLocation.Model
             this.newUser = newUser;
             this.category = category;
             this.conn = conn;
-            currPos = "Loading";
+            currentPosition = "Loading";
             unlockedSet = new HashSet<int>();
             markedSet = new HashSet<int>();
+            counter = 0;
         }
 
        
@@ -57,10 +91,14 @@ namespace MysteryLocation.Model
 
         public void setPosition(Coordinate newCoord)
         {
-            Console.WriteLine("New coordinate");
-            currentPos = newCoord;
-            currPos = currentPos.toString();
+            //counter++;
+           // Console.WriteLine("New coordinate");
+            currentPos = newCoord; // Sätter rätt koordinat
+            //currentPosition = currentPos.toString() + counter;
+            CurrentPosition = newCoord.toString(); //+ counter; // Uppdaterar labels i views
+          //  Console.WriteLine(CurrentPosition + "Testingdfdgdg");
         }
+
         public void setCategory(int cat)
         {
             category = cat;

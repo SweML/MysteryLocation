@@ -15,7 +15,7 @@ namespace MysteryLocation
             APIConnection conn = new APIConnection();
             User user = new User(true, 329, conn);
             GPSUpdater gps = new GPSUpdater(gpsLabel, user);
-            gps.startTimer(1);
+            gps.startTimer(10);
             Console.WriteLine("The user has been created.");
 
             MainPage = new NavigationBar(user, gpsLabel, conn);

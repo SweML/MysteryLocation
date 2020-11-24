@@ -42,7 +42,12 @@ namespace MysteryLocation
         {
             try
             {
-                var location = await Xamarin.Essentials.Geolocation.GetLastKnownLocationAsync();
+                // var location = await Xamarin.Essentials.Geolocation.GetLastKnownLocationAsync(); //Ger en cachad version
+                var location = await Xamarin.Essentials.Geolocation.GetLocationAsync(new Xamarin.Essentials.GeolocationRequest
+                {
+                    DesiredAccuracy = Xamarin.Essentials.GeolocationAccuracy.Best,
+                    Timeout = TimeSpan.FromSeconds(9)
+                });
                 Console.WriteLine("Trying to get new position");
 
                 if (location != null)

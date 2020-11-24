@@ -32,7 +32,8 @@ namespace MysteryLocation
             //GPSUpdater gps = new GPSUpdater(currentGPS);
             // user.updatePosts();
             // gps.startTimer(30);
-            currentGPS.BindingContext = new LocationViewModel(user);
+            BindingContext = user;
+            currentGPS.SetBinding(Label.TextProperty, "CurrentPosition");
         }
 
         
