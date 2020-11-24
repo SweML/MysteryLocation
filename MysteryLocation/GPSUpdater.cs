@@ -9,14 +9,12 @@ namespace MysteryLocation
 {
     class GPSUpdater
     {
-        Label gpsLabel;
         System.Threading.Timer myTimer;
         static int counter;
         User user;
 
-        public GPSUpdater(Label gpsLabel, User user)
+        public GPSUpdater(User user)
         {
-            this.gpsLabel = gpsLabel;
             this.user = user;
             counter = 0;
         }
@@ -27,7 +25,6 @@ namespace MysteryLocation
             {
                 getLocation();
                 counter++;
-                gpsLabel.Text += "  Counter is; " + counter.ToString();
             }, null,
             TimeSpan.FromSeconds(0),
             TimeSpan.FromSeconds(interval));
@@ -42,18 +39,17 @@ namespace MysteryLocation
         {
             try
             {
-                // var location = await Xamarin.Essentials.Geolocation.GetLastKnownLocationAsync(); //Ger en cachad version
-                var location = await Xamarin.Essentials.Geolocation.GetLocationAsync(new Xamarin.Essentials.GeolocationRequest
+                 var location = await Xamarin.Essentials.Geolocation.GetLastKnownLocationAsync(); //Ger en cachad version
+               /* var location = await Xamarin.Essentials.Geolocation.GetLocationAsync(new Xamarin.Essentials.GeolocationRequest
                 {
                     DesiredAccuracy = Xamarin.Essentials.GeolocationAccuracy.Best,
                     Timeout = TimeSpan.FromSeconds(9)
-                });
+                });*/
                 Console.WriteLine("Trying to get new position");
 
                 if (location != null)
                 {
                     Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
-                    gpsLabel.Text = $"{location.Latitude}, {location.Longitude}";
                     user.setPosition(new Coordinate(location.Longitude, location.Latitude));
                 }
             }

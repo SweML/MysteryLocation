@@ -7,7 +7,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Label x:Name="currentGPS"
-               Text="{Binding Position}"
+               Text="{Binding CurrentPosition}"
                VerticalOptions="StartAndExpand"
                HorizontalOptions="Center"/>
 

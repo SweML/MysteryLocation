@@ -28,7 +28,7 @@ namespace MysteryLocation
         {
             this.user = user;
             InitializeComponent();
-          //  currentGPS.BindingContext = new LocationViewModel(user);
+          //  currentGPS.BindingContext = user;
         }
 
         void SavedButtonClicked(object sender, EventArgs args)

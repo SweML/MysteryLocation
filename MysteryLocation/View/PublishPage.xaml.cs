@@ -21,7 +21,7 @@ namespace MysteryLocation.View
         {
             this.user = user;
             InitializeComponent();
-            currentGPS.BindingContext = new LocationViewModel(user);
+            currentGPS.BindingContext = user;
         }
         private async void BtnCam_Clicked(object sender, EventArgs e)
         {

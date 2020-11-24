@@ -33,7 +33,7 @@ namespace MysteryLocation
             // user.updatePosts();
             // gps.startTimer(30);
             BindingContext = user;
-            currentGPS.SetBinding(Label.TextProperty, "CurrentPosition");
+            //currentGPS.SetBinding(Label.TextProperty, "CurrentPosition");
         }
 
         

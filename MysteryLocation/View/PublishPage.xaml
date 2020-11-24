@@ -6,10 +6,10 @@
         <StackLayout>
 
             <Label x:Name="currentGPS"
-               Text="{Binding Position}"
+               Text="{Binding CurrentPosition}"
                VerticalOptions="StartAndExpand"
                HorizontalOptions="Center"/>
-            
+
             <Entry Text="Write subject here (obligatory)"/>
             <Grid>
                 <Grid.RowDefinitions>
