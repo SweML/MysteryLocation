@@ -17,9 +17,11 @@ namespace MysteryLocation
     public partial class MainPage : ContentPage
     {
         User user;
-        public MainPage(User user)
+        APIConnection conn;
+        public MainPage(User user, APIConnection conn)
         {
             InitializeComponent();
+            this.conn = conn;
             this.user = user;
             defaultActivityIndicator.IsRunning = true;
             // api.deleteItem(106);
@@ -62,7 +64,7 @@ namespace MysteryLocation
         async void CreateButtonClicked(object sender, EventArgs args)
         {
 
-            await Navigation.PushAsync(new PublishPage(user), false);
+            await Navigation.PushAsync(new PublishPage(user, conn), false);
             Console.WriteLine("Createbutton works.");
         }
 
