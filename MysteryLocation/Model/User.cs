@@ -91,12 +91,12 @@ namespace MysteryLocation.Model
 
         public void setPosition(Coordinate newCoord)
         {
-            counter++;
+           // counter++;
            // Console.WriteLine("New coordinate");
             currentPos = newCoord; // Sätter rätt koordinat
 
             //currentPosition = currentPos.toString() + counter;
-            CurrentPosition = newCoord.toString() + counter; // Uppdaterar labels i views
+            CurrentPosition = newCoord.toString(); //+ counter; // Uppdaterar labels i views
 
           //  Console.WriteLine(CurrentPosition + "Testingdfdgdg");
         }
