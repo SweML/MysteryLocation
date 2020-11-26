@@ -7,7 +7,7 @@
             android:TabbedPage.ToolbarPlacement="Bottom"
             BarBackgroundColor="#000000"
             android:TabbedPage.BarItemColor="#FFFFFF"
-            android:TabbedPage.BarSelectedItemColor="Red"
+            android:TabbedPage.BarSelectedItemColor="#b11140"
             >
 
   <!--  <NavigationPage Title="Settings" IconImageSource="settingsIcon.png" >

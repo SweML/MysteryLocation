@@ -4,7 +4,11 @@ using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
+[assembly: ExportFont("Helvetica93.ttf", Alias = "Helvetica")]
+[assembly: ExportFont("WalkWay_Semibold.ttf", Alias = "WalkWay")]
+[assembly: ExportFont("Lato-Light.ttf", Alias = "Latow")]
+[assembly: ExportFont("Lato-Black.ttf", Alias = "Latob")]
+[assembly: ExportFont("AndersonGrotesk-Ultrabold.otf", Alias = "Grotesk")]
 namespace MysteryLocation
 {
     public partial class App : Application

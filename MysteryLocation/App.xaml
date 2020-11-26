@@ -1,6 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MysteryLocation.App">
     <Application.Resources>
+        <ResourceDictionary>
+            <ControlTemplate x:Key="Template">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.1*" />
+                    </Grid.RowDefinitions>
+                    <BoxView Color="Black" />
+                    <Label 
+                        Text="MysteryLocation"
+                        TextColor="White"
+                        FontSize="15"
+                        Margin="20,0,0,0"
+                        FontFamily="Helvetica"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"/>
+                    <ContentPresenter Grid.Row="1" VerticalOptions="Start"/>
+                </Grid>
+            </ControlTemplate>
+        </ResourceDictionary>
+
     </Application.Resources>
 
 </Application>

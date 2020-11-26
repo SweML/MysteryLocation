@@ -39,7 +39,7 @@ namespace MysteryLocation
 
 
 
-            NavigationPage home = new NavigationPage(new MainPage(user, conn));
+            NavigationPage home = new NavigationPage(new CardViewTemp(user, conn));
             home.IconImageSource = "homeIcon.png";
             home.Title = "Home";
             Children.Add(home);
