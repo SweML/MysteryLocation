@@ -158,6 +158,8 @@ namespace MysteryLocation
             if (response.IsSuccessStatusCode)
             {
                 string content = await response.Content.ReadAsStringAsync();
+                Console.Write(content);
+
                 posts = JsonConvert.DeserializeObject<List<Post>>(content);
                 currentPosts = posts;
             }

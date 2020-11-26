@@ -64,15 +64,16 @@ namespace MysteryLocation.Model
 
         public User(bool newUser, int category, APIConnection conn)
         {
-            this.feed = feed;
-            this.marked = marked;
-            this.unlocked = unlocked;
+            this.feed = new List<Post>();
+            this.marked = new List<Post>();
+            this.unlocked = new List<Post>();
             this.newUser = newUser;
             this.category = category;
             this.conn = conn;
             currentPosition = "Loading";
             unlockedSet = new HashSet<int>();
             markedSet = new HashSet<int>();
+            updatePosts();
             counter = 0;
         }
 
