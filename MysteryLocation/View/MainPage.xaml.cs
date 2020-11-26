@@ -35,6 +35,10 @@ namespace MysteryLocation
             // user.updatePosts();
             // gps.startTimer(30);
             BindingContext = user;
+          /*  Task.Run( async() =>
+            {
+                 conn.testPublishPosts();
+            });*/
             //currentGPS.SetBinding(Label.TextProperty, "CurrentPosition");
         }
 

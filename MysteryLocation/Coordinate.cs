@@ -6,8 +6,8 @@ namespace MysteryLocation
 {
     public class Coordinate
     {
-        private double longitude { get; set; }
-        private double latitude { get; set; }
+        public double longitude { get; set; }
+        public double latitude { get; set; }
 
         public Coordinate(double longitude, double latitude)
         {

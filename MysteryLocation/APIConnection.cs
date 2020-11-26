@@ -44,8 +44,19 @@ namespace MysteryLocation
                 //UserHolder.user.populateLists(ConvertJsonToPostsUser(content));
 
             }
+        }
 
-
+        public async Task<List<Post>> getDataAsync()
+        {
+            Uri uri = new Uri(string.Format("https://saabstudent2020.azurewebsites.net/observation", string.Empty));
+            HttpResponseMessage response = await client.GetAsync(uri);
+            List<Post> posts = new List<Post>();
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                posts = JsonConvert.DeserializeObject<List<Post>>(content);
+            }
+            return posts;
         }
 
 
@@ -78,7 +89,41 @@ namespace MysteryLocation
             HttpResponseMessage response = await client.PostAsync(uri, content);
         }
 
+       
+        public async Task<int> testPublishPosts(createPost x)
+        {
+            Uri uri = new Uri(string.Format("https://saabstudent2020.azurewebsites.net/observation", string.Empty));
+            string json = JsonConvert.SerializeObject(x, Formatting.Indented);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            Console.WriteLine(content + "Test2");
+            Console.WriteLine(json + "Test2");
+              HttpResponseMessage response = await client.PostAsync(uri, content);
+              if (response.IsSuccessStatusCode)
+              {
+                  Console.WriteLine("Test2");
+                  Console.WriteLine(response.ReasonPhrase + " response.ReasonPhrase");
+                Console.WriteLine(response.Headers.Location + "response.Headers.ToString()");
+                Console.WriteLine(response.Headers + "response.Headers");
+                Console.WriteLine(response.Content.ReadAsStringAsync() + "response.Content");
+                  Console.WriteLine(response.StatusCode.ToString() + "response.StatusCode");
+                string temp = response.Headers.Location.ToString().Substring(54);
+                Console.WriteLine(temp + " is it correct?");
+                return Int32.Parse(temp);
+              }
+            return -1;
+        }
 
+        public async void publishAttachment(PostAttachment x)
+        {
+            Uri uri = new Uri(string.Format("https://saabstudent2020.azurewebsites.net/observation/" + x.obsID + "/attachment", string.Empty));
+            string json = JsonConvert.SerializeObject(x, Formatting.Indented);
+            StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync(uri, content);
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine("Hurra!");
+            }
+        }
 
 
         private String ConvertJsonToPosts(string JsonString) // This should return the whole list instead of a String. Todo

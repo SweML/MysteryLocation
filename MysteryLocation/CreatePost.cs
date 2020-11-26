@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MysteryLocation
 {
-    class createPost
+    public class createPost
     {
 
         public String subject { get; set; }

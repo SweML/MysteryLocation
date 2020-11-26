@@ -187,9 +187,8 @@ namespace MysteryLocation.Model
 
         public async Task updatePosts()
         {
-            await conn.RefreshDataAsync();
-            
-            List<Post> fromAPI = conn.getCurrentPosts();
+            List<Post> fromAPI;
+            fromAPI = await conn.getDataAsync();
             if (!newUser)
             {
                 if (markedSet.Count > 0 || unlockedSet.Count > 0)
