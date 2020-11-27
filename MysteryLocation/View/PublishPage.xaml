@@ -14,6 +14,8 @@
                HorizontalOptions="Center"/>
 
             <Entry x:Name="entrySubject" Placeholder="Write subject here (obligatory)"/>
+
+            <Entry x:Name="entryBody" Placeholder="Write appropriate text here (voluntary)"/>
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -22,7 +24,7 @@
 
                 <Image x:Name="imgCam" Grid.Row="0" Grid.Column="0"/>
                 
-                <Entry x:Name="entryBody" Placeholder="Write appropriate text here (voluntary)"/>
+                
 
                 <Button x:Name="btnCam" Text="SNAP A PIC" Grid.Row="1" Grid.Column="0" Margin="2" Clicked="BtnCam_Clicked"
 BackgroundColor="#00a4fc" TextColor="#FFF"/>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using MysteryLocation.Model;
-
+using Newtonsoft.Json;
 
 namespace MysteryLocation.View
 {
@@ -21,12 +21,18 @@ namespace MysteryLocation.View
             this.user = user;
             
             InitializeComponent();
-            updatePosts();
-
-
+            //updatePosts();
+            testing();
+            
+        }
+        private async void testing()
+        {
+            String content = "[{ \"id\":3,\"subject\":\"New subject\",\"body\":\"New text\",\"created\":\"2020-09-14T12:59:21.7395836\",\"lastUpdated\":\"2020-09-14T12:59:32.4214212\",\"position\":{ \"longitude\":88.0,\"latitude\":9.0} },{ \"id\":4,\"subject\":\"hej på dig\",\"body\":\"mer text här\",\"created\":\"2020-09-14T13:20:10.2899228\",\"lastUpdated\":\"2020-09-14T13:20:10.2899228\",\"position\":{ \"longitude\":12.0,\"latitude\":56.0} }]";
+            List<Post> posts = JsonConvert.DeserializeObject<List<Post>>(content);
+            PostList test = new PostList(posts);
+            listview.ItemsSource = PostList.ELL;
         }
 
-        
         private async void updatePosts()
         {
             

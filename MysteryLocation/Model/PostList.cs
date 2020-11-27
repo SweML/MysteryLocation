@@ -37,6 +37,7 @@ namespace MysteryLocation.Model
         {
            
             all = list;
+            Console.WriteLine(list.Count + " list contains");
             method();
         }
 
@@ -62,11 +63,14 @@ namespace MysteryLocation.Model
                     Position = x.getCoordinate()
 
                 };
-                    ELL.Add(Pl);
+                Console.WriteLine("Throwing exception?");
+                    All.Add(Pl);
+                Console.WriteLine("Exception not thrown.");
             }
             Console.WriteLine(all.Count + "ABCABCABC");
             Console.WriteLine(All.Count + "ETA");
-            
+            ELL = All;
+            Console.WriteLine(ELL.Count + " nbr of elements in ELL");
         }
         public async void getPostList()
         {
@@ -83,7 +87,7 @@ namespace MysteryLocation.Model
 
         }
 
-        public IList<PostList> ELL { set; get; }
+        public static IList<PostList> ELL { set; get; }
 
 
 
