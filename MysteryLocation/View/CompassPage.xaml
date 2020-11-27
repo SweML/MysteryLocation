@@ -9,7 +9,7 @@
     <ContentPage.Content>
         <StackLayout x:Name="layout"
                      >
-            Text="{Binding CurrentPosition}"
+           <!-- Text="{Binding CurrentPosition}"-->
             <Label x:Name="currentGPS"
                FontAttributes="Bold"
                FontSize="20"
