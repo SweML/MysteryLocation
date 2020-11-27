@@ -77,6 +77,15 @@ namespace MysteryLocation.Model
             counter = 0;
         }
 
+       public Coordinate getCurrentPos()
+        {
+            while(currentPos == null)
+            {
+                Task.Delay(200);
+            }
+            return currentPos;
+        }
+
        
         public bool isNewUser()
         {

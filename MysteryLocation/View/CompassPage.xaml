@@ -4,12 +4,16 @@
              x:Class="MysteryLocation.CompassPage"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.BackButtonTitle="False"
+             BackgroundColor="LightGray"
              ControlTemplate="{StaticResource Template}">
     <ContentPage.Content>
-        <StackLayout x:Name="layout">
-
+        <StackLayout x:Name="layout"
+                     >
+            Text="{Binding CurrentPosition}"
             <Label x:Name="currentGPS"
-                   
+               FontAttributes="Bold"
+               FontSize="20"
+               TextColor="Red"
                Text="{Binding CurrentPosition}"
                VerticalOptions="StartAndExpand"
                HorizontalOptions="Center"/>
@@ -44,7 +48,17 @@
            HorizontalOptions="Center" 
                 TextColor="Black"
                 FontSize="30"/>
+
+                <Label x:Name="distToTarget"
+                 FontAttributes="Bold"
+               FontSize="20"
+               TextColor="Red"
+               Text="20,5 km to target"
+               VerticalOptions="StartAndExpand"
+               HorizontalOptions="Center"  />
             </Grid>
+
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

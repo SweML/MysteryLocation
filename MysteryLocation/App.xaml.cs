@@ -16,22 +16,27 @@ namespace MysteryLocation
 
         public User user;
         APIConnection conn;
+        public static double ScreenWidth;
+        public static double ScreenHeight;
         public App()
         {
-            InitializeComponent();
-            Label gpsLabel = new Label();
+            
             conn = new APIConnection();
             user = new User(true, 329, conn);
-            Task.Run(async () =>
-           {
-               await user.updatePosts();
-           });
             GPSUpdater gps = new GPSUpdater(user);
-            gps.startTimer(5);
+            gps.startTimer(1);
+            Label gpsLabel = new Label();
+
+            /*  Task.Run(async () =>
+             {
+                 await user.updatePosts();
+             });*/
+            InitializeComponent();
             MainPage = new NavigationBar(user, conn);
             //MainPage = new SettingsPage();
             //MainPage = new PhotoPage();
             //NavigationPage navigation = new NavigationPage(new MainPage());
+            
         }
 
         protected override void OnStart()

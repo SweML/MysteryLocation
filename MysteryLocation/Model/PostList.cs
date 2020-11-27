@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 using MysteryLocation;
 using MysteryLocation.Model;
 
@@ -17,8 +18,12 @@ namespace MysteryLocation.Model
         public String LastUpdated { get; set; }
         public Coordinate Position { get; set; }
 
+        public String Dist { get; set; }
+
 
         private List<Post> all = new List<Post>();
+
+        private User user;
         
         private APIConnection conn = new APIConnection();
         
@@ -33,26 +38,30 @@ namespace MysteryLocation.Model
           
         }
        
-        public PostList(List<Post> list)
+        public PostList(List<Post> list, User user)
         {
-           
+            this.user = user;
             all = list;
             Console.WriteLine(list.Count + " list contains");
             method();
+            
         }
 
         public void method()
         {
             List<PostList> All = new List<PostList>();
-           
+           // Coordinate newCoordinate = new Coordinate(55.840281, 13.300698);
+            Coordinate newCoordinate = user.getCurrentPos();
+            //newCoordinate = new Coordinate(55.840281, 13.300698);
 
             // Loop through the public static fields of the Color structure.
-            
-                    // Convert the name to a friendly name.
-                   
+
+            // Convert the name to a friendly name.
+            Coordinate other;
             foreach(Post x in all)
             {
                 Console.WriteLine("ABCDEF");
+                other = x.getCoordinate();
                 PostList Pl = new PostList
                 {
                     Id = x.getId(),
@@ -60,12 +69,14 @@ namespace MysteryLocation.Model
                     Body = x.getBody(),
                     Created = x.getCreated(),
                     LastUpdated = x.getLastUpdated(),
-                    Position = x.getCoordinate()
+                    Position = x.getCoordinate(),
+                    Dist = newCoordinate.getDistance(other).ToString()
 
                 };
-                Console.WriteLine("Throwing exception?");
+                //Console.WriteLine("Throwing exception?");
+                //Console.WriteLine(Pl.Position.getDistance(newCoordinate).ToString());
                     All.Add(Pl);
-                Console.WriteLine("Exception not thrown.");
+                //Console.WriteLine("Exception not thrown.");
             }
             Console.WriteLine(all.Count + "ABCABCABC");
             Console.WriteLine(All.Count + "ETA");

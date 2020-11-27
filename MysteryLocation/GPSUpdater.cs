@@ -49,8 +49,8 @@ namespace MysteryLocation
 
                 if (location != null)
                 {
-                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
                     user.setPosition(new Coordinate(location.Longitude, location.Latitude));
+                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
                 }
             }
             catch(Exception ex)

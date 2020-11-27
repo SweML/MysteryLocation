@@ -40,7 +40,7 @@
                                             TextColor="Black"
                                             Margin="10, -2, 0, 0"
                                             VerticalOptions="Fill" />
-                                        <Label x:Name="Category" Text=""
+                                        <Label x:Name="Category" Text="{Binding Dist}}"
                                             FontSize="16"
                                             FontFamily="Grotesk"
                                             TextColor="Gray"
