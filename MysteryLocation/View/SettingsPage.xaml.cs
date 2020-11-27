@@ -70,7 +70,7 @@ namespace MysteryLocation
         void OnSliderValueChanged(object sender, ValueChangedEventArgs args)
         {
             value = args.NewValue;
-            displayLabel.Text = String.Format("Maximum distance {0}", value, "m");
+            displayLabel.Text = String.Format("Maximum distance {0}m", value);
         }
 
         public async void spin()
