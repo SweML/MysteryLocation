@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using MysteryLocation;
 using MysteryLocation.Model;
+using MysteryLocation.View;
+using Xamarin.Forms;
 
 namespace MysteryLocation.Model
 {
-    public class PostList
+    public class PostList/* : INotifyPropertyChanged*/
     {
 
         public int Id { get; set; }
@@ -26,8 +30,41 @@ namespace MysteryLocation.Model
         private User user;
         
         private APIConnection conn = new APIConnection();
-        
-        
+
+        public static Coordinate prevCoordinate = null;
+
+        private CardViewTemp ctp;
+/*
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public static List<PostList> listOfPosts = new List<PostList>();
+
+        public List<PostList> ListOfPosts
+        {
+            get
+            {
+                return listOfPosts;
+            }
+            set
+            {
+                if (listOfPosts != value)
+                {
+                    listOfPosts = value;
+                    
+                    this.OnPropertyChanged("ListOfPosts");
+                }
+            }
+        }
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this,
+                    new PropertyChangedEventArgs(propertyName));
+            }
+        }
+*/
         static PostList()
         {
 
@@ -38,21 +75,24 @@ namespace MysteryLocation.Model
           
         }
        
-        public PostList(List<Post> list, User user)
+        public PostList(User user, CardViewTemp ctp)
         {
             this.user = user;
-            all = list;
-            Console.WriteLine(list.Count + " list contains");
-            method();
+            all = user.getFeed();
+            //Console.WriteLine(list.Count + " list contains");
+            PopulateUIWithPosts();
+            this.ctp = ctp;
             
+
+
         }
 
-        public void method()
+        public void PopulateUIWithPosts()
         {
             List<PostList> All = new List<PostList>();
-           // Coordinate newCoordinate = new Coordinate(55.840281, 13.300698);
-            Coordinate newCoordinate = user.getCurrentPos();
-            //newCoordinate = new Coordinate(55.840281, 13.300698);
+            //Coordinate newCoordinate = new Coordinate(55.840281, 13.300698);
+            //Coordinate newCoordinate = user.getCurrentPos();
+           // newCoordinate = new Coordinate(55.840281, 13.300698);
 
             // Loop through the public static fields of the Color structure.
 
@@ -70,19 +110,71 @@ namespace MysteryLocation.Model
                     Created = x.getCreated(),
                     LastUpdated = x.getLastUpdated(),
                     Position = x.getCoordinate(),
-                    Dist = newCoordinate.getDistance(other).ToString()
+                    Dist = "Loading"
 
                 };
+               
                 //Console.WriteLine("Throwing exception?");
                 //Console.WriteLine(Pl.Position.getDistance(newCoordinate).ToString());
-                    All.Add(Pl);
+                All.Add(Pl);
+                }
                 //Console.WriteLine("Exception not thrown.");
-            }
+            
             Console.WriteLine(all.Count + "ABCABCABC");
             Console.WriteLine(All.Count + "ETA");
+            //  ListOfPosts = All;
             ELL = All;
+            User.updateUI = true;
             Console.WriteLine(ELL.Count + " nbr of elements in ELL");
         }
+      
+        /**
+         * This function is called when the distance between the user's new gps-coordinate 
+         * and the previous calculation's coordinate is greater than 500 m
+         */
+        public static void ReCalculateDistance(User usr)
+        {
+            Coordinate current = usr.getCurrentPos();
+            double distance = 0;
+            if (ELL.Count > 0)
+            {
+                prevCoordinate = current;
+                
+            }
+            List<PostList> All = new List<PostList>();
+            HashSet<PostList> a = new HashSet<PostList>();
+            int i = 0;
+            foreach (PostList x in ELL)
+            {
+
+                if(x.Position == null)
+                {
+                    a.Add(x);
+                }
+
+                distance = current.getDistance(x.Position);
+                if(distance > 1000)
+                {
+                    distance /= 10;
+                    x.Dist = distance.ToString() + " km";
+                }
+                else
+                {
+                    x.Dist = distance.ToString() + " m";
+                }
+                Console.WriteLine(x.Dist + "Testing x.Dist");
+            }
+
+            foreach(PostList x in a)
+            {
+                ELL.Remove(x);
+            }
+            Console.WriteLine("ReCalculated distance " + i);
+            ELL = ELL;
+            User.updateUI = true;
+        }
+
+     
         public async void getPostList()
         {
             try

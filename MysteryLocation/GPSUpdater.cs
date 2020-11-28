@@ -1,6 +1,7 @@
 ﻿using MysteryLocation.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Mime;
 using System.Text;
 using Xamarin.Forms;
@@ -12,6 +13,8 @@ namespace MysteryLocation
         System.Threading.Timer myTimer;
         static int counter;
         User user;
+        bool firstUpdate = true;
+        Stopwatch stop = new Stopwatch();
 
         public GPSUpdater(User user)
         {
@@ -23,7 +26,10 @@ namespace MysteryLocation
         {
             this.myTimer = new System.Threading.Timer((e) =>
             {
-                getLocation();
+                if(!firstUpdate)
+                    getLocationBest();
+                else 
+                    getLocationMedium();     
                 counter++;
             }, null,
             TimeSpan.FromSeconds(0),
@@ -35,12 +41,13 @@ namespace MysteryLocation
             myTimer = null;
         }
 
-        async void getLocation()
+        async void getLocationBest()
         {
             try
             {
-                 //var location = await Xamarin.Essentials.Geolocation.GetLastKnownLocationAsync(); //Ger en cachad version
-               var location = await Xamarin.Essentials.Geolocation.GetLocationAsync(new Xamarin.Essentials.GeolocationRequest
+                //var location = await Xamarin.Essentials.Geolocation.GetLastKnownLocationAsync(); //Ger en cachad version
+                stop.Start();
+                var location = await Xamarin.Essentials.Geolocation.GetLocationAsync(new Xamarin.Essentials.GeolocationRequest
                 {
                     DesiredAccuracy = Xamarin.Essentials.GeolocationAccuracy.Best,
                     Timeout = TimeSpan.FromSeconds(9)
@@ -52,6 +59,38 @@ namespace MysteryLocation
                     user.setPosition(new Coordinate(location.Longitude, location.Latitude));
                     Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
                 }
+                stop.Stop();
+                Console.WriteLine("The time it takes for best is " + stop.Elapsed);
+                stop.Reset();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        async void getLocationMedium()
+        {
+            try
+            {
+                //var location = await Xamarin.Essentials.Geolocation.GetLastKnownLocationAsync(); //Ger en cachad version
+                stop.Start();
+               var location = await Xamarin.Essentials.Geolocation.GetLocationAsync(new Xamarin.Essentials.GeolocationRequest
+                {
+                    DesiredAccuracy = Xamarin.Essentials.GeolocationAccuracy.Medium,
+                    Timeout = TimeSpan.FromSeconds(9)
+                });
+                Console.WriteLine("Trying to get new position");
+
+                if (location != null)
+                {
+                    user.setPosition(new Coordinate(location.Longitude, location.Latitude));
+                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+                    firstUpdate = false;
+                }
+                stop.Stop();
+                Console.WriteLine("The time it takes for medium is " + stop.Elapsed);
+                stop.Reset();
             }
             catch(Exception ex)
             {

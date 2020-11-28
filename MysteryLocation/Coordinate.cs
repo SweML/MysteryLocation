@@ -37,7 +37,7 @@ namespace MysteryLocation
 
              Double d = R * c; // in metres
                                // For testing
-            if (d > 1000)
+           /* if (d > 1000)
             {
                 d /= 1000;
                 Console.WriteLine("The distance between the two coordinates is: " + d + " km");
@@ -45,7 +45,7 @@ namespace MysteryLocation
             else
             {
                 Console.WriteLine("The distance between the two coordinates is: " + d + " m");
-            }
+            }*/
             return d;
         }
     }

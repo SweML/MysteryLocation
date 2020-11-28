@@ -13,7 +13,7 @@
     <ListView SeparatorVisibility="Default"
               x:Name="listview"
         ItemsSource="{x:Static local:PostList.ELL}">
-   
+
         <ListView.RowHeight>
             <OnPlatform x:TypeArguments="x:Int32">
                 <On Platform="iOS, Android" Value="180" />
@@ -40,7 +40,7 @@
                                             TextColor="Black"
                                             Margin="10, -2, 0, 0"
                                             VerticalOptions="Fill" />
-                                        <Label x:Name="Category" Text="{Binding Dist}}"
+                                        <Label x:Name="Category" Text="{Binding Dist}"
                                             FontSize="16"
                                             FontFamily="Grotesk"
                                             TextColor="Gray"
@@ -101,5 +101,4 @@
     </ListView>
 
 </ContentPage>
-    
     
