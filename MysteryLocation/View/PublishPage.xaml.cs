@@ -56,6 +56,17 @@ namespace MysteryLocation.View
                 await DisplayAlert("Error", ex.Message.ToString(), "Ok");
             }
         }
+        private async void BrowseButton_Clicked(object sender, EventArgs e)
+        {
+            (sender as Button).IsEnabled = false;
+            imgSource = await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync();
+            if (imgSource != null)
+            {
+                imgCam.Source = ImageSource.FromStream(() => imgSource);
+            }
+            (sender as Button).IsEnabled = true;
+
+        }
         private async void PublishButton_Clicked(object sender, EventArgs e)
         {
             spin();
