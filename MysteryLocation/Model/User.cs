@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MysteryLocation.ViewModel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,6 +23,8 @@ namespace MysteryLocation.Model
 
         public Coordinate currentPos;
 
+        public PostList pl { set; get; }
+
         public String currentPosition;
         public static bool updateUI = false;
 
@@ -36,14 +39,12 @@ namespace MysteryLocation.Model
                 if (currentPosition != value)
                 {
                     currentPosition = value;
-                    if (PostList.prevCoordinate == null || currentPos.getDistance(PostList.prevCoordinate) >= 500)
-                    {
-                        PostList.ReCalculateDistance(this);
-                    }
-                    this.OnPropertyChanged("CurrentPosition");
+                    this.OnPropertyChanged("CurrentPosition");        
                 }
             }
         }
+
+        public FeedViewModel fvm { get; set; }
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -89,16 +90,6 @@ namespace MysteryLocation.Model
             // feed = JsonConvert.DeserializeObject<List<Post>>(content);
         }
 
-        public Coordinate getCurrentPos()
-        {
-            /* while(currentPos == null)
-             {
-                 Task.Delay(200);
-             }*/
-            return currentPos;
-        }
-
-
         public bool isNewUser()
         {
             return newUser;
@@ -120,7 +111,19 @@ namespace MysteryLocation.Model
             //currentPosition = currentPos.toString() + counter;
             CurrentPosition = newCoord.toString(); //+ counter; // Uppdaterar labels i views
 
-            //  Console.WriteLine(CurrentPosition + "Testingdfdgdg");
+            if (PostList.prevCoordinate == null && fvm != null)
+            {
+                Console.WriteLine("Executing Recalcdist");
+                fvm.RecalculateDistance();
+            }
+            else if (PostList.prevCoordinate != null)
+            {
+                if (currentPos.getDistance(PostList.prevCoordinate) >= 500)
+                {
+                    fvm.RecalculateDistance();
+                }
+            }
+            
         }
 
         public void setCategory(int cat)
@@ -248,9 +251,12 @@ namespace MysteryLocation.Model
                         feed.Add(x);
                     }
                 }
-
+                fvm.updateListElements();
                 Console.WriteLine("User now holds " + feed.Count + " posts");
-
+               /* if(pl != null)
+                {
+                    pl.PopulateUIWithPosts();
+                }*/
             }
         }
 

@@ -1,0 +1,89 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Text;
+
+namespace MysteryLocation.Model
+{
+    public class PostListElement : PostListProperty
+    {
+        public int id;
+        public String subject;
+        public String body;
+        public String created;
+        public String lastUpdated;
+        public Coordinate position;
+        public String dist;
+
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                OnPropertyChanged("Id");
+            }
+        }
+        public string Subject
+        {
+            get { return subject; }
+            set
+            {
+                subject = value;
+                OnPropertyChanged("Subject");
+            }
+        }
+
+        public string Body
+        {
+            get { return body; }
+            set
+            {
+                body = value;
+                OnPropertyChanged("Body");
+            }
+        }
+
+        public string Created
+        {
+            get { return created; }
+            set
+            {
+                created = value;
+                OnPropertyChanged("Created");
+            }
+        }
+
+        public string LastUpdated
+        {
+            get { return lastUpdated; }
+            set
+            {
+                lastUpdated = value;
+                OnPropertyChanged("LastUpdated");
+            }
+        }
+
+        public Coordinate Position
+        {
+            get { return position; }
+            set
+            {
+                position = value;
+                OnPropertyChanged("Position");
+            }
+        }
+
+        public string Dist
+        {
+            get { return dist; }
+            set
+            {
+                dist = value;
+                OnPropertyChanged("Dist");
+            }
+        }
+
+
+    }
+}

@@ -26,9 +26,7 @@ namespace MysteryLocation
             user = new User(true, 329, conn);
             gps = new GPSUpdater(user);
 
-            Task.Run(async() =>
-               await testingDelayGPS()
-            );
+            gps.startTimer(10);
             Label gpsLabel = new Label();
 
             /*  Task.Run(async () =>

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Android.App;
 using MysteryLocation;
 using MysteryLocation.Model;
 using MysteryLocation.View;
@@ -12,7 +13,7 @@ using Xamarin.Forms;
 
 namespace MysteryLocation.Model
 {
-    public class PostList/* : INotifyPropertyChanged*/
+    public class PostList
     {
 
         public int Id { get; set; }
@@ -33,42 +34,7 @@ namespace MysteryLocation.Model
 
         public static Coordinate prevCoordinate = null;
 
-        private CardViewTemp ctp;
-/*
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public static List<PostList> listOfPosts = new List<PostList>();
-
-        public List<PostList> ListOfPosts
-        {
-            get
-            {
-                return listOfPosts;
-            }
-            set
-            {
-                if (listOfPosts != value)
-                {
-                    listOfPosts = value;
-                    
-                    this.OnPropertyChanged("ListOfPosts");
-                }
-            }
-        }
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this,
-                    new PropertyChangedEventArgs(propertyName));
-            }
-        }
-*/
-        static PostList()
-        {
-
-        }
+        public CardViewTemp ctp { get; }
 
         private PostList()
         {
@@ -78,11 +44,11 @@ namespace MysteryLocation.Model
         public PostList(User user, CardViewTemp ctp)
         {
             this.user = user;
-            all = user.getFeed();
-            //Console.WriteLine(list.Count + " list contains");
-            PopulateUIWithPosts();
-            this.ctp = ctp;
             
+            //Console.WriteLine(list.Count + " list contains");
+           // PopulateUIWithPosts();
+            this.ctp = ctp;
+            user.pl = this;
 
 
         }
@@ -92,11 +58,13 @@ namespace MysteryLocation.Model
             List<PostList> All = new List<PostList>();
             //Coordinate newCoordinate = new Coordinate(55.840281, 13.300698);
             //Coordinate newCoordinate = user.getCurrentPos();
-           // newCoordinate = new Coordinate(55.840281, 13.300698);
+            // newCoordinate = new Coordinate(55.840281, 13.300698);
 
             // Loop through the public static fields of the Color structure.
 
             // Convert the name to a friendly name.
+
+            all = user.getFeed();
             Coordinate other;
             foreach(Post x in all)
             {
@@ -124,7 +92,7 @@ namespace MysteryLocation.Model
             Console.WriteLine(All.Count + "ETA");
             //  ListOfPosts = All;
             ELL = All;
-            User.updateUI = true;
+            //ctp.updateView();
             Console.WriteLine(ELL.Count + " nbr of elements in ELL");
         }
       
@@ -132,9 +100,9 @@ namespace MysteryLocation.Model
          * This function is called when the distance between the user's new gps-coordinate 
          * and the previous calculation's coordinate is greater than 500 m
          */
-        public static void ReCalculateDistance(User usr)
+        public void ReCalculateDistance(User usr)
         {
-            Coordinate current = usr.getCurrentPos();
+            Coordinate current = usr.currentPos;
             double distance = 0;
             if (ELL.Count > 0)
             {
@@ -171,7 +139,6 @@ namespace MysteryLocation.Model
             }
             Console.WriteLine("ReCalculated distance " + i);
             ELL = ELL;
-            User.updateUI = true;
         }
 
      

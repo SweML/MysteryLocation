@@ -1,18 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:MysteryLocation.Model"
              x:Class="MysteryLocation.View.CardViewTemp"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.BackButtonTitle="False"
              ControlTemplate="{StaticResource Template}">
 
-
-
+    
+    <!--ItemsSource="{x:Static local:PostList.ELL}" -->
     <!--ItemsSource="{x:Static local:NamedColor.All}">-->
     <ListView SeparatorVisibility="Default"
               x:Name="listview"
-        ItemsSource="{x:Static local:PostList.ELL}">
+        ItemsSource="{Binding Items}">
 
         <ListView.RowHeight>
             <OnPlatform x:TypeArguments="x:Int32">
