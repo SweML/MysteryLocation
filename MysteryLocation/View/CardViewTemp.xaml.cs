@@ -1,31 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using MysteryLocation.Model;
-using Newtonsoft.Json;
-using System.Diagnostics;
-using System.Collections.Specialized;
 using MysteryLocation.ViewModel;
+using MysteryLocation.Model;
 
 namespace MysteryLocation.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CardViewTemp : ContentPage
     {
-        private List<Post> liist = new List<Post>();
-        Model.User user;
+        public User user;
         public FeedViewModel fvm;
 
 
-        public CardViewTemp(Model.User user, APIConnection conn)
+        public CardViewTemp(User user)
         {
             this.user = user;
-            // PostList test = new PostList(user, this);
             fvm = new FeedViewModel(user);
             InitializeComponent();
             this.BindingContext = fvm;

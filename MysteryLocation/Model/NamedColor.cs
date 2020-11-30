@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using Xamarin.Forms;
 using System.Reflection;
@@ -74,3 +74,4 @@ namespace MysteryLocation.Model
         public static IList<NamedColor> All { private set; get; }
     }
 }
+*/

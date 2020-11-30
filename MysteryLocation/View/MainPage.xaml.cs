@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -35,12 +35,12 @@ namespace MysteryLocation
             // user.updatePosts();
             // gps.startTimer(30);
             BindingContext = user;
-          /*  Task.Run( async() =>
+         */ /*  Task.Run( async() =>
             {
                  conn.testPublishPosts();
             });*/
             //currentGPS.SetBinding(Label.TextProperty, "CurrentPosition");
-        }
+    /*    }
 
         
 
@@ -143,6 +143,6 @@ namespace MysteryLocation
 }
 
 
-
+*/
 
 

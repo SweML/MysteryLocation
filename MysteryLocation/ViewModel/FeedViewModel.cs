@@ -10,7 +10,7 @@ namespace MysteryLocation.ViewModel
     {
         public ObservableCollection<PostListElement> items;
         private User user;
-        public static Coordinate prevCoordinate;
+        public Coordinate prevCoordinate;
         public ObservableCollection<PostListElement> Items
         {
             get { return items; }
@@ -25,6 +25,7 @@ namespace MysteryLocation.ViewModel
         {
             Items = new ObservableCollection<PostListElement>();
             this.user = user;
+            prevCoordinate = null;
             Console.WriteLine("Reaches here");
         }
 
@@ -48,6 +49,7 @@ namespace MysteryLocation.ViewModel
                     });
                 }
             }
+            Console.WriteLine("fvm.updateListElements(); is finished");
         }
 
         public void RecalculateDistance()
@@ -56,6 +58,7 @@ namespace MysteryLocation.ViewModel
             double distance = 0;
             if (Items.Count > 0)
             {
+                Console.WriteLine("calling fvm.ReCalculateDistance();");
                 prevCoordinate = current;
 
             }
@@ -72,6 +75,7 @@ namespace MysteryLocation.ViewModel
                     x.Dist = distance.ToString() + " m";
                 }
             }
+            Console.WriteLine("fvm.RecalculateDistance(); is finished");
 
         }
     }

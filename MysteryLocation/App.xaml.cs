@@ -14,39 +14,25 @@ namespace MysteryLocation
     public partial class App : Application
     {
 
-        public User user;
-        APIConnection conn;
-        GPSUpdater gps;
-        public static double ScreenWidth;
-        public static double ScreenHeight;
+        
+        
+         
+      //  public static double ScreenWidth;
+     //   public static double ScreenHeight;
         public App()
         {
-            
-            conn = new APIConnection();
-            user = new User(true, 329, conn);
-            gps = new GPSUpdater(user);
-
+            APIConnection conn = new APIConnection();
+            User user = new User(true, 329, conn);
+            GPSUpdater gps = new GPSUpdater(user);
+         
+            // Starts the gps.
             gps.startTimer(10);
-            Label gpsLabel = new Label();
-
-            /*  Task.Run(async () =>
-             {
-                 await user.updatePosts();
-             });*/
             InitializeComponent();
             MainPage = new NavigationBar(user, conn);
-            //MainPage = new SettingsPage();
-            //MainPage = new PhotoPage();
-            //NavigationPage navigation = new NavigationPage(new MainPage());
+           
             
         }
 
-        public async Task testingDelayGPS()
-        {
-            await Task.Delay(12000);
-            gps.startTimer(10);
-            Console.WriteLine("GPS has been started!");
-        }
 
         protected override void OnStart()
         {

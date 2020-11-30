@@ -4,11 +4,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Mime;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace MysteryLocation
 {
-    class GPSUpdater
+    class GPSUpdater // Denna klassen kan vi nog förbättra med att göra den till en egen tråd.
     {
         System.Threading.Timer myTimer;
         static int counter;
@@ -24,16 +25,19 @@ namespace MysteryLocation
 
         public void startTimer(int interval)
         {
-            this.myTimer = new System.Threading.Timer((e) =>
-            {
-                if(!firstUpdate)
-                    getLocationBest();
-                else 
-                    getLocationMedium();     
-                counter++;
-            }, null,
-            TimeSpan.FromSeconds(0),
-            TimeSpan.FromSeconds(interval));
+           
+               this.myTimer = new System.Threading.Timer((e) =>
+                {
+                    if (!firstUpdate)
+                         getLocationBest();
+                    else
+                        getLocationMedium();
+                    counter++;
+                    Console.WriteLine("Executing timer block in GPSUpdater " + counter);
+                }, null,
+                TimeSpan.FromSeconds(0),
+                TimeSpan.FromSeconds(interval));
+         
         }
 
         public void stopTimer()

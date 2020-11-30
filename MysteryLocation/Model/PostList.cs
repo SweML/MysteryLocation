@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -94,13 +94,13 @@ namespace MysteryLocation.Model
             ELL = All;
             //ctp.updateView();
             Console.WriteLine(ELL.Count + " nbr of elements in ELL");
-        }
+        }*/
       
         /**
          * This function is called when the distance between the user's new gps-coordinate 
          * and the previous calculation's coordinate is greater than 500 m
          */
-        public void ReCalculateDistance(User usr)
+    /*    public void ReCalculateDistance(User usr)
         {
             Coordinate current = usr.currentPos;
             double distance = 0;
@@ -163,3 +163,4 @@ namespace MysteryLocation.Model
 
     }
 }
+    */

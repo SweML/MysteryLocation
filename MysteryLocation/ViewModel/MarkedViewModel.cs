@@ -10,7 +10,7 @@ namespace MysteryLocation.ViewModel
     {
         public ObservableCollection<PostListElement> items;
         private User user;
-        public static Coordinate prevCoordinate;
+        public Coordinate prevCoordinate;
         public ObservableCollection<PostListElement> Items
         {
             get { return items; }
@@ -45,6 +45,7 @@ namespace MysteryLocation.ViewModel
                 Position = new Coordinate(55.907875776284456, 14.067913798214885),
                 Dist = ""
             });
+            prevCoordinate = null;
         }
 
         public void updateListElements()

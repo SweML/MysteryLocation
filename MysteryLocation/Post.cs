@@ -58,10 +58,5 @@ namespace MysteryLocation
 
         }
 
-        public String ToString()
-        {
-            string toReturn = id + "\n" + subject + "\n" + body + "\n" + created + "\n" + lastUpdated + "\n" + position.toString() + "\n";
-            return toReturn;
-        }
     }
 }
