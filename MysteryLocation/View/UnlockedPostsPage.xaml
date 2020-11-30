@@ -12,7 +12,95 @@
                VerticalOptions="StartAndExpand"
                HorizontalOptions="Center"/>
 
+            <ListView SeparatorVisibility="Default"
+              x:Name="listview"
+        ItemsSource="{Binding Items}">
 
+                <ListView.RowHeight>
+                    <OnPlatform x:TypeArguments="x:Int32">
+                        <On Platform="iOS, Android" Value="180" />
+                    </OnPlatform>
+                </ListView.RowHeight>
+                <ListView.WidthRequest Value="20"/>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate x:Name="SS">
+                        <ViewCell>
+                            <ContentView x:Name="SSS" Margin="5,5,5,5">
+                                <Frame OutlineColor="LightGray" CornerRadius="5" Padding="10">
+                                    <StackLayout x:Name="DSL">
+                                        <StackLayout Orientation="Horizontal">
+                                            <BoxView Color="LightGray"
+                                            WidthRequest="90"
+                                            HeightRequest="90"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center"/>
+                                            <StackLayout x:Name="SL" Padding="0">
+                                                <Label x:Name="Title" Text="{Binding Subject}"
+                                            FontSize="22"
+                                            FontFamily="Grotesk"
+                                            TextColor="Black"
+                                            Margin="10, -2, 0, 0"
+                                            VerticalOptions="Fill" />
+                                                <Label x:Name="Category" Text="{Binding Dist}"
+                                            FontSize="16"
+                                            FontFamily="Grotesk"
+                                            TextColor="Gray"
+                                            Margin="10, -2, 0, 0"
+                                            VerticalOptions="Fill" />
+                                                <Label x:Name="Desc" Text="{Binding Body}"
+                                            Margin="10, -4, 0, 0"
+                                            FontSize="15"
+                                            FontFamily="Latow"
+                                            VerticalOptions="Start"
+                                            MaxLines="3"/>
+                                            </StackLayout>
+                                        </StackLayout>
+                                        <BoxView HorizontalOptions="FillAndExpand" HeightRequest="0.5" Color="LightGray"/>
+                                        <StackLayout x:Name="SLSL" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                                            <StackLayout x:Name="SLmark" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical" 
+                                                                                Grid.Column="1" Grid.Row="0" Padding="0,0,0,0"  BackgroundColor="GhostWhite">
+                                                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+
+                                                    <Label x:Name="Mark" Text="Mark" TextColor="Black" FontAttributes="Bold" FontFamily="Latob" 
+                                                                                HorizontalOptions="Start" VerticalOptions="Start" FontSize="Small">
+                                                    </Label>
+                                                </StackLayout>
+
+                                            </StackLayout>
+                                            <StackLayout x:Name="SLdetails" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical" 
+                                                                                Grid.Column="1" Grid.Row="0" Padding="0,0,0,0"  BackgroundColor="GhostWhite">
+                                                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+
+                                                    <Label x:Name="Details" Text="Details" TextColor="Black" FontAttributes="Bold" FontFamily="Latob" 
+                                                                                HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontSize="Small">
+                                                    </Label>
+                                                </StackLayout>
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                                                </StackLayout.GestureRecognizers>
+                                            </StackLayout>
+
+                                            <StackLayout x:Name="SLRep" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Orientation="Vertical" 
+                                                                                Grid.Column="1" Grid.Row="0" Padding="0,0,0,0"  BackgroundColor="GhostWhite">
+                                                <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
+
+                                                    <Label x:Name="Report" Text="Report" TextColor="Black" FontAttributes="Bold" FontFamily="Latob" 
+                                                                                HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" FontSize="Small">
+                                                    </Label>
+                                                </StackLayout>
+
+                                            </StackLayout>
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </ContentView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
 
             <ActivityIndicator x:Name="defaultActivityIndicator"
                                IsRunning="False" 

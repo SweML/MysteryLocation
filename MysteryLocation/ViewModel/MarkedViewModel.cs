@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MysteryLocation.ViewModel
 {
-    public class FeedViewModel : PostListProperty
+    public class MarkedViewModel : PostListProperty
     {
         public ObservableCollection<PostListElement> items;
         private User user;
@@ -21,18 +21,36 @@ namespace MysteryLocation.ViewModel
             }
         }
 
-        public FeedViewModel(User user)
+        public MarkedViewModel(User user)
         {
             Items = new ObservableCollection<PostListElement>();
             this.user = user;
-            Console.WriteLine("Reaches here");
+            Items.Add(new PostListElement()
+            {
+                Id = 9999,
+                Subject = "PlaceHolder 1",
+                Body = "PlaceHolder Text",
+                Created = "2020-09-14T12:59:21.7395836",
+                LastUpdated = "2020-09-14T12:59:21.7395836",
+                Position = new Coordinate(55.907875776284456, 14.067913798214885),
+                Dist = ""
+            });
+            Items.Add(new PostListElement()
+            {
+                Id = 10000,
+                Subject = "PlaceHolder 2",
+                Body = "PlaceHolder Text",
+                Created = "2020-09-14T12:59:21.7395836",
+                LastUpdated = "2020-09-14T12:59:21.7395836",
+                Position = new Coordinate(55.907875776284456, 14.067913798214885),
+                Dist = ""
+            });
         }
 
         public void updateListElements()
         {
-            Console.WriteLine("Calling fvm.updateListElements();");
-            List<Post> posts = user.getFeed();
-            foreach(Post x in posts)
+            List<Post> posts = user.getUnlocked();
+            foreach (Post x in posts)
             {
                 if (x.getCoordinate() != null)
                 {
@@ -44,7 +62,7 @@ namespace MysteryLocation.ViewModel
                         Created = x.getCreated(),
                         LastUpdated = x.getLastUpdated(),
                         Position = x.getCoordinate(),
-                        Dist = "Loading"
+                        Dist = ""
                     });
                 }
             }
@@ -59,7 +77,7 @@ namespace MysteryLocation.ViewModel
                 prevCoordinate = current;
 
             }
-            foreach(PostListElement x in Items)
+            foreach (PostListElement x in Items)
             {
                 distance = current.getDistance(x.Position);
                 if (distance > 1000)
@@ -74,7 +92,8 @@ namespace MysteryLocation.ViewModel
             }
 
         }
+
     }
 
-    
+
 }

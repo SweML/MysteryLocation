@@ -46,6 +46,8 @@ namespace MysteryLocation.Model
 
         public FeedViewModel fvm { get; set; }
 
+        public MarkedViewModel mvm { get; set; }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
@@ -115,6 +117,8 @@ namespace MysteryLocation.Model
             {
                 Console.WriteLine("Executing Recalcdist");
                 fvm.RecalculateDistance();
+                if (mvm != null)
+                    mvm.RecalculateDistance();
             }
             else if (PostList.prevCoordinate != null)
             {
