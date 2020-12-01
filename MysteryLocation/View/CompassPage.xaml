@@ -7,9 +7,36 @@
              BackgroundColor="LightGray"
              ControlTemplate="{StaticResource Template}">
     <ContentPage.Content>
-        <StackLayout x:Name="layout"
-                     >
-           <!-- Text="{Binding CurrentPosition}"-->
+
+
+        <!--stacklayout for the welcome message -->
+        <StackLayout>
+            <StackLayout x:Name="termsLayout">
+                <Label Margin="15" Text="Terms and Conditions :" FontAttributes="Bold" FontSize="Large"></Label>
+                <Label FontSize="Medium" Margin="15"  Text="This mobile application can be used for share locations, picture with short text about interesting places with other users.  &#10; &#10; By clicking the agree button you agree NOT to use this mobile application: &#10; &#10; 
+1 - To post nude, partially nude, or sexually suggestive photos. &#10; 
+2 - To attack, harass, threat, abuse other users.  &#10;
+3 - To communicate with other users in an abusive or offensive manners.  &#10;
+4 - To market or advertise illegal products. &#10;
+5 - To publish contact information, E-mails , phone numbers (spams).  &#10;
+6 - To violate any laws in your jurisdictiont">
+
+                </Label>
+                <Button x:Name="agreeButon" Text="AGREE"
+                        Clicked="onAgree">
+
+                </Button>
+            </StackLayout>
+
+            <!--stacklayout for the welcome message -->
+
+
+
+
+            <!--Name and Visible were Added to control the welcome messaGES  -->
+
+            <StackLayout x:Name="layout" IsVisible="false">
+                <!-- Text="{Binding CurrentPosition}"-->
             <Label x:Name="currentGPS"
                FontAttributes="Bold"
                FontSize="20"
@@ -57,8 +84,9 @@
                VerticalOptions="StartAndExpand"
                HorizontalOptions="Center"  />
             </Grid>
+            </StackLayout>
 
-            
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
