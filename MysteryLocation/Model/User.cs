@@ -119,9 +119,35 @@ namespace MysteryLocation.Model
             distance = dist;
            // Console.WriteLine("The user distance has been changed to " + distance.ToString());
         }
+
+        internal void RemovePostFromFeed(int v)
+        {
+            Post temp = null;
+            Console.WriteLine(feed.Count + " Feed count");
+            foreach (Post x in feed)
+            {
+                if(x.getId() == v)
+                {
+                    temp = x;
+                }
+            }
+            feed.Remove(temp);
+            PostListElement a = fvm.RemovePost(temp);
+            Console.WriteLine(feed.Count + " Feed count");
+            addPostToMarked(temp, a);
+        }
+
+        internal void addPostToMarked(Post x, PostListElement postele)
+        {
+            Console.WriteLine(marked.Count + " Marked count");
+            marked.Add(x);
+            mvm.AddPost(postele);
+            Console.WriteLine(marked.Count + " Marked count");
+        }
+
         /**
-         * Reads the cookie file for information about the user.
-         */
+* Reads the cookie file for information about the user.
+*/
         public void ReadUser()
         {
             var filename = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "myFile.txt");

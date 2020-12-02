@@ -21,10 +21,11 @@ namespace MysteryLocation
         {
             this.user = user;
             mvm = new MarkedViewModel(user);
-            user.mvm = mvm;
             InitializeComponent();
-            currentGPS.BindingContext = user;
-            listview.BindingContext = mvm;
+            this.BindingContext = mvm;
+            user.mvm = mvm;
+            //currentGPS.BindingContext = user;
+
         }
 
         

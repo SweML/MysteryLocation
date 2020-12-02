@@ -78,6 +78,22 @@ namespace MysteryLocation.ViewModel
             Console.WriteLine("fvm.RecalculateDistance(); is finished");
 
         }
+
+        public PostListElement RemovePost(Post temp)
+        {
+            PostListElement refe = null;
+            foreach(PostListElement x in Items)
+            {
+                if(x.Id == temp.getId())
+                {
+                    refe = x;
+                    break;
+                }
+            }
+            if(refe != null)
+                Items.Remove(refe);
+            return refe;
+        }
     }
 
     

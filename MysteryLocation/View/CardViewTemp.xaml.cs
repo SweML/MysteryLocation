@@ -114,6 +114,11 @@ namespace MysteryLocation.View
             await Navigation.PushAsync(new DetailsPage(user), true);
         }
 
-       
+        private void Mark_Clicked(object sender, EventArgs e)
+        {
+            int temp = int.Parse((sender as Button).AutomationId);
+            user.RemovePostFromFeed(temp);
+            
+        }
     }
 }

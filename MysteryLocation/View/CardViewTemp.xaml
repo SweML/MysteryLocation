@@ -60,9 +60,9 @@
                                                                                 Grid.Column="1" Grid.Row="0" Padding="0,0,0,0"  BackgroundColor="GhostWhite">
                                         <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
 
-                                            <Label x:Name="Mark" Text="Mark" TextColor="Black" FontAttributes="Bold" FontFamily="Latob" 
-                                                                                HorizontalOptions="Start" VerticalOptions="Start" FontSize="Small">
-                                            </Label>
+                                            <Button x:Name="Mark" Text="Mark" TextColor="Black" FontAttributes="Bold" FontFamily="Latob" 
+                                                                                HorizontalOptions="Start" VerticalOptions="Start" FontSize="Small" AutomationId="{Binding Id}" Clicked="Mark_Clicked">
+                                            </Button>
                                         </StackLayout>
 
                                     </StackLayout>
