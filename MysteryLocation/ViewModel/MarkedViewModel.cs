@@ -17,7 +17,7 @@ namespace MysteryLocation.ViewModel
             set
             {
                 markeditems = value;
-                OnPropertyChanged("Items");
+                OnPropertyChanged("MarkedItems");
             }
         }
 
