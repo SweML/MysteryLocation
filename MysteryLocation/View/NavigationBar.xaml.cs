@@ -27,11 +27,11 @@ namespace MysteryLocation
         private void pageCreation()
         {
 
-            NavigationPage compass = new NavigationPage(new CompassPage(user));
+           /* NavigationPage compass = new NavigationPage(new CompassPage(user));
             compass.IconImageSource = "compassIcon.png";
             compass.Title = "Compass";
             Children.Add(compass);
-
+           */
             NavigationPage navigationPage = new NavigationPage(new SettingsPage(user));
             navigationPage.IconImageSource = "settingsIcon.png";
             navigationPage.Title = "Settings";
@@ -49,11 +49,11 @@ namespace MysteryLocation
             marked.Title = "Marked";
             Children.Add(marked);
 
-           /* NavigationPage unlocked = new NavigationPage(new UnlockedPostsPage(user));
+            NavigationPage unlocked = new NavigationPage(new UnlockedPostsPage(user));
             unlocked.IconImageSource = "unlockedIcon.png";
             unlocked.Title = "Unlocked";
             Children.Add(unlocked);
-           */
+           
             NavigationPage publish = new NavigationPage(new PublishPage(user, conn));
             publish.IconImageSource = "unlockedIcon.png";
             publish.Title = "Publish";

@@ -8,7 +8,7 @@ namespace MysteryLocation.ViewModel
 {
     public class UnlockedViewModel : PostListProperty
     {
-        public ObservableCollection<PostListElement> items;
+        public ObservableCollection<PostListElement> items = new ObservableCollection<PostListElement>();
         private User user;
         public ObservableCollection<PostListElement> Items
         {
@@ -22,7 +22,6 @@ namespace MysteryLocation.ViewModel
 
         public UnlockedViewModel(User user)
         {
-            Items = new ObservableCollection<PostListElement>();
             this.user = user;
             Items.Add(new PostListElement() {
                Id = 9999,

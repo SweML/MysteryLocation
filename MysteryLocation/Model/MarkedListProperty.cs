@@ -5,15 +5,15 @@ using System.Text;
 
 namespace MysteryLocation.Model
 {
-    public class PostListProperty : INotifyPropertyChanged
+    public class MarkedListProperty : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)
         {
-            //var handler = PropertyChanged;
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

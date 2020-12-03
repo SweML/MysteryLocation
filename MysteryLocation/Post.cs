@@ -4,13 +4,13 @@ namespace MysteryLocation
     public class Post
     {
         private int id { get; set; }
-        public String subject { get; set; }
+        private String subject { get; set; }
         private String body { get; set; }
         private String created { get; set; }
         private String lastUpdated { get; set; }
-        public Coordinate position { get; set; }
+        private Coordinate position { get; set; }
 
-        public Post(int id, String subject, String body, String image, String created, String lastUpdated, Coordinate position)
+        public Post(int id, String subject, String body, String created, String lastUpdated, Coordinate position)
         {
             this.id = id;
             this.subject = subject;

@@ -8,23 +8,26 @@ namespace MysteryLocation.ViewModel
 {
     public class MarkedViewModel : PostListProperty
     {
-        public ObservableCollection<PostListElement> markeditems;
+        public ObservableCollection<PostListElement> items = new ObservableCollection<PostListElement>();
         private User user;
+        private MarkedPostsPage mpp;
         public Coordinate prevCoordinate;
-        public ObservableCollection<PostListElement> MarkedItems
+        public ObservableCollection<PostListElement> Items
         {
-            get { return markeditems; }
+            get { return items; }
             set
             {
-                markeditems = value;
-                OnPropertyChanged("MarkedItems");
+                if(items != value) { 
+                items = value;
+                OnPropertyChanged("Items");
+                }
             }
         }
 
-        public MarkedViewModel(User user)
+        public MarkedViewModel(User user, MarkedPostsPage mpp)
         {
-            MarkedItems = new ObservableCollection<PostListElement>();
             this.user = user;
+            this.mpp = mpp;
           /*  Items.Add(new PostListElement()
             {
                 Id = 9999,
@@ -50,12 +53,12 @@ namespace MysteryLocation.ViewModel
 
         public void updateListElements()
         {
-            List<Post> posts = user.getUnlocked();
+            List<Post> posts = user.getMarked();
             foreach (Post x in posts)
             {
                 if (x.getCoordinate() != null)
                 {
-                    MarkedItems.Add(new PostListElement()
+                    Items.Add(new PostListElement()
                     {
                         Id = x.getId(),
                         Subject = x.getSubject(),
@@ -73,12 +76,12 @@ namespace MysteryLocation.ViewModel
         {
             Coordinate current = user.currentPos;
             double distance = 0;
-            if (MarkedItems.Count > 0)
+            if (Items.Count > 0)
             {
                 prevCoordinate = current;
 
             }
-            foreach (PostListElement x in MarkedItems)
+            foreach (PostListElement x in Items)
             {
                 distance = current.getDistance(x.Position);
                 if (distance > 1000)
@@ -97,10 +100,21 @@ namespace MysteryLocation.ViewModel
         public void AddPost(PostListElement x)
         {
             Console.WriteLine("Entering AddPost");
-            MarkedItems.Add(x);
-           
+            Items.Add(x);
+            /*Items.Add(new PostListElement()
+            {
+                Id = x.Id,
+                Subject = x.Subject,
+                Body = x.Body,
+                Created = x.Created,
+                LastUpdated = x.LastUpdated,
+                Position = x.Position,
+                Dist = x.Dist
+            });*/
+           // OnPropertyChanged("Items");
             Console.WriteLine("Exiting AddPost");
-            Console.WriteLine("Items count is: " + MarkedItems.Count);
+            Console.WriteLine("Items count is: " + Items.Count);
+           // mpp.updateBindingContext();
         }
     }
 

@@ -8,7 +8,7 @@ namespace MysteryLocation.ViewModel
 {
     public class FeedViewModel : PostListProperty
     {
-        public ObservableCollection<PostListElement> items;
+        public ObservableCollection<PostListElement> items = new ObservableCollection<PostListElement>();
         private User user;
         public Coordinate prevCoordinate;
         public ObservableCollection<PostListElement> Items
@@ -23,7 +23,6 @@ namespace MysteryLocation.ViewModel
 
         public FeedViewModel(User user)
         {
-            Items = new ObservableCollection<PostListElement>();
             this.user = user;
             prevCoordinate = null;
             Console.WriteLine("Reaches here");

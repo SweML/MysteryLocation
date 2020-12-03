@@ -20,6 +20,7 @@ namespace MysteryLocation.View
             fvm = new FeedViewModel(user);
             InitializeComponent();
             this.BindingContext = fvm;
+            //currentGPS.BindingContext = user;
             user.fvm = fvm;
             //updatePosts();
             /*Task.Run(async () =>
@@ -117,8 +118,9 @@ namespace MysteryLocation.View
         private void Mark_Clicked(object sender, EventArgs e)
         {
             int temp = int.Parse((sender as Button).AutomationId);
-            user.RemovePostFromFeed(temp);
-            
+            PostListElement refElement = user.RemovePostFromFeed(temp);
+            user.addPostToMarked(refElement);
+
         }
     }
 }
