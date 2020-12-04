@@ -3,13 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:MysteryLocation.ViewModel"
              x:Class="MysteryLocation.SettingsPage"
              NavigationPage.HasNavigationBar="False"
-             NavigationPage.BackButtonTitle="False"
-             ControlTemplate="{StaticResource Template}">
+             NavigationPage.BackButtonTitle="False">
     <ContentPage.BindingContext>
         <local:CategoryViewModel></local:CategoryViewModel>
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" BackgroundColor="Black">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+
+                    </Grid.ColumnDefinitions>
+                    <BoxView Color="Black" />
+                    <Label 
+                        Text="MysteryLocation"
+                        TextColor="White"
+                        FontSize="15"
+                        Margin="20,0,0,0"
+                        FontFamily="Helvetica"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Fill"/>
+                </Grid>
+            </StackLayout>
 <!--
             <Label x:Name="currentGPS"
                Text="{Binding CurrentPosition}"

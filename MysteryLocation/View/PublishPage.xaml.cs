@@ -20,10 +20,10 @@ namespace MysteryLocation.View
         User user;
         APIConnection conn;
         Stream imgSource;
-        public PublishPage(User user, APIConnection conn)
+        public PublishPage()
         {
-            this.user = user;
-            this.conn = conn;
+            this.user = App.user;
+            this.conn = App.conn;
             imgSource = null;
             InitializeComponent();
             currentGPS.BindingContext = user;

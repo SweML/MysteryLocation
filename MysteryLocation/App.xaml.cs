@@ -14,16 +14,16 @@ namespace MysteryLocation
     public partial class App : Application
     {
 
-        
-        
-         
-      //  public static double ScreenWidth;
-     //   public static double ScreenHeight;
+        public static User user;
+        public static APIConnection conn;
+
+        //  public static double ScreenWidth;
+        //   public static double ScreenHeight;
         public App()
         {
-            APIConnection conn = new APIConnection();
-            User user = new User(true, 329, conn);
-           GPSUpdater gps = new GPSUpdater(user);
+            conn = new APIConnection();
+            user = new User(true, 329, conn);
+            GPSUpdater gps = new GPSUpdater(user);
          
             // Starts the gps.
             gps.startTimer(10);

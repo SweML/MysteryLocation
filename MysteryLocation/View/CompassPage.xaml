@@ -4,8 +4,7 @@
              x:Class="MysteryLocation.CompassPage"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.BackButtonTitle="False"
-             BackgroundColor="LightGray"
-             ControlTemplate="{StaticResource Template}">
+             BackgroundColor="LightGray">
     <ContentPage.Content>
 
 
@@ -29,7 +28,26 @@
             </StackLayout>
 
             <!--stacklayout for the welcome message -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" BackgroundColor="Black">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
 
+                    </Grid.ColumnDefinitions>
+                    <BoxView Color="Black" />
+                    <Label 
+                        Text="MysteryLocation"
+                        TextColor="White"
+                        FontSize="15"
+                        Margin="20,0,0,0"
+                        FontFamily="Helvetica"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Fill"/>
+                </Grid>
+            </StackLayout>
 
 
 

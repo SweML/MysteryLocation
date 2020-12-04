@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MysteryLocation.View.PublishPage"
              NavigationPage.HasNavigationBar="False"
-             NavigationPage.BackButtonTitle="False"
-             ControlTemplate="{StaticResource Template}">
+             NavigationPage.BackButtonTitle="False">
     <ContentPage.Content>
         <StackLayout>
             <ActivityIndicator x:Name="defaultActivityIndicator"
