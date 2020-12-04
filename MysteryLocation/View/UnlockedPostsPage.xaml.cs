@@ -21,9 +21,10 @@ namespace MysteryLocation
         {
             this.user = user;
             uvm = new UnlockedViewModel(user);
+            this.BindingContext = uvm;
             InitializeComponent();
-            currentGPS.BindingContext = user;
-            listview.BindingContext = uvm;
+            //currentGPS.BindingContext = user;
+            
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)

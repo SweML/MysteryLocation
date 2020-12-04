@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MysteryLocation.UnlockedPostsPage"
              NavigationPage.HasNavigationBar="False"
-             NavigationPage.BackButtonTitle="False"
-    ControlTemplate="{StaticResource Template}">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label x:Name="currentGPS"
+             NavigationPage.BackButtonTitle="False">
+    <!-- ControlTemplate="{StaticResource Template}">
+    <Label x:Name="currentGPS"
                Text="{Binding CurrentPosition}"
                VerticalOptions="StartAndExpand"
-               HorizontalOptions="Center"/>
+               HorizontalOptions="Center"/> -->
+    <ContentPage.Content>
+        <StackLayout>
+            
 
             <ListView SeparatorVisibility="Default"
               x:Name="listview"
@@ -30,9 +31,10 @@
                                 <Frame OutlineColor="LightGray" CornerRadius="5" Padding="10">
                                     <StackLayout x:Name="DSL">
                                         <StackLayout Orientation="Horizontal">
-                                            <BoxView Color="LightGray"
+                                            <Image 
                                             WidthRequest="90"
                                             HeightRequest="90"
+                                            Source="{Binding Img}"
                                             HorizontalOptions="Center"
                                             VerticalOptions="Center"/>
                                             <StackLayout x:Name="SL" Padding="0">

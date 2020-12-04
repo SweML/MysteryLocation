@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using Xamarin.Forms;
 
 namespace MysteryLocation.Model
 {
@@ -14,6 +15,7 @@ namespace MysteryLocation.Model
         public String lastUpdated;
         public Coordinate position;
         public String dist;
+        public ImageSource img;
 
         public int Id
         {
@@ -84,6 +86,15 @@ namespace MysteryLocation.Model
             }
         }
 
+        public ImageSource Img
+        {
+            get { return img; }
+            set
+            {
+                img = value;
+                OnPropertyChanged("Img");
+            }
+        }
 
     }
 }

@@ -23,7 +23,7 @@ namespace MysteryLocation
         {
             APIConnection conn = new APIConnection();
             User user = new User(true, 329, conn);
-            GPSUpdater gps = new GPSUpdater(user);
+           GPSUpdater gps = new GPSUpdater(user);
          
             // Starts the gps.
             gps.startTimer(10);
