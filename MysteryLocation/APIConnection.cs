@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,6 +58,40 @@ namespace MysteryLocation
                 Console.WriteLine("Hurra!");
             }
         }
+
+        public async Task<UnlockedPosts> getPostAttachmentAsync(int obsId)
+        {
+            Stopwatch stop = new Stopwatch();
+            Uri uri = new Uri(string.Format("https://saabstudent2020.azurewebsites.net/observation/" + obsId + "/attachment", string.Empty));
+            HttpResponseMessage response = await client.GetAsync(uri);
+            UnlockedPosts temp = null;
+            if (response.IsSuccessStatusCode)
+            {
+                string content = await response.Content.ReadAsStringAsync();
+                temp = MakeUnlockedPost(content);
+                temp.obsID = obsId;
+            }
+            return temp;
+        }
+
+        private UnlockedPosts MakeUnlockedPost(string content)
+        {
+            string id = "";
+            int counter = 7;
+            while (content[counter] != ',')
+            {
+                id += content[counter];
+                counter++;
+            }
+            counter = 23 + id.Length;
+            content = content.Substring(counter);
+            content = content.Remove(content.Length - 3, 3);
+            UnlockedPosts temp = new UnlockedPosts(int.Parse(id), content);
+            return temp;
+        }
+
+      
+
         /*
         private List<Post> ConvertJsonToPostsUser(string JsonString)
         {
