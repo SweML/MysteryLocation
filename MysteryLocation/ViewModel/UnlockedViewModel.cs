@@ -12,6 +12,20 @@ namespace MysteryLocation.ViewModel
     {
         public ObservableCollection<PostListElement> items = new ObservableCollection<PostListElement>();
         private User user;
+        private string position;
+
+        public string Position // User position
+        {
+            get { return position; }
+            set
+            {
+                if (position != value)
+                {
+                    position = value;
+                    OnPropertyChanged("Position");
+                }
+            }
+        }
         public ObservableCollection<PostListElement> Items
         {
             get { return items; }

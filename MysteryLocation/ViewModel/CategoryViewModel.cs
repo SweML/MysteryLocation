@@ -2,11 +2,25 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace MysteryLocation.ViewModel
 {
-    class CategoryViewModel
+    public class CategoryViewModel : PostListProperty
     {
+        private string position;
+        public string Position // User position
+        {
+            get { return position; }
+            set
+            {
+                if (position != value)
+                {
+                    position = value;
+                    OnPropertyChanged("Position");
+                }
+            }
+        }
         public IList<Category> CatList { get; set; }
 
         public CategoryViewModel()
@@ -25,5 +39,7 @@ namespace MysteryLocation.ViewModel
 
             }
         }
+
+        
     }
 }

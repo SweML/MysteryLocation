@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MysteryLocation.Model;
+using MysteryLocation.ViewModel;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Xamarin.Essentials;
@@ -27,6 +28,9 @@ namespace MysteryLocation
         public SettingsPage(User user)
         {
             this.user = user;
+            CategoryViewModel cavm = new CategoryViewModel();
+            GPSFetcher.cavm = cavm;
+            this.BindingContext = cavm;
             InitializeComponent();
           //  currentGPS.BindingContext = user;
         }

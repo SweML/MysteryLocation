@@ -18,10 +18,12 @@ namespace MysteryLocation.View
         {
             this.user = user;
             fvm = new FeedViewModel(user);
+            user.fvm = fvm;
+            GPSFetcher.fvm = fvm;
             InitializeComponent();
             this.BindingContext = fvm;
             //currentGPS.BindingContext = user;
-            user.fvm = fvm;
+            
             //updatePosts();
             /*Task.Run(async () =>
             await testing()

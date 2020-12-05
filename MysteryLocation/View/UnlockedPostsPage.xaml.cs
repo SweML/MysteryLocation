@@ -24,6 +24,7 @@ namespace MysteryLocation
             this.BindingContext = uvm;
             InitializeComponent();
             user.uvm = uvm;
+            GPSFetcher.uvm = uvm;
             //currentGPS.BindingContext = user;
             
         }

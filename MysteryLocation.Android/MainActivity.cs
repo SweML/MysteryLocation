@@ -9,6 +9,7 @@ using MysteryLocation;
 using System.IO;
 using System.Threading.Tasks;
 using Android.Content;
+using Plugin.CurrentActivity;
 
 namespace MysteryLocation.Droid
 {
@@ -22,7 +23,7 @@ namespace MysteryLocation.Droid
 
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-
+            CrossCurrentActivity.Current.Init(this, savedInstanceState);
             base.OnCreate(savedInstanceState);
             Instance = this;
 
@@ -36,6 +37,7 @@ namespace MysteryLocation.Droid
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
         // Field, property, and method for Picture Picker

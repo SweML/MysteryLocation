@@ -16,6 +16,7 @@ namespace MysteryLocation
 
         public static User user;
         public static APIConnection conn;
+        private GPSFetcher gps;
 
         //  public static double ScreenWidth;
         //   public static double ScreenHeight;
@@ -23,10 +24,10 @@ namespace MysteryLocation
         {
             conn = new APIConnection();
             user = new User(true, 329, conn);
-            GPSUpdater gps = new GPSUpdater(user);
+            //GPSUpdater gps = new GPSUpdater(user);
          
             // Starts the gps.
-            gps.startTimer(10);
+            //gps.startTimer(10);
             InitializeComponent();
             MainPage = new NavigationBar(user, conn);
            
@@ -36,14 +37,32 @@ namespace MysteryLocation
 
         protected override void OnStart()
         {
+            gps = new GPSFetcher();
+            startGPS();
         }
 
         protected override void OnSleep()
         {
+            stopGPS();
         }
 
         protected override void OnResume()
         {
+            if (gps == null) { 
+                gps = new GPSFetcher();
+                Console.WriteLine("New GPSFetcher onResume. If this happens we have to do something else with the fetches references to vm:s");
+            }
+            startGPS();
+        }
+
+        public  async void startGPS()
+        {
+            await gps.StartListening();
+        }
+
+        public async void stopGPS()
+        {
+            await gps.StopListening();
         }
     }
 }

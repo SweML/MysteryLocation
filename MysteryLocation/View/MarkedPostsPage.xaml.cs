@@ -23,6 +23,7 @@ namespace MysteryLocation
             this.user = user;
             mvm = new MarkedViewModel(user, this);
             user.mvm = mvm;
+            GPSFetcher.mvm = mvm;
             this.BindingContext = mvm;
             InitializeComponent();
             

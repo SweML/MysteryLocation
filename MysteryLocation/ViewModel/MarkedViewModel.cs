@@ -12,6 +12,20 @@ namespace MysteryLocation.ViewModel
         private User user;
         private MarkedPostsPage mpp;
         public Coordinate prevCoordinate;
+        private string position;
+
+        public string Position // User position
+        {
+            get { return position; }
+            set
+            {
+                if (position != value)
+                {
+                    position = value;
+                    OnPropertyChanged("Position");
+                }
+            }
+        }
         public ObservableCollection<PostListElement> Items
         {
             get { return items; }
