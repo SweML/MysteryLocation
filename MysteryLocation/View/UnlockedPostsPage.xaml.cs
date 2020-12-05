@@ -23,6 +23,7 @@ namespace MysteryLocation
             uvm = new UnlockedViewModel(user);
             this.BindingContext = uvm;
             InitializeComponent();
+            user.uvm = uvm;
             //currentGPS.BindingContext = user;
             
         }

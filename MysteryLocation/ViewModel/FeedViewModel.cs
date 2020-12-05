@@ -54,7 +54,8 @@ namespace MysteryLocation.ViewModel
         public void RecalculateDistance()
         {
             Coordinate current = user.currentPos;
-            double distance = 0;
+            double distance = 0, copyDistance = 0;
+            int relevantNbrs = 0;
             if (Items.Count > 0)
             {
                 Console.WriteLine("calling fvm.ReCalculateDistance();");
@@ -64,14 +65,15 @@ namespace MysteryLocation.ViewModel
             foreach(PostListElement x in Items)
             {
                 distance = current.getDistance(x.Position);
+                relevantNbrs = ((int)distance).ToString().Length + 1;
                 if (distance > 1000)
                 {
                     distance /= 10;
-                    x.Dist = distance.ToString() + " km";
+                    x.Dist = distance.ToString().Substring(0, relevantNbrs) + " km";
                 }
                 else
                 {
-                    x.Dist = distance.ToString() + " m";
+                    x.Dist = distance.ToString().Substring(0, relevantNbrs) + " m";
                 }
             }
             Console.WriteLine("fvm.RecalculateDistance(); is finished");
