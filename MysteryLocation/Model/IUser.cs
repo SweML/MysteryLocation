@@ -29,12 +29,12 @@ namespace MysteryLocation.Model
         /**
          * Method to forcefully tell the user to update Posts.
          */
-        Task updatePosts();
+      //  Task updatePosts();
 
-        List<Post> getFeed();
+       // List<Post> getFeed();
 
-        List<Post> getUnlocked();
+      //  List<Post> getUnlocked();
 
-        List<Post> getMarked();
+      //  List<Post> getMarked();
     }
 }

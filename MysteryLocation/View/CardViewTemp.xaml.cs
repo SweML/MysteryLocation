@@ -34,8 +34,8 @@ namespace MysteryLocation.View
         private void Mark_Clicked(object sender, EventArgs e)
         {
             int temp = int.Parse((sender as Button).AutomationId);
-            PostListElement refElement = user.RemovePostFromFeed(temp);
-            user.addPostToMarked(refElement);
+            PostListElement refElement = fvm.RemovePost(temp);
+            GPSFetcher.mvm.AddPost(refElement);
 
         }
 

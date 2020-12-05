@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MysteryLocation.ViewModel
 {
@@ -41,9 +42,14 @@ namespace MysteryLocation.ViewModel
             this.user = user;
             prevCoordinate = null;
             Console.WriteLine("Reaches here");
+            Task.Run(async() =>
+            {
+                List<Post> posts = await App.conn.getDataAsync();
+                updateListElements(posts);
+            });
         }
 
-        public void updateListElements()
+      /*  public void updateListElements()
         {
             Console.WriteLine("Calling fvm.updateListElements();");
             List<Post> posts = user.getFeed();
@@ -64,7 +70,7 @@ namespace MysteryLocation.ViewModel
                 }
             }
             Console.WriteLine("fvm.updateListElements(); is finished");
-        }
+        }*/
 
         public void updateListElements(List<Post> posts)
         {
@@ -85,22 +91,21 @@ namespace MysteryLocation.ViewModel
                     });
                 }
             }
+            if (GPSFetcher.currentPosition != null)
+                RecalculateDistance();
         }
 
         public void RecalculateDistance()
         {
             Position current = GPSFetcher.currentPosition;
-            double distance = 0;
-            int relevantNbrs = 0;
+            
             Console.WriteLine("calling fvm.ReCalculateDistance();");
             if (Items.Count > 0 && current != null)
             {
-                Console.WriteLine("calling fvm.ReCalculateDistance();");
-
-
-
-                if (prevCoordinate == null/* || prevCoordinate.CalculateDistance(current) > 0.5*/)
+                if (prevCoordinate == null || GlobalFuncs.calcDist(current, prevCoordinate) > 500)
                 {
+                    double distance = 0;
+                    int relevantNbrs = 0;
                     prevCoordinate = current;
                     foreach (PostListElement x in Items)
                     {
@@ -126,12 +131,12 @@ namespace MysteryLocation.ViewModel
 
             
 
-            public PostListElement RemovePost(Post temp)
+            public PostListElement RemovePost(int temp)
             {
                 PostListElement refe = null;
                 foreach (PostListElement x in Items)
                 {
-                    if (x.Id == temp.getId())
+                    if (x.Id == temp)
                     {
                         refe = x;
                         break;

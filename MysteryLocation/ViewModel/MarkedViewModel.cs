@@ -116,20 +116,9 @@ namespace MysteryLocation.ViewModel
         {
             Console.WriteLine("Entering AddPost");
             Items.Add(x);
-            /*Items.Add(new PostListElement()
-            {
-                Id = x.Id,
-                Subject = x.Subject,
-                Body = x.Body,
-                Created = x.Created,
-                LastUpdated = x.LastUpdated,
-                Position = x.Position,
-                Dist = x.Dist
-            });*/
-           // OnPropertyChanged("Items");
+            App.user.markedSet.Add(x.Id);
             Console.WriteLine("Exiting AddPost");
             Console.WriteLine("Items count is: " + Items.Count);
-           // mpp.updateBindingContext();
         }
     }
 
