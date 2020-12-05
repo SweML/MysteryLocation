@@ -87,7 +87,7 @@ namespace MysteryLocation.Model
         public void setCategory(int cat)
         {
             category = cat;
-            //Console.WriteLine("The user category has been changed to " + category.ToString());
+            Console.WriteLine("The user category has been changed to " + category.ToString());
         }
         public void setDistance(double dist)
         {
@@ -145,25 +145,36 @@ namespace MysteryLocation.Model
                             counter++;
                         else if (counter == 0)
                         {
-                            if (lineCounter == 1)
+                            if (lineCounter == 0)
                             {
                                 category = Int16.Parse(ln);
+                                Console.WriteLine("The category is: " + category);
                             }
                             else
                             {
-                                // Sätt önskat avstånd
+                                distance = Int16.Parse(ln);
+                                Console.WriteLine("The distance is: " + distance);
                             }
                         }
-                        else if (counter == 1)
-                            unlockedSet.Add(Int16.Parse(ln));
-                        else if (counter == 2)
+                        else if (counter == 1) { 
                             markedSet.Add(Int16.Parse(ln));
+                            forbiddenSet.Add(Int16.Parse(ln));
+                        }
+                        else if (counter == 2) { 
+                            unlockedSet.Add(Int16.Parse(ln));
+                            forbiddenSet.Add(Int16.Parse(ln));
+                        }
                         else
                         {
                             tracker = Int16.Parse(ln);
                         }
                     }
                     file.Close();
+                    Console.WriteLine("The number of posts in marked is: " + markedSet.Count);
+                    foreach (int x in markedSet)
+                    {
+                        Console.Write(x + ", ");
+                    }
                 }
             }
         }
@@ -171,16 +182,24 @@ namespace MysteryLocation.Model
         public void SaveUser()
         {
             String infoToSave = "";
-            infoToSave = category + "\n";
-            foreach (Post x in unlocked)
+            infoToSave = category + "\n"; 
+            infoToSave = distance + "\n";
+            infoToSave += "*\n";
+            foreach (int x in markedSet)
             { // Saving info from unlocked
-                infoToSave += x.getId() + "\n";
+                infoToSave += x + "\n";
             }
             infoToSave += "*\n"; // To indicate the end of previous
-            foreach (Post x in marked)
+            foreach (int x in unlockedSet)
             { // Saving info from unlocked
-                infoToSave += x.getId() + "\n";
+                infoToSave += x + "\n";
             }
+            infoToSave += "*\n"; // To indicate the end of previous
+            if(tracking != null)
+                infoToSave += tracking.getId();
+            var filename = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "myFile.txt");
+            System.IO.File.WriteAllText(filename, infoToSave);
+            Console.WriteLine(infoToSave);
         }
 
         // Method to set which post is being tracked.

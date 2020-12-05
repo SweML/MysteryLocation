@@ -17,14 +17,14 @@ namespace MysteryLocation
     public partial class MarkedPostsPage : ContentPage
     {
         public User user;
-        public MarkedViewModel mvm;
+        //public MarkedViewModel mvm;
         public MarkedPostsPage(User user)
         {
             this.user = user;
-            mvm = new MarkedViewModel(user, this);
-            user.mvm = mvm;
-            GPSFetcher.mvm = mvm;
-            this.BindingContext = mvm;
+           // mvm = new MarkedViewModel(user, this);
+            //user.mvm = mvm;
+            GPSFetcher.mvm = GlobalFuncs.mvm;
+            this.BindingContext = GlobalFuncs.mvm;
             InitializeComponent();
             
             
@@ -32,11 +32,7 @@ namespace MysteryLocation
             
         }
 
-        public void updateBindingContext()
-        {
-            this.BindingContext = mvm;
-        }
-
+      
         
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)

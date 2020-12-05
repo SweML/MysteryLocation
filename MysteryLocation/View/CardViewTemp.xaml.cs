@@ -11,17 +11,16 @@ namespace MysteryLocation.View
     public partial class CardViewTemp : ContentPage
     {
         public User user;
-        public FeedViewModel fvm;
+        //public static FeedViewModel fvm = new FeedViewModel(null);
 
 
         public CardViewTemp(User user)
         {
-            this.user = user;
-            fvm = new FeedViewModel(user);
-            user.fvm = fvm;
-            GPSFetcher.fvm = fvm;
+            //this.user = user;
+            //fvm = 
+            GPSFetcher.fvm = GlobalFuncs.fvm;
             InitializeComponent();
-            this.BindingContext = fvm;
+            this.BindingContext = GlobalFuncs.fvm;
         }
   
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
@@ -34,7 +33,7 @@ namespace MysteryLocation.View
         private void Mark_Clicked(object sender, EventArgs e)
         {
             int temp = int.Parse((sender as Button).AutomationId);
-            PostListElement refElement = fvm.RemovePost(temp);
+            PostListElement refElement = GlobalFuncs.fvm.RemovePost(temp);
             GPSFetcher.mvm.AddPost(refElement);
 
         }
@@ -43,7 +42,7 @@ namespace MysteryLocation.View
         private async void updateContents(object sender, EventArgs e)
         {
             List<Post> posts = await App.conn.getDataAsync();
-            fvm.updateListElements(posts);
+            GlobalFuncs.fvm.updateListElements(posts);
         }
     }
 }

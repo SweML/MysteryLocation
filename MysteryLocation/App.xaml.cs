@@ -1,6 +1,7 @@
 ﻿
 using MysteryLocation.Model;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -24,8 +25,10 @@ namespace MysteryLocation
         {
             conn = new APIConnection();
             user = new User(true, 329, conn);
+            GlobalFuncs.fvm = new ViewModel.FeedViewModel(null);
+            GlobalFuncs.mvm = new ViewModel.MarkedViewModel(null);
             //GPSUpdater gps = new GPSUpdater(user);
-         
+
             // Starts the gps.
             //gps.startTimer(10);
             InitializeComponent();
@@ -37,13 +40,22 @@ namespace MysteryLocation
 
         protected override void OnStart()
         {
+            
             gps = new GPSFetcher();
             startGPS();
+            user.ReadUser();
+            Task.Run(async() => 
+            {
+                List<Post> posts = await conn.getDataAsync();
+                GlobalFuncs.fvm.updateListElements(posts);
+                GlobalFuncs.mvm.updateListElements(posts);
+            });
         }
 
         protected override void OnSleep()
         {
             stopGPS();
+            user.SaveUser();
         }
 
         protected override void OnResume()
@@ -54,6 +66,8 @@ namespace MysteryLocation
             }
             startGPS();
         }
+
+        
 
         public  async void startGPS()
         {

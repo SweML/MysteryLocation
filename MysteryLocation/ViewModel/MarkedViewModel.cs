@@ -11,7 +11,7 @@ namespace MysteryLocation.ViewModel
     {
         public ObservableCollection<PostListElement> items = new ObservableCollection<PostListElement>();
         private User user;
-        private MarkedPostsPage mpp;
+        //private MarkedPostsPage mpp;
         public Position prevCoordinate;
         private string position;
 
@@ -39,10 +39,10 @@ namespace MysteryLocation.ViewModel
             }
         }
 
-        public MarkedViewModel(User user, MarkedPostsPage mpp)
+        public MarkedViewModel(User user)
         {
             this.user = user;
-            this.mpp = mpp;
+           // this.mpp = mpp;
           /*  Items.Add(new PostListElement()
             {
                 Id = 9999,
@@ -87,30 +87,90 @@ namespace MysteryLocation.ViewModel
             }
         }
 
+        public void updateListElements(List<Post> posts)
+        {
+            Items.Clear();
+            HashSet<int> forbidden = App.user.markedSet;
+            foreach (Post x in posts)
+            {
+                if (x.getCoordinate() != null && forbidden.Contains(x.getId()))
+                {
+                    Items.Add(new PostListElement()
+                    {
+                        Id = x.getId(),
+                        Subject = x.getSubject(),
+                        Body = x.getBody(),
+                        Created = x.getCreated(),
+                        LastUpdated = x.getLastUpdated(),
+                        Position = x.getCoordinate(),
+                        Dist = "Loading"
+                    });
+                }
+            }
+            if (GPSFetcher.currentPosition != null)
+                RecalculateDistance();
+        }
+
         public void RecalculateDistance()
         {
-            Position current = user.currentPos;
-            double distance = 0;
-            if (Items.Count > 0)
-            {
-                prevCoordinate = current;
+            Position current = GPSFetcher.currentPosition;
 
-            }
-            foreach (PostListElement x in Items)
+            Console.WriteLine("calling fvm.ReCalculateDistance();");
+            if (Items.Count > 0 && current != null)
             {
-                distance = current.CalculateDistance(x.Position);
-                if (distance > 1000)
+                if (prevCoordinate == null || GlobalFuncs.calcDist(current, prevCoordinate) > 500)
                 {
-                    distance /= 10;
-                    x.Dist = distance.ToString() + " km";
-                }
-                else
-                {
-                    x.Dist = distance.ToString() + " m";
+                    double distance = 0;
+                    int relevantNbrs = 0;
+                    prevCoordinate = current;
+                    foreach (PostListElement x in Items)
+                    {
+                        if (x.Position != null)
+                        {
+                            distance = GlobalFuncs.calcDist(current, x.Position); // Conversion to metres
+                            relevantNbrs = ((int)distance).ToString().Length + 2;
+                            if (distance > 1000)
+                            {
+                                distance /= 1000;
+                                x.Dist = distance.ToString().Substring(0, relevantNbrs - 3) + " km";
+                            }
+                            else
+                            {
+                                x.Dist = distance.ToString().Substring(0, relevantNbrs) + " m";
+                            }
+                        }
+                        Console.WriteLine("fvm.RecalculateDistance(); is finished");
+                    }
                 }
             }
-
         }
+
+
+
+        /*    public void RecalculateDistance()
+            {
+                Position current = user.currentPos;
+                double distance = 0;
+                if (Items.Count > 0)
+                {
+                    prevCoordinate = current;
+
+                }
+                foreach (PostListElement x in Items)
+                {
+                    distance = current.CalculateDistance(x.Position);
+                    if (distance > 1000)
+                    {
+                        distance /= 10;
+                        x.Dist = distance.ToString() + " km";
+                    }
+                    else
+                    {
+                        x.Dist = distance.ToString() + " m";
+                    }
+                }
+
+            }*/
 
         public void AddPost(PostListElement x)
         {

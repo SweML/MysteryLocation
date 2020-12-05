@@ -1,4 +1,5 @@
-﻿using Plugin.Geolocator.Abstractions;
+﻿using MysteryLocation.ViewModel;
+using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,6 +8,10 @@ namespace MysteryLocation
 {
     public class GlobalFuncs
     {
+        public static FeedViewModel fvm;
+
+        public static MarkedViewModel mvm;
+
 
         public static double calcDist(Position p1, Position p2)
         {

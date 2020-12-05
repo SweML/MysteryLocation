@@ -11,7 +11,7 @@ namespace MysteryLocation.ViewModel
     public class FeedViewModel : PostListProperty
     {
         public ObservableCollection<PostListElement> items = new ObservableCollection<PostListElement>();
-        private User user;
+        //private User user;
         private string position;
         public Position prevCoordinate;
 
@@ -39,13 +39,13 @@ namespace MysteryLocation.ViewModel
 
         public FeedViewModel(User user)
         {
-            this.user = user;
+            //this.user = user;
             prevCoordinate = null;
             Console.WriteLine("Reaches here");
             Task.Run(async() =>
             {
-                List<Post> posts = await App.conn.getDataAsync();
-                updateListElements(posts);
+               // List<Post> posts = await App.conn.getDataAsync();
+               // updateListElements(posts);
             });
         }
 
@@ -75,9 +75,10 @@ namespace MysteryLocation.ViewModel
         public void updateListElements(List<Post> posts)
         {
             Items.Clear();
+            HashSet<int> forbidden = App.user.forbiddenSet;
             foreach (Post x in posts)
             {
-                if (x.getCoordinate() != null)
+                if (x.getCoordinate() != null && !forbidden.Contains(x.getId()))
                 {
                     Items.Add(new PostListElement()
                     {
