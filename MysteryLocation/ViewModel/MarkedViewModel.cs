@@ -1,4 +1,5 @@
 ﻿using MysteryLocation.Model;
+using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +12,7 @@ namespace MysteryLocation.ViewModel
         public ObservableCollection<PostListElement> items = new ObservableCollection<PostListElement>();
         private User user;
         private MarkedPostsPage mpp;
-        public Coordinate prevCoordinate;
+        public Position prevCoordinate;
         private string position;
 
         public string Position // User position
@@ -88,7 +89,7 @@ namespace MysteryLocation.ViewModel
 
         public void RecalculateDistance()
         {
-            Coordinate current = user.currentPos;
+            Position current = user.currentPos;
             double distance = 0;
             if (Items.Count > 0)
             {
@@ -97,7 +98,7 @@ namespace MysteryLocation.ViewModel
             }
             foreach (PostListElement x in Items)
             {
-                distance = current.getDistance(x.Position);
+                distance = current.CalculateDistance(x.Position);
                 if (distance > 1000)
                 {
                     distance /= 10;

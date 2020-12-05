@@ -1,5 +1,6 @@
 ﻿using MysteryLocation.ViewModel;
 using Newtonsoft.Json;
+using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +20,7 @@ namespace MysteryLocation.Model
 
         public int category;
 
-        public Coordinate currentPos;
+        public Position currentPos;
 
         public String currentPosition;
 
@@ -101,7 +102,7 @@ namespace MysteryLocation.Model
             return newUser;
         }
 
-        public void setPosition(Coordinate newCoord)
+       /* public void setPosition(Position newCoord)
         {
             // counter++;
             // Console.WriteLine("New coordinate");
@@ -119,7 +120,7 @@ namespace MysteryLocation.Model
                         mvm.RecalculateDistance();
             }
         }
-
+       */
         public void setCategory(int cat)
         {
             category = cat;
@@ -292,7 +293,7 @@ namespace MysteryLocation.Model
             {
                 foreach (Post x in fromAPI)
                 {
-                    if (x.getCoordinate() != null && x.getCoordinate().latitude != 0 && x.getCoordinate().longitude != 0)
+                    if (x.getCoordinate() != null && x.getCoordinate().Latitude != 0 && x.getCoordinate().Longitude != 0)
                     {
                         feed.Add(x);
                     }

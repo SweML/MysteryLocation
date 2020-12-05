@@ -6,7 +6,7 @@
              NavigationPage.BackButtonTitle="False">
     <!-- ControlTemplate="{StaticResource Template}">
     <Label x:Name="currentGPS"
-               Text="{Binding CurrentPosition}"
+               Text="Funkar detta?"
                VerticalOptions="StartAndExpand"
                HorizontalOptions="Center"/> -->
     <ContentPage.Content>

@@ -74,7 +74,7 @@ namespace MysteryLocation.View
             if(entrySubject.Text.Length > 0 && entryBody.Text.Length > 0 && imgSource != null)
             {
                 // Först publicera vanlig createPost
-                createPost pubPost = new createPost(entrySubject.Text, entryBody.Text, user.currentPos);
+                createPost pubPost = new createPost(entrySubject.Text, entryBody.Text, GPSFetcher.currentPosition);
                 int status = -2;
                 status = await conn.testPublishPosts(pubPost);
                 // Sen skapa PostAttachment och publicera den

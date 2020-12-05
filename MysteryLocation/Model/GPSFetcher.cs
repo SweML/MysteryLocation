@@ -15,7 +15,7 @@ namespace MysteryLocation.Model
         public static MarkedViewModel mvm;
         public static UnlockedViewModel uvm;
         public static CategoryViewModel cavm;
-
+        public static Position currentPosition;
         public GPSFetcher()
         {
 
@@ -36,19 +36,34 @@ namespace MysteryLocation.Model
         {
 
             //If updating the UI, ensure you invoke on main thread
-            var position = e.Position;
+            /*var position = e.Position;
             var output = "Full: Lat: " + position.Latitude + " Long: " + position.Longitude;
             output += "\n" + $"Time: {position.Timestamp}";
             output += "\n" + $"Heading: {position.Heading}";
             output += "\n" + $"Speed: {position.Speed}";
             output += "\n" + $"Accuracy: {position.Accuracy}";
             output += "\n" + $"Altitude: {position.Altitude}";
-            output += "\n" + $"Altitude Accuracy: {position.AltitudeAccuracy}";
-            if (fvm != null) fvm.Position = position.Longitude + " , " + position.Latitude;
-            if (mvm != null) mvm.Position = position.Longitude + " , " + position.Latitude;
-            if (uvm != null) uvm.Position = position.Longitude + " , " + position.Latitude;
-            if (cavm != null) cavm.Position = position.Longitude + " , " + position.Latitude;
-            Console.WriteLine(output);
+            output += "\n" + $"Altitude Accuracy: {position.AltitudeAccuracy}";*/
+            setPositions(e.Position);
+            
+            //Console.WriteLine(output);
+        }
+
+        private void setPositions(Position position)
+        {
+            currentPosition = position;
+            string latitude = "" + position.Latitude;
+            string longitude = "" + position.Longitude;
+            if (latitude.Length > 8)
+                latitude = latitude.Substring(0, 8);
+            if (longitude.Length > 8)
+                longitude = longitude.Substring(0, 8);
+            string writePosition = latitude + " , " + longitude;
+            if (fvm != null) fvm.Position = writePosition;
+            if (mvm != null) mvm.Position = writePosition;
+            if (uvm != null) uvm.Position = writePosition;
+            if (cavm != null) cavm.Position = writePosition;
+            fvm.RecalculateDistance();
         }
 
         private void PositionError(object sender, PositionErrorEventArgs e)

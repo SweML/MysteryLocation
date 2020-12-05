@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.Geolocator.Abstractions;
+using System;
 namespace MysteryLocation
 {
     public class Post
@@ -8,9 +9,9 @@ namespace MysteryLocation
         private String body { get; set; }
         private String created { get; set; }
         private String lastUpdated { get; set; }
-        private Coordinate position { get; set; }
-
-        public Post(int id, String subject, String body, String created, String lastUpdated, Coordinate position)
+        // private Coordinate position { get; set; }
+        private Position position;
+        public Post(int id, String subject, String body, String created, String lastUpdated, Position position)
         {
             this.id = id;
             this.subject = subject;
@@ -41,7 +42,7 @@ namespace MysteryLocation
         {
             return lastUpdated;
         }
-        public Coordinate getCoordinate()
+        public Position getCoordinate()
         {
             return position;
         }

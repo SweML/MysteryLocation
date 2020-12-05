@@ -1,4 +1,5 @@
 ﻿using MysteryLocation.Model;
+using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -48,7 +49,7 @@ namespace MysteryLocation.ViewModel
                 Body = "PlaceHolder Text",
                 Created = "2020-09-14T12:59:21.7395836",
                 LastUpdated = "2020-09-14T12:59:21.7395836",
-                Position = new Coordinate(55.907875776284456, 14.067913798214885),
+                Position = new Position(55.907875776284456, 14.067913798214885),
                 Dist = "",
                 Img = a
             });
@@ -59,7 +60,7 @@ namespace MysteryLocation.ViewModel
                 Body = "PlaceHolder Text",
                 Created = "2020-09-14T12:59:21.7395836",
                 LastUpdated = "2020-09-14T12:59:21.7395836",
-                Position = new Coordinate(55.907875776284456, 14.067913798214885),
+                Position = new Position(55.907875776284456, 14.067913798214885),
                 Dist = ""
             });
         }
@@ -89,7 +90,7 @@ namespace MysteryLocation.ViewModel
                 Body = "Test",
                 Created = "2020-09-14T12:59:21.7395836",
                 LastUpdated = "2020-09-14T12:59:21.7395836",
-                Position = new Coordinate(55.907875776284456, 14.067913798214885),
+                Position = new Position(55.907875776284456, 14.067913798214885),
                 Dist = "", // Är dist intressant för en upplåst post?
                 Img = ImageSource.FromStream(() => new MemoryStream(attachment.imgBytes))
             });

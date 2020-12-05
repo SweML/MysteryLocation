@@ -23,29 +23,29 @@ namespace MysteryLocation
             counter = 0;
         }
 
-        public void startTimer(int interval)
+     /*   public void startTimer(int interval)
         {
            
                this.myTimer = new System.Threading.Timer((e) =>
                 {
                     if (!firstUpdate)
-                         getLocationBest();
+                        // getLocationBest();
                     else
-                        getLocationMedium();
+                       // getLocationMedium();
                     counter++;
                     Console.WriteLine("Executing timer block in GPSUpdater " + counter);
                 }, null,
                 TimeSpan.FromSeconds(0),
                 TimeSpan.FromSeconds(interval));
          
-        }
+        }*/
 
         public void stopTimer()
         {
             myTimer = null;
         }
 
-        async void getLocationBest()
+     /*   async void getLocationBest()
         {
             try
             {
@@ -72,7 +72,7 @@ namespace MysteryLocation
 
             }
         }
-
+     */
         async void getLocationMedium()
         {
             try
@@ -88,7 +88,7 @@ namespace MysteryLocation
 
                 if (location != null)
                 {
-                    user.setPosition(new Coordinate(location.Longitude, location.Latitude));
+                   // user.setPosition(new Coordinate(location.Longitude, location.Latitude));
                     Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
                     firstUpdate = false;
                 }

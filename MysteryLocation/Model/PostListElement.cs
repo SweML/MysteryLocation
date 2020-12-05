@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.Geolocator.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
@@ -13,7 +14,8 @@ namespace MysteryLocation.Model
         public String body;
         public String created;
         public String lastUpdated;
-        public Coordinate position;
+        //public Coordinate position;
+        public Position position;
         public String dist;
         public ImageSource img;
 
@@ -66,7 +68,7 @@ namespace MysteryLocation.Model
             }
         }
 
-        public Coordinate Position
+        public Position Position
         {
             get { return position; }
             set

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Plugin.Geolocator.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,9 +11,9 @@ namespace MysteryLocation
         public String subject { get; set; }
         public String body { get; set; }
 
-        public Coordinate position { get; set; }
+        public Position position { get; set; }
 
-        public createPost(string subject, String body, Coordinate position)
+        public createPost(string subject, String body, Position position)
         {
             this.subject = subject;
             this.body = body;
