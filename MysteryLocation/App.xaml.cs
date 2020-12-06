@@ -27,6 +27,7 @@ namespace MysteryLocation
             user = new User(true, 329, conn);
             GlobalFuncs.fvm = new ViewModel.FeedViewModel(null);
             GlobalFuncs.mvm = new ViewModel.MarkedViewModel(null);
+            GlobalFuncs.uvm = new ViewModel.UnlockedViewModel(null);
             //GPSUpdater gps = new GPSUpdater(user);
 
             // Starts the gps.
@@ -49,6 +50,14 @@ namespace MysteryLocation
                 List<Post> posts = await conn.getDataAsync();
                 GlobalFuncs.fvm.updateListElements(posts);
                 GlobalFuncs.mvm.updateListElements(posts);
+                GlobalFuncs.uvm.updateListElements(posts);
+            });
+
+            Task.Run(async() =>
+            {
+               // await Task.Delay(20000);
+                //Console.WriteLine("Test----------------------------------------------------------------------------------------------------------");
+                //await GlobalFuncs.unlockTracker();
             });
         }
 

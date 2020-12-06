@@ -1,8 +1,10 @@
-﻿using MysteryLocation.ViewModel;
+﻿using MysteryLocation.Model;
+using MysteryLocation.ViewModel;
 using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MysteryLocation
 {
@@ -11,6 +13,8 @@ namespace MysteryLocation
         public static FeedViewModel fvm;
 
         public static MarkedViewModel mvm;
+
+        public static UnlockedViewModel uvm;
 
 
         public static double calcDist(Position p1, Position p2)
@@ -32,5 +36,14 @@ namespace MysteryLocation
             return d;
         }
 
+        public static async Task unlockTracker()
+        {
+            if (App.user != null && App.conn != null && App.user.tracking != null)
+            {
+                UnlockedPosts attachment = await App.conn.getPostAttachmentAsync(App.user.tracking.getId());
+                uvm.addUnlockedPost(App.user.tracking, attachment);
+                App.user.tracking = null;
+            }
+        }
     }
 }

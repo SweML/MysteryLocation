@@ -63,7 +63,7 @@ namespace MysteryLocation.Model
         public double distance;
 
 
-        private Post tracking { get; set; }
+        public Post tracking { get; set; }
         private int tracker;
         private APIConnection conn;
 
@@ -140,7 +140,7 @@ namespace MysteryLocation.Model
 
                     while ((ln = file.ReadLine()) != null)
                     {
-                        lineCounter++;
+                        
                         if (ln.Contains("*"))
                             counter++;
                         else if (counter == 0)
@@ -168,6 +168,7 @@ namespace MysteryLocation.Model
                         {
                             tracker = Int16.Parse(ln);
                         }
+                        lineCounter++;
                     }
                     file.Close();
                     Console.WriteLine("The number of posts in marked is: " + markedSet.Count);
@@ -183,7 +184,7 @@ namespace MysteryLocation.Model
         {
             String infoToSave = "";
             infoToSave = category + "\n"; 
-            infoToSave = distance + "\n";
+            infoToSave += distance + "\n";
             infoToSave += "*\n";
             foreach (int x in markedSet)
             { // Saving info from unlocked
@@ -200,6 +201,13 @@ namespace MysteryLocation.Model
             var filename = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "myFile.txt");
             System.IO.File.WriteAllText(filename, infoToSave);
             Console.WriteLine(infoToSave);
+        }
+
+        public void saveImage(int obsId, byte[] image)
+        {
+            var filename = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), obsId + ".dat");
+            System.IO.File.WriteAllBytes(filename, image);
+            Console.WriteLine("The image ought to have been saved ___________________________________________________---------------------------_______________--------------______________");
         }
 
         // Method to set which post is being tracked.
@@ -229,6 +237,17 @@ namespace MysteryLocation.Model
         public List<Post> getMarked()
         {
             return marked;
+        }
+
+        public byte[] readImage(int obsId)
+        {
+            Console.WriteLine("Trying to read the image for unlocked.");
+            var filename = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), obsId + ".dat");
+            if (File.Exists(filename))
+            {
+                return System.IO.File.ReadAllBytes(filename);
+            }
+            return null;
         }
     }
 

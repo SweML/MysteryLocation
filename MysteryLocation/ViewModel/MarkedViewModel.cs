@@ -90,10 +90,10 @@ namespace MysteryLocation.ViewModel
         public void updateListElements(List<Post> posts)
         {
             Items.Clear();
-            HashSet<int> forbidden = App.user.markedSet;
+            HashSet<int> markedPosts = App.user.markedSet;
             foreach (Post x in posts)
             {
-                if (x.getCoordinate() != null && forbidden.Contains(x.getId()))
+                if (x.getCoordinate() != null && markedPosts.Contains(x.getId()))
                 {
                     Items.Add(new PostListElement()
                     {

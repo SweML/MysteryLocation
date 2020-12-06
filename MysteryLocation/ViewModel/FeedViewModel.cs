@@ -80,6 +80,8 @@ namespace MysteryLocation.ViewModel
             {
                 if (x.getCoordinate() != null && !forbidden.Contains(x.getId()))
                 {
+                    if (x.getId() == 384)   // For testing static unlock func
+                        App.user.tracking = x; // For testing static unlock func
                     Items.Add(new PostListElement()
                     {
                         Id = x.getId(),

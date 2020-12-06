@@ -16,17 +16,17 @@ namespace MysteryLocation
     public partial class UnlockedPostsPage : ContentPage
     {
         public User user;
-        public UnlockedViewModel uvm;
+      //  public UnlockedViewModel uvm;
         public UnlockedPostsPage(User user)
         {
             this.user = user;
-            uvm = new UnlockedViewModel(user);
-            this.BindingContext = uvm;
+            //uvm = new UnlockedViewModel(user);
+            this.BindingContext = GlobalFuncs.uvm;
             InitializeComponent();
-            user.uvm = uvm;
-            GPSFetcher.uvm = uvm;
+            user.uvm = GlobalFuncs.uvm;
+            GPSFetcher.uvm = GlobalFuncs.uvm;
             //currentGPS.BindingContext = user;
-            
+
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
