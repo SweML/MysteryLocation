@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:MysteryLocation.ViewModel"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:MysteryLocation.ViewModel" xmlns:views="clr-namespace:MysteryLocation.View"
              x:Class="MysteryLocation.SettingsPage"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.BackButtonTitle="False">
@@ -9,36 +9,7 @@
     </ContentPage.BindingContext> -->
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" BackgroundColor="Black">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="40" />
-                        <RowDefinition Height="40" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-
-                    </Grid.ColumnDefinitions>
-                    <BoxView Color="Black" />
-                    <Label 
-                        Text="MysteryLocation"
-                        TextColor="White"
-                        FontSize="15"
-                        Margin="20,0,0,0"
-                        FontFamily="Helvetica"
-                        VerticalOptions="Center"
-                        HorizontalOptions="StartAndExpand"/>
-                    <Label 
-                        Grid.Row="1"
-                        Text="{Binding Position}"
-                        TextColor="White"
-                        FontSize="15"
-                        Margin="20,0,0,0"
-                        FontFamily="Helvetica"
-                        VerticalOptions="Center"
-                        HorizontalOptions="CenterAndExpand"/>
-                </Grid>
-            </StackLayout>
+            <views:HeaderView/>
             <!--
             <Label x:Name="currentGPS"
                Text="{Binding CurrentPosition}"

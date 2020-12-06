@@ -21,6 +21,21 @@ namespace MysteryLocation.ViewModel
                 }
             }
         }
+
+        private string positionLocation;
+        public string PositionLocation // User position
+        {
+            get { return positionLocation; }
+            set
+            {
+                if (positionLocation != value)
+                {
+                    positionLocation = value;
+                    OnPropertyChanged("PositionLocation");
+                }
+            }
+        }
+
         public IList<Category> CatList { get; set; }
 
         public CategoryViewModel()

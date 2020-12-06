@@ -20,6 +20,35 @@ namespace MysteryLocation
         {
 
         }
+
+        private string position;
+        public string Position // User position
+        {
+            get { return position; }
+            set
+            {
+                if (position != value)
+                {
+                    position = value;
+                    OnPropertyChanged("Position");
+                }
+            }
+        }
+
+        private string positionLocation;
+        public string PositionLocation // User position
+        {
+            get { return positionLocation; }
+            set
+            {
+                if (positionLocation != value)
+                {
+                    positionLocation = value;
+                    OnPropertyChanged("PositionLocation");
+                }
+            }
+        }
+
         string headingDisplay;
         public string HeadingDisplay
         {

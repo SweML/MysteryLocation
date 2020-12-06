@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MysteryLocation.View.HeaderView">
+    <ContentView.Content>
+        <StackLayout Orientation="Vertical" HorizontalOptions="Fill" BackgroundColor="#000000">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3" />
+                    <RowDefinition Height="20" />
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="2" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+
+                </Grid.ColumnDefinitions>
+
+                <Label 
+                        Grid.Row="1"
+                        Text="MysteryLocation"
+                        TextColor="White"
+                        FontSize="17"
+                        Margin="20,0,0,0"
+                        FontFamily="Helvetica"
+                        VerticalOptions="Center"
+                        HorizontalOptions="StartAndExpand"/>
+                <Label 
+                        Grid.Row="2"
+                        Text="{Binding PositionLocation}"
+                        TextColor="White"
+                        FontSize="10"
+                        Margin="20,0,0,0"
+                        FontFamily="Helvetica"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"/>
+            </Grid>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

@@ -47,6 +47,8 @@ namespace MysteryLocation.Model
         
         public UnlockedViewModel uvm { get; set; }
 
+        public ViewCompass vc { get; set; }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)

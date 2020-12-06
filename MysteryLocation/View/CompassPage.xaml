@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:MysteryLocation.View"
              x:Class="MysteryLocation.CompassPage"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.BackButtonTitle="False"
@@ -28,27 +28,7 @@
             </StackLayout>
 
             <!--stacklayout for the welcome message -->
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" BackgroundColor="Black">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="60" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-
-                    </Grid.ColumnDefinitions>
-                    <BoxView Color="Black" />
-                    <Label 
-                        Text="MysteryLocation"
-                        TextColor="White"
-                        FontSize="15"
-                        Margin="20,0,0,0"
-                        FontFamily="Helvetica"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Fill"/>
-                </Grid>
-            </StackLayout>
-
+            <views:HeaderView/>
 
 
             <!--Name and Visible were Added to control the welcome messaGES  -->
@@ -59,7 +39,7 @@
                FontAttributes="Bold"
                FontSize="20"
                TextColor="Red"
-               Text="{Binding CurrentPosition}"
+               Text="{Binding Position}"
                VerticalOptions="StartAndExpand"
                HorizontalOptions="Center"/>
 

@@ -4,8 +4,10 @@ using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace MysteryLocation.Model
 {
@@ -16,6 +18,8 @@ namespace MysteryLocation.Model
         public static UnlockedViewModel uvm;
         public static CategoryViewModel cavm;
         public static Position currentPosition;
+        public static ViewCompass vc;
+
         public GPSFetcher()
         {
 
@@ -44,12 +48,12 @@ namespace MysteryLocation.Model
             output += "\n" + $"Accuracy: {position.Accuracy}";
             output += "\n" + $"Altitude: {position.Altitude}";
             output += "\n" + $"Altitude Accuracy: {position.AltitudeAccuracy}";*/
-            setPositions(e.Position);
+            setPositionsAsync(e.Position);
             
             //Console.WriteLine(output);
         }
 
-        private void setPositions(Position position)
+        private async Task setPositionsAsync(Position position)
         {
             currentPosition = position;
             string latitude = "" + position.Latitude;
@@ -59,11 +63,41 @@ namespace MysteryLocation.Model
             if (longitude.Length > 8)
                 longitude = longitude.Substring(0, 8);
             string writePosition = latitude + " , " + longitude;
+            string writePositionLocation = await WritePositionWithLocation(position) + latitude + ", " + longitude;
             if (fvm != null) fvm.Position = writePosition;
+            if (fvm != null) fvm.PositionLocation = writePositionLocation;
+
             if (mvm != null) mvm.Position = writePosition;
+            if (mvm != null) mvm.PositionLocation = writePositionLocation;
+
             if (uvm != null) uvm.Position = writePosition;
+            if (uvm != null) uvm.PositionLocation = writePositionLocation;
+
             if (cavm != null) cavm.Position = writePosition;
+            if (cavm != null) cavm.PositionLocation = writePositionLocation;
+
+            if (vc != null) vc.Position = writePosition;
+            if (vc != null) vc.PositionLocation = writePositionLocation;
+
             fvm.RecalculateDistance();
+        }
+
+        private async Task<String> WritePositionWithLocation(Position p)
+        {
+            var placemarks = await Geocoding.GetPlacemarksAsync(p.Latitude, p.Longitude);
+
+            var placemark = placemarks?.FirstOrDefault();
+
+            if (placemark != null)
+            {
+                if (placemark.Locality != null) { return placemark.Locality + ", " + placemark.CountryName + " - "; }
+                else if (placemark.Locality == null) { return placemark.SubLocality + ", " + placemark.CountryName + " - "; }
+                else { return ""; };
+            }
+            else
+            {
+                return "";
+            }
         }
 
         private void PositionError(object sender, PositionErrorEventArgs e)
