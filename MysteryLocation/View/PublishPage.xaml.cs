@@ -71,10 +71,10 @@ namespace MysteryLocation.View
         {
             spin();
             Console.WriteLine("Publish button works");
-            if(entrySubject.Text.Length > 0 && entryBody.Text.Length > 0 && imgSource != null)
+            if ((Category)entrySubject.SelectedItem != null && entryBody.Text.Length > 0 && imgSource != null)
             {
                 // Först publicera vanlig createPost
-                createPost pubPost = new createPost(entrySubject.Text, entryBody.Text, GPSFetcher.currentPosition);
+                createPost pubPost = new createPost(((Category)entrySubject.SelectedItem).CategoryName, entryBody.Text, GPSFetcher.currentPosition);
                 int status = -2;
                 status = await conn.testPublishPosts(pubPost);
                 // Sen skapa PostAttachment och publicera den

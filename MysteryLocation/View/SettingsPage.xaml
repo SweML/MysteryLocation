@@ -4,9 +4,9 @@
              x:Class="MysteryLocation.SettingsPage"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.BackButtonTitle="False">
-  <!--  <ContentPage.BindingContext>
+    <!--<ContentPage.BindingContext>
         <local:CategoryViewModel></local:CategoryViewModel>
-    </ContentPage.BindingContext> -->
+    </ContentPage.BindingContext>--> 
     <ContentPage.Content>
         <StackLayout>
             <views:HeaderView/>

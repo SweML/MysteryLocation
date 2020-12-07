@@ -1,11 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:MysteryLocation.ViewModel" xmlns:views="clr-namespace:MysteryLocation.View"
              x:Class="MysteryLocation.View.PublishPage"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.BackButtonTitle="False">
+    <ContentPage.BindingContext>
+        <local:CategoryViewModel></local:CategoryViewModel>
+    </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
+            <views:HeaderView/>
             <ActivityIndicator x:Name="defaultActivityIndicator"
                                IsRunning="False" 
                                Color="CornflowerBlue"
@@ -19,7 +23,7 @@
                VerticalOptions="StartAndExpand"
                HorizontalOptions="Center"/>
 
-            <Entry x:Name="entrySubject" Placeholder="Write subject here (obligatory)"/>
+            <Picker ItemDisplayBinding="{Binding CategoryName}" x:Name="entrySubject" Title="Select Category" ItemsSource="{Binding CatList}"/>
 
             <Entry x:Name="entryBody" Placeholder="Write appropriate text here (voluntary)"/>
             <Grid>

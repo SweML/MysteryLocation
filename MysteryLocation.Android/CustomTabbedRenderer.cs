@@ -57,7 +57,7 @@ namespace MysteryLocation.Droid
                                 button.LayoutParameters = parameters;
                                 bottomView.AddView(button);
 
-                                button.Click += (object sender, EventArgs e) =>
+                                button.Click += (object sender, EventArgs test) =>
                                 {
                                     Element.CurrentPage = Element.Children[2];
                                 };
