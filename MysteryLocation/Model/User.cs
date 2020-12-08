@@ -129,7 +129,7 @@ namespace MysteryLocation.Model
 */
         public void ReadUser()
         {
-            var filename = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "myFile.txt");
+            var filename = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "myFile1.txt");
             if (File.Exists(filename))
             {
                 newUser = false;
@@ -149,26 +149,26 @@ namespace MysteryLocation.Model
                         {
                             if (lineCounter == 0)
                             {
-                                category = Int16.Parse(ln);
+                                category = int.Parse(ln);
                                 Console.WriteLine("The category is: " + category);
                             }
                             else
                             {
-                                distance = Int16.Parse(ln);
+                                distance = int.Parse(ln);
                                 Console.WriteLine("The distance is: " + distance);
                             }
                         }
                         else if (counter == 1) { 
-                            markedSet.Add(Int16.Parse(ln));
-                            forbiddenSet.Add(Int16.Parse(ln));
+                            markedSet.Add(int.Parse(ln));
+                            forbiddenSet.Add(int.Parse(ln));
                         }
                         else if (counter == 2) { 
-                            unlockedSet.Add(Int16.Parse(ln));
-                            forbiddenSet.Add(Int16.Parse(ln));
+                            unlockedSet.Add(int.Parse(ln));
+                            forbiddenSet.Add(int.Parse(ln));
                         }
                         else
                         {
-                            tracker = Int16.Parse(ln);
+                            tracker = int.Parse(ln);
                         }
                         lineCounter++;
                     }
@@ -200,7 +200,7 @@ namespace MysteryLocation.Model
             infoToSave += "*\n"; // To indicate the end of previous
             if(tracking != null)
                 infoToSave += tracking.getId();
-            var filename = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "myFile.txt");
+            var filename = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "myFile1.txt");
             System.IO.File.WriteAllText(filename, infoToSave);
             Console.WriteLine(infoToSave);
         }

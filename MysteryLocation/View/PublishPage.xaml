@@ -18,10 +18,7 @@
                                HeightRequest="80" 
                                WidthRequest="80"
                                />
-            <Label x:Name="currentGPS"
-               Text="{Binding CurrentPosition}"
-               VerticalOptions="StartAndExpand"
-               HorizontalOptions="Center"/>
+            
 
             <Picker ItemDisplayBinding="{Binding CategoryName}" x:Name="entrySubject" Title="Select Category" ItemsSource="{Binding CatList}"/>
 

@@ -24,7 +24,6 @@ namespace MysteryLocation.View
             this.user = App.user;
             this.conn = App.conn;
             InitializeComponent();
-            currentGPS.BindingContext = user;
             entryBody.Text = "";
         }
         private async void BtnCam_Clicked(object sender, EventArgs e)
@@ -70,31 +69,59 @@ namespace MysteryLocation.View
         }
         private async void PublishButton_Clicked(object sender, EventArgs e)
         {
-            spin();
             Console.WriteLine("Publish button is pushed");
             try
             {
                 if (entrySubject.SelectedIndex > -1)
                 {
                     // Först publicera vanlig createPost
-                    createPost pubPost = new createPost(entrySubject.Items[entrySubject.SelectedIndex], entryBody.Text, GPSFetcher.currentPosition);
+                    spinOn();
+                    PostAttachment attach = null;
+                    if (bytes != null)
+                    {
+                        try
+                        {
+                             attach = new PostAttachment(0, bytes);
+                        }catch(Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
+                       
+                    }
+                    string title = entrySubject.Items[entrySubject.SelectedIndex];
+                    if (GPSFetcher.currentPosition != null && attach != null)
+                        title += "*ML";
+                    createPost pubPost = new createPost(entrySubject.Items[entrySubject.SelectedIndex] + "*ML", entryBody.Text, GPSFetcher.currentPosition);
                     int status = -2;
                     status = await conn.testPublishPosts(pubPost);
                     Console.WriteLine("post was much success");
                     // Sen skapa PostAttachment och publicera den
-                    if (status >= 0 && (bytes.Length != 0 || bytes == null))
+                    if (status >= 0 && (bytes.Length != 0 || bytes != null))
                     {
-                        PostAttachment attach = new PostAttachment(status, bytes);
-                        conn.publishAttachment(attach);
-                        Console.WriteLine(status + " should be 321 and id should be 321 as well");
-                        Console.WriteLine("postattach was much success");
+                        attach.obsID = status;
+                        bool success = await conn.publishAttachment(attach);
+                        if (success)
+                        {
+                            imgCam.Source = null;
+                            entryBody.Text = "";
+                            spinOff();
+                        }
+                        else // Publication of attachment failed.
+                        {
+                            spinOff();
+                        }
                     }
-                    else
+                    else // publish failed.
                     {
                         Console.WriteLine("Adding attachment failed. Status < 0");
+                        spinOff();
                     }
 
 
+
+                }
+                else // Please choose a category for your post.
+                {
 
                 }
             }
@@ -102,7 +129,7 @@ namespace MysteryLocation.View
             {
                 Console.WriteLine("nullreference in publishButton: " + error);
             }
-            await Navigation.PopAsync(true);
+            await Navigation.PopModalAsync(true);
         }
         private byte[] streamToArray(Stream stream)
         {
@@ -117,6 +144,16 @@ namespace MysteryLocation.View
         {
             defaultActivityIndicator.IsRunning = true;
             await Task.Delay(1000);
+            defaultActivityIndicator.IsRunning = false;
+        }
+
+        public void spinOn()
+        {
+            defaultActivityIndicator.IsRunning = true;
+        }
+
+        public void spinOff()
+        {
             defaultActivityIndicator.IsRunning = false;
         }
     }

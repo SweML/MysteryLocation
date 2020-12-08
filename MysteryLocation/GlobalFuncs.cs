@@ -16,7 +16,9 @@ namespace MysteryLocation
 
         public static UnlockedViewModel uvm;
 
+        public static bool gpsOn = false;
 
+        public static bool settingsActive = false;
         public static double calcDist(Position p1, Position p2)
         {
             Double R = 6371e3; // metres
@@ -34,6 +36,26 @@ namespace MysteryLocation
                               // For testing
 
             return d;
+        }
+
+        /*
+         *  Filter out posts that do not have a Coordinate nor a marker. *ML
+         */
+        public static List<Post> filterInvaliedPosts(List<Post> list)
+        {
+            List<Post> temp = new List<Post>();
+            string markerCheck;
+            foreach(Post x in list)
+            {
+                markerCheck = x.getSubject();
+                if(markerCheck.Length > 4)
+                {
+                    markerCheck = markerCheck.Substring(x.getSubject().Length - 3);
+                    if (x.getCoordinate() != null && markerCheck == "*ML")
+                        temp.Add(x);
+                }
+            }
+            return temp;
         }
 
         public static async Task unlockTracker()

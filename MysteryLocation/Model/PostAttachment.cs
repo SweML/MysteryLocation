@@ -27,7 +27,7 @@ namespace MysteryLocation.Model
             {
                 x.CopyTo(ms);
                 description = Convert.ToBase64String(ms.ToArray());
-                Console.WriteLine(description + " This text from convertImageSourceToBase64 in PostAttachment");
+              //  Console.WriteLine(description + " This text from convertImageSourceToBase64 in PostAttachment");
             }
         }
 

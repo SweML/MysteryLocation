@@ -48,17 +48,28 @@ namespace MysteryLocation
             Task.Run(async() => 
             {
                 List<Post> posts = await conn.getDataAsync();
-                GlobalFuncs.fvm.updateListElements(posts);
-                GlobalFuncs.mvm.updateListElements(posts);
+                posts = GlobalFuncs.filterInvaliedPosts(posts);
                 GlobalFuncs.uvm.updateListElements(posts);
+                while (!GlobalFuncs.gpsOn)
+                {
+                    await Task.Delay(25);
+                }
+                GlobalFuncs.mvm.updateListElements(posts);
+                while (!GlobalFuncs.settingsActive)
+                {
+                    await Task.Delay(25);
+                }
+                GlobalFuncs.fvm.updateListElements(posts);
+                
+                
             });
 
-            Task.Run(async() =>
-            {
+            //Task.Run(async() =>
+            //{
                // await Task.Delay(20000);
                 //Console.WriteLine("Test----------------------------------------------------------------------------------------------------------");
                 //await GlobalFuncs.unlockTracker();
-            });
+           // });
         }
 
         protected override void OnSleep()

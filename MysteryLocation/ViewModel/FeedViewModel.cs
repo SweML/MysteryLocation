@@ -11,9 +11,10 @@ namespace MysteryLocation.ViewModel
     public class FeedViewModel : PostListProperty
     {
         public ObservableCollection<PostListElement> items = new ObservableCollection<PostListElement>();
-        //private User user;
         private string position;
+        public Position currentPos;
         public Position prevCoordinate;
+        private List<Post> memory;
 
         public string Position // User position
         {
@@ -54,69 +55,91 @@ namespace MysteryLocation.ViewModel
 
         public FeedViewModel(User user)
         {
-            //this.user = user;
             prevCoordinate = null;
             Console.WriteLine("Reaches here");
-            Task.Run(async() =>
-            {
-               // List<Post> posts = await App.conn.getDataAsync();
-               // updateListElements(posts);
-            });
         }
 
-      /*  public void updateListElements()
-        {
-            Console.WriteLine("Calling fvm.updateListElements();");
-            List<Post> posts = user.getFeed();
-            foreach (Post x in posts)
-            {
-                if (x.getCoordinate() != null)
-                {
-                    Items.Add(new PostListElement()
-                    {
-                        Id = x.getId(),
-                        Subject = x.getSubject(),
-                        Body = x.getBody(),
-                        Created = x.getCreated(),
-                        LastUpdated = x.getLastUpdated(),
-                        Position = x.getCoordinate(),
-                        Dist = "Loading"
-                    });
-                }
-            }
-            Console.WriteLine("fvm.updateListElements(); is finished");
-        }*/
 
+      
+
+        /*
+         *  This method will only ever be called when the GPSFetcher has a current Position.
+         */
         public void updateListElements(List<Post> posts)
         {
             Items.Clear();
-            HashSet<int> forbidden = App.user.forbiddenSet;
-            foreach (Post x in posts)
+            currentPos = GPSFetcher.currentPosition; // So that all methods use the same Position.
+            if (posts != null)
+                memory = posts; // Save the list for later. Ha en metod som tar bort icke valid inlägg
+            Console.WriteLine("Elements in memory is: " + memory.Count);
+            List<Post> temp = filterBasedOnCategory();
+            double distance = 10;
+            foreach (Post x in temp)
             {
-                if (x.getCoordinate() != null && !forbidden.Contains(x.getId()))
+                distance = GlobalFuncs.calcDist(currentPos, x.getCoordinate());
+                if (distance <= App.user.distance && !App.user.forbiddenSet.Contains(x.getId()))
                 {
-                    if (x.getId() == 384)   // For testing static unlock func
-                        App.user.tracking = x; // For testing static unlock func
                     Items.Add(new PostListElement()
                     {
                         Id = x.getId(),
-                        Subject = x.getSubject(),
+                        Subject = x.getSubject().Substring(0, x.getSubject().Length - 3),
                         Body = x.getBody(),
                         Created = x.getCreated(),
                         LastUpdated = x.getLastUpdated(),
                         Position = x.getCoordinate(),
-                        Dist = "Loading"
+                        Dist = distance.ToString()
                     });
+
                 }
             }
-            if (GPSFetcher.currentPosition != null)
-                RecalculateDistance();
         }
+
+        private List<Post> filterBasedOnCategory()
+        {
+            List<Post> temp = new List<Post>();
+            string chosenCategory = "";
+            int nbr = App.user.category;
+            switch (nbr)
+            {
+                case 1:
+                    chosenCategory = "Historisk";
+                    break;
+                case 2:
+                    chosenCategory = "Natur";
+                    break;
+                case 3:
+                    chosenCategory = "Arkitektur";
+                    break;
+                case 4:
+                    chosenCategory = "Modern arkitektur";
+                    break;
+                case 5:
+                    chosenCategory = "Historisk arkitektur";
+                    break;
+                default:
+                    break;
+            }
+            if (chosenCategory.Length > 1)
+            {
+                Console.WriteLine("Chosencategory is " + chosenCategory);
+                foreach (Post x in memory)
+                {
+                    Console.WriteLine(chosenCategory + "*ML" + " . " + x.getSubject());
+                    if (chosenCategory + "*ML" == x.getSubject())
+                    {
+                        temp.Add(x);
+
+                    }
+                }
+            }
+            return temp;
+        }
+
 
         public void RecalculateDistance()
         {
             Position current = GPSFetcher.currentPosition;
-            
+
             Console.WriteLine("calling fvm.ReCalculateDistance();");
             if (Items.Count > 0 && current != null)
             {
@@ -147,24 +170,49 @@ namespace MysteryLocation.ViewModel
             }
         }
 
-            
 
-            public PostListElement RemovePost(int temp)
+
+        public PostListElement RemovePost(int temp)
+        {
+            PostListElement refe = null;
+            foreach (PostListElement x in Items)
             {
-                PostListElement refe = null;
-                foreach (PostListElement x in Items)
+                if (x.Id == temp)
                 {
-                    if (x.Id == temp)
-                    {
-                        refe = x;
-                        break;
-                    }
+                    refe = x;
+                    break;
                 }
-                if (refe != null)
-                    Items.Remove(refe);
-                return refe;
             }
+            if (refe != null)
+                Items.Remove(refe);
+            return refe;
         }
+    }
 
-    
+
 }
+/*   public void updateListElements(List<Post> posts)
+         {
+             Items.Clear();
+             HashSet<int> forbidden = App.user.forbiddenSet;
+             foreach (Post x in posts)
+             {
+                 if (x.getCoordinate() != null && !forbidden.Contains(x.getId()))
+                 {
+                     if (x.getId() == 384)   // For testing static unlock func
+                         App.user.tracking = x; // For testing static unlock func
+                     Items.Add(new PostListElement()
+                     {
+                         Id = x.getId(),
+                         Subject = x.getSubject(),
+                         Body = x.getBody(),
+                         Created = x.getCreated(),
+                         LastUpdated = x.getLastUpdated(),
+                         Position = x.getCoordinate(),
+                         Dist = "Loading"
+                     });
+                 }
+             }
+             if (GPSFetcher.currentPosition != null)
+                 RecalculateDistance();
+         }*/

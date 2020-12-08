@@ -60,7 +60,10 @@ namespace MysteryLocation
                SliderError.Text = "";
                CategoryId = ((Category)CategoryEntry.SelectedItem).CategoryId;
                user.setCategory(CategoryId);
-               user.setDistance(value);
+               user.setDistance(value * 1000);
+            if (GlobalFuncs.settingsActive && GlobalFuncs.gpsOn)
+                GlobalFuncs.fvm.updateListElements(null);
+               GlobalFuncs.settingsActive = true;
                Console.WriteLine();
                Console.WriteLine("Saved");
             }
@@ -74,7 +77,7 @@ namespace MysteryLocation
         void OnSliderValueChanged(object sender, ValueChangedEventArgs args)
         {
             value = args.NewValue;
-            displayLabel.Text = String.Format("Maximum distance {0}m", value);
+            displayLabel.Text = String.Format("Maximum distance {0}km", value);
         }
 
         public async void spin()

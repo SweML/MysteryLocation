@@ -16,18 +16,18 @@ namespace MysteryLocation
     {
         private HttpClient client;
 
-        private Semaphore sem;
+        private SemaphoreSlim sem;
         
 
         public APIConnection()
         {
             client = new HttpClient();
-            sem = new Semaphore(1, 1);
+            sem = new SemaphoreSlim(1);
         }
 
         public async Task<List<Post>> getDataAsync()
         {
-            sem.WaitOne();
+            await sem.WaitAsync();
             Uri uri = new Uri(string.Format("https://saabstudent2020.azurewebsites.net/observation", string.Empty));
             HttpResponseMessage response = await client.GetAsync(uri);
             List<Post> posts = new List<Post>();
@@ -42,7 +42,7 @@ namespace MysteryLocation
 
         public async Task<int> testPublishPosts(createPost x)
         {
-            sem.WaitOne();
+            await sem.WaitAsync();
             Uri uri = new Uri(string.Format("https://saabstudent2020.azurewebsites.net/observation", string.Empty));
             string json = JsonConvert.SerializeObject(x, Formatting.Indented);
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -50,15 +50,18 @@ namespace MysteryLocation
               if (response.IsSuccessStatusCode)
               {      
                 string temp = response.Headers.Location.ToString().Substring(54);
+                sem.Release();
                 return Int32.Parse(temp);
               }
             sem.Release();
             return -1;
         }
 
-        public async void publishAttachment(PostAttachment x)
+        public async Task<bool> publishAttachment(PostAttachment x)
         {
-            sem.WaitOne();
+            Console.WriteLine("Entering publishAttachment method in API");
+            await sem.WaitAsync();
+            Console.WriteLine("Entering publishAttachment method in API. Passed semaphore");
             Uri uri = new Uri(string.Format("https://saabstudent2020.azurewebsites.net/observation/" + x.obsID + "/attachment", string.Empty));
             string json = JsonConvert.SerializeObject(x, Formatting.Indented);
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -66,13 +69,16 @@ namespace MysteryLocation
             if (response.IsSuccessStatusCode)
             {
                 Console.WriteLine("Hurra!");
+                sem.Release();
+                return true;
             }
             sem.Release();
+            return false;
         }
 
         public async Task<UnlockedPosts> getPostAttachmentAsync(int obsId)
         {
-            sem.WaitOne();
+            await sem.WaitAsync();
             Stopwatch stop = new Stopwatch();
             Uri uri = new Uri(string.Format("https://saabstudent2020.azurewebsites.net/observation/" + obsId + "/attachment", string.Empty));
             HttpResponseMessage response = await client.GetAsync(uri);

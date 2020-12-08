@@ -14,6 +14,7 @@ namespace MysteryLocation.ViewModel
         //private MarkedPostsPage mpp;
         public Position prevCoordinate;
         private string position;
+        public Position currentPos;
 
         public string Position // User position
         {
@@ -57,27 +58,6 @@ namespace MysteryLocation.ViewModel
         public MarkedViewModel(User user)
         {
             this.user = user;
-           // this.mpp = mpp;
-          /*  Items.Add(new PostListElement()
-            {
-                Id = 9999,
-                Subject = "PlaceHolder 1",
-                Body = "PlaceHolder Text",
-                Created = "2020-09-14T12:59:21.7395836",
-                LastUpdated = "2020-09-14T12:59:21.7395836",
-                Position = new Coordinate(55.907875776284456, 14.067913798214885),
-                Dist = ""
-            });
-            Items.Add(new PostListElement()
-            {
-                Id = 10000,
-                Subject = "PlaceHolder 2",
-                Body = "PlaceHolder Text",
-                Created = "2020-09-14T12:59:21.7395836",
-                LastUpdated = "2020-09-14T12:59:21.7395836",
-                Position = new Coordinate(55.907875776284456, 14.067913798214885),
-                Dist = ""
-            });*/
             prevCoordinate = null;
         }
 
@@ -106,24 +86,25 @@ namespace MysteryLocation.ViewModel
         {
             Items.Clear();
             HashSet<int> markedPosts = App.user.markedSet;
+            double distance = 0;
             foreach (Post x in posts)
             {
-                if (x.getCoordinate() != null && markedPosts.Contains(x.getId()))
+                if (markedPosts.Contains(x.getId()))
                 {
+                    distance = GlobalFuncs.calcDist(currentPos, x.getCoordinate());
                     Items.Add(new PostListElement()
                     {
                         Id = x.getId(),
-                        Subject = x.getSubject(),
+                        Subject = x.getSubject().Substring(0, x.getSubject().Length - 3),
                         Body = x.getBody(),
                         Created = x.getCreated(),
                         LastUpdated = x.getLastUpdated(),
                         Position = x.getCoordinate(),
-                        Dist = "Loading"
+                        Dist = distance.ToString()
                     });
                 }
             }
-            if (GPSFetcher.currentPosition != null)
-                RecalculateDistance();
+            
         }
 
         public void RecalculateDistance()
@@ -192,6 +173,7 @@ namespace MysteryLocation.ViewModel
             Console.WriteLine("Entering AddPost");
             Items.Add(x);
             App.user.markedSet.Add(x.Id);
+            App.user.forbiddenSet.Add(x.Id);
             Console.WriteLine("Exiting AddPost");
             Console.WriteLine("Items count is: " + Items.Count);
         }

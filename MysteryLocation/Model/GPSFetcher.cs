@@ -79,7 +79,14 @@ namespace MysteryLocation.Model
             if (vc != null) vc.Position = writePosition;
             if (vc != null) vc.PositionLocation = writePositionLocation;
 
-            fvm.RecalculateDistance();
+            if(fvm != null && mvm != null)
+            {
+                fvm.currentPos = position;
+                mvm.currentPos = position;
+                GlobalFuncs.gpsOn = true;
+            }
+
+            //fvm.RecalculateDistance();
         }
 
         private async Task<String> WritePositionWithLocation(Position p)
