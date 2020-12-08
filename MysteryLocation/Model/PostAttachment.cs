@@ -11,10 +11,14 @@ namespace MysteryLocation.Model
         public int obsID { get; set; }
         public string description { get; set; }
 
-        public PostAttachment(int obsID, Stream imgStream)
+        public PostAttachment(int obsID, byte[] bytes)
         {
             this.obsID = obsID;
+            Stream imgStream = new MemoryStream(bytes);
+            //Console.WriteLine("postattachment converting");
             convertImageSourceToBase64(imgStream);
+            Console.WriteLine("postattachment SUCCESS");
+
         }
 
         private void convertImageSourceToBase64(Stream x)

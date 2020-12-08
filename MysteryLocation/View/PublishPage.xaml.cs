@@ -8,7 +8,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,18 +18,18 @@ namespace MysteryLocation.View
     {
         User user;
         APIConnection conn;
-        Stream imgSource;
+        byte[] bytes;
         public PublishPage()
         {
             this.user = App.user;
             this.conn = App.conn;
-            imgSource = null;
             InitializeComponent();
             currentGPS.BindingContext = user;
+            entryBody.Text = "";
         }
         private async void BtnCam_Clicked(object sender, EventArgs e)
         {
-            spin();
+            //spin();
             Console.WriteLine("Camera button works at least");
             try
             {
@@ -45,10 +44,12 @@ namespace MysteryLocation.View
 
                 if (photo != null)
                 {
-                    imgSource = photo.GetStream();
-                    imgCam.Source = ImageSource.FromStream(() => { return photo.GetStream(); });  
+
+                    bytes = streamToArray(photo.GetStream());
+
+                    imgCam.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
                 }
-               // Console.WriteLine(imgCam.Source.ToString() + "TestingCam"); //Xamarin.Forms.StreamImageSource
+                // Console.WriteLine(imgCam.Source.ToString() + "TestingCam"); //Xamarin.Forms.StreamImageSource
 
             }
             catch (Exception ex)
@@ -59,43 +60,58 @@ namespace MysteryLocation.View
         private async void BrowseButton_Clicked(object sender, EventArgs e)
         {
             (sender as Button).IsEnabled = false;
-            imgSource = await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync();
-            if (imgSource != null)
+            bytes = streamToArray(await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync());
+            if (bytes.Length != 0 || bytes == null)
             {
-                imgCam.Source = ImageSource.FromStream(() => imgSource);
+                imgCam.Source = ImageSource.FromStream(() => new MemoryStream(bytes));
             }
             (sender as Button).IsEnabled = true;
-
+            Console.WriteLine("Browse was much succes!");
         }
         private async void PublishButton_Clicked(object sender, EventArgs e)
         {
             spin();
-            Console.WriteLine("Publish button works");
-            if ((Category)entrySubject.SelectedItem != null && entryBody.Text.Length > 0 && imgSource != null)
+            Console.WriteLine("Publish button is pushed");
+            try
             {
-                // Först publicera vanlig createPost
-                createPost pubPost = new createPost(((Category)entrySubject.SelectedItem).CategoryName, entryBody.Text, GPSFetcher.currentPosition);
-                int status = -2;
-                status = await conn.testPublishPosts(pubPost);
-                // Sen skapa PostAttachment och publicera den
-                if(status >= 0)
+                if (entrySubject.SelectedIndex > -1)
                 {
-                    PostAttachment attach = new PostAttachment(status, imgSource);
-                    conn.publishAttachment(attach);
-                    Console.WriteLine(status + " should be 321 and id should be 321 as well");
+                    // Först publicera vanlig createPost
+                    createPost pubPost = new createPost(entrySubject.Items[entrySubject.SelectedIndex], entryBody.Text, GPSFetcher.currentPosition);
+                    int status = -2;
+                    status = await conn.testPublishPosts(pubPost);
+                    Console.WriteLine("post was much success");
+                    // Sen skapa PostAttachment och publicera den
+                    if (status >= 0 && (bytes.Length != 0 || bytes == null))
+                    {
+                        PostAttachment attach = new PostAttachment(status, bytes);
+                        conn.publishAttachment(attach);
+                        Console.WriteLine(status + " should be 321 and id should be 321 as well");
+                        Console.WriteLine("postattach was much success");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Adding attachment failed. Status < 0");
+                    }
+
+
 
                 }
-                else
-                {
-                    Console.WriteLine("Adding attachment failed. Status < 0");
-                }
-
-
-                
             }
-            await Navigation.PopAsync(false);
+            catch (NullReferenceException error)
+            {
+                Console.WriteLine("nullreference in publishButton: " + error);
+            }
+            await Navigation.PopAsync(true);
         }
-
+        private byte[] streamToArray(Stream stream)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                stream.CopyTo(memoryStream);
+                return memoryStream.ToArray();
+            }
+        }
 
         public async void spin()
         {
@@ -103,7 +119,5 @@ namespace MysteryLocation.View
             await Task.Delay(1000);
             defaultActivityIndicator.IsRunning = false;
         }
-
-
     }
 }
