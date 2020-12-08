@@ -38,7 +38,8 @@ namespace MysteryLocation.View
                 {
                     DefaultCamera = CameraDevice.Rear,
                     Directory = "Xamarin",
-                    SaveToAlbum = true
+                    SaveToAlbum = true,
+                    PhotoSize = PhotoSize.Small
                 });
 
                 if (photo != null)

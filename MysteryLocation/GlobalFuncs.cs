@@ -16,6 +16,8 @@ namespace MysteryLocation
 
         public static UnlockedViewModel uvm;
 
+        public static CategoryViewModel svm;
+
         public static bool gpsOn = false;
 
         public static bool settingsActive = false;

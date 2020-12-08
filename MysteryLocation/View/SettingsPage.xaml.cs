@@ -28,9 +28,9 @@ namespace MysteryLocation
         public SettingsPage(User user)
         {
             this.user = user;
-            CategoryViewModel cavm = new CategoryViewModel();
-            GPSFetcher.cavm = cavm;
-            this.BindingContext = cavm;
+            //CategoryViewModel cavm = new CategoryViewModel();
+            GPSFetcher.cavm = GlobalFuncs.svm;
+            this.BindingContext = GlobalFuncs.svm;
             InitializeComponent();
           //  currentGPS.BindingContext = user;
         }

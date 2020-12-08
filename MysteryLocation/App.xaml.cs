@@ -28,6 +28,7 @@ namespace MysteryLocation
             GlobalFuncs.fvm = new ViewModel.FeedViewModel(null);
             GlobalFuncs.mvm = new ViewModel.MarkedViewModel(null);
             GlobalFuncs.uvm = new ViewModel.UnlockedViewModel(null);
+            GlobalFuncs.svm = new ViewModel.CategoryViewModel();
             //GPSUpdater gps = new GPSUpdater(user);
 
             // Starts the gps.
