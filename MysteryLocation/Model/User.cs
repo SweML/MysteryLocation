@@ -105,7 +105,7 @@ namespace MysteryLocation.Model
             {
                 UnlockedPosts temp = await conn.getPostAttachmentAsync(tracking.getId());
                 temp.obsID = tracking.getId();
-                uvm.addUnlockedPost(tracking, temp);
+               // uvm.addUnlockedPost(tracking, temp);
                 tracking = null;
             });
             
@@ -215,14 +215,20 @@ namespace MysteryLocation.Model
         // Method to set which post is being tracked.
         public void addTracker(int observationId)
         {
+            Console.WriteLine("ENTERING ADD TRACKER");
             foreach (Post x in marked)
             {
+                Console.WriteLine("jaja" + x.getId());
                 if (x.getId() == observationId)
                 {
                     tracking = x;
+                    Console.WriteLine("Skriver du ut koordinaterna" + x.getCoordinate().Latitude + x.getCoordinate().Longitude);
                     //marked.Remove(x);
                 }
             }
+            Console.WriteLine("count IN marked" +  marked.Count);
+            Console.WriteLine("count IN feed" + feed.Count);
+            Console.WriteLine("count IN unlock" + unlocked.Count);
         }
        
 

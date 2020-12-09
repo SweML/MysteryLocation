@@ -42,6 +42,20 @@ namespace MysteryLocation.ViewModel
             }
         }
 
+      /*  private string localArea;
+        public string LocalArea // User position
+        {
+            get { return localArea; }
+            set
+            {
+                if (localArea != value)
+                {
+                    localArea = value;
+                    OnPropertyChanged("LocalArea");
+                }
+            }
+        }*/
+
         public ObservableCollection<PostListElement> Items
         {
             get { return items; }
@@ -53,6 +67,8 @@ namespace MysteryLocation.ViewModel
                 }
             }
         }
+
+        public PostListElement tracked { get; set; }
 
         public MarkedViewModel(User user)
         {
@@ -133,7 +149,7 @@ namespace MysteryLocation.ViewModel
             Console.WriteLine("calling fvm.ReCalculateDistance();");
             if (Items.Count > 0 && current != null)
             {
-                if (prevCoordinate == null || GlobalFuncs.calcDist(current, prevCoordinate) > 500)
+                if (prevCoordinate == null || GlobalFuncs.calcDist(current, prevCoordinate) > 10)
                 {
                     double distance = 0;
                     int relevantNbrs = 0;
@@ -158,6 +174,22 @@ namespace MysteryLocation.ViewModel
                     }
                 }
             }
+        }
+
+        public PostListElement RemovePost(int temp)
+        {
+            PostListElement refe = null;
+            foreach (PostListElement x in Items)
+            {
+                if (x.Id == temp)
+                {
+                    refe = x;
+                    break;
+                }
+            }
+            if (refe != null)
+                Items.Remove(refe);
+            return refe;
         }
 
 
@@ -195,6 +227,8 @@ namespace MysteryLocation.ViewModel
             Console.WriteLine("Exiting AddPost");
             Console.WriteLine("Items count is: " + Items.Count);
         }
+
+        
     }
 
 

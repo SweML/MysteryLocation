@@ -4,7 +4,7 @@
              x:Class="MysteryLocation.CompassPage"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.BackButtonTitle="False"
-             BackgroundColor="LightGray">
+             BackgroundColor="white">
     <ContentPage.Content>
 
 
@@ -78,7 +78,7 @@
                  FontAttributes="Bold"
                FontSize="20"
                TextColor="Red"
-               Text="20,5 km to target"
+               Text="{Binding Distance}"
                VerticalOptions="StartAndExpand"
                HorizontalOptions="Center"  />
             </Grid>

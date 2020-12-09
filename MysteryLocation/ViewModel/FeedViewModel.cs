@@ -120,7 +120,7 @@ namespace MysteryLocation.ViewModel
             Console.WriteLine("calling fvm.ReCalculateDistance();");
             if (Items.Count > 0 && current != null)
             {
-                if (prevCoordinate == null || GlobalFuncs.calcDist(current, prevCoordinate) > 500)
+                if (prevCoordinate == null || GlobalFuncs.calcDist(current, prevCoordinate) > 100)
                 {
                     double distance = 0;
                     int relevantNbrs = 0;
@@ -146,8 +146,6 @@ namespace MysteryLocation.ViewModel
                 }
             }
         }
-
-            
 
             public PostListElement RemovePost(int temp)
             {

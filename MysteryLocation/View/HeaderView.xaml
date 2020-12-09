@@ -3,16 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MysteryLocation.View.HeaderView">
     <ContentView.Content>
-        <StackLayout Orientation="Vertical" HorizontalOptions="Fill" BackgroundColor="#000000">
+        <StackLayout Orientation="Vertical" HorizontalOptions="Fill" BackgroundColor="#2a4337">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="3" />
-                    <RowDefinition Height="20" />
-                    <RowDefinition Height="10" />
-                    <RowDefinition Height="2" />
+                    <RowDefinition Height="5" />
+                    <RowDefinition Height="40" />
+                    <RowDefinition Height="15" />
+                    <RowDefinition Height="5" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
+                    
 
                 </Grid.ColumnDefinitions>
 
@@ -20,20 +20,30 @@
                         Grid.Row="1"
                         Text="MysteryLocation"
                         TextColor="White"
-                        FontSize="17"
+                        FontSize="30"
                         Margin="20,0,0,0"
-                        FontFamily="Helvetica"
+                        FontFamily="Circular"
                         VerticalOptions="Center"
                         HorizontalOptions="StartAndExpand"/>
                 <Label 
                         Grid.Row="2"
                         Text="{Binding PositionLocation}"
                         TextColor="White"
+                        FontSize="12"
+                        Margin="20,0,0,0"
+                        FontFamily="Circular"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"/>
+            <!--    <Label 
+                        Grid.Row="2"
+                        Text="{Binding LocalArea}"
+                        TextColor="White"
                         FontSize="10"
                         Margin="20,0,0,0"
                         FontFamily="Helvetica"
                         VerticalOptions="Center"
                         HorizontalOptions="Start"/>
+                -->
             </Grid>
         </StackLayout>
     </ContentView.Content>

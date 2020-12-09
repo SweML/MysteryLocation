@@ -10,6 +10,7 @@ using Xamarin.Forms.Xaml;
 [assembly: ExportFont("Lato-Light.ttf", Alias = "Latow")]
 [assembly: ExportFont("Lato-Black.ttf", Alias = "Latob")]
 [assembly: ExportFont("AndersonGrotesk-Ultrabold.otf", Alias = "Grotesk")]
+[assembly: ExportFont("CircularStd-Black.ttf", Alias = "Circular")]
 namespace MysteryLocation
 {
     public partial class App : Application

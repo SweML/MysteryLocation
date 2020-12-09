@@ -23,19 +23,13 @@ namespace MysteryLocation.View
             this.BindingContext = GlobalFuncs.fvm;
         }
   
-        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-          
-            // then pass it to your page
-            await Navigation.PushAsync(new DetailsPage(user), true);
-        }
 
         private void Mark_Clicked(object sender, EventArgs e)
         {
             int temp = int.Parse((sender as Button).AutomationId);
             PostListElement refElement = GlobalFuncs.fvm.RemovePost(temp);
             GPSFetcher.mvm.AddPost(refElement);
-
+            DependencyService.Get<SnackInterface>().SnackbarShow("Post #" + temp + " is now marked");
         }
 
         //Metod vid refresh.
