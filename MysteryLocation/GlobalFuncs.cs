@@ -19,6 +19,13 @@ namespace MysteryLocation
 
         public static ViewCompass vc;
 
+        public static CategoryViewModel svm;
+
+        public static bool gpsOn = false;
+
+        public static bool settingsActive = false;
+        private static int prevUnlock = -1;
+
 
         public static double calcDist(Position p1, Position p2)
         {
@@ -61,9 +68,9 @@ namespace MysteryLocation
 
         public static async Task unlockTracker()
         {
-            if (App.user != null && App.conn != null && GlobalFuncs.mvm.tracked != null )
+            if (App.user != null && App.conn != null && GlobalFuncs.mvm.tracked != null && GlobalFuncs.mvm.tracked.Id != prevUnlock)
             {
-                
+                prevUnlock = GlobalFuncs.mvm.tracked.Id;
                     UnlockedPosts attachment = await App.conn.getPostAttachmentAsync(GlobalFuncs.mvm.tracked.Id);
                 
                 

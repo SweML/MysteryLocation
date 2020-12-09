@@ -77,12 +77,15 @@ namespace MysteryLocation.ViewModel
         {
             Items.Clear();
             HashSet<int> markedPosts = App.user.markedSet;
+            currentPos = GPSFetcher.currentPosition;
             double distance = 0;
+            Console.WriteLine("MVM inparamter posts size is: " + posts.Count);
+            if (markedPosts.Count > 0) { 
             foreach (Post x in posts)
             {
                 if (markedPosts.Contains(x.getId()))
                 {
-                    distance = GlobalFuncs.calcDist(currentPos, x.getCoordinate());
+                    distance = calcDist(currentPos, x.getCoordinate());
                     Items.Add(new PostListElement()
                     {
                         Id = x.getId(),
@@ -93,7 +96,11 @@ namespace MysteryLocation.ViewModel
                         Position = x.getCoordinate(),
                         Dist = distance.ToString()
                     });
-                }
+                        Console.WriteLine("Nbr of items in Items is: " + Items.Count);
+                        Console.WriteLine("The id of the current elemen is:" + x.getId());
+                    }
+
+            }
             }
 
         }
@@ -113,7 +120,7 @@ namespace MysteryLocation.ViewModel
                     {
                         if (x.Position != null)
                         {
-                            distance = GlobalFuncs.calcDist(current, x.Position); // Conversion to metres
+                            distance = calcDist(current, x.Position); // Conversion to metres
                             relevantNbrs = ((int)distance).ToString().Length + 2;
                             if (distance > 1000)
                             {
@@ -131,6 +138,15 @@ namespace MysteryLocation.ViewModel
             }
         }
 
+        public void AddPost(PostListElement x)
+        {
+            Console.WriteLine("Entering AddPost");
+            Items.Add(x);
+            App.user.markedSet.Add(x.Id);
+            Console.WriteLine("Exiting AddPost");
+            Console.WriteLine("Items count is: " + Items.Count);
+        }
+
         public PostListElement RemovePost(int temp)
         {
             PostListElement refe = null;
@@ -146,8 +162,30 @@ namespace MysteryLocation.ViewModel
                 Items.Remove(refe);
             return refe;
         }
+
+        private double calcDist(Position p1, Position p2)
+        {
+            Double R = 6371e3; // metres
+            Double φ1 = p1.Latitude * Math.PI / 180; // φ, λ in radians
+            Double φ2 = p2.Latitude * Math.PI / 180;
+            Double Δφ = (p2.Latitude - p1.Latitude) * Math.PI / 180;
+            Double Δλ = (p2.Longitude - p1.Longitude) * Math.PI / 180;
+
+            Double a = Math.Sin(Δφ / 2) * Math.Sin(Δφ / 2) +
+                     Math.Cos(φ1) * Math.Cos(φ2) *
+                     Math.Sin(Δλ / 2) * Math.Sin(Δλ / 2);
+            Double c = 2 * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1 - a));
+
+            Double d = R * c; // in metres
+                              // For testing
+
+            return d;
+        }
+
     }
 }
+
+
 
 
 

@@ -59,6 +59,7 @@ namespace MysteryLocation.Model
         private void setPositions(Position position)
         {
             currentPosition = position;
+            GlobalFuncs.gpsOn = true;
             string latitude = "" + position.Latitude;
             string longitude = "" + position.Longitude;
             if (latitude.Length > 8)

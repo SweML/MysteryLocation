@@ -83,6 +83,7 @@ namespace MysteryLocation.ViewModel
         //Ändra här?
         public void addUnlockedPost(PostListElement x, UnlockedPosts attachment)
         {
+            App.user.unlockedSet.Add(x.Id);
             images.Add(attachment.imgBytes);
             Items.Add(new PostListElement()
             {
@@ -94,9 +95,9 @@ namespace MysteryLocation.ViewModel
                 Position = x.Position,
                 Dist = "", // Är dist intressant för en upplåst post?
                 Img = ImageSource.FromStream(() => new MemoryStream(attachment.imgBytes))
-        });
-            App.user.unlockedSet.Add(x.Id);
+             });
             App.user.saveImage(x.Id, attachment.imgBytes);
+            
         }
 
         public void testAddUnlockedPost(int obsId, UnlockedPosts attachment)
@@ -138,6 +139,9 @@ namespace MysteryLocation.ViewModel
                 }
             }
         }
+
+
+
     }
 
 

@@ -30,7 +30,7 @@ namespace MysteryLocation.View
         private async void updateContents(object sender, EventArgs e)
         {
             List<Post> posts = await App.conn.getDataAsync();
-            GlobalFuncs.fvm.updateListElements(posts);
+            //GlobalFuncs.fvm.updateListElements(posts);
         }
     }
 }

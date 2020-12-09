@@ -179,7 +179,7 @@ namespace MysteryLocation.Model
         }
 
         // Method to set which post is being tracked.
-        public void addTracker(int observationId)
+     /*   public void addTracker(int observationId)
         {
             Console.WriteLine("ENTERING ADD TRACKER");
             foreach (Post x in marked)
@@ -196,13 +196,8 @@ namespace MysteryLocation.Model
             Console.WriteLine("count IN feed" + feed.Count);
             Console.WriteLine("count IN unlock" + unlocked.Count);
         }
-       
+       */
 
-        public List<Post> getFeed()
-        {
-            return feed;
-        }
-       
 
      
         public byte[] readImage(int obsId)

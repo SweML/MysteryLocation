@@ -42,8 +42,11 @@ namespace MysteryLocation
                CategoryId = ((Category)CategoryEntry.SelectedItem).CategoryId;
                App.user.setCategory(CategoryId);
                App.user.setDistance(value * 1000);
-               if (GlobalFuncs.settingsActive && GlobalFuncs.gpsOn) // Check to see if user has chosen a new category. 
-                    GlobalFuncs.fvm.updateListElements(null);
+            if (GlobalFuncs.settingsActive && GlobalFuncs.gpsOn)
+            { // Check to see if user has chosen a new category. 
+                GlobalFuncs.fvm.updateListElements(null);
+                Console.WriteLine("Does this execute?");
+            }
                GlobalFuncs.settingsActive = true;
             }
 

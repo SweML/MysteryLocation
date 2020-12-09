@@ -48,23 +48,60 @@ namespace MysteryLocation
             
             gps = new GPSFetcher();
             startGPS();
+            //List<Post> posts = null;
             Task.Run(async() => 
             {
                 List<Post> posts = await conn.getDataAsync();
                 posts = GlobalFuncs.filterInvaliedPosts(posts);
-                GlobalFuncs.uvm.updateListElements(posts); // Does not care about distance nor *ML
-                while (!GlobalFuncs.gpsOn)
+                // Does not care about distance nor *ML
+               while (!GlobalFuncs.gpsOn && !GlobalFuncs.settingsActive)
                 {
-                    await Task.Delay(25);
-                }
-                GlobalFuncs.mvm.updateListElements(posts); // Does not care about *ML only distance
-                while (!GlobalFuncs.settingsActive)
-                {
-                    await Task.Delay(25);
-                }
-                GlobalFuncs.fvm.updateListElements(posts); // Cares about both *ML and distance.
+                   await Task.Delay(25);
+               }
+               GlobalFuncs.fvm.updateListElements(posts);
+               GlobalFuncs.mvm.updateListElements(posts); // Does not care about *ML only distance
+               GlobalFuncs.uvm.updateListElements(posts);
+                // Cares about both *ML and distance
             });
+
+         /*   Task.Run(async () =>
+            {
+                while (posts == null && !GlobalFuncs.gpsOn && !GlobalFuncs.settingsActive)
+                    await Task.Delay(25);
+                await updateFeed(posts);
+            });
+
+            Task.Run(async () =>
+            {
+                while (posts == null && !GlobalFuncs.gpsOn)
+                    await Task.Delay(25);
+                await updateMarked(posts);
+            });
+
+            Task.Run(async () =>
+            {
+                while (posts == null)
+                    await Task.Delay(25);
+                await updateUnlocked(posts);
+            });*/
         }
+
+        public async Task updateFeed(List<Post> temp)
+        {
+            
+            GlobalFuncs.fvm.updateListElements(temp);
+        }
+
+        public async Task updateMarked(List<Post> temp)
+        {
+            GlobalFuncs.mvm.updateListElements(temp);
+        }
+
+        public async Task updateUnlocked(List<Post> temp)
+        {
+            GlobalFuncs.mvm.updateListElements(temp);
+        }
+
 
         protected override void OnSleep()
         {

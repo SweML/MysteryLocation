@@ -54,6 +54,7 @@ namespace MysteryLocation.ViewModel
         public FeedViewModel(User user)
         {
             prevCoordinate = null;
+            memory = null;
         }
 
 
@@ -115,7 +116,7 @@ namespace MysteryLocation.ViewModel
                 default:
                     break;
             }
-            if (chosenCategory.Length > 1)
+            if (chosenCategory.Length > 1 && memory != null)
             {
                 foreach (Post x in memory)
                 {
