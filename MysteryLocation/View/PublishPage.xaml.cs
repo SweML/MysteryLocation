@@ -83,6 +83,9 @@ namespace MysteryLocation.View
                 {
                     Console.WriteLine("Adding attachment failed. Status < 0");
                 }
+            }catch(Exception ex)
+            {
+
             }
             await Navigation.PopModalAsync(true);
         }

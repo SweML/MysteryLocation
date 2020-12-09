@@ -40,28 +40,28 @@ namespace MysteryLocation.ViewModel
             }
         }
 
-      /*  private string localArea;
-        public string LocalArea // User position
-        {
-            get { return localArea; }
-            set
-            {
-                if (localArea != value)
-                {
-                    localArea = value;
-                    OnPropertyChanged("LocalArea");
-                }
-            }
-        }*/
+        /*  private string localArea;
+          public string LocalArea // User position
+          {
+              get { return localArea; }
+              set
+              {
+                  if (localArea != value)
+                  {
+                      localArea = value;
+                      OnPropertyChanged("LocalArea");
+                  }
+              }
+          }*/
 
         public ObservableCollection<PostListElement> Items
         {
             get { return items; }
             set
             {
-                if(items != value) { 
-                items = value;
-                OnPropertyChanged("Items");
+                if (items != value) {
+                    items = value;
+                    OnPropertyChanged("Items");
                 }
             }
         }
@@ -95,7 +95,7 @@ namespace MysteryLocation.ViewModel
                     });
                 }
             }
-            
+
         }
 
         public void RecalculateDistance()
@@ -146,6 +146,8 @@ namespace MysteryLocation.ViewModel
                 Items.Remove(refe);
             return refe;
         }
+    }
+}
 
 
 
@@ -182,3 +184,4 @@ namespace MysteryLocation.ViewModel
         
     }
 }
+*/
