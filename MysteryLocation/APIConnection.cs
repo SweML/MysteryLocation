@@ -57,7 +57,7 @@ namespace MysteryLocation
 
         public async Task<bool> publishAttachment(PostAttachment x)
         {
-            await sem.WaitAsync();
+           await sem.WaitAsync();
             Uri uri = new Uri(string.Format("https://saabstudent2020.azurewebsites.net/observation/" + x.obsID + "/attachment", string.Empty));
             string json = JsonConvert.SerializeObject(x, Formatting.Indented);
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
@@ -73,7 +73,7 @@ namespace MysteryLocation
 
         public async Task<UnlockedPosts> getPostAttachmentAsync(int obsId)
         {
-            await sem.WaitAsync();
+           await sem.WaitAsync();
             Stopwatch stop = new Stopwatch();
             Uri uri = new Uri(string.Format("https://saabstudent2020.azurewebsites.net/observation/" + obsId + "/attachment", string.Empty));
             HttpResponseMessage response = await client.GetAsync(uri);

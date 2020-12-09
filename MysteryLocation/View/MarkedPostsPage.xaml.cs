@@ -17,6 +17,8 @@ namespace MysteryLocation
     public partial class MarkedPostsPage : ContentPage
     {
         public User user;
+        private Button prevButton;
+        //public MarkedViewModel mvm;
         public MarkedPostsPage(User user)
         {
             this.user = user;
@@ -34,13 +36,24 @@ namespace MysteryLocation
             // then pass it to your page
             await Navigation.PushAsync(new DetailsPage(user), true);
         }
-        private async void testLabelButton(object sender, EventArgs e)
-        {
-            int obsID = int.Parse((sender as Button).AutomationId); // Should we save the sorted posts in User as well? user.addTracker(int obsId){ foreach(Post x in memory) {if(x.getId() == obsID) tracking = x;} }
-                                                                    //TODO
 
-            //  user.addTracker(obsID);
-            await Navigation.PushAsync(new CompassPage(user), false);
+        private async void Track(object sender, EventArgs e)
+        {
+            if(prevButton != null)
+            {
+                prevButton.BackgroundColor = Color.FromHex("#404040"); ;
+            }
+            Console.WriteLine("It registers a tap on label Track " + sender.ToString() + " " + e.ToString());
+            int obsID = int.Parse((sender as Button).AutomationId);
+            prevButton = sender as Button;
+            prevButton.BackgroundColor = Color.FromHex("#1f9f64");
+            Console.WriteLine("OBSAD" + obsID);
+            //add if true -> then notify?
+            GlobalFuncs.addTracker(obsID);
+            DependencyService.Get<SnackInterface>().SnackbarShow("The post #" + obsID + "is now being tracked");
         }
+
+        
+
     }
 }

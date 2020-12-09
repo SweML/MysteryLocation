@@ -135,7 +135,7 @@ namespace MysteryLocation.ViewModel
             Position current = GPSFetcher.currentPosition;
             if (Items.Count > 0 && current != null)
             {
-                if (GlobalFuncs.calcDist(current, prevCoordinate) > 500)
+                if (prevCoordinate == null || GlobalFuncs.calcDist(current, prevCoordinate) > 500)
                 {
                     double distance = 0;
                     int relevantNbrs = 0;

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace MysteryLocation
 {
@@ -16,11 +17,9 @@ namespace MysteryLocation
 
         public static UnlockedViewModel uvm;
 
-        public static CategoryViewModel svm;
+        public static ViewCompass vc;
 
-        public static bool gpsOn = false;
 
-        public static bool settingsActive = false;
         public static double calcDist(Position p1, Position p2)
         {
             Double R = 6371e3; // metres
@@ -62,12 +61,36 @@ namespace MysteryLocation
 
         public static async Task unlockTracker()
         {
-            if (App.user != null && App.conn != null && App.user.tracking != null)
+            if (App.user != null && App.conn != null && GlobalFuncs.mvm.tracked != null )
             {
-                UnlockedPosts attachment = await App.conn.getPostAttachmentAsync(App.user.tracking.getId());
-                uvm.addUnlockedPost(App.user.tracking, attachment);
-                App.user.tracking = null;
+                
+                    UnlockedPosts attachment = await App.conn.getPostAttachmentAsync(GlobalFuncs.mvm.tracked.Id);
+                
+                
+                    mvm.RemovePost(GlobalFuncs.mvm.tracked.Id);
+                    uvm.addUnlockedPost(GlobalFuncs.mvm.tracked, attachment);
+                
+               
+                    //DependencyService.Get<SnackInterface>().SnackbarShow("Post cannot be unlocked - no image available");
+                
+            }
+            
+            
+        }
+
+        public static void addTracker(int observationId)
+        {
+            Console.WriteLine("Entering Add Tracker");
+            foreach (PostListElement x in mvm.Items)
+            {
+                if (x.Id == observationId)
+                {
+                    mvm.tracked = x;
+                    Console.WriteLine(x.Position.Latitude + x.Position.Longitude);
+                    //marked.Remove(x);
+                }
             }
         }
+
     }
 }

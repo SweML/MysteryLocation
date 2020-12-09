@@ -48,16 +48,17 @@ namespace MysteryLocation.Droid
                             var childRelativeLayoutView = viewGroup.GetChildAt(j);
                             if (childRelativeLayoutView is BottomNavigationView bottomView)
                             {
-                                BottomNavigationView.LayoutParams parameters = new BottomNavigationView.LayoutParams(208, 208);
-                                parameters.Gravity = GravityFlags.CenterHorizontal;
+                                BottomNavigationView.LayoutParams parameters = new BottomNavigationView.LayoutParams(200, 200);
+                                parameters.Gravity = GravityFlags.Center;
 
-                                Drawable b = Resources.GetDrawable(Resource.Drawable.b);
+
+                               
                                 button.SetScaleType(Android.Widget.ImageView.ScaleType.Center);
-                                button.SetImageDrawable(b);
+                                
                                 button.LayoutParameters = parameters;
                                 bottomView.AddView(button);
 
-                                button.Click += (object sender, EventArgs test) =>
+                                button.Click += (object sender, EventArgs b) =>
                                 {
                                     Element.CurrentPage = Element.Children[2];
                                 };

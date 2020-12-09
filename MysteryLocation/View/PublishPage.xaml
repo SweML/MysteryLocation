@@ -9,7 +9,15 @@
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <StackLayout>
-            <views:HeaderView/>
+            <Grid>
+                
+                <ImageButton x:Name="Close"
+                        Source="close.png"
+                        WidthRequest="60"
+                        HorizontalOptions="End"
+                        BackgroundColor="Transparent"
+                        Clicked="ClosingPP"/>
+            </Grid>
             <ActivityIndicator x:Name="defaultActivityIndicator"
                                IsRunning="False" 
                                Color="CornflowerBlue"

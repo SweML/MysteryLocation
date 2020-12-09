@@ -9,19 +9,102 @@
 
     <!--ItemsSource="{x:Static local:PostList.ELL}" -->
     <!--ItemsSource="{x:Static local:NamedColor.All}">-->
-    <ContentPage.Content>
-        <StackLayout>
-            <views:HeaderView/>
-            <ListView SeparatorVisibility="Default"
-              x:Name="listview"
-                ItemsSource="{Binding Items}">
 
-                <ListView.RowHeight>
-                    <OnPlatform x:TypeArguments="x:Int32">
-                        <On Platform="iOS, Android" Value="180" />
-                    </OnPlatform>
-                </ListView.RowHeight>
-                <ListView.WidthRequest Value="20"/>
+    <ContentPage.Content>
+        <Frame Padding="0" BackgroundColor="#2a4237">
+
+            <StackLayout>
+                <views:HeaderView/>
+                <Frame CornerRadius="30" Margin="0,-5,0,0" Padding="5,15,5,15" BackgroundColor="#4b5d57">
+                    <StackLayout>
+                        <ListView SeparatorVisibility="Default"
+                             x:Name="listview"
+                                 ItemsSource="{Binding Items}" 
+                                  RowHeight="180"
+                                  HasUnevenRows="True" >
+
+                            <ListView.ItemTemplate>
+                                <DataTemplate x:Name="SS">
+                                    <ViewCell>
+                                        <ContentView x:Name="SSS" Margin="5,5,5,5">
+                                            <Frame OutlineColor="#d9d9d8" CornerRadius="25" Padding="15" BackgroundColor="#f3f2f1">
+                                                <StackLayout x:Name="DSL" Orientation="Horizontal">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <BoxView Color="DarkGray"
+                                                                WidthRequest="90"
+                                                                HeightRequest="90"
+                                                                HorizontalOptions="Center"
+                                                                VerticalOptions="Center"/>
+                                                        <StackLayout x:Name="SL" Padding="0">
+                                                            <Label x:Name="Title" Text="{Binding Subject}"
+                                                                FontSize="22"
+                                                                FontFamily="Circular"
+                                                                TextColor="Black"
+                                                                Margin="10, -2, 0, 0"
+                                                                VerticalOptions="Fill" />
+
+                                                        </StackLayout>
+                                                    </StackLayout>
+
+                                                    <StackLayout x:Name="SLSL" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+
+                                                        <StackLayout x:Name="SLmark" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Orientation="Vertical" 
+                                                                                Grid.Column="1" Grid.Row="0" Padding="0,0,0,0">
+                                                            <StackLayout  HorizontalOptions="End" VerticalOptions="FillAndExpand" Orientation="Vertical">
+                                                                <Label x:Name="Category" Text="{Binding Dist}"
+                                                                FontSize="17"
+                                                                FontFamily="Grotesk"
+                                                                TextColor="Gray"
+                                                                Margin="10, 6, 0, 0"
+                                                                VerticalOptions="Start"
+                                                                   HorizontalOptions="End"/>
+                                                                <BoxView HorizontalOptions="EndAndExpand" HeightRequest="0.5" Color="#4b5d57" />
+
+
+                                                                <Button x:Name="Track" Text="Track" TextColor="White" FontAttributes="Bold" FontFamily="Latob" BackgroundColor="#404040" CornerRadius="10"
+                                                                                HorizontalOptions="End" VerticalOptions="EndAndExpand" FontSize="Small" AutomationId="{Binding Id}" Clicked="Track">
+                                                                </Button>
+
+                                                            </StackLayout>
+
+
+
+
+                                                        </StackLayout>
+
+
+                                                    </StackLayout>
+                                                </StackLayout>
+                                            </Frame>
+                                        </ContentView>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+
+                        </ListView>
+                    </StackLayout>
+
+
+                </Frame>
+            </StackLayout>
+        </Frame>
+
+
+    </ContentPage.Content>
+
+    <!-- <ContentPage.Content>
+        <Frame Padding="0" BackgroundColor="#2a4237">
+
+            <StackLayout>
+                <views:HeaderView/>
+                
+                <Frame CornerRadius="30" Margin="0,0,0,0" Padding="5,15,5,15">
+                    <ListView SeparatorVisibility="Default"
+              x:Name="listview"
+                ItemsSource="{Binding Items}" 
+                              RowHeight="180" HasUnevenRows="True">
+
+                
 
                 <ListView.ItemTemplate>
                     <DataTemplate x:Name="SS">
@@ -64,7 +147,7 @@
                                                 <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Orientation="Horizontal">
 
                                                     <Button x:Name="Track" Text="Track" TextColor="Black" FontAttributes="Bold" FontFamily="Latob" 
-                                                                                HorizontalOptions="Start" VerticalOptions="Start" FontSize="Small" AutomationId="{Binding Id}" Clicked="testLabelButton">
+                                                                                HorizontalOptions="Start" VerticalOptions="Start" FontSize="Small" AutomationId="{Binding Id}" Clicked="Track">
 
                                                     </Button>
                                                 </StackLayout>
@@ -99,11 +182,14 @@
                             </ContentView>
                         </ViewCell>
                     </DataTemplate>
-                </ListView.ItemTemplate>
+                    </ListView.ItemTemplate>
 
-            </ListView>
+                </ListView>
+
+            </Frame>
         </StackLayout>
-    </ContentPage.Content>
+        </Frame>
+    </ContentPage.Content>-->
 
 </ContentPage>
 

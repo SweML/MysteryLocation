@@ -40,6 +40,20 @@ namespace MysteryLocation.ViewModel
             }
         }
 
+      /*  private string localArea;
+        public string LocalArea // User position
+        {
+            get { return localArea; }
+            set
+            {
+                if (localArea != value)
+                {
+                    localArea = value;
+                    OnPropertyChanged("LocalArea");
+                }
+            }
+        }*/
+
         public ObservableCollection<PostListElement> Items
         {
             get { return items; }
@@ -51,6 +65,8 @@ namespace MysteryLocation.ViewModel
                 }
             }
         }
+
+        public PostListElement tracked { get; set; }
 
         public MarkedViewModel(User user)
         {
@@ -88,7 +104,7 @@ namespace MysteryLocation.ViewModel
 
             if (Items.Count > 0 && current != null)
             {
-                if (GlobalFuncs.calcDist(current, prevCoordinate) > 500)
+                if (prevCoordinate == null || GlobalFuncs.calcDist(current, prevCoordinate) > 10)
                 {
                     double distance = 0;
                     int relevantNbrs = 0;
@@ -109,10 +125,52 @@ namespace MysteryLocation.ViewModel
                                 x.Dist = distance.ToString().Substring(0, relevantNbrs) + " m";
                             }
                         }
+                        Console.WriteLine("fvm.RecalculateDistance(); is finished");
                     }
                 }
             }
         }
+
+        public PostListElement RemovePost(int temp)
+        {
+            PostListElement refe = null;
+            foreach (PostListElement x in Items)
+            {
+                if (x.Id == temp)
+                {
+                    refe = x;
+                    break;
+                }
+            }
+            if (refe != null)
+                Items.Remove(refe);
+            return refe;
+        }
+
+
+
+        /*    public void RecalculateDistance()
+            {
+                Position current = user.currentPos;
+                double distance = 0;
+                if (Items.Count > 0)
+                {
+                    prevCoordinate = current;
+
+                }
+                foreach (PostListElement x in Items)
+                {
+                    distance = current.CalculateDistance(x.Position);
+                    if (distance > 1000)
+                    {
+                        distance /= 10;
+                        x.Dist = distance.ToString() + " km";
+                    }
+                    else
+                    {
+                        x.Dist = distance.ToString() + " m";
+                    }
+                }
 
         public void AddPost(PostListElement x)
         {
@@ -120,5 +178,7 @@ namespace MysteryLocation.ViewModel
             App.user.markedSet.Add(x.Id);
             App.user.forbiddenSet.Add(x.Id);
         }
+
+        
     }
 }

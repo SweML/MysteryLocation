@@ -67,70 +67,29 @@ namespace MysteryLocation.View
         {
             try
             {
-                if (entrySubject.SelectedIndex > -1)
+                // Först publicera vanlig createPost
+                createPost pubPost = new createPost(entrySubject.Text, entryBody.Text, GPSFetcher.currentPosition);
+                int status = -2;
+                status = await conn.testPublishPosts(pubPost);
+                // Sen skapa PostAttachment och publicera den
+                if(status >= 0)
                 {
-                    // Först publicera vanlig createPost
-                    spinOn();
-                    PostAttachment attach = null;
-                    if (bytes != null)
-                    {
-                        try
-                        {
-                             attach = new PostAttachment(0, bytes);
-                        }catch(Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                        }
-                       
-                    }
-                    string title = entrySubject.Items[entrySubject.SelectedIndex];
-                    if (GPSFetcher.currentPosition != null && attach != null)
-                        title += "*ML";
-                    createPost pubPost = new createPost(entrySubject.Items[entrySubject.SelectedIndex] + "*ML", entryBody.Text, GPSFetcher.currentPosition);
-                    int status = -2;
-                    status = await conn.testPublishPosts(pubPost);
-                    // Sen skapa PostAttachment och publicera den
-                    if (status >= 0 && (bytes.Length != 0 || bytes != null))
-                    {
-                        attach.obsID = status;
-                        bool success = await conn.publishAttachment(attach);
-                        if (success)
-                        {
-                            imgCam.Source = null;
-                            entryBody.Text = "";
-                            spinOff();
-                        }
-                        else // Publication of attachment failed.
-                        {
-                            spinOff();
-                        }
-                    }
-                    else // publish failed.
-                    {
-                        spinOff();
-                    }
-
-
+                    PostAttachment attach = new PostAttachment(status, imgSource);
+                    conn.publishAttachment(attach);
+                    Console.WriteLine(status + " should be 321 and id should be 321 as well");
 
                 }
-                else // Please choose a category for your post.
+                else
                 {
-
+                    Console.WriteLine("Adding attachment failed. Status < 0");
                 }
-            }
-            catch (NullReferenceException error)
-            {
-                Console.WriteLine("nullreference in publishButton: " + error);
             }
             await Navigation.PopModalAsync(true);
         }
-        private byte[] streamToArray(Stream stream)
+
+        public async void ClosingPP(object sender, EventArgs e)
         {
-            using (var memoryStream = new MemoryStream())
-            {
-                stream.CopyTo(memoryStream);
-                return memoryStream.ToArray();
-            }
+            await Navigation.PopModalAsync(true);
         }
 
         public async void spin()

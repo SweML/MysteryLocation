@@ -1,5 +1,8 @@
-﻿using System;
+﻿using MysteryLocation.Model;
+using Plugin.Geolocator.Abstractions;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -15,10 +18,11 @@ namespace MysteryLocation
         double beta;
         double y;
         double x;
+        User user;
 
-        public ViewCompass()
+        public ViewCompass(User user)
         {
-
+            this.user = user;
         }
 
         private string position;
@@ -34,6 +38,22 @@ namespace MysteryLocation
                 }
             }
         }
+
+        private string distance;
+        public string Distance // User position
+        {
+            get { return distance; }
+            set
+            {
+                if (distance != value)
+                {
+                    distance = value;
+                    OnPropertyChanged("Distance");
+                }
+            }
+        }
+
+        
 
         private string positionLocation;
         public string PositionLocation // User position
@@ -57,6 +77,7 @@ namespace MysteryLocation
         }
 
         double heading = 0;
+        
 
         public double Heading
         {
@@ -88,6 +109,17 @@ namespace MysteryLocation
             Compass.Start(SensorSpeed.UI);
 
         }
+        private ObservableCollection<PostListElement> items;
+
+        public ObservableCollection<PostListElement> Items
+        {
+            get { return items; }
+            set
+            {
+                items = value;
+                OnPropertyChanged("Items");
+            }
+        }
 
         private async void Compass_ReadingChanged(object sender, CompassChangedEventArgs e)
         {
@@ -96,13 +128,15 @@ namespace MysteryLocation
             int displayHeading = (int)Heading;
             displayHeading *= -1;
             HeadingDisplay = $" {displayHeading.ToString()}°";
-
+            
             try
             {
                 var location = await Geolocation.GetLastKnownLocationAsync();
+                //Get position of post, släng in dem i sista 2 param nedan
+                Beta = Heading + Bearing(GPSFetcher.currentPosition.Latitude, GPSFetcher.currentPosition.Longitude, GlobalFuncs.mvm.tracked.Position.Latitude, GlobalFuncs.mvm.tracked.Position.Longitude);
+               // Beta = Heading + Bearing(location.Latitude, location.Longitude, GlobalFuncs.mvm.tracked.Position.Latitude, GlobalFuncs.mvm.tracked.Position.Longitude);
+                
 
-                Beta = Heading + Bearing(location.Latitude, location.Longitude, 21.422512, 39.826198);
-               
             }
             catch (FeatureNotSupportedException fnsEx)
             {

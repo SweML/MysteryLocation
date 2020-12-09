@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <None Remove="Resources\Fonts\AndersonGrotesk-Ultrabold.otf" />
+    <None Remove="Resources\Fonts\CircularStd-Black.ttf" />
     <None Remove="Resources\Fonts\Helvetica93.ttf" />
     <None Remove="Resources\Fonts\Lato-Black.ttf" />
     <None Remove="Resources\Fonts\Lato-Light.ttf" />
@@ -28,6 +29,9 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\Fonts\AndersonGrotesk-Ultrabold.otf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Fonts\CircularStd-Black.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Fonts\Helvetica93.ttf">
@@ -51,6 +55,8 @@
     <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
+
+  
 
   <ItemGroup>
     <Reference Include="Mono.Android">

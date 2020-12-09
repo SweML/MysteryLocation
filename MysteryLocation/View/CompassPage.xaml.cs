@@ -14,7 +14,7 @@ namespace MysteryLocation
         public CompassPage(User user)
         {
             this.user = user;
-            vm = new ViewCompass();
+            vm = new ViewCompass(user);
             user.vc = vm;
             GPSFetcher.vc = vm;
             InitializeComponent();
