@@ -21,18 +21,20 @@ namespace MysteryLocation
 
         //  public static double ScreenWidth;
         //   public static double ScreenHeight;
-        public App()
+        public App() // App starts here
         {
+            
             conn = new APIConnection();
-            user = new User(true, 329, conn);
+
+            // Instansiate the user object. The user object will try to read previous settings.
+            user = new User(conn);
+
+            // Initialize the viewmodels
             GlobalFuncs.fvm = new ViewModel.FeedViewModel(null);
             GlobalFuncs.mvm = new ViewModel.MarkedViewModel(null);
             GlobalFuncs.uvm = new ViewModel.UnlockedViewModel(null);
             GlobalFuncs.svm = new ViewModel.CategoryViewModel();
-            //GPSUpdater gps = new GPSUpdater(user);
-
-            // Starts the gps.
-            //gps.startTimer(10);
+            
             InitializeComponent();
             MainPage = new NavigationBar(user, conn);
            
@@ -40,37 +42,27 @@ namespace MysteryLocation
         }
 
 
-        protected override void OnStart()
+        protected override void OnStart()  // This will be executed after the app constructor.
         {
             
             gps = new GPSFetcher();
             startGPS();
-            user.ReadUser();
             Task.Run(async() => 
             {
                 List<Post> posts = await conn.getDataAsync();
                 posts = GlobalFuncs.filterInvaliedPosts(posts);
-                GlobalFuncs.uvm.updateListElements(posts);
+                GlobalFuncs.uvm.updateListElements(posts); // Does not care about distance nor *ML
                 while (!GlobalFuncs.gpsOn)
                 {
                     await Task.Delay(25);
                 }
-                GlobalFuncs.mvm.updateListElements(posts);
+                GlobalFuncs.mvm.updateListElements(posts); // Does not care about *ML only distance
                 while (!GlobalFuncs.settingsActive)
                 {
                     await Task.Delay(25);
                 }
-                GlobalFuncs.fvm.updateListElements(posts);
-                
-                
+                GlobalFuncs.fvm.updateListElements(posts); // Cares about both *ML and distance.
             });
-
-            //Task.Run(async() =>
-            //{
-               // await Task.Delay(20000);
-                //Console.WriteLine("Test----------------------------------------------------------------------------------------------------------");
-                //await GlobalFuncs.unlockTracker();
-           // });
         }
 
         protected override void OnSleep()

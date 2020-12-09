@@ -28,8 +28,6 @@ namespace MysteryLocation.View
         }
         private async void BtnCam_Clicked(object sender, EventArgs e)
         {
-            //spin();
-            Console.WriteLine("Camera button works at least");
             try
             {
                 await CrossMedia.Current.Initialize();
@@ -49,8 +47,6 @@ namespace MysteryLocation.View
 
                     imgCam.Source = ImageSource.FromStream(() => { return photo.GetStream(); });
                 }
-                // Console.WriteLine(imgCam.Source.ToString() + "TestingCam"); //Xamarin.Forms.StreamImageSource
-
             }
             catch (Exception ex)
             {
@@ -66,11 +62,9 @@ namespace MysteryLocation.View
                 imgCam.Source = ImageSource.FromStream(() => new MemoryStream(bytes));
             }
             (sender as Button).IsEnabled = true;
-            Console.WriteLine("Browse was much succes!");
         }
         private async void PublishButton_Clicked(object sender, EventArgs e)
         {
-            Console.WriteLine("Publish button is pushed");
             try
             {
                 if (entrySubject.SelectedIndex > -1)
@@ -95,7 +89,6 @@ namespace MysteryLocation.View
                     createPost pubPost = new createPost(entrySubject.Items[entrySubject.SelectedIndex] + "*ML", entryBody.Text, GPSFetcher.currentPosition);
                     int status = -2;
                     status = await conn.testPublishPosts(pubPost);
-                    Console.WriteLine("post was much success");
                     // Sen skapa PostAttachment och publicera den
                     if (status >= 0 && (bytes.Length != 0 || bytes != null))
                     {
@@ -114,7 +107,6 @@ namespace MysteryLocation.View
                     }
                     else // publish failed.
                     {
-                        Console.WriteLine("Adding attachment failed. Status < 0");
                         spinOff();
                     }
 

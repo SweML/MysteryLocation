@@ -1,13 +1,6 @@
 ﻿using MysteryLocation.Model;
 using MysteryLocation.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace MysteryLocation
 {
@@ -21,7 +14,10 @@ namespace MysteryLocation
             this.conn = conn;
             pageCreation();
             InitializeComponent();
-            CurrentPage = Children[2];
+            if (!App.user.newUser)
+                CurrentPage = Children[2]; // If previous user open feed.
+            else
+                CurrentPage = Children[0]; // For newUser open settingspage.
         }
 
         private void pageCreation()
@@ -31,41 +27,6 @@ namespace MysteryLocation
             this.Children.Add(new CardViewTemp(user) { });
             this.Children.Add(new MarkedPostsPage(user) { Title = "Marked", IconImageSource = "feedIcon.png" });
             this.Children.Add(new UnlockedPostsPage(user) { Title = "Unlocked", IconImageSource = "unlockedIcon.png" });
-
-            /* NavigationPage compass = new NavigationPage(new CompassPage(user));
-             compass.IconImageSource = "compassIcon.png";
-             compass.Title = "Compass";
-             Children.Add(compass);
-            */
-            /*
-             NavigationPage navigationPage = new NavigationPage(new SettingsPage(user));
-             navigationPage.IconImageSource = "settingsIcon.png";
-             navigationPage.Title = "Settings";
-             Children.Add(navigationPage);
-
-
-
-             NavigationPage home = new NavigationPage(new CardViewTemp(user));
-             home.IconImageSource = "homeIcon.png";
-             home.Title = "Home";
-             Children.Add(home);
-
-             NavigationPage marked = new NavigationPage(new MarkedPostsPage(user));
-             marked.IconImageSource = "feedIcon.png";
-             marked.Title = "Marked";
-             Children.Add(marked);
-
-             NavigationPage unlocked = new NavigationPage(new UnlockedPostsPage(user));
-             unlocked.IconImageSource = "unlockedIcon.png";
-             unlocked.Title = "Unlocked";
-             Children.Add(unlocked);
-
-             NavigationPage publish = new NavigationPage(new PublishPage(user, conn));
-             publish.IconImageSource = "unlockedIcon.png";
-             publish.Title = "Publish";
-             Children.Add(publish);*/
-
-
         }
     }
 }

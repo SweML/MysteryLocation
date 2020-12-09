@@ -101,7 +101,6 @@ namespace MysteryLocation.ViewModel
 
         public void testAddUnlockedPost(int obsId, UnlockedPosts attachment)
         {
-            Console.WriteLine("Test entering viewModel and viewModel list size is: " + Items.Count);
             Items.Add(new PostListElement()
             {
                 Id = 384,
@@ -112,9 +111,7 @@ namespace MysteryLocation.ViewModel
                 Position = new Position(55.907875776284456, 14.067913798214885),
                 Dist = "", // Är dist intressant för en upplåst post?
                 Img = ImageSource.FromStream(() => new MemoryStream(attachment.imgBytes))
-            });
-            
-            Console.WriteLine("Test exiting viewModel and viewModel list size is: " + Items.Count);
+            });            
         }
 
 

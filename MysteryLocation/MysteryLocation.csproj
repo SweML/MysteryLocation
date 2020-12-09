@@ -11,6 +11,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="GPSUpdater.cs" />
+    <Compile Remove="Model\MarkedListProperty.cs" />
+    <Compile Remove="Model\NamedColor.cs" />
+    <Compile Remove="Model\PostList.cs" />
+    <Compile Remove="Model\UserHolder.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\Fonts\AndersonGrotesk-Ultrabold.otf" />
     <None Remove="Resources\Fonts\Helvetica93.ttf" />
     <None Remove="Resources\Fonts\Lato-Black.ttf" />

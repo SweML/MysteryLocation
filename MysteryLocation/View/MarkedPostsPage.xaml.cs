@@ -17,19 +17,12 @@ namespace MysteryLocation
     public partial class MarkedPostsPage : ContentPage
     {
         public User user;
-        //public MarkedViewModel mvm;
         public MarkedPostsPage(User user)
         {
             this.user = user;
-           // mvm = new MarkedViewModel(user, this);
-            //user.mvm = mvm;
             GPSFetcher.mvm = GlobalFuncs.mvm;
             this.BindingContext = GlobalFuncs.mvm;
             InitializeComponent();
-            
-            
-            //currentGPS.BindingContext = user;
-            
         }
 
       
@@ -41,12 +34,12 @@ namespace MysteryLocation
             // then pass it to your page
             await Navigation.PushAsync(new DetailsPage(user), true);
         }
-
         private async void testLabelButton(object sender, EventArgs e)
         {
-            Console.WriteLine("It registers a tap on label Track " + sender.ToString() + " " + e.ToString());
-            int obsID = int.Parse((sender as Button).AutomationId);
-            user.addTracker(obsID);
+            int obsID = int.Parse((sender as Button).AutomationId); // Should we save the sorted posts in User as well? user.addTracker(int obsId){ foreach(Post x in memory) {if(x.getId() == obsID) tracking = x;} }
+                                                                    //TODO
+
+            //  user.addTracker(obsID);
             await Navigation.PushAsync(new CompassPage(user), false);
         }
     }

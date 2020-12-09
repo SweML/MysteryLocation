@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
@@ -8,7 +7,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using MysteryLocation.Model;
 using Newtonsoft.Json;
-using Xamarin.Forms;
 
 namespace MysteryLocation
 {
@@ -59,16 +57,13 @@ namespace MysteryLocation
 
         public async Task<bool> publishAttachment(PostAttachment x)
         {
-            Console.WriteLine("Entering publishAttachment method in API");
             await sem.WaitAsync();
-            Console.WriteLine("Entering publishAttachment method in API. Passed semaphore");
             Uri uri = new Uri(string.Format("https://saabstudent2020.azurewebsites.net/observation/" + x.obsID + "/attachment", string.Empty));
             string json = JsonConvert.SerializeObject(x, Formatting.Indented);
             StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.PostAsync(uri, content);
             if (response.IsSuccessStatusCode)
             {
-                Console.WriteLine("Hurra!");
                 sem.Release();
                 return true;
             }

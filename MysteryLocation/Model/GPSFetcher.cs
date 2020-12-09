@@ -2,10 +2,8 @@
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
@@ -85,8 +83,6 @@ namespace MysteryLocation.Model
                 mvm.currentPos = position;
                 GlobalFuncs.gpsOn = true;
             }
-
-            //fvm.RecalculateDistance();
         }
 
         private async Task<String> WritePositionWithLocation(Position p)

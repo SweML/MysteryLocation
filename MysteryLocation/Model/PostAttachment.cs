@@ -15,10 +15,7 @@ namespace MysteryLocation.Model
         {
             this.obsID = obsID;
             Stream imgStream = new MemoryStream(bytes);
-            //Console.WriteLine("postattachment converting");
             convertImageSourceToBase64(imgStream);
-            Console.WriteLine("postattachment SUCCESS");
-
         }
 
         private void convertImageSourceToBase64(Stream x)
@@ -27,7 +24,6 @@ namespace MysteryLocation.Model
             {
                 x.CopyTo(ms);
                 description = Convert.ToBase64String(ms.ToArray());
-              //  Console.WriteLine(description + " This text from convertImageSourceToBase64 in PostAttachment");
             }
         }
 

@@ -18,7 +18,6 @@ namespace MysteryLocation.Model
         {
             this.id = id;
             this.description = description;
-            Console.WriteLine("The deserializer in API user this constructor");
             convertBase64ToBytes(this.description);
         }
 

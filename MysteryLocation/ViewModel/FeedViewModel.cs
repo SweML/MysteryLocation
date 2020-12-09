@@ -3,8 +3,6 @@ using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MysteryLocation.ViewModel
 {
@@ -56,7 +54,6 @@ namespace MysteryLocation.ViewModel
         public FeedViewModel(User user)
         {
             prevCoordinate = null;
-            Console.WriteLine("Reaches here");
         }
 
 
@@ -71,7 +68,6 @@ namespace MysteryLocation.ViewModel
             currentPos = GPSFetcher.currentPosition; // So that all methods use the same Position.
             if (posts != null)
                 memory = posts; // Save the list for later. Ha en metod som tar bort icke valid inlägg
-            Console.WriteLine("Elements in memory is: " + memory.Count);
             List<Post> temp = filterBasedOnCategory();
             double distance = 10;
             foreach (Post x in temp)
@@ -121,10 +117,8 @@ namespace MysteryLocation.ViewModel
             }
             if (chosenCategory.Length > 1)
             {
-                Console.WriteLine("Chosencategory is " + chosenCategory);
                 foreach (Post x in memory)
                 {
-                    Console.WriteLine(chosenCategory + "*ML" + " . " + x.getSubject());
                     if (chosenCategory + "*ML" == x.getSubject())
                     {
                         temp.Add(x);
@@ -139,11 +133,9 @@ namespace MysteryLocation.ViewModel
         public void RecalculateDistance()
         {
             Position current = GPSFetcher.currentPosition;
-
-            Console.WriteLine("calling fvm.ReCalculateDistance();");
             if (Items.Count > 0 && current != null)
             {
-                if (prevCoordinate == null || GlobalFuncs.calcDist(current, prevCoordinate) > 500)
+                if (GlobalFuncs.calcDist(current, prevCoordinate) > 500)
                 {
                     double distance = 0;
                     int relevantNbrs = 0;
@@ -164,13 +156,10 @@ namespace MysteryLocation.ViewModel
                                 x.Dist = distance.ToString().Substring(0, relevantNbrs) + " m";
                             }
                         }
-                        Console.WriteLine("fvm.RecalculateDistance(); is finished");
                     }
                 }
             }
         }
-
-
 
         public PostListElement RemovePost(int temp)
         {
@@ -188,31 +177,4 @@ namespace MysteryLocation.ViewModel
             return refe;
         }
     }
-
-
 }
-/*   public void updateListElements(List<Post> posts)
-         {
-             Items.Clear();
-             HashSet<int> forbidden = App.user.forbiddenSet;
-             foreach (Post x in posts)
-             {
-                 if (x.getCoordinate() != null && !forbidden.Contains(x.getId()))
-                 {
-                     if (x.getId() == 384)   // For testing static unlock func
-                         App.user.tracking = x; // For testing static unlock func
-                     Items.Add(new PostListElement()
-                     {
-                         Id = x.getId(),
-                         Subject = x.getSubject(),
-                         Body = x.getBody(),
-                         Created = x.getCreated(),
-                         LastUpdated = x.getLastUpdated(),
-                         Position = x.getCoordinate(),
-                         Dist = "Loading"
-                     });
-                 }
-             }
-             if (GPSFetcher.currentPosition != null)
-                 RecalculateDistance();
-         }*/
