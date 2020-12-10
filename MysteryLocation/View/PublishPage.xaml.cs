@@ -56,10 +56,18 @@ namespace MysteryLocation.View
         private async void BrowseButton_Clicked(object sender, EventArgs e)
         {
             (sender as Button).IsEnabled = false;
-            bytes = streamToArray(await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync());
-            if (bytes.Length != 0 || bytes == null)
+            try
             {
-                imgCam.Source = ImageSource.FromStream(() => new MemoryStream(bytes));
+                
+                bytes = streamToArray(await DependencyService.Get<IPhotoPickerService>().GetImageStreamAsync());
+                if (bytes.Length != 0 || bytes == null)
+                {
+                    imgCam.Source = ImageSource.FromStream(() => new MemoryStream(bytes));
+                }
+            }
+            catch(NullReferenceException)
+            {
+                Console.WriteLine("Nullref exception, you didn't choose anything in browse");
             }
             (sender as Button).IsEnabled = true;
         }
