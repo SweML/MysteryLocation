@@ -14,7 +14,15 @@ namespace MysteryLocation
         {
             GPSFetcher.cavm = GlobalFuncs.svm;
             this.BindingContext = GlobalFuncs.svm;
+            
             InitializeComponent();
+
+            value = App.user.getDistance();
+            value = value / 1000;
+            CategoryId = App.user.getCategory();
+
+            displayLabel.Text = String.Format("Maximum distance {0}km", value);
+            CategoryEntry.SelectedIndex = CategoryId;
         }
 
         void SavedButtonClicked(object sender, EventArgs args)

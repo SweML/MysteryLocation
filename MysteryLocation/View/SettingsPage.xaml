@@ -49,11 +49,12 @@
                HorizontalOptions="Center" />
 
             <Label x:Name="displayLabel"
-               Text="(uninitialized)"
+               Text=""
                HorizontalOptions="Center"
                VerticalOptions="CenterAndExpand" />
 
             <Button Text="Save Settings"
+                BackgroundColor="#2a4237"
                 VerticalOptions="End"
                 HorizontalOptions="Center"
                 Clicked="SavedButtonClicked"

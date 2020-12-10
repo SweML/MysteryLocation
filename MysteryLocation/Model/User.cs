@@ -63,9 +63,17 @@ namespace MysteryLocation.Model
         {
             category = cat;
         }
+        public int getCategory()
+        {
+            return category;
+        }
         public void setDistance(double dist)
         {
             distance = dist;
+        }
+        public double getDistance()
+        {
+            return distance;
         }
 
         public void unlockCurrent()
