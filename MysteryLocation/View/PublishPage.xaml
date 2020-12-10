@@ -8,8 +8,19 @@
         <local:CategoryViewModel></local:CategoryViewModel>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
+
+
+        <AbsoluteLayout VerticalOptions="FillAndExpand"  
+                HorizontalOptions="FillAndExpand">
+
+
+            <StackLayout   
+                AbsoluteLayout.LayoutFlags="All"  
+               AbsoluteLayout.LayoutBounds="0,0,1,1">
+
             <Grid>
+                
+                
                 
                 <ImageButton x:Name="Close"
                         Source="close.png"
@@ -18,14 +29,7 @@
                         BackgroundColor="Transparent"
                         Clicked="ClosingPP"/>
             </Grid>
-            <ActivityIndicator x:Name="defaultActivityIndicator"
-                               IsRunning="False" 
-                               Color="CornflowerBlue"
-                               VerticalOptions="CenterAndExpand"
-                               HorizontalOptions="FillAndExpand" 
-                               HeightRequest="80" 
-                               WidthRequest="80"
-                               />
+   
             
 
             <Picker ItemDisplayBinding="{Binding CategoryName}" x:Name="entrySubject" Title="Select Category" ItemsSource="{Binding CatList}"/>
@@ -61,8 +65,19 @@ BackgroundColor="#00a4fc" TextColor="#FFF"/>
 
 
 
-            
+            </StackLayout>
 
-        </StackLayout>
+
+            <ActivityIndicator x:Name="defaultActivityIndicator"
+                               IsRunning="False" 
+                                 AbsoluteLayout.LayoutFlags="All"  
+               AbsoluteLayout.LayoutBounds="0.5,0.5,0.25,0.25"
+                               Color="CornflowerBlue"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="FillAndExpand" 
+                               HeightRequest="80" 
+                               WidthRequest="80"
+                               />
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
