@@ -179,7 +179,7 @@ namespace MysteryLocation.ViewModel
             Double d = R * c; // in metres
                               // For testing
 
-            return d;
+            return Math.Round(d, 1);
         }
 
     }

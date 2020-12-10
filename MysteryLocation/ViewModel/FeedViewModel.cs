@@ -3,6 +3,7 @@ using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace MysteryLocation.ViewModel
 {
@@ -89,6 +90,22 @@ namespace MysteryLocation.ViewModel
 
                 }
             }
+            Items = OrderThoseGroups(Items);
+        }
+
+        public static ObservableCollection<PostListElement> OrderThoseGroups(ObservableCollection<PostListElement> orderThoseGroups)
+        {
+            ObservableCollection<PostListElement> temp;
+            temp = new ObservableCollection<PostListElement>(orderThoseGroups.OrderBy(PostListElement => PostListElement.Created)); // double.Parse(PostListElement.Dist)
+            temp = new ObservableCollection<PostListElement>(temp.Reverse());
+            orderThoseGroups.Clear();
+            foreach (PostListElement j in temp)
+            {
+                orderThoseGroups.Add(j);
+                Console.WriteLine(j.Created);
+            }
+            
+            return orderThoseGroups;
         }
 
         private List<Post> filterBasedOnCategory()

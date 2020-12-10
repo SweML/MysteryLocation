@@ -86,9 +86,9 @@ namespace MysteryLocation.View
 
                     }
                     string title = entrySubject.Items[entrySubject.SelectedIndex];
-                    if (GPSFetcher.currentPosition != null && attach != null)
+                    if (GPSFetcher.currentPosition != null && attach != null && attach.description.Length < 3000000)
                         title += "*ML";
-                    createPost pubPost = new createPost(entrySubject.Items[entrySubject.SelectedIndex] + "*ML", entryBody.Text, GPSFetcher.currentPosition);
+                    createPost pubPost = new createPost(title, entryBody.Text, GPSFetcher.currentPosition);
                     int status = -2;
                     status = await conn.testPublishPosts(pubPost);
                     Console.WriteLine("post was much success");
