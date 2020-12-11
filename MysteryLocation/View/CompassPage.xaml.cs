@@ -22,29 +22,7 @@ namespace MysteryLocation
 
             vm.Start();
             ///versionsTracking Hadi
-            VersionTracking.Track();
-            if (VersionTracking.IsFirstLaunchEver)
-            {
-                termsLayout.IsVisible = true;
-                layout.IsVisible = false;
-            }
 
-            else
-            {
-                termsLayout.IsVisible = false;
-                layout.IsVisible = true;
-                ///versionsTracking Hadi
-            }
         }
-
-
-
-        ///the button aDDED
-        public void onAgree(object sender, EventArgs e)
-        {
-            termsLayout.IsVisible = false;
-            layout.IsVisible = true;
-        }
-
     }
 }

@@ -8,11 +8,23 @@ namespace MysteryLocation
     {
         public User user;
         public APIConnection conn;
-        public NavigationBar(User user, APIConnection conn)
+        public int flag;
+        public NavigationBar(User user, APIConnection conn, int flag)
         {
             this.user = user;
             this.conn = conn;
-            pageCreation();
+            this.flag = flag;
+            if (flag == 1)
+            {
+
+                pageCreation();
+                pushTerms();
+            }
+            else
+            {
+                pageCreation();
+            }
+
             InitializeComponent();
             if (!App.user.newUser)
                 CurrentPage = Children[2]; // If previous user open feed.
@@ -27,6 +39,11 @@ namespace MysteryLocation
             this.Children.Add(new CardViewTemp(user) { });
             this.Children.Add(new MarkedPostsPage(user) { Title = "Marked", IconImageSource = "feedIcon.png" });
             this.Children.Add(new UnlockedPostsPage(user) { Title = "Unlocked", IconImageSource = "unlockedIcon.png" });
+        }
+
+        private async void pushTerms()
+        {
+            await Navigation.PushModalAsync(new TermsView());
         }
     }
 }

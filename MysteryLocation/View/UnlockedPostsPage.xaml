@@ -42,16 +42,16 @@
                                             TextColor="Black"
                                             Margin="10, -2, 0, 0"
                                             VerticalOptions="Fill" />
-                                                            
+
                                                             <Label x:Name="Desc" Text="{Binding Body}"
                                             Margin="10, -4, 0, 0"
                                             FontSize="15"
                                             FontFamily="Latow"
                                             VerticalOptions="Start"
-                                            MaxLines="3"/> 
+                                            MaxLines="3"/>
 
                                                         </StackLayout>
-                                                        
+
                                                     </StackLayout>
 
                                                     <StackLayout x:Name="SLSL" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -59,20 +59,16 @@
                                                         <StackLayout x:Name="SLmark" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Orientation="Vertical" 
                                                                                 Grid.Column="1" Grid.Row="0" Padding="0,0,0,0">
                                                             <StackLayout  HorizontalOptions="End" VerticalOptions="FillAndExpand" Orientation="Vertical">
-                                                                
+
 
 
                                                                 <Button x:Name="Details" Text="Details" TextColor="White" FontAttributes="Bold" FontFamily="Latob" BackgroundColor="#404040" CornerRadius="10"
-                                                                                HorizontalOptions="End" VerticalOptions="EndAndExpand" FontSize="Small" AutomationId="{Binding Id}" >
+                                                                                HorizontalOptions="End" VerticalOptions="EndAndExpand" FontSize="Small" AutomationId="{Binding Id}" Clicked="Details_Clicked" >
                                                                 </Button>
 
                                                             </StackLayout>
 
-
-
-
                                                         </StackLayout>
-
 
                                                     </StackLayout>
                                                 </StackLayout>

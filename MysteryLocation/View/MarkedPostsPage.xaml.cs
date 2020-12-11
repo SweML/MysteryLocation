@@ -27,19 +27,14 @@ namespace MysteryLocation
             InitializeComponent();
         }
 
-      
-        
 
-        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
 
-            // then pass it to your page
-            await Navigation.PushAsync(new DetailsPage(user), true);
-        }
+
+
 
         private async void Track(object sender, EventArgs e)
         {
-            if(prevButton != null)
+            if (prevButton != null)
             {
                 prevButton.BackgroundColor = Color.FromHex("#404040"); ;
             }
@@ -53,7 +48,7 @@ namespace MysteryLocation
             DependencyService.Get<SnackInterface>().SnackbarShow("The post #" + obsID + "is now being tracked");
         }
 
-        
+
 
     }
 }

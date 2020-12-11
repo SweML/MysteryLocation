@@ -3,6 +3,7 @@ using MysteryLocation.Model;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 [assembly: ExportFont("Helvetica93.ttf", Alias = "Helvetica")]
@@ -11,6 +12,8 @@ using Xamarin.Forms.Xaml;
 [assembly: ExportFont("Lato-Black.ttf", Alias = "Latob")]
 [assembly: ExportFont("AndersonGrotesk-Ultrabold.otf", Alias = "Grotesk")]
 [assembly: ExportFont("CircularStd-Black.ttf", Alias = "Circular")]
+[assembly: ExportFont("CircularStd-Book.ttf", Alias = "Circularbook")]
+
 namespace MysteryLocation
 {
     public partial class App : Application
@@ -35,11 +38,22 @@ namespace MysteryLocation
             GlobalFuncs.mvm = new ViewModel.MarkedViewModel(null);
             GlobalFuncs.uvm = new ViewModel.UnlockedViewModel(null);
             GlobalFuncs.svm = new ViewModel.CategoryViewModel();
-            
-            InitializeComponent();
-            MainPage = new NavigationBar(user, conn);
-           
-            
+
+            VersionTracking.Track();
+
+            if (VersionTracking.IsFirstLaunchEver)
+            {
+                //Första gång
+                MainPage = new NavigationBar(user, conn, 1);
+            }
+
+            else
+            {   //Ej första 
+                MainPage = new NavigationBar(user, conn, 0);
+                ///versionsTracking Hadi
+            }
+
+
         }
 
 

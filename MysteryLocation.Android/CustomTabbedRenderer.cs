@@ -52,9 +52,12 @@ namespace MysteryLocation.Droid
                                 parameters.Gravity = GravityFlags.Center;
 
 
-                               
-                                button.SetScaleType(Android.Widget.ImageView.ScaleType.Center);
-                                
+                                Drawable b = Resources.GetDrawable(Resource.Drawable.plus);
+
+                                button.SetScaleType(Android.Widget.ImageView.ScaleType.CenterCrop);
+                                button.SetImageDrawable(b);
+
+
                                 button.LayoutParameters = parameters;
                                 bottomView.AddView(button);
 

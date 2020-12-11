@@ -4,12 +4,122 @@
              x:Class="MysteryLocation.View.DetailsPage"
              BindingContext="MysteryLocation.View.CardViewTemp"
              NavigationPage.HasNavigationBar="True"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              NavigationPage.BackButtonTitle="False">
     <ContentPage.Content>
-        <StackLayout>
-            <Label x:Name="lab" 
-                   >
-            </Label>
+        <StackLayout Padding="0">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="440" />
+                </Grid.RowDefinitions>
+                <StackLayout HorizontalOptions="FillAndExpand" Padding="0" >
+                    <Image x:Name="image" Grid.Row="0"  Aspect="AspectFill"></Image>
+                </StackLayout>
+
+
+                <yummy:PancakeView BackgroundColor="White" CornerRadius="60,60,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="35,0,35,0" Grid.Row="1" Margin="0,0,0,0">
+                    <StackLayout>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="35"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Label
+                                x:Name="Title"
+                                Grid.Row="1"
+                                FontFamily="Circular"
+                                FontSize="25"
+                                TextColor="Black"
+                                />
+                            <BoxView HorizontalOptions="Fill" HeightRequest="0.1" Color="LightGray" Grid.Row="2"/>
+                        </Grid>
+                        <StackLayout Orientation="Horizontal">
+                            <Grid HorizontalOptions="Start" VerticalOptions="Center">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1"/>
+                                    <RowDefinition Height="25"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="220"/>
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                Grid.Row="1"
+                                FontFamily="Circular"
+                                FontSize="22"
+                                TextColor="Gray"
+                                Text="Description"
+                                />
+                                <Label
+                                x:Name="Body"
+                                Grid.Row="2"
+                                FontFamily="Circularbook"
+                                FontSize="17"
+                                TextColor="Gray"
+                                />
+
+                            </Grid>
+                            <Grid HorizontalOptions="EndAndExpand" VerticalOptions="Start">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Image x:Name="imge" Grid.Row="1" Grid.Column="0" WidthRequest="90"
+                                            HeightRequest="120"></Image>
+
+                            </Grid>
+
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="35"/>
+                                    <RowDefinition Height="1"/>
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Text="Additional details"
+                                    Grid.Row="1"
+                                    FontFamily="Circular"
+                                    FontSize="25"
+                                    TextColor="Black"
+                                />
+                                <BoxView HorizontalOptions="Fill" HeightRequest="0.1" Color="LightGray" Grid.Row="2"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <!--Empty-->
+                                    <RowDefinition Height="5"/>
+                                    <!--Tallinn, Eesti - EE-->
+                                    <RowDefinition Height="25"/>
+                                    <!--Latitude-->
+                                    <RowDefinition Height="25"/>
+                                    <!--Longitude-->
+                                    <RowDefinition Height="25"/>
+                                    <!--Altitude-->
+                                    <RowDefinition Height="25"/>
+                                    <!--Timestamp-->
+                                    <RowDefinition Height="25"/>
+                                </Grid.RowDefinitions>
+                                <Label
+                                    x:Name="Location"
+                                    Grid.Row="1"
+                                    FontFamily="Circular"
+                                    FontSize="15"
+                                    TextColor="#434343"
+                                    />
+                            </Grid>
+                        </StackLayout>
+
+
+                    </StackLayout>
+                </yummy:PancakeView>
+
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

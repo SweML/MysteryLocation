@@ -10,22 +10,7 @@
 
         <!--stacklayout for the welcome message -->
         <StackLayout>
-            <StackLayout x:Name="termsLayout">
-                <Label Margin="15" Text="Terms and Conditions :" FontAttributes="Bold" FontSize="Large"></Label>
-                <Label FontSize="Medium" Margin="15"  Text="This mobile application can be used for share locations, picture with short text about interesting places with other users.  &#10; &#10; By clicking the agree button you agree NOT to use this mobile application: &#10; &#10; 
-1 - To post nude, partially nude, or sexually suggestive photos. &#10; 
-2 - To attack, harass, threat, abuse other users.  &#10;
-3 - To communicate with other users in an abusive or offensive manners.  &#10;
-4 - To market or advertise illegal products. &#10;
-5 - To publish contact information, E-mails , phone numbers (spams).  &#10;
-6 - To violate any laws in your jurisdictiont">
 
-                </Label>
-                <Button x:Name="agreeButon" Text="AGREE"
-                        Clicked="onAgree">
-
-                </Button>
-            </StackLayout>
 
             <!--stacklayout for the welcome message -->
             <views:HeaderView/>
@@ -33,9 +18,9 @@
 
             <!--Name and Visible were Added to control the welcome messaGES  -->
 
-            <StackLayout x:Name="layout" IsVisible="false">
+            <StackLayout x:Name="layout">
                 <!-- Text="{Binding CurrentPosition}"-->
-            <Label x:Name="currentGPS"
+                <Label x:Name="currentGPS"
                FontAttributes="Bold"
                FontSize="20"
                TextColor="Red"
@@ -43,30 +28,30 @@
                VerticalOptions="StartAndExpand"
                HorizontalOptions="Center"/>
 
-            <Grid>
-                <!--Here we put compass for fun -->
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="500"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+                <Grid>
+                    <!--Here we put compass for fun -->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="500"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
-                <Image HorizontalOptions="FillAndExpand"
+                    <Image HorizontalOptions="FillAndExpand"
                VerticalOptions="FillAndExpand" 
                    Rotation="{Binding Heading}"
                Source="compass.png"/>
 
-                <Image HorizontalOptions="Center"
+                    <Image HorizontalOptions="Center"
                VerticalOptions="Center"
                Source="compassArrow.png" 
                x:Name="CompassArrow"/>
 
-                <Image HorizontalOptions="Center"
+                    <Image HorizontalOptions="Center"
                VerticalOptions="Center"
                Rotation="{Binding Beta}"
                Source="arrow.png" 
                x:Name="ImageArrow"/>
 
-                <Label 
+                    <Label 
             Text="{Binding HeadingDisplay}" 
            x:Name="LabelInfo"
            VerticalOptions="Center" 
@@ -74,14 +59,14 @@
                 TextColor="Black"
                 FontSize="30"/>
 
-                <Label x:Name="distToTarget"
+                    <Label x:Name="distToTarget"
                  FontAttributes="Bold"
                FontSize="20"
                TextColor="Red"
                Text="{Binding Distance}"
                VerticalOptions="StartAndExpand"
                HorizontalOptions="Center"  />
-            </Grid>
+                </Grid>
             </StackLayout>
 
 

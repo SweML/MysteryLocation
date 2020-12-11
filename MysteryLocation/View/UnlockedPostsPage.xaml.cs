@@ -16,7 +16,7 @@ namespace MysteryLocation
     public partial class UnlockedPostsPage : ContentPage
     {
         public User user;
-      //  public UnlockedViewModel uvm;
+        //  public UnlockedViewModel uvm;
         public UnlockedPostsPage(User user)
         {
             this.user = user;
@@ -29,11 +29,11 @@ namespace MysteryLocation
 
         }
 
-        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private async void Details_Clicked(object sender, EventArgs e)
         {
+            int temp = int.Parse((sender as Button).AutomationId);
 
-            // then pass it to your page
-            await Navigation.PushAsync(new DetailsPage(user), true);
+            await Navigation.PushModalAsync(new DetailsPage(user, temp), true);
         }
     }
 }

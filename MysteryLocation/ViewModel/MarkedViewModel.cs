@@ -125,11 +125,11 @@ namespace MysteryLocation.ViewModel
                             if (distance > 1000)
                             {
                                 distance /= 1000;
-                                x.Dist = distance.ToString().Substring(0, relevantNbrs - 3) + " km";
+                                x.Dist = Math.Round(distance, 1).ToString() + " km";
                             }
                             else
                             {
-                                x.Dist = distance.ToString().Substring(0, relevantNbrs) + " m";
+                                x.Dist = Math.Round(distance, 1).ToString() + " m";
                             }
                         }
                         Console.WriteLine("fvm.RecalculateDistance(); is finished");

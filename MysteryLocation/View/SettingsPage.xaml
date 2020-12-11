@@ -54,10 +54,12 @@
                VerticalOptions="CenterAndExpand" />
 
             <Button Text="Save Settings"
-                BackgroundColor="#2a4237"
+                BackgroundColor="#404040"
                 VerticalOptions="End"
                 HorizontalOptions="Center"
                 Clicked="SavedButtonClicked"
+                TextColor="White"
+                    CornerRadius="10"
                 />
 
             <ActivityIndicator x:Name="defaultActivityIndicator"

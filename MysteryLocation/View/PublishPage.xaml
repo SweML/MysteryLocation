@@ -3,72 +3,194 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:MysteryLocation.ViewModel" xmlns:views="clr-namespace:MysteryLocation.View"
              x:Class="MysteryLocation.View.PublishPage"
              NavigationPage.HasNavigationBar="False"
-             NavigationPage.BackButtonTitle="False">
+             NavigationPage.BackButtonTitle="False"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             BackgroundColor="#2a4337">
     <ContentPage.BindingContext>
         <local:CategoryViewModel></local:CategoryViewModel>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-
-
-        <AbsoluteLayout VerticalOptions="FillAndExpand"  
-                HorizontalOptions="FillAndExpand">
-
-
-            <StackLayout   
-                AbsoluteLayout.LayoutFlags="All"  
-               AbsoluteLayout.LayoutBounds="0,0,1,1">
-
-            <Grid>
-                
-                
-                
-                <ImageButton x:Name="Close"
+        <StackLayout>
+            <StackLayout VerticalOptions="Center">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="30" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="5" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="15" />
+                    </Grid.ColumnDefinitions>
+                    <ImageButton 
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        x:Name="Close"
                         Source="close.png"
-                        WidthRequest="60"
-                        HorizontalOptions="End"
                         BackgroundColor="Transparent"
-                        Clicked="ClosingPP"/>
-            </Grid>
-   
-            
-
-            <Picker ItemDisplayBinding="{Binding CategoryName}" x:Name="entrySubject" Title="Select Category" ItemsSource="{Binding CatList}"/>
-
-            <Entry x:Name="entryBody" Placeholder="Write appropriate text here (voluntary)"/>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
-                <Image x:Name="imgCam" Grid.Row="0" Grid.Column="0"/>
-                
-                <Button x:Name="btnCam" 
-                        Text="SNAP A PIC" 
-                        Grid.Row="1" 
-                        Grid.Column="0" 
-                        Margin="2" 
-                        Clicked="BtnCam_Clicked"
-                        BackgroundColor="#00a4fc" TextColor="#FFF"/>
-                <Button x:Name="BrowseButton" 
-                        Text="Browse for a PIC" 
-                        Grid.Row="1" Grid.Column="1" 
-                        Margin="2" 
-                        Clicked="BrowseButton_Clicked"
-                        BackgroundColor="#00a4fc" 
-                        TextColor="#FFF"/>
-            </Grid>
-            <Button x:Name="btnPublish" Text="Publish post!" 
-                    VerticalOptions="End"
-                    Margin="2" Clicked="PublishButton_Clicked"
-BackgroundColor="#00a4fc" TextColor="#FFF"/>
-
-
+                        Clicked="ClosingPP"
+                        />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="3"
+                        FontFamily="Circular"
+                        FontSize="35"
+                        TextColor="White"
+                        Text="Create a post"
+                    />
+                    <ImageButton 
+                        Grid.Row="1"
+                        Grid.Column="4"
+                        x:Name="check"
+                        Source="check.png"
+                        Clicked="PublishButton_Clicked"
+                        BackgroundColor="Transparent"
+                        />
+                </Grid>
 
             </StackLayout>
 
+            <yummy:PancakeView BackgroundColor="White" CornerRadius="60,60,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="35,0,35,0">
+                <yummy:PancakeView.Shadow>
+                    <yummy:DropShadow Color="#202020" Offset="30,30"></yummy:DropShadow>
+                </yummy:PancakeView.Shadow>
+                <StackLayout>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="1"/>
+                        </Grid.RowDefinitions>
+                        <Label
+                            Grid.Row="1"
+                            FontFamily="Circular"
+                            FontSize="25"
+                            TextColor="Black"
+                            Text="Add attachment"
+                        />
+                        <BoxView HorizontalOptions="Fill" HeightRequest="0.1" Color="#4b5d57" Grid.Row="2"/>
+                    </Grid>
 
-            <ActivityIndicator x:Name="defaultActivityIndicator"
+                    <Grid x:Name="PublishContainer">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="100"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="5" />
+                        </Grid.ColumnDefinitions>
+
+                        <Picker ItemDisplayBinding="{Binding CategoryName}" x:Name="entrySubject" Title="Select Category" ItemsSource="{Binding CatList}" Grid.Row="1" Grid.Column="0"  VerticalOptions="Center" HorizontalOptions="Fill" Margin="0,0,-40,0"/>
+
+                        <Image x:Name="imgCam" Grid.Row="1" Grid.Column="1" WidthRequest="70"
+                                    HeightRequest="90"
+                                    HorizontalOptions="EndAndExpand"
+                                    VerticalOptions="Center"
+                               BackgroundColor="Gray"/>
+
+                    </Grid>
+                    <!---->
+                    <Entry x:Name="entryBody" Placeholder="Write appropriate text here (voluntary)"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <Button x:Name="btnCam" 
+                                Text="SNAP A PIC" 
+                                Grid.Row="1" 
+                                Grid.Column="0" 
+                                Margin="2" 
+                                Clicked="BtnCam_Clicked"
+                                FontFamily="Latob"
+                                CornerRadius="10"
+                                BackgroundColor="#404040" TextColor="#FFF"/>
+                        <Button x:Name="BrowseButton" 
+                                Text="Browse for a PIC" 
+                                Grid.Row="1" Grid.Column="1" 
+                                Margin="2" 
+                                FontFamily="Latob"
+                                Clicked="BrowseButton_Clicked"
+                                BackgroundColor="#404040" 
+                                CornerRadius="10"
+                                TextColor="#FFF"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="0"/>
+                            <RowDefinition Height="35"/>
+                            <RowDefinition Height="1"/>
+                        </Grid.RowDefinitions>
+                        <Label
+                            Grid.Row="1"
+                            FontFamily="Circular"
+                            FontSize="25"
+                            TextColor="Black"
+                            Text="My Location"
+                            Padding="0"
+                        />
+                        <BoxView HorizontalOptions="Fill" HeightRequest="0.1" Color="#4b5d57" Grid.Row="2"/>
+                    </Grid>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <!--TEMPORARY DISPLAY - shall be filled with correct details i efterhand-->
+                            <!--Empty-->
+                            <RowDefinition Height="5"/>
+                            <!--Tallinn, Eesti - EE-->
+                            <RowDefinition Height="25"/>
+                            <!--Latitude-->
+                            <RowDefinition Height="25"/>
+                            <!--Longitude-->
+                            <RowDefinition Height="25"/>
+                            <!--Altitude-->
+                            <RowDefinition Height="25"/>
+                            <!--Timestamp-->
+                            <RowDefinition Height="25"/>
+                        </Grid.RowDefinitions>
+                        <Label
+                            Grid.Row="1"
+                            FontFamily="Circular"
+                            FontSize="15"
+                            TextColor="#434343"
+                            Text="New York, United States of America - US"
+                        />
+                        <Label
+                            Grid.Row="2"
+                            FontFamily="Circular"
+                            FontSize="15"
+                            TextColor="#434343"
+                            Text="54°35'56.4 N"
+                        />
+                        <Label
+                            Grid.Row="3"
+                            FontFamily="Circular"
+                            FontSize="15"
+                            TextColor="#434343"
+                            Text="5°55'46.5 W"
+                        />
+                        <Label
+                            Grid.Row="4"
+                            FontFamily="Circular"
+                            FontSize="15"
+                            TextColor="#434343"
+                            Text="63m"
+                        />
+                        <Label
+                            Grid.Row="5"
+                            FontFamily="Circular"
+                            FontSize="15"
+                            TextColor="#434343"
+                            Text="YYYY-MM-DD HH:MM:SS "
+                        />
+                    </Grid>
+                    <ActivityIndicator x:Name="defaultActivityIndicator"
                                IsRunning="False" 
                                  AbsoluteLayout.LayoutFlags="All"  
                AbsoluteLayout.LayoutBounds="0.5,0.5,0.25,0.25"
@@ -78,6 +200,12 @@ BackgroundColor="#00a4fc" TextColor="#FFF"/>
                                HeightRequest="80" 
                                WidthRequest="80"
                                />
-        </AbsoluteLayout>
+                </StackLayout>
+
+            </yummy:PancakeView>
+
+
+
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
