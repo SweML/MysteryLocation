@@ -10,8 +10,17 @@
         <local:CategoryViewModel></local:CategoryViewModel>
     </ContentPage.BindingContext>
     <ContentPage.Content>
-        <StackLayout>
-            <StackLayout VerticalOptions="Center">
+
+
+        <AbsoluteLayout 
+                VerticalOptions="FillAndExpand"  
+                HorizontalOptions="FillAndExpand">
+
+            <StackLayout
+                AbsoluteLayout.LayoutFlags="All"  
+               AbsoluteLayout.LayoutBounds="0,0,1,1">
+                
+                    <StackLayout VerticalOptions="Center">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="15" />
@@ -190,8 +199,22 @@
                             Text="YYYY-MM-DD HH:MM:SS "
                         />
                     </Grid>
-                    <ActivityIndicator x:Name="defaultActivityIndicator"
+               
+                </StackLayout>
+
+            </yummy:PancakeView>
+
+
+
+        </StackLayout>
+
+
+
+
+
+                <ActivityIndicator x:Name="defaultActivityIndicator"
                                IsRunning="False" 
+                               
                                  AbsoluteLayout.LayoutFlags="All"  
                AbsoluteLayout.LayoutBounds="0.5,0.5,0.25,0.25"
                                Color="CornflowerBlue"
@@ -200,12 +223,20 @@
                                HeightRequest="80" 
                                WidthRequest="80"
                                />
-                </StackLayout>
 
-            </yummy:PancakeView>
+                <Label x:Name="labetoShow" 
+                      Margin="2" 
+                    IsVisible="False"
+                                 AbsoluteLayout.LayoutFlags="All"  
+                      AbsoluteLayout.LayoutBounds="0.5,0.80,0.70,0.15"
+                     FontSize="25"
+                     FontFamily="Latob"
+                                BackgroundColor="#404040" TextColor="#FFF"
+                   Text="srry it took soo long ">
 
+                </Label>
 
+        </AbsoluteLayout>
 
-        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
