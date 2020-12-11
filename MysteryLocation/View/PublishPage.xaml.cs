@@ -19,6 +19,7 @@ namespace MysteryLocation.View
         User user;
         APIConnection conn;
         byte[] bytes;
+        bool published;
         public PublishPage()
         {
             this.user = App.user;
@@ -80,6 +81,13 @@ namespace MysteryLocation.View
                 {
                     // Först publicera vanlig createPost
                     spinOn();
+
+                    ///hadi 
+                    published = false;
+                    startTiming();
+                    await Task.Delay(10000);   /// only to test  the  7 seconds delay
+                    //hadi
+
                     PostAttachment attach = null;
                     if (bytes != null)
                     {
@@ -109,7 +117,11 @@ namespace MysteryLocation.View
                         {
                             imgCam.Source = null;
                             entryBody.Text = "";
+
+                            ////
+                            published = true;
                             spinOff();
+                            ////
                         }
                         else // Publication of attachment failed.
                         {
@@ -150,6 +162,31 @@ namespace MysteryLocation.View
         {
             await Navigation.PopModalAsync(true);
         }
+
+
+
+
+
+        /// hadis  timer  
+        public void startTiming()
+        {
+            Device.StartTimer(new TimeSpan(0, 0, 7), () =>
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    if (!published)
+                    {
+                        labetoShow.IsVisible = true;
+                    }
+
+
+                });
+                return false; // runs again, or false to stop
+            });
+        }
+        /// hadis Timer 
+
+
 
         public async void spin()
         {
