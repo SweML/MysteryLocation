@@ -131,7 +131,7 @@ namespace MysteryLocation
             
             try
             {
-                var location = await Geolocation.GetLastKnownLocationAsync();
+                //var location = await Geolocation.GetLastKnownLocationAsync();
                 //Get position of post, släng in dem i sista 2 param nedan
                 Beta = Heading + Bearing(GPSFetcher.currentPosition.Latitude, GPSFetcher.currentPosition.Longitude, GlobalFuncs.mvm.tracked.Position.Latitude, GlobalFuncs.mvm.tracked.Position.Longitude);
                // Beta = Heading + Bearing(location.Latitude, location.Longitude, GlobalFuncs.mvm.tracked.Position.Latitude, GlobalFuncs.mvm.tracked.Position.Longitude);

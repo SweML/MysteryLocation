@@ -68,11 +68,15 @@ namespace MysteryLocation
 
         public static async Task unlockTracker()
         {
-            if (App.user != null && App.conn != null && GlobalFuncs.mvm.tracked != null && GlobalFuncs.mvm.tracked.Id != prevUnlock)
+            if (App.user != null && App.conn != null && GlobalFuncs.mvm.tracked != null && prevUnlock != GlobalFuncs.mvm.tracked.Id)
             {
-                prevUnlock = GlobalFuncs.mvm.tracked.Id;
+                
+                await Task.Run(async () => {
+                    prevUnlock = GlobalFuncs.mvm.tracked.Id;
                     UnlockedPosts attachment = await App.conn.getPostAttachmentAsync(GlobalFuncs.mvm.tracked.Id);
                     uvm.addUnlockedPost(mvm.RemovePost(GlobalFuncs.mvm.tracked.Id), attachment);
+                });
+                    
                 
                
                     //DependencyService.Get<SnackInterface>().SnackbarShow("Post cannot be unlocked - no image available");

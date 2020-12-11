@@ -27,11 +27,6 @@ namespace MysteryLocation
             InitializeComponent();
         }
 
-
-
-
-
-
         private async void Track(object sender, EventArgs e)
         {
             if (prevButton != null)

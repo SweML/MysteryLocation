@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MysteryLocation.Model;
 using Newtonsoft.Json;
+using Xamarin.Forms;
 
 namespace MysteryLocation
 {
@@ -82,14 +83,21 @@ namespace MysteryLocation
             {
                 string content = await response.Content.ReadAsStringAsync();
                 temp = MakeUnlockedPost(content);
+                if(temp == null)
+                    DependencyService.Get<SnackInterface>().SnackbarShow("Post #" + obsId + " does not have an image");
                 temp.obsID = obsId;
+                sem.Release();
+                return temp;
             }
+            DependencyService.Get<SnackInterface>().SnackbarShow("Failed to unlock post #" + obsId);
             sem.Release();
             return temp;
         }
 
         private UnlockedPosts MakeUnlockedPost(string content)
         {
+            if (content.Length < 100)
+                return null;
             string id = "";
             int counter = 7;
             while (content[counter] != ',')

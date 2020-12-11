@@ -60,29 +60,42 @@ namespace MysteryLocation.Model
         {
             currentPosition = position;
             GlobalFuncs.gpsOn = true;
-            string latitude = "" + position.Latitude;
-            string longitude = "" + position.Longitude;
-            if (latitude.Length > 8)
+            string latitude = "" + Math.Round(position.Latitude, 5);
+            string longitude = "" + Math.Round(position.Longitude, 5);
+            /*if (latitude.Length > 8)
                 latitude = latitude.Substring(0, 8);
             if (longitude.Length > 8)
-                longitude = longitude.Substring(0, 8);
+                longitude = longitude.Substring(0, 8);*/
             string writePosition = latitude + " , " + longitude;
-           // string writePositionLocation = await WritePositionWithLocation(position) + latitude + ", " + longitude;
-            if (fvm != null) fvm.Position = writePosition;
-            if (fvm != null) fvm.PositionLocation = writePosition;
+            // string writePositionLocation = await WritePositionWithLocation(position) + latitude + ", " + longitude;
+            if (fvm != null)
+            {
+                fvm.Position = writePosition;
+                fvm.PositionLocation = writePosition;
+            }
+            if (mvm != null)
+            {
+                mvm.Position = writePosition;
+                mvm.PositionLocation = writePosition;
+            }
 
-            if (mvm != null) mvm.Position = writePosition;
-            if (mvm != null) mvm.PositionLocation = writePosition;
-
-            if (uvm != null) uvm.Position = writePosition;
-            if (uvm != null) uvm.PositionLocation = writePosition;
-
-            if (cavm != null) cavm.Position = writePosition;
-            if (cavm != null) cavm.PositionLocation = writePosition;
-
-            if (vc != null) vc.Position = writePosition;
-            if (vc != null) vc.PositionLocation = writePosition;
-            if(vc!= null) vc.Distance = getDistance();
+            if (uvm != null) 
+            {  
+                uvm.Position = writePosition;
+                uvm.PositionLocation = writePosition;
+            }
+            if (cavm != null)
+            {
+                cavm.Position = writePosition;
+                cavm.PositionLocation = writePosition;
+            }
+            if (vc != null)
+            {
+                vc.Position = writePosition;
+                vc.PositionLocation = writePosition;
+                vc.Distance = getDistance();
+            }
+               
             
 
             if (cavm != null) cavm.PositionLocation = writePosition;
@@ -94,36 +107,39 @@ namespace MysteryLocation.Model
 
         private void check(Position p)
         {
-            if (GlobalFuncs.mvm.tracked != null) { 
-                if(GlobalFuncs.calcDist(p, GlobalFuncs.mvm.tracked.Position) >= 1000 || GlobalFuncs.calcDist(p, GlobalFuncs.mvm.tracked.Position) >= 500  )
+            if (GlobalFuncs.mvm.tracked != null) {
+                double distance = GlobalFuncs.calcDist(p, GlobalFuncs.mvm.tracked.Position);
+                if (distance >= 1000 || distance >= 500)
                 {
                     withinThousand = false;
                     withinFive = false;
                 }
-                else if(GlobalFuncs.calcDist(p, GlobalFuncs.mvm.tracked.Position) <= 1000 && !withinThousand)
+                else if (distance <= 25 && !withinTwentyFive)
                 {
-                    DependencyService.Get<SnackInterface>().SnackbarShow("You are now inom 1km");
-                    withinThousand = true;
-                }
-                else if(GlobalFuncs.calcDist(p, GlobalFuncs.mvm.tracked.Position) <= 500 && !withinFive)
-                {
-                    DependencyService.Get<SnackInterface>().SnackbarShow("You are now inom 500m");
-                    withinFive = true;
-                }
-                else if (GlobalFuncs.calcDist(p, GlobalFuncs.mvm.tracked.Position) <= 25)
-                {
-                    DependencyService.Get<SnackInterface>().SnackbarShow("Congratjulashons you are now inom 25m");
+                    DependencyService.Get<SnackInterface>().SnackbarShow("Post nr: " + GlobalFuncs.mvm.tracked.Id + " is unlocked");
                     //Stop tracking
                     //Remove from mList
                     Task.Run(async () => {
+                        withinTwentyFive = true;
                         await GlobalFuncs.unlockTracker();
+                        withinTwentyFive = false;
                     });
-                    
-                     
-                   // PostListElement refElement = GlobalFuncs.mvm.RemovePost(GlobalFuncs.mvm.tracked.Id);
-                    
+                    // PostListElement refElement = GlobalFuncs.mvm.RemovePost(GlobalFuncs.mvm.tracked.Id);
+
                     //Add in unlocked
                 }
+                else if (distance <= 500 && !withinFive)
+                {
+                    DependencyService.Get<SnackInterface>().SnackbarShow("You are now within 500m of target");
+                    withinFive = true;
+                }
+                else if(distance <= 1000 && !withinThousand)
+                {
+                    DependencyService.Get<SnackInterface>().SnackbarShow("You are now within 1 km of target");
+                    withinThousand = true;
+                }
+                
+                
             }   
         }
 
