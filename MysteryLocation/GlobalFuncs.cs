@@ -72,10 +72,7 @@ namespace MysteryLocation
             {
                 prevUnlock = GlobalFuncs.mvm.tracked.Id;
                     UnlockedPosts attachment = await App.conn.getPostAttachmentAsync(GlobalFuncs.mvm.tracked.Id);
-                
-                
-                    mvm.RemovePost(GlobalFuncs.mvm.tracked.Id);
-                    uvm.addUnlockedPost(GlobalFuncs.mvm.tracked, attachment);
+                    uvm.addUnlockedPost(mvm.RemovePost(GlobalFuncs.mvm.tracked.Id), attachment);
                 
                
                     //DependencyService.Get<SnackInterface>().SnackbarShow("Post cannot be unlocked - no image available");

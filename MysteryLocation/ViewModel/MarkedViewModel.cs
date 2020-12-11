@@ -114,14 +114,12 @@ namespace MysteryLocation.ViewModel
                 if (prevCoordinate == null || GlobalFuncs.calcDist(current, prevCoordinate) > 10)
                 {
                     double distance = 0;
-                    int relevantNbrs = 0;
                     prevCoordinate = current;
                     foreach (PostListElement x in Items)
                     {
                         if (x.Position != null)
                         {
                             distance = calcDist(current, x.Position); // Conversion to metres
-                            relevantNbrs = ((int)distance).ToString().Length + 2;
                             if (distance > 1000)
                             {
                                 distance /= 1000;
@@ -129,7 +127,7 @@ namespace MysteryLocation.ViewModel
                             }
                             else
                             {
-                                x.Dist = Math.Round(distance, 1).ToString() + " m";
+                                x.Dist = distance.ToString() + " m"; // Math.round not needed here.
                             }
                         }
                         Console.WriteLine("fvm.RecalculateDistance(); is finished");
@@ -142,7 +140,7 @@ namespace MysteryLocation.ViewModel
         {
             Console.WriteLine("Entering AddPost");
             Items.Add(x);
-            App.user.markedSet.Add(x.Id);
+            App.user.markedSet.Add(x.Id); // To keep track of which posts to save where.
             Console.WriteLine("Exiting AddPost");
             Console.WriteLine("Items count is: " + Items.Count);
         }
@@ -158,8 +156,10 @@ namespace MysteryLocation.ViewModel
                     break;
                 }
             }
-            if (refe != null)
+            if (refe != null) { 
                 Items.Remove(refe);
+                App.user.markedSet.Remove(refe.Id); // To keep track of which posts to save where.
+            }
             return refe;
         }
 
@@ -184,42 +184,3 @@ namespace MysteryLocation.ViewModel
 
     }
 }
-
-
-
-
-
-        /*    public void RecalculateDistance()
-            {
-                Position current = user.currentPos;
-                double distance = 0;
-                if (Items.Count > 0)
-                {
-                    prevCoordinate = current;
-
-                }
-                foreach (PostListElement x in Items)
-                {
-                    distance = current.CalculateDistance(x.Position);
-                    if (distance > 1000)
-                    {
-                        distance /= 10;
-                        x.Dist = distance.ToString() + " km";
-                    }
-                    else
-                    {
-                        x.Dist = distance.ToString() + " m";
-                    }
-                }
-
-        public void AddPost(PostListElement x)
-        {
-            Items.Add(x);
-            App.user.markedSet.Add(x.Id);
-            App.user.forbiddenSet.Add(x.Id);
-        }
-
-        
-    }
-}
-*/
