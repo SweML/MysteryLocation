@@ -85,7 +85,8 @@ namespace MysteryLocation
                 temp = MakeUnlockedPost(content);
                 if(temp == null)
                     DependencyService.Get<SnackInterface>().SnackbarShow("Post #" + obsId + " does not have an image");
-                temp.obsID = obsId;
+                else 
+                    temp.obsID = obsId;
                 sem.Release();
                 return temp;
             }
