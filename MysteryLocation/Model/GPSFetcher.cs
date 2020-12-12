@@ -95,6 +95,7 @@ namespace MysteryLocation.Model
             {
                 pvm.Latitude = position.Latitude.ToString();
                 pvm.Longitude = position.Longitude.ToString();
+                pvm.Altitude = position.Altitude.ToString() + " m";
             }
 
             if (vc != null)

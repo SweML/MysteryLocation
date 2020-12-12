@@ -15,6 +15,8 @@ namespace MysteryLocation.ViewModel
 
         public string latitude;
 
+        public string altitude;
+
         private Timer timer;
 
         public IList<Category> CatList { get; set; }
@@ -48,6 +50,16 @@ namespace MysteryLocation.ViewModel
             {
                 latitude = value;
                 OnPropertyChanged("Latitude");
+            }
+        }
+
+        public string Altitude
+        {
+            get { return altitude; }
+            set
+            {
+                altitude = value;
+                OnPropertyChanged("Altitude");
             }
         }
 

@@ -190,7 +190,7 @@
                             FontFamily="Circular"
                             FontSize="15"
                             TextColor="#434343"
-                            Text="63m"
+                            Text="{Binding Altitude}"
                         />
                         <Label
                             Grid.Row="5"
