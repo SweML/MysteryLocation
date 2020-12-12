@@ -35,31 +35,23 @@ namespace MysteryLocation.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Forms.Init(this, savedInstanceState);
+           
+            //ActivityCompat.RequestPermissions(this, permissionArray, requestCode);
             // App.ScreenWidth = Resources.DisplayMetrics.WidthPixels / Resources.DisplayMetrics.Density;
             // App.ScreenHeight = Resources.DisplayMetrics.HeightPixels / Resources.DisplayMetrics.Density;
 
+
+
+         
             LoadApplication(new App());
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {
-            //Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-            try { 
             Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-                if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessFineLocation) != (int)Permission.Granted)
-                {
-                    DependencyService.Get<SnackInterface>().SnackbarShow("No access to fine location");
-                }
-                if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.Camera) != (int)Permission.Granted)
-                {
-                    
-                }
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
         // Field, property, and method for Picture Picker
         public static readonly int PickImageId = 1000;
 
@@ -85,6 +77,62 @@ namespace MysteryLocation.Droid
                 }
             }
         }
+
+    /*public static bool hasPermissions(Context context, String[] permissions)
+    {
+        if (context != null && permissions != null)
+        {
+            foreach(string permission in permissions)
+            {
+                if (ActivityCompat.CheckSelfPermission(context, permission) != Permission.Granted)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
+       int PERMISSION_ALL = 1;
+            String[] PERMISSIONS = {
+                Manifest.Permission.AccessFineLocation,
+                Manifest.Permission.AccessCoarseLocation,
+                Manifest.Permission.Camera, 
+                Manifest.Permission.ReadExternalStorage, 
+                Manifest.Permission.WriteExternalStorage
+            };
+
+            if (!hasPermissions(this, PERMISSIONS))
+            {
+                ActivityCompat.RequestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+            }
+
+           private async void handlePermission(int requestCode)
+          {
+              switch (requestCode)
+              {
+                  case CAMERA:
+                      if (ActivityCompat.CheckSelfPermission(this, Manifest.Permission.Camera) != Permission.Granted)
+                      {
+                          if (ActivityCompat.ShouldShowRequestPermissionRationale(this, Manifest.Permission.Camera))
+                          {
+                              await Navigation.DisplayAlert("Need location", "Gunna need that location", "OK");
+                          }
+                      }
+                      break;
+              }
+          }
+
+           private String[] PERMISSIONS = {
+                  Manifest.Permission.AccessFineLocation,
+                  Manifest.Permission.AccessCoarseLocation,
+                  Manifest.Permission.Camera,
+                  Manifest.Permission.ReadExternalStorage,
+                  Manifest.Permission.WriteExternalStorage };
+
+          private const int CAMERA = 1, STORAGE = 2, LOCATION = 25;
+       */
+            
+     
+}
 }
     
