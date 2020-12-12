@@ -21,6 +21,8 @@ namespace MysteryLocation
 
         public static CategoryViewModel svm;
 
+        public const string marker = "*MT";
+
         public static bool gpsOn = false;
 
         public static bool settingsActive = false;
@@ -59,7 +61,7 @@ namespace MysteryLocation
                 if(markerCheck.Length > 4)
                 {
                     markerCheck = markerCheck.Substring(x.getSubject().Length - 3);
-                    if (x.getCoordinate() != null && markerCheck == "*ML")
+                    if (x.getCoordinate() != null && markerCheck == marker)
                         temp.Add(x);
                 }
             }
@@ -75,6 +77,7 @@ namespace MysteryLocation
                     prevUnlock = GlobalFuncs.mvm.tracked.Id;
                     UnlockedPosts attachment = await App.conn.getPostAttachmentAsync(GlobalFuncs.mvm.tracked.Id);
                     uvm.addUnlockedPost(mvm.RemovePost(GlobalFuncs.mvm.tracked.Id), attachment);
+                    GlobalFuncs.mvm.tracked = null;
                 });
                     
                 

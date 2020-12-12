@@ -12,7 +12,7 @@ namespace MysteryLocation.ViewModel
         public Position prevCoordinate;
         private string position;
         public Position currentPos;
-
+        public Position pos;
         public string Position // User position
         {
             get { return position; }
@@ -210,5 +210,13 @@ namespace MysteryLocation.ViewModel
             return Math.Round(d, 1);
         }
 
+        public void setMyPos(Position p)
+        {
+            pos = p;
+        }
+        public Position returnmypos()
+        {
+            return pos;
+        }
     }
 }

@@ -22,7 +22,9 @@ namespace MysteryLocation.Model
         public static PublishViewModel pvm;
         public static Position currentPosition;
         public static ViewCompass vc;
-
+        double a;
+        double b;
+        public Position pos;
         public GPSFetcher()
         {
 
@@ -94,6 +96,25 @@ namespace MysteryLocation.Model
                 vc.Position = writePosition;
                 vc.PositionLocation = writePosition;
                 vc.Distance = getDistance();
+                if (GlobalFuncs.mvm.tracked != null)
+                {
+
+                    a = GlobalFuncs.calcDist(GlobalFuncs.mvm.returnmypos(), GlobalFuncs.mvm.tracked.Position);
+                    b = GlobalFuncs.calcDist(currentPosition, GlobalFuncs.mvm.tracked.Position);
+                    if (b >= a)
+                    {
+                        vc.DecimalD = 0.0;
+                    }
+                    else
+                    {
+                        vc.DecimalD = 1.0 - (b / a);
+                    }
+
+                }
+                else
+                {
+                    vc.DecimalD = 0;
+                }
             }
                
             

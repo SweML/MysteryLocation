@@ -13,6 +13,7 @@ using Xamarin.Forms.Xaml;
 [assembly: ExportFont("AndersonGrotesk-Ultrabold.otf", Alias = "Grotesk")]
 [assembly: ExportFont("CircularStd-Black.ttf", Alias = "Circular")]
 [assembly: ExportFont("CircularStd-Book.ttf", Alias = "Circularbook")]
+[assembly: ExportFont("coolvetica.compressed-regular.ttf", Alias = "coolvetica")]
 
 namespace MysteryLocation
 {

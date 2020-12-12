@@ -4,15 +4,15 @@
              x:Class="MysteryLocation.View.CardViewTemp"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.BackButtonTitle="False"
-             BackgroundColor="#2a4237">
+             BackgroundImageSource="mo.png">
     <!--ControlTemplate="{StaticResource Template}">-->
 
     <ContentPage.Content>
-        <Frame Padding="0" BackgroundColor="#2a4237">
+        <Frame Padding="0" BackgroundColor="#202020" Opacity="0.8">
             
             <StackLayout>
                 <views:HeaderView/>
-                <Frame CornerRadius="30" Margin="0,-5,0,0" Padding="5,15,5,15" BackgroundColor="#4b5d57">
+                <Frame CornerRadius="30" Margin="0,-5,0,0" Padding="5,15,5,15" BackgroundColor="Black" Opacity="1">
                     <StackLayout>
                         <ListView SeparatorVisibility="Default"
                              x:Name="listview"

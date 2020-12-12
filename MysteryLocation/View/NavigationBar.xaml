@@ -5,9 +5,9 @@
             xmlns:local="clr-namespace:MysteryLocation" 
             x:Class="MysteryLocation.NavigationBar"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            BarBackgroundColor="#2a4237"
+            BarBackgroundColor="#202020"
             android:TabbedPage.BarItemColor="#FCF6F5"
-            android:TabbedPage.BarSelectedItemColor="#FEFEFE"
+            android:TabbedPage.BarSelectedItemColor="#eeb705"
             
 >
     <!--  <NavigationPage Title="Settings" IconImageSource="settingsIcon.png" >
@@ -15,6 +15,6 @@
             <local:SettingsPage />
         </x:Arguments>
     </NavigationPage>-->
-    
+
 
 </TabbedPage>

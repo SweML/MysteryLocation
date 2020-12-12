@@ -139,7 +139,7 @@ namespace MysteryLocation.ViewModel
             {
                 foreach (Post x in memory)
                 {
-                    if (chosenCategory + "*ML" == x.getSubject())
+                    if (chosenCategory + GlobalFuncs.marker == x.getSubject())
                     {
                         temp.Add(x);
 

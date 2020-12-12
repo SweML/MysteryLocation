@@ -38,6 +38,7 @@ namespace MysteryLocation
             Console.WriteLine("OBSAD" + obsID);
             //add if true -> then notify?
             GlobalFuncs.addTracker(obsID);
+            GlobalFuncs.mvm.setMyPos(GPSFetcher.currentPosition);
             DependencyService.Get<SnackInterface>().SnackbarShow("The post #" + obsID + "is now being tracked");
         }
 

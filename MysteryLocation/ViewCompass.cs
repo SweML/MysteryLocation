@@ -53,7 +53,19 @@ namespace MysteryLocation
             }
         }
 
-        
+        private double decimalD;
+        public double DecimalD // User position
+        {
+            get { return decimalD; }
+            set
+            {
+                if (decimalD != value)
+                {
+                    decimalD = value;
+                    OnPropertyChanged("DecimalD");
+                }
+            }
+        }
 
         private string positionLocation;
         public string PositionLocation // User position
@@ -138,6 +150,11 @@ namespace MysteryLocation
 
                 if(GPSFetcher.currentPosition != null && GlobalFuncs.mvm.tracked != null) { 
                     Beta = Heading + Bearing(GPSFetcher.currentPosition.Latitude, GPSFetcher.currentPosition.Longitude, GlobalFuncs.mvm.tracked.Position.Latitude, GlobalFuncs.mvm.tracked.Position.Longitude);
+                }
+                else
+                {
+                    Beta = 0;
+                    DecimalD = 0;
                 }
             }
             catch (FeatureNotSupportedException fnsEx)

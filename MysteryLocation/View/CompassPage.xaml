@@ -1,75 +1,66 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:MysteryLocation.View"
-             x:Class="MysteryLocation.CompassPage"
-             NavigationPage.HasNavigationBar="False"
-             NavigationPage.BackButtonTitle="False"
-             BackgroundColor="white">
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:views="clr-namespace:MysteryLocation.View" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MysteryLocation.CompassPage" 
+             NavigationPage.HasNavigationBar="False" 
+             NavigationPage.BackButtonTitle="False" 
+             xmlns:control="clr-namespace:ProgressRingControl.Forms.Plugin;assembly=ProgressRing.Forms.Plugin">
     <ContentPage.Content>
+        <Frame Padding="0" BackgroundColor="#202020">
+            <StackLayout>
+                <!--stacklayout for the welcome message -->
+                <views:HeaderView />
+                <!--Name and Visible were Added to control the welcome messaGES  -->
+                <Frame CornerRadius="30"  Padding="0" Margin="0" BackgroundColor="#404040">
+
+                    <StackLayout x:Name="layout">
+                        <Grid>
+                            <!-- Text="{Binding CurrentPosition}"-->
 
 
-        <!--stacklayout for the welcome message -->
-        <StackLayout>
 
 
-            <!--stacklayout for the welcome message -->
-            <views:HeaderView/>
 
 
-            <!--Name and Visible were Added to control the welcome messaGES  -->
 
-            <StackLayout x:Name="layout">
-                <!-- Text="{Binding CurrentPosition}"-->
-                <Label x:Name="currentGPS"
-               FontAttributes="Bold"
-               FontSize="20"
-               TextColor="Red"
-               Text="{Binding Position}"
-               VerticalOptions="StartAndExpand"
-               HorizontalOptions="Center"/>
 
-                <Grid>
-                    <!--Here we put compass for fun -->
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="500"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
 
-                    <Image HorizontalOptions="FillAndExpand"
-               VerticalOptions="FillAndExpand" 
-                   Rotation="{Binding Heading}"
-               Source="compass.png"/>
+                            <Image Source="mo.png" Aspect="AspectFill" VerticalOptions="Fill"/>
+                            <Grid>
+                                <!--Here we put compass for fun -->
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
 
-                    <Image HorizontalOptions="Center"
-               VerticalOptions="Center"
-               Source="compassArrow.png" 
-               x:Name="CompassArrow"/>
+                                <control:ProgressRing RingThickness="60" RingProgressColor="#eeb705" Opacity="0.7" Progress="{Binding DecimalD}" ScaleX="0.80" ScaleY="0.80" RingBaseColor="Transparent"/>
+                                <Image HorizontalOptions="FillAndExpand" 
+                                   VerticalOptions="FillAndExpand" 
+                                   Rotation="{Binding Heading}" 
+                                   Source="compass.png"/>
+                                <Image HorizontalOptions="Center" 
+                                   VerticalOptions="Center" 
+                                   x:Name="CompassArrow" />
+                                <Image HorizontalOptions="Center" 
+                                   VerticalOptions="Center" 
+                                   Rotation="{Binding Beta}" 
+                                   Source="compassArrow.png" 
+                                   x:Name="ImageArrow" />
+                                <Label Text="{Binding HeadingDisplay}" 
+                                   x:Name="LabelInfo" 
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center" 
+                                   Margin="0,8,0,0"
+                                   TextColor="Black" 
+                                   FontFamily="Grotesk" 
+                                   FontSize="25" />
+                            </Grid>
 
-                    <Image HorizontalOptions="Center"
-               VerticalOptions="Center"
-               Rotation="{Binding Beta}"
-               Source="arrow.png" 
-               x:Name="ImageArrow"/>
-
-                    <Label 
-            Text="{Binding HeadingDisplay}" 
-           x:Name="LabelInfo"
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" 
-                TextColor="Black"
-                FontSize="30"/>
-
-                    <Label x:Name="distToTarget"
-                 FontAttributes="Bold"
-               FontSize="20"
-               TextColor="Red"
-               Text="{Binding Distance}"
-               VerticalOptions="StartAndExpand"
-               HorizontalOptions="Center"  />
-                </Grid>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
             </StackLayout>
-
-
-        </StackLayout>
+        </Frame>
+        <!--stacklayout for the welcome message -->
     </ContentPage.Content>
 </ContentPage>
