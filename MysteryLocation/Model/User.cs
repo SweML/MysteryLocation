@@ -29,7 +29,7 @@ namespace MysteryLocation.Model
 
         public ViewCompass vc { get; set; }
 
-        public int tracker { get; set; }
+        public int tracker = -1;
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
@@ -148,7 +148,8 @@ namespace MysteryLocation.Model
                         }
                         else
                         {
-                            GlobalFuncs.addTracker(int.Parse(ln));  // added 12/12
+                           // GlobalFuncs.addTracker(int.Parse(ln));  // added 12/12
+                            tracker = int.Parse(ln);
                             lineCounter++;
                         }
                     }
@@ -178,9 +179,13 @@ namespace MysteryLocation.Model
                 infoToSave += x + "\n";
             }
             infoToSave += "*\n"; // To indicate the end of previous
-            if (GlobalFuncs.mvm.tracked != null)  // added 12/12
-                infoToSave += GlobalFuncs.mvm.tracked.Id;  // added 12/12
+            if (GlobalFuncs.mvm.tracked != null)
+            {  // added 12/12
+                infoToSave += GlobalFuncs.mvm.tracked.Id;
+
+            }// added 12/12
             var filename = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "myFile1.txt");
+            Console.WriteLine(infoToSave);
             System.IO.File.WriteAllText(filename, infoToSave);
         }
 

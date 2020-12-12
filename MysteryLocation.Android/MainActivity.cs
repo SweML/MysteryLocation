@@ -49,6 +49,10 @@ namespace MysteryLocation.Droid
                 {
                     DependencyService.Get<SnackInterface>().SnackbarShow("No access to fine location");
                 }
+                if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.Camera) != (int)Permission.Granted)
+                {
+                    
+                }
             }
             catch(Exception ex)
             {

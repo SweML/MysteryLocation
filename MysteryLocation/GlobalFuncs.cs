@@ -94,6 +94,8 @@ namespace MysteryLocation
                 if (x.Id == observationId)
                 {
                     mvm.tracked = x;
+                    App.user.tracker = observationId;
+                    mvm.tracked.Color = "#1f9f64";
                     Console.WriteLine(x.Position.Latitude + x.Position.Longitude);
                     //marked.Remove(x);
                 }

@@ -61,8 +61,8 @@
                                                                 <BoxView HorizontalOptions="EndAndExpand" HeightRequest="0.5" Color="#4b5d57" />
 
 
-                                                                <Button x:Name="Track" Text="Track" TextColor="White" FontAttributes="Bold" FontFamily="Latob" BackgroundColor="#404040" CornerRadius="10"
-                                                                                HorizontalOptions="End" VerticalOptions="EndAndExpand" FontSize="Small" AutomationId="{Binding Id}" Clicked="Track">
+                                                                <Button x:Name="Track" Text="Track" TextColor="White" FontAttributes="Bold" FontFamily="Latob" BackgroundColor="{Binding Color}" CornerRadius="10"
+                                                                                HorizontalOptions="End" VerticalOptions="EndAndExpand"  FontSize="Small" AutomationId="{Binding Id}" Clicked="Track">
                                                                 </Button>
 
                                                             </StackLayout>

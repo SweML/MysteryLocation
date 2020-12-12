@@ -85,11 +85,13 @@ namespace MysteryLocation.ViewModel
                         Created = x.getCreated(),
                         LastUpdated = x.getLastUpdated(),
                         Position = x.getCoordinate(),
-                        Dist = distance.ToString()
+                        Dist = distance.ToString(),
+                        Color = "#404040"
                     });
 
                 }
             }
+
             Items = OrderThoseGroups(Items);
         }
 

@@ -15,6 +15,7 @@ namespace MysteryLocation.View
             GPSFetcher.fvm = GlobalFuncs.fvm;
             InitializeComponent();
             this.BindingContext = GlobalFuncs.fvm;
+
         }
   
 

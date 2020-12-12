@@ -73,17 +73,33 @@ namespace MysteryLocation.ViewModel
             prevCoordinate = null;
         }
 
+        public void setTracker(int obsId)
+        {
+            foreach(PostListElement x in Items)
+            {
+                if(x.Id == obsId)
+                {
+                    tracked = x;
+                    tracked.Color = "#1f9f64";
+                }
+            }
+        }
+
         public void updateListElements(List<Post> posts)
         {
             Items.Clear();
             HashSet<int> markedPosts = App.user.markedSet;
             currentPos = GPSFetcher.currentPosition;
             double distance = 0;
+            string buttonColor = "";
             Console.WriteLine("MVM inparamter posts size is: " + posts.Count);
             if (markedPosts.Count > 0) { 
             foreach (Post x in posts)
             {
-                if (markedPosts.Contains(x.getId()))
+                    buttonColor = "#404040";
+                    if(x.getId() == App.user.tracker)
+                        buttonColor = "#1f9f64";
+                    if (markedPosts.Contains(x.getId()))
                 {
                     distance = calcDist(currentPos, x.getCoordinate());
                     Items.Add(new PostListElement()
@@ -94,15 +110,27 @@ namespace MysteryLocation.ViewModel
                         Created = x.getCreated(),
                         LastUpdated = x.getLastUpdated(),
                         Position = x.getCoordinate(),
-                        Dist = distance.ToString()
+                        Dist = distance.ToString(),
+                        Color = buttonColor
                     });
                         Console.WriteLine("Nbr of items in Items is: " + Items.Count);
                         Console.WriteLine("The id of the current elemen is:" + x.getId());
                     }
 
-            }
-            }
 
+            }
+            }
+            if(App.user.tracker > 0)
+            {
+                foreach(PostListElement x in Items)
+                {
+                    if(x.Id == App.user.tracker)
+                    {
+                        tracked = x;
+                        GlobalFuncs.addTracker(x.Id);
+                    }
+                }
+            }
         }
 
         public void RecalculateDistance()

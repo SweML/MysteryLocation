@@ -17,6 +17,7 @@ namespace MysteryLocation.Model
         //public Coordinate position;
         public Position position;
         public String dist;
+        public String color;
         public ImageSource img;
 
         public int Id
@@ -95,6 +96,16 @@ namespace MysteryLocation.Model
             {
                 img = value;
                 OnPropertyChanged("Img");
+            }
+        }
+
+        public string Color
+        {
+            get { return color; }
+            set
+            {
+                color = value;
+                OnPropertyChanged("Color");
             }
         }
 
