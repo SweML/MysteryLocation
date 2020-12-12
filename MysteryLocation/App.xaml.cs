@@ -39,6 +39,7 @@ namespace MysteryLocation
             GlobalFuncs.mvm = new ViewModel.MarkedViewModel(null);
             GlobalFuncs.uvm = new ViewModel.UnlockedViewModel(null);
             GlobalFuncs.svm = new ViewModel.CategoryViewModel();
+            GPSFetcher.pvm = new ViewModel.PublishViewModel();
 
             VersionTracking.Track();
 

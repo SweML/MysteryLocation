@@ -91,6 +91,12 @@ namespace MysteryLocation.Model
                 cavm.Position = writePosition;
                 cavm.PositionLocation = writePosition;
             }
+            if(pvm != null)
+            {
+                pvm.Latitude = position.Latitude.ToString();
+                pvm.Longitude = position.Longitude.ToString();
+            }
+
             if (vc != null)
             {
                 vc.Position = writePosition;

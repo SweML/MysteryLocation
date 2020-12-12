@@ -26,6 +26,7 @@ namespace MysteryLocation.View
             this.conn = App.conn;
             InitializeComponent();
             entryBody.Text = "";
+            this.BindingContext = GPSFetcher.pvm;
         }
         private async void BtnCam_Clicked(object sender, EventArgs e)
         {
@@ -160,6 +161,7 @@ namespace MysteryLocation.View
 
         public async void ClosingPP(object sender, EventArgs e)
         {
+            GPSFetcher.pvm.stopTimer();
             await Navigation.PopModalAsync(true);
         }
 
@@ -204,6 +206,20 @@ namespace MysteryLocation.View
         public void spinOff()
         {
             defaultActivityIndicator.IsRunning = false;
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                    GPSFetcher.pvm.stopTimer();
+                    base.OnBackButtonPressed();
+                    await Navigation.PopModalAsync();
+                
+            });
+
+            return true;
         }
     }
 }

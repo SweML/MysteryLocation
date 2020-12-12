@@ -11,7 +11,7 @@ using Xamarin.Forms.Platform.Android.AppCompat;
 using MysteryLocation.View;
 using System.Diagnostics;
 using Android.Support.V4.View;
-
+using MysteryLocation.Model;
 
 [assembly: ExportRenderer(typeof(NavigationBar), typeof(MysteryLocation.Droid.CustomTabbedRenderer))]
 namespace MysteryLocation.Droid
@@ -68,6 +68,7 @@ namespace MysteryLocation.Droid
 
                                 button.LongClick += (object sender, LongClickEventArgs args) =>
                                 {
+                                    GPSFetcher.pvm.startTimer();
                                     Application.Current.MainPage.Navigation.PushModalAsync(new NavigationPage(new PublishPage()));
                                 };
                             }
