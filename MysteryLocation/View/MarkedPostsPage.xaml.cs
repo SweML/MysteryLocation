@@ -31,7 +31,7 @@ namespace MysteryLocation
         {
             if (prevButton != null)
             {
-                prevButton.BackgroundColor = Color.FromHex("#404040"); ;
+                prevButton.BackgroundColor = Color.FromHex("#404040");
             }
             Console.WriteLine("It registers a tap on label Track " + sender.ToString() + " " + e.ToString());
             int obsID = int.Parse((sender as Button).AutomationId);

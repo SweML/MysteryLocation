@@ -10,6 +10,12 @@ using System.IO;
 using System.Threading.Tasks;
 using Android.Content;
 using Plugin.CurrentActivity;
+using Android.Support.V4.Content;
+using Xamarin.Forms;
+using Android;
+using Android.Support.V4.App;
+using Android.Util;
+using Android.Support.Design.Widget;
 
 namespace MysteryLocation.Droid
 {
@@ -28,7 +34,7 @@ namespace MysteryLocation.Droid
             Instance = this;
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Forms.Init(this, savedInstanceState);
             // App.ScreenWidth = Resources.DisplayMetrics.WidthPixels / Resources.DisplayMetrics.Density;
             // App.ScreenHeight = Resources.DisplayMetrics.HeightPixels / Resources.DisplayMetrics.Density;
 
@@ -37,7 +43,17 @@ namespace MysteryLocation.Droid
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {
             //Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            try { 
             Plugin.Permissions.PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+                if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessFineLocation) != (int)Permission.Granted)
+                {
+                    DependencyService.Get<SnackInterface>().SnackbarShow("No access to fine location");
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
         // Field, property, and method for Picture Picker

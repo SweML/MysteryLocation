@@ -43,15 +43,15 @@ namespace MysteryLocation.Model
         {
 
             //If updating the UI, ensure you invoke on main thread
-            /*var position = e.Position;
+            var position = e.Position;
             var output = "Full: Lat: " + position.Latitude + " Long: " + position.Longitude;
             output += "\n" + $"Time: {position.Timestamp}";
             output += "\n" + $"Heading: {position.Heading}";
             output += "\n" + $"Speed: {position.Speed}";
             output += "\n" + $"Accuracy: {position.Accuracy}";
             output += "\n" + $"Altitude: {position.Altitude}";
-            output += "\n" + $"Altitude Accuracy: {position.AltitudeAccuracy}";*/
-            setPositions(e.Position);
+            output += "\n" + $"Altitude Accuracy: {position.AltitudeAccuracy}";
+            setPositions(position);
             
             //Console.WriteLine(output);
         }

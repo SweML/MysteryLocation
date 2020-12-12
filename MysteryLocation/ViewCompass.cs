@@ -133,10 +133,12 @@ namespace MysteryLocation
             {
                 //var location = await Geolocation.GetLastKnownLocationAsync();
                 //Get position of post, släng in dem i sista 2 param nedan
-                Beta = Heading + Bearing(GPSFetcher.currentPosition.Latitude, GPSFetcher.currentPosition.Longitude, GlobalFuncs.mvm.tracked.Position.Latitude, GlobalFuncs.mvm.tracked.Position.Longitude);
-               // Beta = Heading + Bearing(location.Latitude, location.Longitude, GlobalFuncs.mvm.tracked.Position.Latitude, GlobalFuncs.mvm.tracked.Position.Longitude);
-                
+                // Beta = Heading + Bearing(location.Latitude, location.Longitude, GlobalFuncs.mvm.tracked.Position.Latitude, GlobalFuncs.mvm.tracked.Position.Longitude);
 
+
+                if(GPSFetcher.currentPosition != null && GlobalFuncs.mvm.tracked != null) { 
+                    Beta = Heading + Bearing(GPSFetcher.currentPosition.Latitude, GPSFetcher.currentPosition.Longitude, GlobalFuncs.mvm.tracked.Position.Latitude, GlobalFuncs.mvm.tracked.Position.Longitude);
+                }
             }
             catch (FeatureNotSupportedException fnsEx)
             {

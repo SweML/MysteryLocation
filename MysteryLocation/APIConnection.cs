@@ -28,6 +28,7 @@ namespace MysteryLocation
         {
             await sem.WaitAsync();
             Uri uri = new Uri(string.Format("https://saabstudent2020.azurewebsites.net/observation", string.Empty));
+            //client.Timeout = TimeSpan.FromSeconds(10);
             HttpResponseMessage response = await client.GetAsync(uri);
             List<Post> posts = new List<Post>();
             if (response.IsSuccessStatusCode)

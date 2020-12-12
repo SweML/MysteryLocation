@@ -176,7 +176,8 @@ namespace MysteryLocation.View
                 {
                     if (!published)
                     {
-                        labetoShow.IsVisible = true;
+                        // labetoShow.IsVisible = true;
+                        DependencyService.Get<SnackInterface>().SnackbarShow("Publishing is taking longer than usual. Please wait ...");
                     }
 
 

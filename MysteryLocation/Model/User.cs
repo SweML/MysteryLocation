@@ -24,7 +24,7 @@ namespace MysteryLocation.Model
         public FeedViewModel fvm { get; set; }
 
         public MarkedViewModel mvm { get; set; }
-        
+
         public UnlockedViewModel uvm { get; set; }
 
         public ViewCompass vc { get; set; }
@@ -84,10 +84,10 @@ namespace MysteryLocation.Model
             {
                 UnlockedPosts temp = await conn.getPostAttachmentAsync(tracking.getId());
                 temp.obsID = tracking.getId();
-               // uvm.addUnlockedPost(tracking, temp);
+                // uvm.addUnlockedPost(tracking, temp);
                 tracking = null;
             });
-            
+
         }
 
         public void testUnlockCurrent()
@@ -109,7 +109,6 @@ namespace MysteryLocation.Model
             var filename = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "myFile1.txt");
             if (File.Exists(filename))
             {
-                newUser = false;
                 String fileInfo = System.IO.File.ReadAllText(filename);
                 using (StreamReader file = new StreamReader(filename))
                 {
@@ -119,7 +118,7 @@ namespace MysteryLocation.Model
 
                     while ((ln = file.ReadLine()) != null)
                     {
-                        
+
                         if (ln.Contains("*"))
                             counter++;
                         else if (counter == 0)
@@ -135,25 +134,30 @@ namespace MysteryLocation.Model
                                 lineCounter++;
                             }
                         }
-                        else if (counter == 1) { 
+                        else if (counter == 1)
+                        {
                             markedSet.Add(int.Parse(ln));
                             forbiddenSet.Add(int.Parse(ln));
                             lineCounter++;
                         }
-                        else if (counter == 2) { 
+                        else if (counter == 2)
+                        {
                             unlockedSet.Add(int.Parse(ln));
                             forbiddenSet.Add(int.Parse(ln));
                             lineCounter++;
                         }
                         else
                         {
-                            tracker = int.Parse(ln);
+                            GlobalFuncs.addTracker(int.Parse(ln));  // added 12/12
                             lineCounter++;
                         }
                     }
                     file.Close();
                     if (category > 0 && distance > 0)
+                    {
                         GlobalFuncs.settingsActive = true;
+                        newUser = false; // Set the user state here since a file will be saved even if the app crashes.  // added 12/12
+                    }
                 }
             }
         }
@@ -161,11 +165,11 @@ namespace MysteryLocation.Model
         public void SaveUser()
         {
             String infoToSave = "";
-            infoToSave = category + "\n"; 
+            infoToSave = category + "\n";
             infoToSave += distance + "\n";
             infoToSave += "*\n";
             foreach (int x in markedSet)
-            { // Saving info from unlocked
+            { // Saving info from marked
                 infoToSave += x + "\n";
             }
             infoToSave += "*\n"; // To indicate the end of previous
@@ -174,8 +178,8 @@ namespace MysteryLocation.Model
                 infoToSave += x + "\n";
             }
             infoToSave += "*\n"; // To indicate the end of previous
-            if(tracking != null)
-                infoToSave += tracking.getId();
+            if (GlobalFuncs.mvm.tracked != null)  // added 12/12
+                infoToSave += GlobalFuncs.mvm.tracked.Id;  // added 12/12
             var filename = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), "myFile1.txt");
             System.IO.File.WriteAllText(filename, infoToSave);
         }
@@ -187,27 +191,27 @@ namespace MysteryLocation.Model
         }
 
         // Method to set which post is being tracked.
-     /*   public void addTracker(int observationId)
-        {
-            Console.WriteLine("ENTERING ADD TRACKER");
-            foreach (Post x in marked)
-            {
-                Console.WriteLine("jaja" + x.getId());
-                if (x.getId() == observationId)
-                {
-                    tracking = x;
-                    Console.WriteLine("Skriver du ut koordinaterna" + x.getCoordinate().Latitude + x.getCoordinate().Longitude);
-                    //marked.Remove(x);
-                }
-            }
-            Console.WriteLine("count IN marked" +  marked.Count);
-            Console.WriteLine("count IN feed" + feed.Count);
-            Console.WriteLine("count IN unlock" + unlocked.Count);
-        }
-       */
+        /*   public void addTracker(int observationId)
+           {
+               Console.WriteLine("ENTERING ADD TRACKER");
+               foreach (Post x in marked)
+               {
+                   Console.WriteLine("jaja" + x.getId());
+                   if (x.getId() == observationId)
+                   {
+                       tracking = x;
+                       Console.WriteLine("Skriver du ut koordinaterna" + x.getCoordinate().Latitude + x.getCoordinate().Longitude);
+                       //marked.Remove(x);
+                   }
+               }
+               Console.WriteLine("count IN marked" +  marked.Count);
+               Console.WriteLine("count IN feed" + feed.Count);
+               Console.WriteLine("count IN unlock" + unlocked.Count);
+           }
+          */
 
 
-     
+
         public byte[] readImage(int obsId)
         {
             var filename = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), obsId + ".dat");
