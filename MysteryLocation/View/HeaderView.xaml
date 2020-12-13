@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MysteryLocation.View.HeaderView">
     <ContentView.Content>
-        <StackLayout Orientation="Vertical" HorizontalOptions="Fill" BackgroundColor="#202020">
+        <StackLayout Orientation="Vertical" HorizontalOptions="Fill" BackgroundColor="#000000">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="5" />
                     <RowDefinition Height="40" />
+                    <RowDefinition Height="15" />
                     <RowDefinition Height="15" />
                     <RowDefinition Height="5" />
                 </Grid.RowDefinitions>
@@ -28,6 +29,15 @@
                 <Label 
                         Grid.Row="2"
                         Text="{Binding PositionLocation}"
+                        TextColor="#eeb705"
+                        FontSize="12"
+                        Margin="20,0,0,0"
+                        FontFamily="Circular"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"/>
+                <Label 
+                        Grid.Row="3"
+                        Text="{Binding Position}"
                         TextColor="#eeb705"
                         FontSize="12"
                         Margin="20,0,0,0"

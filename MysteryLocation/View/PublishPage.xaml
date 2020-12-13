@@ -6,7 +6,9 @@
              NavigationPage.HasNavigationBar="False"
              NavigationPage.BackButtonTitle="False"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             BackgroundColor="#2a4337">
+             BackgroundColor="#eeb705"
+             BackgroundImageSource="arkiv.png"
+             Opacity="0.9">
     <!--<ContentPage.BindingContext>
         <local:CategoryViewModel></local:CategoryViewModel>
     </ContentPage.BindingContext>-->
@@ -49,7 +51,7 @@
                         Grid.Column="3"
                         FontFamily="Circular"
                         FontSize="35"
-                        TextColor="White"
+                        TextColor="Black"
                         Text="Create a post"
                     />
                     <ImageButton 
@@ -64,10 +66,8 @@
 
             </StackLayout>
 
-            <yummy:PancakeView BackgroundColor="White" CornerRadius="60,60,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="35,0,35,0">
-                <yummy:PancakeView.Shadow>
-                    <yummy:DropShadow Color="#202020" Offset="30,30"></yummy:DropShadow>
-                </yummy:PancakeView.Shadow>
+            <yummy:PancakeView BackgroundColor="Black" CornerRadius="60,60,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="35,10,35,0" Opacity="0.98">
+           
                 <StackLayout>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -79,10 +79,10 @@
                             Grid.Row="1"
                             FontFamily="Circular"
                             FontSize="25"
-                            TextColor="Black"
+                            TextColor="White"
                             Text="Add attachment"
                         />
-                        <BoxView HorizontalOptions="Fill" HeightRequest="0.1" Color="#4b5d57" Grid.Row="2"/>
+                        <BoxView HorizontalOptions="Fill" HeightRequest="0.1" Color="#eeb705" Grid.Row="2"/>
                     </Grid>
 
                     <Grid x:Name="PublishContainer">
@@ -96,7 +96,17 @@
                             <ColumnDefinition Width="5" />
                         </Grid.ColumnDefinitions>
 
-                        <Picker ItemDisplayBinding="{Binding CategoryName}" x:Name="entrySubject" Title="Select Category" ItemsSource="{Binding CatList}" Grid.Row="1" Grid.Column="0"  VerticalOptions="Center" HorizontalOptions="Fill" Margin="0,0,-40,0"/>
+                        <Picker ItemDisplayBinding="{Binding CategoryName}" 
+                                x:Name="entrySubject" 
+                                Title="Select Category" 
+                                ItemsSource="{Binding CatList}" 
+                                Grid.Row="1" 
+                                Grid.Column="0"  
+                                VerticalOptions="Center"
+                                HorizontalOptions="Fill" 
+                                Margin="0,0,-40,0" 
+                                TextColor="#FFFFFF" 
+                                TitleColor="#eeb705"/>
 
                         <Image x:Name="imgCam" Grid.Row="1" Grid.Column="1" WidthRequest="70"
                                     HeightRequest="90"
@@ -106,7 +116,7 @@
 
                     </Grid>
                     <!---->
-                    <Entry x:Name="entryBody" Placeholder="Write appropriate text here (voluntary)"/>
+                    <Entry x:Name="entryBody" Placeholder="Write appropriate text here (voluntary)" TextColor="#FFFFFF" PlaceholderColor="#eeb705"/>
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -121,16 +131,16 @@
                                 Clicked="BtnCam_Clicked"
                                 FontFamily="Latob"
                                 CornerRadius="10"
-                                BackgroundColor="#404040" TextColor="#FFF"/>
+                                BackgroundColor="#eeb705" TextColor="black"/>
                         <Button x:Name="BrowseButton" 
                                 Text="Browse for a PIC" 
                                 Grid.Row="1" Grid.Column="1" 
                                 Margin="2" 
                                 FontFamily="Latob"
                                 Clicked="BrowseButton_Clicked"
-                                BackgroundColor="#404040" 
+                                BackgroundColor="#eeb705" 
                                 CornerRadius="10"
-                                TextColor="#FFF"/>
+                                TextColor="black"/>
                     </Grid>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -142,11 +152,11 @@
                             Grid.Row="1"
                             FontFamily="Circular"
                             FontSize="25"
-                            TextColor="Black"
+                            TextColor="White"
                             Text="My Location"
                             Padding="0"
                         />
-                        <BoxView HorizontalOptions="Fill" HeightRequest="0.1" Color="#4b5d57" Grid.Row="2"/>
+                        <BoxView HorizontalOptions="Fill" HeightRequest="0.1" Color="#eeb705" Grid.Row="2"/>
                     </Grid>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -154,7 +164,7 @@
                             <!--Empty-->
                             <RowDefinition Height="5"/>
                             <!--Tallinn, Eesti - EE-->
-                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="35"/>
                             <!--Latitude-->
                             <RowDefinition Height="25"/>
                             <!--Longitude-->
@@ -168,35 +178,35 @@
                             Grid.Row="1"
                             FontFamily="Circular"
                             FontSize="15"
-                            TextColor="#434343"
-                            Text="New York, United States of America - US"
+                            TextColor="#FFFFFF"
+                            Text="{Binding PositionLocation}"
                         />
                         <Label
                             Grid.Row="2"
                             FontFamily="Circular"
                             FontSize="15"
-                            TextColor="#434343"
+                            TextColor="#FFFFFF"
                             Text="{Binding Latitude}"
                         />
                         <Label
                             Grid.Row="3"
                             FontFamily="Circular"
                             FontSize="15"
-                            TextColor="#434343"
+                            TextColor="#FFFFFF"
                             Text="{Binding Longitude}"
                         />
                         <Label
                             Grid.Row="4"
                             FontFamily="Circular"
                             FontSize="15"
-                            TextColor="#434343"
+                            TextColor="#FFFFFF"
                             Text="{Binding Altitude}"
                         />
                         <Label
                             Grid.Row="5"
                             FontFamily="Circular"
                             FontSize="15"
-                            TextColor="#434343"
+                            TextColor="#FFFFFF"
                            
                             Text="{Binding Now}"
                         />
@@ -216,29 +226,17 @@
 
 
 
-                <ActivityIndicator x:Name="defaultActivityIndicator"
+            <ActivityIndicator x:Name="defaultActivityIndicator"
                                IsRunning="False" 
                                
                                  AbsoluteLayout.LayoutFlags="All"  
                AbsoluteLayout.LayoutBounds="0.5,0.5,0.25,0.25"
-                               Color="CornflowerBlue"
+                               Color="#eeb705"
                                VerticalOptions="CenterAndExpand"
                                HorizontalOptions="FillAndExpand" 
                                HeightRequest="80" 
                                WidthRequest="80"
                                />
-
-                <Label x:Name="labetoShow" 
-                      Margin="2" 
-                    IsVisible="False"
-                                 AbsoluteLayout.LayoutFlags="All"  
-                      AbsoluteLayout.LayoutBounds="0.5,0.80,0.70,0.15"
-                     FontSize="25"
-                     FontFamily="Latob"
-                                BackgroundColor="#404040" TextColor="#FFF"
-                   Text="srry it took soo long ">
-
-                </Label>
 
         </AbsoluteLayout>
 

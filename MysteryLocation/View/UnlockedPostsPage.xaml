@@ -3,18 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:MysteryLocation.View"
              x:Class="MysteryLocation.UnlockedPostsPage"
              NavigationPage.HasNavigationBar="False"
-             NavigationPage.BackButtonTitle="False">
+             NavigationPage.BackButtonTitle="False"
+             BackgroundImageSource="uPage.png">
     <!-- ControlTemplate="{StaticResource Template}">
     <Label x:Name="currentGPS"
                Text="Funkar detta?"
                VerticalOptions="StartAndExpand"
                HorizontalOptions="Center"/> -->
     <ContentPage.Content>
-        <Frame Padding="0" BackgroundColor="#2a4237">
+        <Frame Padding="0" BackgroundColor="Black" Opacity="0.9">
 
             <StackLayout>
                 <views:HeaderView/>
-                <Frame CornerRadius="30" Margin="0,-5,0,0" Padding="5,15,5,15" BackgroundColor="#4b5d57">
+                <Frame CornerRadius="30" Margin="0,-5,0,0" Padding="5,15,5,15" BackgroundColor="#001010">
                     <StackLayout>
                         <ListView SeparatorVisibility="Default"
                              x:Name="listview"
@@ -26,7 +27,7 @@
                                 <DataTemplate x:Name="SS">
                                     <ViewCell>
                                         <ContentView x:Name="SSS" Margin="5,5,5,5">
-                                            <Frame OutlineColor="#d9d9d8" CornerRadius="25" Padding="15" BackgroundColor="#f3f2f1">
+                                            <Frame OutlineColor="#d9d9d8" CornerRadius="25" Padding="15" BackgroundColor="Black">
                                                 <StackLayout x:Name="DSL" Orientation="Horizontal">
                                                     <StackLayout Orientation="Horizontal">
                                                         <Image 
@@ -39,15 +40,17 @@
                                                             <Label x:Name="Title" Text="{Binding Subject}"
                                             FontSize="22"
                                             FontFamily="Grotesk"
-                                            TextColor="Black"
+                                            TextColor="White"
                                             Margin="10, -2, 0, 0"
                                             VerticalOptions="Fill" />
 
                                                             <Label x:Name="Desc" Text="{Binding Body}"
                                             Margin="10, -4, 0, 0"
                                             FontSize="15"
-                                            FontFamily="Latow"
+                                            FontFamily="Circularbook"
                                             VerticalOptions="Start"
+                                                                
+                                                                   TextColor="White"
                                             MaxLines="3"/>
 
                                                         </StackLayout>

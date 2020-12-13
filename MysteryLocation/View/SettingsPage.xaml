@@ -3,74 +3,92 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:MysteryLocation.ViewModel" xmlns:views="clr-namespace:MysteryLocation.View"
              x:Class="MysteryLocation.SettingsPage"
              NavigationPage.HasNavigationBar="False"
-             NavigationPage.BackButtonTitle="False">
+             NavigationPage.BackButtonTitle="False"
+             xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             BackgroundImageSource="sPage.png">
     <!--<ContentPage.BindingContext>
         <local:CategoryViewModel></local:CategoryViewModel>
-    </ContentPage.BindingContext>--> 
+    </ContentPage.BindingContext>-->
     <ContentPage.Content>
-        <StackLayout>
-            <views:HeaderView/>
-            <!--
-            <Label x:Name="currentGPS"
-               Text="{Binding CurrentPosition}"
-               VerticalOptions="StartAndExpand"
-               HorizontalOptions="Center"/>
--->
-            <!--<Grid x:Name="Output" HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Row="1">
-                <Popup VerticalOffset="10" HorizontalOffset="200" x:Name="StandardPopup">
-                    <Border BorderBrush="{StaticResource ApplicationForegroundThemeBrush}" 
-                Background="{StaticResource ApplicationPageBackgroundThemeBrush}"
-                BorderThickness="2" Width="200" Height="200">
-                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock Text="Choose a category" FontSize="24.667" HorizontalAlignment="Center"/>
-                            <Button Content="Close" Click="ClosePopupClicked" HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </Border>
-                </Popup>
-            </Grid>-->
+        <Frame Padding="0" BackgroundColor="Black" Opacity="0.9">
 
-            <Picker ItemDisplayBinding="{Binding CategoryName}" x:Name="CategoryEntry" Title="Select Category" ItemsSource="{Binding CatList}"/>  
+            <StackLayout>
+                <views:HeaderView/>
+                <pv:PancakeView BackgroundColor="#001010" CornerRadius="30,30,30,30" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="35,0,35,0" Grid.Row="1" Margin="0,0,0,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="15" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="15" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="auto" />
 
-            <Label x:Name="PickerError"
+                        </Grid.RowDefinitions>
+
+                        <Picker Grid.Row="1" ItemDisplayBinding="{Binding CategoryName}" x:Name="CategoryEntry" Title="Select Category" ItemsSource="{Binding CatList}" TitleColor="#eeb705" TextColor="White" />
+
+                        <Label x:Name="PickerError"
                TextColor="Red"
                Text=""
-               HorizontalOptions="Center" />
+               HorizontalOptions="Center" Grid.Row="2" />
 
-            <Slider Maximum="10000"
+                        <Slider Maximum="10000"
                     Minimum="1"
                     VerticalOptions="CenterAndExpand"
-                    MaximumTrackColor="Blue"
-                    MinimumTrackColor="Red"
-                ValueChanged="OnSliderValueChanged" />
-            
-            <Label x:Name="SliderError"
+                    MaximumTrackColor="White"
+                    MinimumTrackColor="#eeb705"
+                ValueChanged="OnSliderValueChanged"
+                                    Grid.Row="3"/>
+
+                        <Label x:Name="SliderError"
                TextColor="Red"
                Text=""
-               HorizontalOptions="Center" />
+               HorizontalOptions="Center" Grid.Row="4" 
+                                   />
 
-            <Label x:Name="displayLabel"
+                        <Label x:Name="displayLabel"
                Text=""
+                                   TextColor="#eeb705"
                HorizontalOptions="Center"
-               VerticalOptions="CenterAndExpand" />
+               VerticalOptions="CenterAndExpand"
+                                   Grid.Row="5"
+                                  />
 
-            <Button Text="Save Settings"
-                BackgroundColor="#404040"
-                VerticalOptions="End"
-                HorizontalOptions="Center"
-                Clicked="SavedButtonClicked"
-                TextColor="White"
-                    CornerRadius="10"
-                />
 
-            <ActivityIndicator x:Name="defaultActivityIndicator"
+                        <ActivityIndicator x:Name="defaultActivityIndicator"
                                IsRunning="False" 
                                Color="CornflowerBlue"
                                VerticalOptions="CenterAndExpand"
                                HorizontalOptions="FillAndExpand" 
                                HeightRequest="80" 
                                WidthRequest="80"
+                                               Grid.Row="6"
                                />
 
-        </StackLayout>
+                        <Button Text="Save Settings"
+                BackgroundColor="#eeb705"
+                VerticalOptions="Center"
+                HorizontalOptions="Center"
+                Clicked="SavedButtonClicked"
+                TextColor="#202020"
+                    CornerRadius="10"
+                                    Grid.Row="7"
+                                    
+                />
+
+
+
+                    </Grid>
+                </pv:PancakeView>
+            </StackLayout>
+        </Frame>
+
+
     </ContentPage.Content>
+
 </ContentPage>
+

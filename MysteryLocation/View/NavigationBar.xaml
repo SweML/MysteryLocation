@@ -5,7 +5,7 @@
             xmlns:local="clr-namespace:MysteryLocation" 
             x:Class="MysteryLocation.NavigationBar"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            BarBackgroundColor="#202020"
+            BarBackgroundColor="#090909"
             android:TabbedPage.BarItemColor="#FCF6F5"
             android:TabbedPage.BarSelectedItemColor="#eeb705"
             

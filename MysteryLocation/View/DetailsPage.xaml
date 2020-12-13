@@ -4,22 +4,18 @@
              x:Class="MysteryLocation.View.DetailsPage"
              BindingContext="MysteryLocation.View.CardViewTemp"
              NavigationPage.HasNavigationBar="True"
-             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             NavigationPage.BackButtonTitle="False">
+             xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             NavigationPage.BackButtonTitle="False"
+             BackgroundColor="Transparent">
     <ContentPage.Content>
         <StackLayout Padding="0">
 
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="440" />
-                </Grid.RowDefinitions>
-                <StackLayout HorizontalOptions="FillAndExpand" Padding="0" >
-                    <Image x:Name="image" Grid.Row="0"  Aspect="AspectFill"></Image>
-                </StackLayout>
+            <Button BackgroundColor="Transparent" HeightRequest="100" Clicked="TapGestureRecognizer_Tapped">
+                
+            </Button>
 
 
-                <yummy:PancakeView BackgroundColor="White" CornerRadius="60,60,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="35,0,35,0" Grid.Row="1" Margin="0,0,0,0">
+                <pv:PancakeView BackgroundColor="Black" Margin="0" CornerRadius="60,60,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="35,0,35,0" Grid.Row="1"  Opacity="0.9">
                     <StackLayout>
                         <Grid>
                             <Grid.RowDefinitions>
@@ -32,94 +28,172 @@
                                 Grid.Row="1"
                                 FontFamily="Circular"
                                 FontSize="25"
-                                TextColor="Black"
+                                TextColor="#eeb705"
                                 />
                             <BoxView HorizontalOptions="Fill" HeightRequest="0.1" Color="LightGray" Grid.Row="2"/>
                         </Grid>
-                        <StackLayout Orientation="Horizontal">
-                            <Grid HorizontalOptions="Start" VerticalOptions="Center">
+                    <StackLayout Orientation="Horizontal">
+                        <StackLayout HorizontalOptions="Start">
+                            <Grid VerticalOptions="Center">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1"/>
                                     <RowDefinition Height="25"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="220"/>
+                                    <ColumnDefinition Width="200"/>
                                 </Grid.ColumnDefinitions>
                                 <Label
                                 Grid.Row="1"
                                 FontFamily="Circular"
                                 FontSize="22"
-                                TextColor="Gray"
+                                TextColor="White"
                                 Text="Description"
                                 />
-                                <Label
+                                <ScrollView Grid.Row="2" HeightRequest="100" VerticalScrollBarVisibility="Always" BackgroundColor="black">
+                                    <Label
                                 x:Name="Body"
                                 Grid.Row="2"
                                 FontFamily="Circularbook"
                                 FontSize="17"
                                 TextColor="Gray"
                                 />
+                                </ScrollView>
+                                
 
                             </Grid>
-                            <Grid HorizontalOptions="EndAndExpand" VerticalOptions="Start">
+                        </StackLayout>
+                        
+                        <StackLayout HorizontalOptions="EndAndExpand">
+                            <Grid >
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="1"/>
                                     <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Image x:Name="imge" Grid.Row="1" Grid.Column="0" WidthRequest="90"
-                                            HeightRequest="120"></Image>
-
-                            </Grid>
-
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20"/>
-                                    <RowDefinition Height="35"/>
                                     <RowDefinition Height="1"/>
                                 </Grid.RowDefinitions>
-                                <Label
-                                    Text="Additional details"
-                                    Grid.Row="1"
-                                    FontFamily="Circular"
-                                    FontSize="25"
-                                    TextColor="Black"
-                                />
-                                <BoxView HorizontalOptions="Fill" HeightRequest="0.1" Color="LightGray" Grid.Row="2"/>
-                            </Grid>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <!--Empty-->
-                                    <RowDefinition Height="5"/>
-                                    <!--Tallinn, Eesti - EE-->
-                                    <RowDefinition Height="25"/>
-                                    <!--Latitude-->
-                                    <RowDefinition Height="25"/>
-                                    <!--Longitude-->
-                                    <RowDefinition Height="25"/>
-                                    <!--Altitude-->
-                                    <RowDefinition Height="25"/>
-                                    <!--Timestamp-->
-                                    <RowDefinition Height="25"/>
-                                </Grid.RowDefinitions>
-                                <Label
-                                    x:Name="Location"
-                                    Grid.Row="1"
-                                    FontFamily="Circular"
-                                    FontSize="15"
-                                    TextColor="#434343"
-                                    />
+                                <!-- Add show image fullscreen?-->
+                                <Image  x:Name="image" HeightRequest="150" WidthRequest="100" Grid.Row="1" Opacity="1" Aspect="AspectFit"></Image>
                             </Grid>
                         </StackLayout>
+                       
 
 
                     </StackLayout>
-                </yummy:PancakeView>
+                    <StackLayout>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <BoxView HorizontalOptions="Fill" HeightRequest="0.1" Color="LightGray"/>
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                            </Grid.RowDefinitions>
+                            <Label
+                                Text="Additional details"
+                                Grid.Row="0"
+                                FontFamily="Circular"
+                                FontSize="25"
+                                TextColor="#eeb705"
+                                />
+                        </Grid>
+                    </StackLayout>
+                    <StackLayout>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <!--Empty-->
+                                <RowDefinition Height="2"/>
+                                <!--Tallinn, Eesti - EE-->
+                                <RowDefinition Height="20"/>
+                                <!--Latitude-->
+                                <RowDefinition Height="17"/>
+                                <!--Longitude-->
+                                <RowDefinition Height="20"/>
+                                <!--Altitude-->
+                                <RowDefinition Height="17"/>
+                                <!--Timestamp-->
+                                <RowDefinition Height="20"/>
 
-            </Grid>
+                                <RowDefinition Height="17"/>
+                                <!--Latitude-->
+                                <RowDefinition Height="20"/>
+                                <!--Longitude-->
+                                <RowDefinition Height="17"/>
+                                <!--Altitude-->
+                            </Grid.RowDefinitions>
+                            <Label
+                                    Text="Location"
+                                    Grid.Row="1"
+                                    FontFamily="Circular"
+                                    FontSize="18"
+                                    TextColor="White"
+                                    />
+                            <Label
+                                    x:Name="Location"
+                                    Grid.Row="2"
+                                    FontFamily="Circularbook"
+                                    FontSize="15"
+                                    TextColor="White"
+                                    />
+
+                            <Label
+                                    Text="Latitude"
+                                    Grid.Row="3"
+                                    FontFamily="Circular"
+                                    FontSize="18"
+                                    TextColor="White"
+                                    />
+                            <Label
+                                    x:Name="Latitude"
+                                    Grid.Row="4"
+                                    FontFamily="Circularbook"
+                                    FontSize="15"
+                                    TextColor="White"
+                                    />
+
+                            <Label
+                                    Text="Longitude"
+                                    Grid.Row="5"
+                                    FontFamily="Circular"
+                                    FontSize="18"
+                                    TextColor="White"
+                                    />
+                            <Label
+                                    x:Name="Longitude"
+                                    Grid.Row="6"
+                                    FontFamily="Circularbook"
+                                    FontSize="15"
+                                    TextColor="White"
+                                    />
+
+                            
+
+                            <Label
+                                    Text="Date"
+                                    Grid.Row="7"
+                                    FontFamily="Circular"
+                                    FontSize="18"
+                                    TextColor="White"
+                                    />
+                            <Label
+                                    x:Name="Date"
+                                    Grid.Row="8"
+                                    FontFamily="Circularbook"
+                                    FontSize="15"
+                                    TextColor="White"
+                                    />
+
+                        </Grid>
+                    </StackLayout>
+                    
+
+
+                </StackLayout>
+                </pv:PancakeView>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

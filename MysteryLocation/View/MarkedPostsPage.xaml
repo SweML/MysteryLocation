@@ -3,19 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:MysteryLocation.View"
              x:Class="MysteryLocation.MarkedPostsPage"
              NavigationPage.HasNavigationBar="False"
-             NavigationPage.BackButtonTitle="False">
-  <!--  ControlTemplate="{StaticResource Template}">-->
+             NavigationPage.BackButtonTitle="False"
+             BackgroundImageSource="mPage.png">
+    <!--  ControlTemplate="{StaticResource Template}">-->
 
 
     <!--ItemsSource="{x:Static local:PostList.ELL}" -->
     <!--ItemsSource="{x:Static local:NamedColor.All}">-->
 
     <ContentPage.Content>
-        <Frame Padding="0" BackgroundColor="#2a4237">
+        <Frame Padding="0" BackgroundColor="Black" Opacity="0.9">
 
             <StackLayout>
                 <views:HeaderView/>
-                <Frame CornerRadius="30" Margin="0,-5,0,0" Padding="5,15,5,15" BackgroundColor="#4b5d57">
+                <Frame CornerRadius="30" Margin="0,-5,0,0" Padding="5,15,5,15" BackgroundColor="#001010">
                     <StackLayout>
                         <ListView SeparatorVisibility="Default"
                              x:Name="listview"
@@ -27,7 +28,7 @@
                                 <DataTemplate x:Name="SS">
                                     <ViewCell>
                                         <ContentView x:Name="SSS" Margin="5,5,5,5">
-                                            <Frame OutlineColor="#d9d9d8" CornerRadius="25" Padding="15" BackgroundColor="#f3f2f1">
+                                            <Frame OutlineColor="#d9d9d8" CornerRadius="25" Padding="15" BackgroundColor="Black">
                                                 <StackLayout x:Name="DSL" Orientation="Horizontal">
                                                     <StackLayout Orientation="Horizontal">
                                                         <BoxView Color="DarkGray"
@@ -39,7 +40,7 @@
                                                             <Label x:Name="Title" Text="{Binding Subject}"
                                                                 FontSize="22"
                                                                 FontFamily="Circular"
-                                                                TextColor="Black"
+                                                                TextColor="White"
                                                                 Margin="10, -2, 0, 0"
                                                                 VerticalOptions="Fill" />
 
@@ -54,11 +55,11 @@
                                                                 <Label x:Name="Category" Text="{Binding Dist}"
                                                                 FontSize="17"
                                                                 FontFamily="Grotesk"
-                                                                TextColor="Gray"
+                                                                TextColor="White"
                                                                 Margin="10, 6, 0, 0"
                                                                 VerticalOptions="Start"
                                                                    HorizontalOptions="End"/>
-                                                                <BoxView HorizontalOptions="EndAndExpand" HeightRequest="0.5" Color="#4b5d57" />
+                                                                <BoxView HorizontalOptions="EndAndExpand" HeightRequest="0.5" Color="#eeb705" />
 
 
                                                                 <Button x:Name="Track" Text="Track" TextColor="White" FontAttributes="Bold" FontFamily="Latob" BackgroundColor="{Binding Color}" CornerRadius="10"

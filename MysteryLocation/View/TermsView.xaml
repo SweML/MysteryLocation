@@ -2,11 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MysteryLocation.View.TermsView"
-             BackgroundColor="red">
+             BackgroundColor="Black"
+             >
     <ContentPage.Content>
         <StackLayout>
-            <Label Margin="15" Text="Terms and Conditions :" FontAttributes="Bold" FontSize="Large"></Label>
-            <Label FontSize="Medium" Margin="15"  Text="This mobile application can be used for share locations, picture with short text about interesting places with other users.  &#10; &#10; By clicking the agree button you agree NOT to use this mobile application: &#10; &#10; 
+            <Label Margin="15" Text="Terms and Conditions :" FontFamily="Circular" TextColor="White" FontAttributes="Bold" FontSize="Large"></Label>
+            <Label FontSize="Medium" TextColor="White" Margin="15"  Text="This mobile application can be used for share locations, picture with short text about interesting places with other users.  &#10; &#10; By clicking the agree button you agree NOT to use this mobile application: &#10; &#10; 
 1 - To post nude, partially nude, or sexually suggestive photos. &#10; 
 2 - To attack, harass, threat, abuse other users.  &#10;
 3 - To communicate with other users in an abusive or offensive manners.  &#10;
@@ -16,7 +17,9 @@
 
             </Label>
             <Button x:Name="agreeButton" Text="AGREE"
-                        Clicked="agreeButton_Clicked">
+                        Clicked="agreeButton_Clicked"
+                    BackgroundColor="#eeb705"
+                    TextColor="Black">
 
             </Button>
         </StackLayout>

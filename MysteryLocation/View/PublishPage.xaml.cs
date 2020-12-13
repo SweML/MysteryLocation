@@ -20,6 +20,7 @@ namespace MysteryLocation.View
         APIConnection conn;
         byte[] bytes;
         bool published;
+        Boolean _isTapped = false;
         public PublishPage()
         {
             this.user = App.user;
@@ -73,8 +74,16 @@ namespace MysteryLocation.View
             }
             (sender as Button).IsEnabled = true;
         }
+
+        
+
         private async void PublishButton_Clicked(object sender, EventArgs e)
         {
+            if (_isTapped)
+                return;
+
+            _isTapped = true;
+
             Console.WriteLine("Publish button is pushed");
             try
             {
@@ -86,7 +95,7 @@ namespace MysteryLocation.View
                     ///hadi 
                     published = false;
                     startTiming();
-                    await Task.Delay(10000);   /// only to test  the  7 seconds delay
+                    await Task.Delay(10000);   //Ta bort????????/// only to test  the  7 seconds delay
                     //hadi
 
                     PostAttachment attach = null;
@@ -148,6 +157,7 @@ namespace MysteryLocation.View
                 Console.WriteLine("nullreference in publishButton: " + error);
             }
             await Navigation.PopModalAsync(true);
+            _isTapped = false;
         }
 
         private byte[] streamToArray(Stream stream)
@@ -158,11 +168,18 @@ namespace MysteryLocation.View
                 return memoryStream.ToArray();
             }
         }
-
+        
         public async void ClosingPP(object sender, EventArgs e)
         {
+            if (_isTapped)
+                return;
+
+            _isTapped = true;
+
             GPSFetcher.pvm.stopTimer();
             await Navigation.PopModalAsync(true);
+
+            _isTapped = false;
         }
 
 

@@ -29,11 +29,19 @@ namespace MysteryLocation
 
         }
 
+        Boolean _istapped = false;
         private async void Details_Clicked(object sender, EventArgs e)
         {
+            
+            if (_istapped)
+                return;
+
+            _istapped = true;
             int temp = int.Parse((sender as Button).AutomationId);
 
             await Navigation.PushModalAsync(new DetailsPage(user, temp), true);
+
+            _istapped = false;
         }
     }
 }

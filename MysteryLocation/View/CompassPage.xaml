@@ -5,62 +5,79 @@
              x:Class="MysteryLocation.CompassPage" 
              NavigationPage.HasNavigationBar="False" 
              NavigationPage.BackButtonTitle="False" 
+             BackgroundImageSource="cPage.png"
+             xmlns:pv="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:control="clr-namespace:ProgressRingControl.Forms.Plugin;assembly=ProgressRing.Forms.Plugin">
     <ContentPage.Content>
-        <Frame Padding="0" BackgroundColor="#202020">
+        <Frame Padding="0" BackgroundColor="#000000" Opacity="0.9">
             <StackLayout>
                 <!--stacklayout for the welcome message -->
                 <views:HeaderView />
                 <!--Name and Visible were Added to control the welcome messaGES  -->
-                <Frame CornerRadius="30"  Padding="0" Margin="0" BackgroundColor="#404040">
+                <pv:PancakeView BackgroundColor="#001010" CornerRadius="30,30,30,30" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="1" Margin="0,0,0,0">
+
 
                     <StackLayout x:Name="layout">
                         <Grid>
                             <!-- Text="{Binding CurrentPosition}"-->
 
-
-
-
-
-
-
-
-
-                            <Image Source="mo.png" Aspect="AspectFill" VerticalOptions="Fill"/>
                             <Grid>
                                 <!--Here we put compass for fun -->
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="5" />
+                                    <RowDefinition Height="25" />
+                                    <RowDefinition Height="35" />
+                                    <RowDefinition Height="auto" />
                                 </Grid.RowDefinitions>
-
-                                <control:ProgressRing RingThickness="60" RingProgressColor="#eeb705" Opacity="0.7" Progress="{Binding DecimalD}" ScaleX="0.80" ScaleY="0.80" RingBaseColor="Transparent"/>
+                                <Label x:Name="distToTarget"
+                                       Grid.Row="1"
+                                         FontAttributes="Bold"	                   
+                                       FontSize="20"	                
+                                       TextColor="White"	
+                                       Text="Distance to target"
+                                       VerticalOptions="StartAndExpand"	
+                                       HorizontalOptions="Center"  
+                                       FontFamily="Circular"/>
+                                <Label
+                                       Grid.Row="2"
+                                         FontAttributes="Bold"	                   
+                                       FontSize="30"	                
+                                       TextColor="White"	
+                                       
+                                    Text="{Binding Distance}"	
+                                       VerticalOptions="StartAndExpand"	
+                                       HorizontalOptions="Center"  
+                                       FontFamily="Circular"/>
+                                <control:ProgressRing RingThickness="65" RingProgressColor="#eeb705" Opacity="0.7" Progress="{Binding DecimalD}" ScaleX="0.80" ScaleY="0.80" RingBaseColor="Transparent" Grid.Row="3"/>
                                 <Image HorizontalOptions="FillAndExpand" 
-                                   VerticalOptions="FillAndExpand" 
+                                   VerticalOptions="Center" 
                                    Rotation="{Binding Heading}" 
-                                   Source="compass.png"/>
+                                   
+                                       
+                                   Source="compass.png"
+                                       Grid.Row="3"/>
                                 <Image HorizontalOptions="Center" 
                                    VerticalOptions="Center" 
-                                   x:Name="CompassArrow" />
+                                   x:Name="CompassArrow" Grid.Row="3"/>
                                 <Image HorizontalOptions="Center" 
                                    VerticalOptions="Center" 
                                    Rotation="{Binding Beta}" 
                                    Source="compassArrow.png" 
-                                   x:Name="ImageArrow" />
+                                   x:Name="ImageArrow" Grid.Row="3"/>
                                 <Label Text="{Binding HeadingDisplay}" 
                                    x:Name="LabelInfo" 
                                    VerticalOptions="Center"
                                    HorizontalOptions="Center" 
                                    Margin="0,8,0,0"
-                                   TextColor="Black" 
-                                   FontFamily="Grotesk" 
-                                   FontSize="25" />
+                                   TextColor="White" 
+                                   FontFamily="Latob"
+                                   FontSize="40" Grid.Row="3"/>
                             </Grid>
 
                         </Grid>
                     </StackLayout>
-                </Frame>
+                </pv:PancakeView>
             </StackLayout>
         </Frame>
-        <!--stacklayout for the welcome message -->
     </ContentPage.Content>
 </ContentPage>

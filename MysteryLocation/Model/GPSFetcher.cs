@@ -4,6 +4,7 @@ using Plugin.Geolocator.Abstractions;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -22,6 +23,7 @@ namespace MysteryLocation.Model
         public static PublishViewModel pvm;
         public static Position currentPosition;
         public static ViewCompass vc;
+        public string writePositionLocation;
         double a;
         double b;
         public Position pos;
@@ -68,40 +70,44 @@ namespace MysteryLocation.Model
                 latitude = latitude.Substring(0, 8);
             if (longitude.Length > 8)
                 longitude = longitude.Substring(0, 8);*/
-            string writePosition = latitude + " , " + longitude;
-            // string writePositionLocation = await WritePositionWithLocation(position) + latitude + ", " + longitude;
+            string writePosition = latitude + ", " + longitude;
+            Task.Run(async () => {
+                await WritePositionWithLocation(position);
+                
+            }); 
             if (fvm != null)
             {
                 fvm.Position = writePosition;
-                fvm.PositionLocation = writePosition;
+                fvm.PositionLocation = writePositionLocation;
             }
             if (mvm != null)
             {
                 mvm.Position = writePosition;
-                mvm.PositionLocation = writePosition;
+                mvm.PositionLocation = writePositionLocation; 
             }
 
             if (uvm != null) 
             {  
                 uvm.Position = writePosition;
-                uvm.PositionLocation = writePosition;
+                uvm.PositionLocation = writePositionLocation; 
             }
             if (cavm != null)
             {
                 cavm.Position = writePosition;
-                cavm.PositionLocation = writePosition;
+                cavm.PositionLocation = writePositionLocation;
             }
             if(pvm != null)
             {
                 pvm.Latitude = position.Latitude.ToString();
                 pvm.Longitude = position.Longitude.ToString();
                 pvm.Altitude = position.Altitude.ToString() + " m";
+                pvm.PositionLocation = writePositionLocation;
             }
 
             if (vc != null)
             {
                 vc.Position = writePosition;
-                vc.PositionLocation = writePosition;
+                vc.PositionLocation = writePositionLocation;
                 vc.Distance = getDistance();
                 if (GlobalFuncs.mvm.tracked != null)
                 {
@@ -124,9 +130,7 @@ namespace MysteryLocation.Model
                 }
             }
                
-            
-
-            if (cavm != null) cavm.PositionLocation = writePosition;
+           
 
             fvm.RecalculateDistance();
             mvm.RecalculateDistance();
@@ -184,27 +188,60 @@ namespace MysteryLocation.Model
             
         }
 
-        private async Task<String> WritePositionWithLocation(Position p)
+        
+           
+       
+
+        public async Task WritePositionWithLocation(Position p)
         {
             var placemarks = await Geocoding.GetPlacemarksAsync(p.Latitude, p.Longitude);
 
             var placemark = placemarks?.FirstOrDefault();
-            
+
+
+            StringBuilder sb = new StringBuilder();
+
             if (placemark != null)
             {
-                if (placemark.Locality != null) 
-                 { return placemark.Locality + ", " + placemark.CountryName + " - "; }
-                 else if (placemark.Locality == null && placemark.SubLocality != null) 
-                 { return placemark.SubLocality + ", " + placemark.CountryName + " - "; }
-                else if (placemark.Locality == null && placemark.SubLocality == null && placemark.SubAdminArea != null && placemark.AdminArea != null)
-                { return placemark.AdminArea + ", " + placemark.SubAdminArea + " - "; }
-                else if (placemark.Locality == null && placemark.SubLocality == null && placemark.Thoroughfare != null && placemark.SubThoroughfare != null)
-                { return placemark.Thoroughfare + " " + placemark.SubThoroughfare + ", " + placemark.CountryName + " - "; }
-                else { return ""; } 
+                if (placemark.CountryName != null)
+                {
+                    sb.Append(placemark.CountryName);
+                }
+                if (placemark.CountryCode != null)
+                {
+                    sb.Append(", " + placemark.CountryCode);
+                }
+                if (placemark.AdminArea != null)
+                {
+                    sb.Append(", " + placemark.AdminArea);
+                }
+                if (placemark.SubAdminArea != null)
+                {
+                    sb.Append(", " + placemark.SubAdminArea);
+                }
+                if (placemark.Locality != null)
+                {
+                    sb.Append(", " + placemark.Locality);
+                }
+                if (placemark.SubLocality != null)
+                {
+                    sb.Append(", " + placemark.SubLocality);
+                }
+                if (placemark.Thoroughfare != null)
+                {
+                    sb.Append(", " + placemark.Thoroughfare);
+                }
+                if (placemark.SubThoroughfare != null)
+                {
+                    sb.Append(", " + placemark.SubThoroughfare);
+                }
+                writePositionLocation = sb.ToString();
+                
+
             }
             else
             {
-                return "";
+                writePositionLocation = null;
             }
         }
 
