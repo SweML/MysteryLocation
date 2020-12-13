@@ -67,6 +67,14 @@
 
                                                                 <Button x:Name="Details" Text="Details" TextColor="White" FontAttributes="Bold" FontFamily="Latob" BackgroundColor="#404040" CornerRadius="10"
                                                                                 HorizontalOptions="End" VerticalOptions="EndAndExpand" FontSize="Small" AutomationId="{Binding Id}" Clicked="Details_Clicked" >
+
+                                                                    <Button.WidthRequest>
+                                                                        <OnPlatform x:TypeArguments="x:Double">
+                                                                            <On Platform="iOS">90</On>
+                                                                            <On Platform="Android">90</On>
+                                                                        </OnPlatform>
+                                                                    </Button.WidthRequest>
+
                                                                 </Button>
 
                                                             </StackLayout>

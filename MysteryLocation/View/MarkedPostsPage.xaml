@@ -64,6 +64,13 @@
 
                                                                 <Button x:Name="Track" Text="Track" TextColor="White" FontAttributes="Bold" FontFamily="Latob" BackgroundColor="{Binding Color}" CornerRadius="10"
                                                                                 HorizontalOptions="End" VerticalOptions="EndAndExpand"  FontSize="Small" AutomationId="{Binding Id}" Clicked="Track">
+                                                                    <Button.WidthRequest>
+                                                                        <OnPlatform x:TypeArguments="x:Double">
+                                                                            <On Platform="iOS">90</On>
+                                                                            <On Platform="Android">90</On>
+                                                                        </OnPlatform>
+                                                                    </Button.WidthRequest>
+
                                                                 </Button>
 
                                                             </StackLayout>

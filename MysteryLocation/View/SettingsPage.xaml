@@ -29,12 +29,19 @@
 
                         </Grid.RowDefinitions>
 
-                        <Picker Grid.Row="1" ItemDisplayBinding="{Binding CategoryName}" x:Name="CategoryEntry" Title="Select Category" ItemsSource="{Binding CatList}" TitleColor="#eeb705" TextColor="White" />
-
+                        <Picker/>
+                        <Picker  Grid.Row="1" ItemDisplayBinding="{Binding CategoryName}" x:Name="CategoryEntry" Title="Select Category" ItemsSource="{Binding CatList}" TitleColor="#eeb705" TextColor="White" >
+                            <Picker.BackgroundColor>
+                                <OnPlatform x:TypeArguments="Color">
+                                    <On Platform="iOS" Value="Transparent" />
+                                    
+                                </OnPlatform>
+                            </Picker.BackgroundColor>
+                        </Picker>
                         <Label x:Name="PickerError"
-               TextColor="Red"
-               Text=""
-               HorizontalOptions="Center" Grid.Row="2" />
+                         TextColor="Red"
+                        Text=""
+                        HorizontalOptions="Center" Grid.Row="2" />
 
                         <Slider Maximum="10000"
                     Minimum="1"
