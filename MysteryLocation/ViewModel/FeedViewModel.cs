@@ -47,8 +47,11 @@ namespace MysteryLocation.ViewModel
             get { return items; }
             set
             {
-                items = value;
-                OnPropertyChanged("Items");
+                if (items != value)
+                {
+                    items = value;
+                    OnPropertyChanged("Items");
+                }
             }
         }
 

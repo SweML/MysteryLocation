@@ -26,6 +26,7 @@ namespace MysteryLocation.Model
         public string writePositionLocation;
         double a;
         double b;
+        public bool getNewPos = true;
         public Position pos;
         public GPSFetcher()
         {
@@ -71,10 +72,12 @@ namespace MysteryLocation.Model
             if (longitude.Length > 8)
                 longitude = longitude.Substring(0, 8);*/
             string writePosition = latitude + ", " + longitude;
+            if (getNewPos) { 
             Task.Run(async () => {
                 await WritePositionWithLocation(position);
                 
-            }); 
+            });
+            }
             if (fvm != null)
             {
                 fvm.Position = writePosition;
@@ -194,6 +197,7 @@ namespace MysteryLocation.Model
 
         public async Task WritePositionWithLocation(Position p)
         {
+            getNewPos = false;
             var placemarks = await Geocoding.GetPlacemarksAsync(p.Latitude, p.Longitude);
 
             var placemark = placemarks?.FirstOrDefault();
@@ -243,6 +247,7 @@ namespace MysteryLocation.Model
             {
                 writePositionLocation = null;
             }
+            getNewPos = true;
         }
 
         private void PositionError(object sender, PositionErrorEventArgs e)

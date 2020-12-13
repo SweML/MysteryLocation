@@ -70,7 +70,7 @@ namespace MysteryLocation
                 List<Post> posts = await conn.getDataAsync();
                 posts = GlobalFuncs.filterInvaliedPosts(posts);
                 // Does not care about distance nor *ML
-               while (!GlobalFuncs.gpsOn && !GlobalFuncs.settingsActive)
+               while (!GlobalFuncs.gpsOn || !GlobalFuncs.settingsActive)
                 {
                    await Task.Delay(25);
                }

@@ -14,7 +14,7 @@ namespace MysteryLocation
         {
             GPSFetcher.cavm = GlobalFuncs.svm;
             this.BindingContext = GlobalFuncs.svm;
-            
+
             InitializeComponent();
 
             value = App.user.getDistance();
@@ -27,38 +27,39 @@ namespace MysteryLocation
 
         void SavedButtonClicked(object sender, EventArgs args)
         {
-               if ((Category)CategoryEntry.SelectedItem == null)
-               {
-                   PickerError.Text = "Choose a category";
+            if ((Category)CategoryEntry.SelectedItem == null)
+            {
+                PickerError.Text = "Choose a category";
 
-                   if (value == 0)
-                   {
-                       SliderError.Text = "Choose a distance";
-                       return;
-                   }
-                   SliderError.Text = "";
-                   return;
-               }
-               if (value == 0)
-               {
-                   PickerError.Text = "";
-                   SliderError.Text = "Choose a distance";
-                   return;
-               }
-               PickerError.Text = "";
-               SliderError.Text = "";
-               CategoryId = ((Category)CategoryEntry.SelectedItem).CategoryId;
-               App.user.setCategory(CategoryId);
-               App.user.setDistance(value * 1000);
+                if (value == 0)
+                {
+                    SliderError.Text = "Choose a distance";
+                    return;
+                }
+                SliderError.Text = "";
+                return;
+            }
+            if (value == 0)
+            {
+                PickerError.Text = "";
+                SliderError.Text = "Choose a distance";
+                return;
+            }
+            PickerError.Text = "";
+            SliderError.Text = "";
+            CategoryId = ((Category)CategoryEntry.SelectedItem).CategoryId;
+            App.user.setCategory(CategoryId);
+            App.user.setDistance(value * 1000);
+            DependencyService.Get<SnackInterface>().SnackbarShow("User settings has been set.");
             if (GlobalFuncs.settingsActive && GlobalFuncs.gpsOn)
             { // Check to see if user has chosen a new category. 
                 GlobalFuncs.fvm.updateListElements(null);
                 Console.WriteLine("Does this execute?");
             }
-               GlobalFuncs.settingsActive = true;
-            }
+            GlobalFuncs.settingsActive = true;
+        }
 
-    
+
         void OnSliderValueChanged(object sender, ValueChangedEventArgs args)
         {
             value = args.NewValue;

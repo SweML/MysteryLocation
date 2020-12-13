@@ -38,8 +38,11 @@ namespace MysteryLocation.ViewModel
             get { return longitude; }
             set
             {
-                longitude = value;
-                OnPropertyChanged("Longitude");
+                if (longitude != value)
+                {
+                    longitude = value;
+                    OnPropertyChanged("Longitude");
+                }
             }
         }
 
@@ -48,8 +51,10 @@ namespace MysteryLocation.ViewModel
             get { return latitude; }
             set
             {
+                if(latitude != value) { 
                 latitude = value;
                 OnPropertyChanged("Latitude");
+                }
             }
         }
 
@@ -58,8 +63,11 @@ namespace MysteryLocation.ViewModel
             get { return altitude; }
             set
             {
-                altitude = value;
-                OnPropertyChanged("Altitude");
+                if (altitude != value)
+                {
+                    altitude = value;
+                    OnPropertyChanged("Altitude");
+                }
             }
         }
 
