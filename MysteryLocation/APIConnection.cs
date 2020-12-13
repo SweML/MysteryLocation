@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MysteryLocation.Model;
 using Newtonsoft.Json;
+using Plugin.Toast;
 using Xamarin.Forms;
 
 namespace MysteryLocation
@@ -84,14 +85,41 @@ namespace MysteryLocation
             {
                 string content = await response.Content.ReadAsStringAsync();
                 temp = MakeUnlockedPost(content);
-                if(temp == null)
-                    DependencyService.Get<SnackInterface>().SnackbarShow("Post #" + obsId + " does not have an image");
+                if(temp == null) {
+                    switch (Device.RuntimePlatform)
+                    {
+                        case Device.Android:
+                            DependencyService.Get<SnackInterface>().SnackbarShow("Post #" + obsId + " does not have an image");
+                            break;
+                        case Device.iOS:
+                            CrossToastPopUp.Current.ShowToastMessage("Post #" + obsId + " does not have an image");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                
+
                 else 
                     temp.obsID = obsId;
                 sem.Release();
                 return temp;
             }
-            DependencyService.Get<SnackInterface>().SnackbarShow("Failed to unlock post #" + obsId);
+
+            switch (Device.RuntimePlatform)
+            {
+                case Device.Android:
+                    DependencyService.Get<SnackInterface>().SnackbarShow("Failed to unlock post #" + obsId);
+                    break;
+                case Device.iOS:
+                    CrossToastPopUp.Current.ShowToastMessage("Failed to unlock post #" + obsId);
+                    break;
+                default:
+                    break;
+            }
+
+
             sem.Release();
             return temp;
         }

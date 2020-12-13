@@ -3,6 +3,7 @@ using MysteryLocation.ViewModel;
 using Plugin.Connectivity;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
+using Plugin.Toast;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -122,7 +123,7 @@ namespace MysteryLocation.View
                         status = await conn.testPublishPosts(pubPost);
                         Console.WriteLine("post was much success");
                         // Sen skapa PostAttachment och publicera den
-                        if (status >= 0 && (bytes.Length != 0 || bytes != null))
+                        if (status >= 0 && bytes != null && attach != null)
                         {
                             attach.obsID = status;
                             bool success = await conn.publishAttachment(attach);
@@ -139,13 +140,33 @@ namespace MysteryLocation.View
                             else // Publication of attachment failed.
                             {
                                 spinOff();
-                                DependencyService.Get<SnackInterface>().SnackbarShow("Publish failed");
+                                switch (Device.RuntimePlatform)
+                                {
+                                    case Device.Android:
+                                        DependencyService.Get<SnackInterface>().SnackbarShow("Publish failed");
+                                        break;
+                                    case Device.iOS:
+                                        CrossToastPopUp.Current.ShowToastMessage("Publish failed");
+                                        break;
+                                    default:
+                                        break;
+                                }
 
                             }
                         }
                         else // publish failed.
                         {
-                            DependencyService.Get<SnackInterface>().SnackbarShow("Publish failed");
+                            switch (Device.RuntimePlatform)
+                            {
+                                case Device.Android:
+                                    DependencyService.Get<SnackInterface>().SnackbarShow("Initial publish successful - no image attached therefore not displayed");
+                                    break;
+                                case Device.iOS:
+                                    CrossToastPopUp.Current.ShowToastMessage("Initial publish successful - no image attached therefore not displayed");
+                                    break;
+                                default:
+                                    break;
+                            }
                             spinOff();
                         }
 
@@ -168,13 +189,33 @@ namespace MysteryLocation.View
                 if (published)
                 {
                     await Navigation.PopModalAsync(true);
-                    DependencyService.Get<SnackInterface>().SnackbarShow("The post was successfully published");
+                    switch (Device.RuntimePlatform)
+                    {
+                        case Device.Android:
+                            DependencyService.Get<SnackInterface>().SnackbarShow("The post was successfully published");
+                            break;
+                        case Device.iOS:
+                            CrossToastPopUp.Current.ShowToastMessage("The post was successfully published");
+                            break;
+                        default:
+                            break;
+                    }
 
                 }
             }
             else
             {
-                DependencyService.Get<SnackInterface>().SnackbarShow("Internet is not available");
+                switch (Device.RuntimePlatform)
+                {
+                    case Device.Android:
+                        DependencyService.Get<SnackInterface>().SnackbarShow("Internet is not available");
+                        break;
+                    case Device.iOS:
+                        CrossToastPopUp.Current.ShowToastMessage("Internet is not available");
+                        break;
+                    default:
+                        break;
+                }
             }
           
             
@@ -218,9 +259,18 @@ namespace MysteryLocation.View
                     if (!published)
                     {
                         // labetoShow.IsVisible = true;
-                        DependencyService.Get<SnackInterface>().SnackbarShow("Publishing is taking longer than usual. Please wait ...");
+                        switch (Device.RuntimePlatform)
+                        {
+                            case Device.Android:
+                                DependencyService.Get<SnackInterface>().SnackbarShow("Publishing is taking longer than usual, please wait ...");
+                                break;
+                            case Device.iOS:
+                                CrossToastPopUp.Current.ShowToastMessage("Publishing is taking longer than usual, please wait ...");
+                                break;
+                            default:
+                                break;
+                        }
                     }
-
 
                 });
                 return false; // runs again, or false to stop

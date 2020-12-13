@@ -1,5 +1,6 @@
 ﻿using System;
 using MysteryLocation.Model;
+using Plugin.Toast;
 using Xamarin.Forms;
 
 namespace MysteryLocation
@@ -25,8 +26,14 @@ namespace MysteryLocation
             CategoryEntry.SelectedIndex = CategoryId;
         }
 
+        
+
         void SavedButtonClicked(object sender, EventArgs args)
         {
+
+            
+
+
             if ((Category)CategoryEntry.SelectedItem == null)
             {
                 PickerError.Text = "Choose a category";
@@ -50,7 +57,17 @@ namespace MysteryLocation
             CategoryId = ((Category)CategoryEntry.SelectedItem).CategoryId;
             App.user.setCategory(CategoryId);
             App.user.setDistance(value * 1000);
-            DependencyService.Get<SnackInterface>().SnackbarShow("User settings has been set.");
+            switch (Device.RuntimePlatform)
+            {
+                case Device.Android:
+                    DependencyService.Get<SnackInterface>().SnackbarShow("User settings has been set");
+                    break;
+                case Device.iOS:
+                    CrossToastPopUp.Current.ShowToastMessage("User settings has been set");
+                    break;
+                default:
+                    break;
+            }
             if (GlobalFuncs.settingsActive && GlobalFuncs.gpsOn)
             { // Check to see if user has chosen a new category. 
                 GlobalFuncs.fvm.updateListElements(null);

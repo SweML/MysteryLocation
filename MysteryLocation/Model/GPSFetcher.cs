@@ -1,6 +1,7 @@
 ﻿using MysteryLocation.ViewModel;
 using Plugin.Geolocator;
 using Plugin.Geolocator.Abstractions;
+using Plugin.Toast;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -151,7 +152,20 @@ namespace MysteryLocation.Model
                 }
                 else if (distance <= 25 && !withinTwentyFive)
                 {
-                    DependencyService.Get<SnackInterface>().SnackbarShow("Post nr: " + GlobalFuncs.mvm.tracked.Id + " is unlocked");
+
+                    switch (Device.RuntimePlatform)
+                    {
+                        case Device.Android:
+                            DependencyService.Get<SnackInterface>().SnackbarShow("Post nr: " + GlobalFuncs.mvm.tracked.Id + " is unlocked");
+                            break;
+                        case Device.iOS:
+                            CrossToastPopUp.Current.ShowToastMessage("Post nr: " + GlobalFuncs.mvm.tracked.Id + " is unlocked");
+                            break;
+                        default:
+                            break;
+                    }
+
+
                     //Stop tracking
                     //Remove from mList
                     Task.Run(async () => {
@@ -165,12 +179,32 @@ namespace MysteryLocation.Model
                 }
                 else if (distance <= 500 && !withinFive)
                 {
-                    DependencyService.Get<SnackInterface>().SnackbarShow("You are now within 500m of target");
+                    switch (Device.RuntimePlatform)
+                    {
+                        case Device.Android:
+                            DependencyService.Get<SnackInterface>().SnackbarShow("You're now within 500m of the target");
+                            break;
+                        case Device.iOS:
+                            CrossToastPopUp.Current.ShowToastMessage("You're now within 500m of the target");
+                            break;
+                        default:
+                            break;
+                    }
                     withinFive = true;
                 }
                 else if(distance <= 1000 && !withinThousand)
                 {
-                    DependencyService.Get<SnackInterface>().SnackbarShow("You are now within 1 km of target");
+                    switch (Device.RuntimePlatform)
+                    {
+                        case Device.Android:
+                            DependencyService.Get<SnackInterface>().SnackbarShow("You're now within 1km of the target");
+                            break;
+                        case Device.iOS:
+                            CrossToastPopUp.Current.ShowToastMessage("You're now within 1km of the target");
+                            break;
+                        default:
+                            break;
+                    }
                     withinThousand = true;
                 }
                 

@@ -1,6 +1,7 @@
 ﻿
 using MysteryLocation.Model;
 using Plugin.Connectivity;
+using Plugin.Toast;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -59,13 +60,36 @@ namespace MysteryLocation
             {
                 if (!CrossConnectivity.Current.IsConnected)
                 {
-                    DependencyService.Get<SnackInterface>().SnackbarShowIndefininte("Internet is not available");
+                    
+
+                    switch (Device.RuntimePlatform)
+                    {
+                        case Device.Android:
+                            DependencyService.Get<SnackInterface>().SnackbarShowIndefininte("Internet is not available");
+                            break;
+                        case Device.iOS:
+                            CrossToastPopUp.Current.ShowToastMessage("Internet is not available");
+                            break;
+                        default:
+                            break;
+                    }
+
                     while (!CrossConnectivity.Current.IsConnected)
                     {
                         await Task.Delay(100);
                     }
 
-                    DependencyService.Get<SnackInterface>().SnackbarShow("Internet connection has been established");
+                    switch (Device.RuntimePlatform)
+                    {
+                        case Device.Android:
+                            DependencyService.Get<SnackInterface>().SnackbarShow("Internet connection has been established");
+                            break;
+                        case Device.iOS:
+                            CrossToastPopUp.Current.ShowToastMessage("Internet connection has been established");
+                            break;
+                        default:
+                            break;
+                    }
                 }
 
                 

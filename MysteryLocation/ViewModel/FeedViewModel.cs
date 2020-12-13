@@ -1,6 +1,7 @@
 ﻿using MysteryLocation.Model;
 using Plugin.Connectivity;
 using Plugin.Geolocator.Abstractions;
+using Plugin.Toast;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -105,7 +106,17 @@ namespace MysteryLocation.ViewModel
                 }
                 else
                 {
-                    DependencyService.Get<SnackInterface>().SnackbarShow("Internet is not available");
+                    switch (Device.RuntimePlatform)
+                    {
+                        case Device.Android:
+                            DependencyService.Get<SnackInterface>().SnackbarShow("Internet is not available");
+                            break;
+                        case Device.iOS:
+                            CrossToastPopUp.Current.ShowToastMessage("Internet is not available");
+                            break;
+                        default:
+                            break;
+                    }
                 }
                 // Does not care about distance nor *ML
                
