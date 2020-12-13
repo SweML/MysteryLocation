@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using MysteryLocation.ViewModel;
 using MysteryLocation.Model;
+using Plugin.Toast;
 
 namespace MysteryLocation.View
 {
@@ -15,6 +16,7 @@ namespace MysteryLocation.View
             GPSFetcher.fvm = GlobalFuncs.fvm;
             InitializeComponent();
             this.BindingContext = GlobalFuncs.fvm;
+           
 
         }
   
@@ -24,7 +26,20 @@ namespace MysteryLocation.View
             int temp = int.Parse((sender as Button).AutomationId);
             PostListElement refElement = GlobalFuncs.fvm.RemovePost(temp);
             GPSFetcher.mvm.AddPost(refElement);
-            DependencyService.Get<SnackInterface>().SnackbarShow("Post #" + temp + " is now marked");
+
+            switch (Device.RuntimePlatform)
+            {
+                case Device.Android:
+                    DependencyService.Get<SnackInterface>().SnackbarShow("Post #" + temp + " is now marked");
+                    break;
+                case Device.iOS:
+                    CrossToastPopUp.Current.ShowToastMessage("Post #" + temp + " is now marked");
+                    break;
+                default:
+                    break;
+            }
+
+
         }
 
         //Metod vid refresh.

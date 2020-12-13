@@ -1,5 +1,7 @@
 ﻿
 using MysteryLocation.Model;
+using Plugin.Connectivity;
+using Plugin.Toast;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -41,19 +43,8 @@ namespace MysteryLocation
             GlobalFuncs.svm = new ViewModel.CategoryViewModel();
             GPSFetcher.pvm = new ViewModel.PublishViewModel();
 
-            VersionTracking.Track();
 
-            if (VersionTracking.IsFirstLaunchEver)
-            {
-                //Första gång
-                MainPage = new NavigationBar(user, conn, 1);
-            }
-
-            else
-            {   //Ej första 
-                MainPage = new NavigationBar(user, conn, 0);
-                ///versionsTracking Hadi
-            }
+            MainPage = new NavigationBar(user, conn);
 
 
         }
@@ -67,6 +58,41 @@ namespace MysteryLocation
             //List<Post> posts = null;
             Task.Run(async() => 
             {
+                if (!CrossConnectivity.Current.IsConnected)
+                {
+                    
+
+                    switch (Device.RuntimePlatform)
+                    {
+                        case Device.Android:
+                            DependencyService.Get<SnackInterface>().SnackbarShowIndefininte("Internet is not available");
+                            break;
+                        case Device.iOS:
+                            CrossToastPopUp.Current.ShowToastMessage("Internet is not available");
+                            break;
+                        default:
+                            break;
+                    }
+
+                    while (!CrossConnectivity.Current.IsConnected)
+                    {
+                        await Task.Delay(100);
+                    }
+
+                    switch (Device.RuntimePlatform)
+                    {
+                        case Device.Android:
+                            DependencyService.Get<SnackInterface>().SnackbarShow("Internet connection has been established");
+                            break;
+                        case Device.iOS:
+                            CrossToastPopUp.Current.ShowToastMessage("Internet connection has been established");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+
+                
                 List<Post> posts = await conn.getDataAsync();
                 posts = GlobalFuncs.filterInvaliedPosts(posts);
                 // Does not care about distance nor *ML

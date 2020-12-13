@@ -1,6 +1,7 @@
 ﻿using MysteryLocation.Model;
 using MysteryLocation.View;
 using MysteryLocation.ViewModel;
+using Plugin.Toast;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,18 @@ namespace MysteryLocation
             //add if true -> then notify?
             GlobalFuncs.addTracker(obsID);
             GlobalFuncs.mvm.setMyPos(GPSFetcher.currentPosition);
-            DependencyService.Get<SnackInterface>().SnackbarShow("The post #" + obsID + "is now being tracked");
+
+            switch (Device.RuntimePlatform)
+            {
+                case Device.Android:
+                    DependencyService.Get<SnackInterface>().SnackbarShowIndefininte("The post #" + obsID + "is now being tracked");
+                    break;
+                case Device.iOS:
+                    CrossToastPopUp.Current.ShowToastMessage("The post #" + obsID + "is now being tracked");
+                    break;
+                default:
+                    break;
+            }
         }
 
 

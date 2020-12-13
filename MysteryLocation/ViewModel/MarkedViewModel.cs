@@ -59,7 +59,8 @@ namespace MysteryLocation.ViewModel
             get { return items; }
             set
             {
-                if (items != value) {
+                if (items != value)
+                {
                     items = value;
                     OnPropertyChanged("Items");
                 }
@@ -75,9 +76,9 @@ namespace MysteryLocation.ViewModel
 
         public void setTracker(int obsId)
         {
-            foreach(PostListElement x in Items)
+            foreach (PostListElement x in Items)
             {
-                if(x.Id == obsId)
+                if (x.Id == obsId)
                 {
                     tracked = x;
                     tracked.Color = "#1f9f64";
@@ -92,39 +93,53 @@ namespace MysteryLocation.ViewModel
             currentPos = GPSFetcher.currentPosition;
             double distance = 0;
             string buttonColor = "";
+            string textDist;
             Console.WriteLine("MVM inparamter posts size is: " + posts.Count);
-            if (markedPosts.Count > 0) { 
-            foreach (Post x in posts)
+            if (markedPosts.Count > 0)
             {
+                foreach (Post x in posts)
+                {
                     buttonColor = "#404040";
-                    if(x.getId() == App.user.tracker)
+                    if (x.getId() == App.user.tracker)
                         buttonColor = "#1f9f64";
                     if (markedPosts.Contains(x.getId()))
-                {
-                    distance = calcDist(currentPos, x.getCoordinate());
-                    Items.Add(new PostListElement()
                     {
-                        Id = x.getId(),
-                        Subject = x.getSubject().Substring(0, x.getSubject().Length - 3),
-                        Body = x.getBody(),
-                        Created = x.getCreated(),
-                        LastUpdated = x.getLastUpdated(),
-                        Position = x.getCoordinate(),
-                        Dist = distance.ToString(),
-                        Color = buttonColor
-                    });
+                        distance = calcDist(currentPos, x.getCoordinate());
+                        if (distance > 1000)
+                        {
+                            distance /= 1000;
+                            textDist = Math.Round(distance, 1).ToString() + " km";
+                        }
+                        else
+                        {
+                            textDist = Math.Round(distance, 1).ToString() + " m";
+                        }
+
+                        Items.Add(new PostListElement()
+                        {
+
+
+                            Id = x.getId(),
+                            Subject = x.getSubject().Substring(0, x.getSubject().Length - 3),
+                            Body = x.getBody(),
+                            Created = x.getCreated(),
+                            LastUpdated = x.getLastUpdated(),
+                            Position = x.getCoordinate(),
+                            Dist = distance.ToString(),
+                            Color = buttonColor
+                        });
                         Console.WriteLine("Nbr of items in Items is: " + Items.Count);
                         Console.WriteLine("The id of the current elemen is:" + x.getId());
                     }
 
 
+                }
             }
-            }
-            if(App.user.tracker > 0)
+            if (App.user.tracker > 0)
             {
-                foreach(PostListElement x in Items)
+                foreach (PostListElement x in Items)
                 {
-                    if(x.Id == App.user.tracker)
+                    if (x.Id == App.user.tracker)
                     {
                         tracked = x;
                         GlobalFuncs.addTracker(x.Id);
@@ -184,7 +199,8 @@ namespace MysteryLocation.ViewModel
                     break;
                 }
             }
-            if (refe != null) { 
+            if (refe != null)
+            {
                 Items.Remove(refe);
                 App.user.markedSet.Remove(refe.Id); // To keep track of which posts to save where.
             }
