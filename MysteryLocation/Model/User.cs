@@ -130,7 +130,7 @@ namespace MysteryLocation.Model
                             }
                             else
                             {
-                                distance = int.Parse(ln);
+                                distance = double.Parse(ln);
                                 lineCounter++;
                             }
                         }
