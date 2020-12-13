@@ -19,6 +19,7 @@ namespace MysteryLocation.View
 
         private async void agreeButton_Clicked(object sender, EventArgs e)
         {
+            App.user.termsFlag = 1;
             await Navigation.PopModalAsync(true);
         }
     }

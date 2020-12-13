@@ -20,6 +20,7 @@ namespace MysteryLocation.Model
 
         //public Position currentPos;
 
+        public int termsFlag = 0;
 
         public FeedViewModel fvm { get; set; }
 
@@ -128,9 +129,14 @@ namespace MysteryLocation.Model
                                 category = int.Parse(ln);
                                 lineCounter++;
                             }
-                            else
+                            else if(lineCounter == 1)
                             {
                                 distance = double.Parse(ln);
+                                lineCounter++;
+                            }
+                            else
+                            {
+                                termsFlag = int.Parse(ln);
                                 lineCounter++;
                             }
                         }
@@ -168,6 +174,7 @@ namespace MysteryLocation.Model
             String infoToSave = "";
             infoToSave = category + "\n";
             infoToSave += distance + "\n";
+            infoToSave += termsFlag + "\n";
             infoToSave += "*\n";
             foreach (int x in markedSet)
             { // Saving info from marked

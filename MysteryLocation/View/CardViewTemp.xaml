@@ -18,7 +18,11 @@
                              x:Name="listview"
                                  ItemsSource="{Binding Items}" 
                                   RowHeight="180"
-                                  HasUnevenRows="True" >
+                                  HasUnevenRows="True" 
+                                  IsPullToRefreshEnabled="True"
+                                   RefreshCommand="{Binding RefreshCommand}"
+                                    IsRefreshing="{Binding IsRefreshing}"
+                                  >
 
                             <ListView.ItemTemplate>
                                 <DataTemplate x:Name="SS">

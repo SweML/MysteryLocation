@@ -1,9 +1,13 @@
 ﻿using MysteryLocation.Model;
+using Plugin.Connectivity;
 using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace MysteryLocation.ViewModel
 {
@@ -62,7 +66,56 @@ namespace MysteryLocation.ViewModel
         }
 
 
-      
+        private bool _isRefreshing = false;
+        public bool IsRefreshing
+        {
+            get { return _isRefreshing; }
+            set
+            {
+                _isRefreshing = value;
+                OnPropertyChanged(nameof(IsRefreshing));
+            }
+        }
+        public ICommand RefreshCommand
+        {
+            get
+            {
+                return new Command(async () =>
+                {
+                    IsRefreshing = true;
+
+                    await RefreshData();
+
+                    IsRefreshing = false;
+                });
+            }
+        }
+
+        private async Task RefreshData()
+        {
+            await Task.Run(async () => {
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    if (GlobalFuncs.gpsOn && GlobalFuncs.settingsActive)
+                    {
+                        List<Post> posts = await App.conn.getDataAsync();
+                        posts = GlobalFuncs.filterInvaliedPosts(posts);
+                        GlobalFuncs.fvm.updateListElements(posts);
+                    }
+                }
+                else
+                {
+                    DependencyService.Get<SnackInterface>().SnackbarShow("Internet is not available");
+                }
+                // Does not care about distance nor *ML
+               
+                
+                
+            });
+        }
+
+
+
 
         /*
          *  This method will only ever be called when the GPSFetcher has a current Position.
@@ -75,11 +128,24 @@ namespace MysteryLocation.ViewModel
                 memory = posts; // Save the list for later. Ha en metod som tar bort icke valid inlägg
             List<Post> temp = filterBasedOnCategory();
             double distance = 10;
+            string textDist;
             foreach (Post x in temp)
             {
                 distance = calcDist(currentPos, x.getCoordinate());
+                
                 if (distance <= App.user.distance && !App.user.markedSet.Contains(x.getId()) && !App.user.unlockedSet.Contains(x.getId()))
                 {
+
+                    if (distance > 1000)
+                    {
+                        distance /= 1000;
+                        textDist = Math.Round(distance, 1).ToString() + " km";
+                    }
+                    else
+                    {
+                        textDist = Math.Round(distance, 1).ToString() + " m";
+                    }
+
                     Items.Add(new PostListElement()
                     {
                         Id = x.getId(),
@@ -88,7 +154,7 @@ namespace MysteryLocation.ViewModel
                         Created = x.getCreated(),
                         LastUpdated = x.getLastUpdated(),
                         Position = x.getCoordinate(),
-                        Dist = distance.ToString(),
+                        Dist = textDist,
                         Color = "#404040"
                     });
 

@@ -53,8 +53,6 @@ namespace MysteryLocation.View
                     //More to be added.
                 }
             }
-
-
         }
 
         public async Task set(PostListElement x)

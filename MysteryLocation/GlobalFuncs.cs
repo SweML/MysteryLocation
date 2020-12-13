@@ -1,5 +1,6 @@
 ﻿using MysteryLocation.Model;
 using MysteryLocation.ViewModel;
+using Plugin.Connectivity;
 using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
@@ -72,23 +73,40 @@ namespace MysteryLocation
 
         public static async Task unlockTracker()
         {
+            
             if (App.user != null && App.conn != null && GlobalFuncs.mvm.tracked != null && prevUnlock != GlobalFuncs.mvm.tracked.Id)
             {
                 
                 await Task.Run(async () => {
+                   
                     prevUnlock = GlobalFuncs.mvm.tracked.Id;
-                    UnlockedPosts attachment = await App.conn.getPostAttachmentAsync(GlobalFuncs.mvm.tracked.Id);
-                    uvm.addUnlockedPost(mvm.RemovePost(GlobalFuncs.mvm.tracked.Id), attachment);
-                    GlobalFuncs.mvm.tracked = null;
-                });
+                    int temp = GlobalFuncs.mvm.tracked.Id;
+                    if (!CrossConnectivity.Current.IsConnected)
+                    {
+
+                        DependencyService.Get<SnackInterface>().SnackbarShowIndefininte("Internet is not available");
+
+                        while (!CrossConnectivity.Current.IsConnected)
+                        {
+                            await Task.Delay(100);
+                        }
+                        DependencyService.Get<SnackInterface>().SnackbarShow("Internet connection has been established ");
+                    }
                     
-                
-               
-                    //DependencyService.Get<SnackInterface>().SnackbarShow("Post cannot be unlocked - no image available");
-                
+
+                    UnlockedPosts attachment = await App.conn.getPostAttachmentAsync(temp);
+                    uvm.addUnlockedPost(mvm.RemovePost(temp), attachment);
+                    GlobalFuncs.mvm.tracked = null;
+
+                });
+
+
+                //DependencyService.Get<SnackInterface>().SnackbarShow("Post cannot be unlocked - no image available");
+
+
             }
-            
-            
+
+
         }
 
         public static void addTracker(int observationId)

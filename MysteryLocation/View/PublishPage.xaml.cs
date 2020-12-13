@@ -1,5 +1,6 @@
 ﻿using MysteryLocation.Model;
 using MysteryLocation.ViewModel;
+using Plugin.Connectivity;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using System;
@@ -79,84 +80,105 @@ namespace MysteryLocation.View
 
         private async void PublishButton_Clicked(object sender, EventArgs e)
         {
+         
             if (_isTapped)
                 return;
 
             _isTapped = true;
 
-            Console.WriteLine("Publish button is pushed");
-            try
+            if (CrossConnectivity.Current.IsConnected)
             {
-                if (entrySubject.SelectedIndex > -1)
+                try
                 {
-                    // Först publicera vanlig createPost
-                    spinOn();
-
-                    ///hadi 
-                    published = false;
-                    startTiming();
-                    await Task.Delay(10000);   //Ta bort????????/// only to test  the  7 seconds delay
-                    //hadi
-
-                    PostAttachment attach = null;
-                    if (bytes != null)
+                    if (entrySubject.SelectedIndex > -1)
                     {
-                        try
-                        {
-                            attach = new PostAttachment(0, bytes);
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                        }
+                        // Först publicera vanlig createPost
+                        spinOn();
 
-                    }
-                    string title = entrySubject.Items[entrySubject.SelectedIndex];
-                    if (GPSFetcher.currentPosition != null && attach != null && attach.description.Length < 3000000)
-                        title += GlobalFuncs.marker;
-                    createPost pubPost = new createPost(title, entryBody.Text, GPSFetcher.currentPosition);
-                    int status = -2;
-                    status = await conn.testPublishPosts(pubPost);
-                    Console.WriteLine("post was much success");
-                    // Sen skapa PostAttachment och publicera den
-                    if (status >= 0 && (bytes.Length != 0 || bytes != null))
-                    {
-                        attach.obsID = status;
-                        bool success = await conn.publishAttachment(attach);
-                        if (success)
-                        {
-                            imgCam.Source = null;
-                            entryBody.Text = "";
+                        ///hadi 
+                        published = false;
+                        startTiming();
+                        await Task.Delay(10000);   //Ta bort????????/// only to test  the  7 seconds delay
+                                                   //hadi
 
-                            ////
-                            published = true;
+                        PostAttachment attach = null;
+                        if (bytes != null)
+                        {
+                            try
+                            {
+                                attach = new PostAttachment(0, bytes);
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine(ex.Message);
+                            }
+
+                        }
+                        string title = entrySubject.Items[entrySubject.SelectedIndex];
+                        if (GPSFetcher.currentPosition != null && attach != null && attach.description.Length < 3000000)
+                            title += GlobalFuncs.marker;
+                        createPost pubPost = new createPost(title, entryBody.Text, GPSFetcher.currentPosition);
+                        int status = -2;
+                        status = await conn.testPublishPosts(pubPost);
+                        Console.WriteLine("post was much success");
+                        // Sen skapa PostAttachment och publicera den
+                        if (status >= 0 && (bytes.Length != 0 || bytes != null))
+                        {
+                            attach.obsID = status;
+                            bool success = await conn.publishAttachment(attach);
+                            if (success)
+                            {
+                                imgCam.Source = null;
+                                entryBody.Text = "";
+
+                                ////
+                                published = true;
+                                spinOff();
+                                ////
+                            }
+                            else // Publication of attachment failed.
+                            {
+                                spinOff();
+                                DependencyService.Get<SnackInterface>().SnackbarShow("Publish failed");
+
+                            }
+                        }
+                        else // publish failed.
+                        {
+                            DependencyService.Get<SnackInterface>().SnackbarShow("Publish failed");
                             spinOff();
-                            ////
                         }
-                        else // Publication of attachment failed.
-                        {
-                            spinOff();
-                        }
+
+
+
                     }
-                    else // publish failed.
+                    else // Please choose a category for your post.
                     {
-                        Console.WriteLine("Adding attachment failed. Status < 0");
-                        spinOff();
+
                     }
-
-
-
                 }
-                else // Please choose a category for your post.
+                catch (NullReferenceException error)
                 {
+                    Console.WriteLine("nullreference in publishButton: " + error);
+                }
+
+
+
+
+                if (published)
+                {
+                    await Navigation.PopModalAsync(true);
+                    DependencyService.Get<SnackInterface>().SnackbarShow("The post was successfully published");
 
                 }
             }
-            catch (NullReferenceException error)
+            else
             {
-                Console.WriteLine("nullreference in publishButton: " + error);
+                DependencyService.Get<SnackInterface>().SnackbarShow("Internet is not available");
             }
-            await Navigation.PopModalAsync(true);
+          
+            
+
             _isTapped = false;
         }
 

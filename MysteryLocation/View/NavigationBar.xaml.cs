@@ -9,12 +9,12 @@ namespace MysteryLocation
         public User user;
         public APIConnection conn;
         public int flag;
-        public NavigationBar(User user, APIConnection conn, int flag)
+        public static int flago = 0;
+        public NavigationBar(User user, APIConnection conn)
         {
             this.user = user;
             this.conn = conn;
-            this.flag = flag;
-            if (flag == 1)
+            if (App.user.termsFlag == 0)
             {
 
                 pageCreation();

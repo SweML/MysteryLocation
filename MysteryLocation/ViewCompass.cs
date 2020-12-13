@@ -118,7 +118,7 @@ namespace MysteryLocation
                 return;
 
             Compass.ReadingChanged += Compass_ReadingChanged;
-            Compass.Start(SensorSpeed.UI);
+            Compass.Start(SensorSpeed.UI, applyLowPassFilter : true);
 
         }
         private ObservableCollection<PostListElement> items;
