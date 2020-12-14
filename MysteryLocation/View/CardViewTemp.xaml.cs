@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using MysteryLocation.ViewModel;
 using MysteryLocation.Model;
 using Plugin.Toast;
 
@@ -43,17 +42,14 @@ namespace MysteryLocation.View
             }
             catch(ArgumentNullException error)
             {
-                Console.WriteLine("You're pushing the mark button very fast: " + error.Message);
             }
 
 
         }
 
-        //Metod vid refresh.
         private async void updateContents(object sender, EventArgs e)
         {
             List<Post> posts = await App.conn.getDataAsync();
-            //GlobalFuncs.fvm.updateListElements(posts);
         }
     }
 }

@@ -29,7 +29,6 @@ namespace MysteryLocation
         {
             await sem.WaitAsync();
             Uri uri = new Uri(string.Format("https://saabstudent2020.azurewebsites.net/observation", string.Empty));
-            //client.Timeout = TimeSpan.FromSeconds(10);
             HttpResponseMessage response = await client.GetAsync(uri);
             List<Post> posts = new List<Post>();
             if (response.IsSuccessStatusCode)
@@ -77,7 +76,6 @@ namespace MysteryLocation
         public async Task<UnlockedPosts> getPostAttachmentAsync(int obsId)
         {
            await sem.WaitAsync();
-            Stopwatch stop = new Stopwatch();
             Uri uri = new Uri(string.Format("https://saabstudent2020.azurewebsites.net/observation/" + obsId + "/attachment", string.Empty));
             HttpResponseMessage response = await client.GetAsync(uri);
             UnlockedPosts temp = null;
@@ -142,19 +140,6 @@ namespace MysteryLocation
             return temp;
         }
 
-      
-
-        /*
-        private List<Post> ConvertJsonToPostsUser(string JsonString)
-        {
-            List<Post> posts;
-            posts = JsonConvert.DeserializeObject<List<Post>>(JsonString);
-            return posts;
-        }
-        */
-
-
-
         /** Method to delete an observation.
          *  Currently not supported by the API.
          *  The response returns an errorcode 405
@@ -173,18 +158,6 @@ namespace MysteryLocation
                 Console.WriteLine("Delete failed " + response);
             }
         }*/
-
-        /*    public async Task RefreshDataAsync() // Get 
-            {
-                Uri uri = new Uri(string.Format("https://saabstudent2020.azurewebsites.net/observation", string.Empty));
-                HttpResponseMessage response = await client.GetAsync(uri);
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    currentPosts = ConvertJsonToPostsUser(content);
-                }
-            }
-        */
 
 
     }

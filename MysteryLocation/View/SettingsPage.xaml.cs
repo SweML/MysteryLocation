@@ -69,13 +69,12 @@ namespace MysteryLocation
                     break;
             }
             if (GlobalFuncs.settingsActive && GlobalFuncs.gpsOn)
-            { // Check to see if user has chosen a new category. 
+            { 
                 GlobalFuncs.fvm.updateListElements(null);
-                Console.WriteLine("Does this execute?");
+                
             }
             GlobalFuncs.settingsActive = true;
 
-            //NavigationBar.CurrentPage = Children[2];
         }
 
 
@@ -86,33 +85,6 @@ namespace MysteryLocation
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-/* public async void spin()
-        {
-            defaultActivityIndicator.IsRunning = true;
-            await Task.Delay(2000);
-            defaultActivityIndicator.IsRunning = false;
-        }*/
-//if (!StandardPopup.IsOpen) { StandardPopup.IsOpen = true; }
-//Console.WriteLine("popup");
-
-
-//private void ClosePopupClicked(object sender, RoutedEventArgs e)
-//{
-//    // if the Popup is open, then close it 
-//    if (StandardPopup.IsOpen) { StandardPopup.IsOpen = false; }
-//}
-
-
 
 
 

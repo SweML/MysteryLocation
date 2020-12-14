@@ -118,7 +118,7 @@ namespace MysteryLocation.ViewModel
                             break;
                     }
                 }
-                // Does not care about distance nor *ML
+           
                
                 
                 
@@ -178,7 +178,7 @@ namespace MysteryLocation.ViewModel
         public static ObservableCollection<PostListElement> OrderThoseGroups(ObservableCollection<PostListElement> orderThoseGroups)
         {
             ObservableCollection<PostListElement> temp;
-            temp = new ObservableCollection<PostListElement>(orderThoseGroups.OrderBy(PostListElement => PostListElement.Created)); // double.Parse(PostListElement.Dist)
+            temp = new ObservableCollection<PostListElement>(orderThoseGroups.OrderBy(PostListElement => PostListElement.Created)); 
             temp = new ObservableCollection<PostListElement>(temp.Reverse());  //                    Lägg in komparator här om tid.
             orderThoseGroups.Clear();
             foreach (PostListElement j in temp)

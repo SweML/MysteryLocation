@@ -44,7 +44,7 @@ namespace MysteryLocation.Model
             }
             catch(GeolocationException g1)
             {
-                Console.WriteLine("Permission error: " + g1.Message);
+ 
                 
                 switch (Device.RuntimePlatform)
                 {
@@ -77,12 +77,10 @@ namespace MysteryLocation.Model
         private void PositionChanged(object sender, PositionEventArgs e)
         {
 
-            //If updating the UI, ensure you invoke on main thread
             var position = e.Position;
             
             setPositions(position);
-            
-            //Console.WriteLine(output);
+
         }
 
         private void setPositions(Position position)

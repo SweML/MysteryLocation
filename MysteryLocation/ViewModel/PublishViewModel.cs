@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Timers;
 
 namespace MysteryLocation.ViewModel
@@ -78,10 +77,7 @@ namespace MysteryLocation.ViewModel
 
         void timer_Elapsed(object sender, ElapsedEventArgs e)
         {
-            // if (PropertyChanged != null)
-            Console.WriteLine("Ticking");
                 OnPropertyChanged("Now");
-               // PropertyChanged(this, new PropertyChangedEventArgs("Now"));
         }
 
         public PublishViewModel()

@@ -40,19 +40,7 @@ namespace MysteryLocation.ViewModel
             }
         }
 
-        /*  private string localArea;
-          public string LocalArea // User position
-          {
-              get { return localArea; }
-              set
-              {
-                  if (localArea != value)
-                  {
-                      localArea = value;
-                      OnPropertyChanged("LocalArea");
-                  }
-              }
-          }*/
+       
 
         public ObservableCollection<PostListElement> Items
         {
@@ -94,7 +82,6 @@ namespace MysteryLocation.ViewModel
             double distance = 0;
             string buttonColor = "";
             string textDist;
-            Console.WriteLine("MVM inparamter posts size is: " + posts.Count);
             if (markedPosts.Count > 0)
             {
                 foreach (Post x in posts)
@@ -128,8 +115,7 @@ namespace MysteryLocation.ViewModel
                             Dist = distance.ToString(),
                             Color = buttonColor
                         });
-                        Console.WriteLine("Nbr of items in Items is: " + Items.Count);
-                        Console.WriteLine("The id of the current elemen is:" + x.getId());
+                 
                     }
 
 
@@ -174,7 +160,6 @@ namespace MysteryLocation.ViewModel
                                 x.Dist = distance.ToString() + " m"; // Math.round not needed here.
                             }
                         }
-                        Console.WriteLine("fvm.RecalculateDistance(); is finished");
                     }
                 }
             }
@@ -182,11 +167,9 @@ namespace MysteryLocation.ViewModel
 
         public void AddPost(PostListElement x)
         {
-            Console.WriteLine("Entering AddPost");
             Items.Add(x);
             App.user.markedSet.Add(x.Id); // To keep track of which posts to save where.
-            Console.WriteLine("Exiting AddPost");
-            Console.WriteLine("Items count is: " + Items.Count);
+
         }
 
         public PostListElement RemovePost(int temp)

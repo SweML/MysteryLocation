@@ -1,7 +1,5 @@
 ﻿using Plugin.Geolocator.Abstractions;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MysteryLocation
 {
@@ -21,17 +19,5 @@ namespace MysteryLocation
 
         }
 
-
-
-
-        public void unlockImage()
-        {
-
-        }
-
-        public void lockImage()
-        {
-
-        }
     }
 }

@@ -5,10 +5,7 @@ using Plugin.Geolocator.Abstractions;
 using Plugin.Toast;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace MysteryLocation
@@ -124,7 +121,6 @@ namespace MysteryLocation
                 });
 
 
-                //DependencyService.Get<SnackInterface>().SnackbarShow("Post cannot be unlocked - no image available");
 
 
             }
@@ -134,7 +130,6 @@ namespace MysteryLocation
 
         public static void addTracker(int observationId)
         {
-            Console.WriteLine("Entering Add Tracker");
             foreach (PostListElement x in mvm.Items)
             {
                 if (x.Id == observationId)
@@ -143,7 +138,6 @@ namespace MysteryLocation
                     App.user.tracker = observationId;
                     mvm.tracked.Color = "#1f9f64";
                     Console.WriteLine(x.Position.Latitude + x.Position.Longitude);
-                    //marked.Remove(x);
                 }
             }
         }
