@@ -38,9 +38,38 @@ namespace MysteryLocation.Model
         {
             if (CrossGeolocator.Current.IsListening)
                 return;
+            try
+            {
+                await CrossGeolocator.Current.StartListeningAsync(TimeSpan.FromSeconds(5), 10, true);
+            }
+            catch(GeolocationException g1)
+            {
+                Console.WriteLine("Permission error: " + g1.Message);
+                
+                switch (Device.RuntimePlatform)
+                {
+                    case Device.Android:
+                        
+                        DependencyService.Get<SnackInterface>().SnackbarShow("To use our app you have to grant us the permission to use your GPS");
+                        break;
+                    case Device.iOS:
+                        CrossToastPopUp.Current.ShowToastMessage("To use our app you have to grant us the permission to use your GPS");
+                        break;
+                    default:
+                        break;
+                }
+                try
+                {
+                    await CrossGeolocator.Current.StartListeningAsync(TimeSpan.FromSeconds(5), 10, true);
 
-            await CrossGeolocator.Current.StartListeningAsync(TimeSpan.FromSeconds(5), 10, true);
+                }
+                catch (GeolocationException g2)
+                {
+                    Environment.Exit(0);
+                }
 
+
+            }
             CrossGeolocator.Current.PositionChanged += PositionChanged;
             CrossGeolocator.Current.PositionError += PositionError;
         }
