@@ -23,20 +23,27 @@ namespace MysteryLocation.View
 
         private void Mark_Clicked(object sender, EventArgs e)
         {
-            int temp = int.Parse((sender as Button).AutomationId);
-            PostListElement refElement = GlobalFuncs.fvm.RemovePost(temp);
-            GPSFetcher.mvm.AddPost(refElement);
-
-            switch (Device.RuntimePlatform)
+            try
             {
-                case Device.Android:
-                    DependencyService.Get<SnackInterface>().SnackbarShow("Post #" + temp + " is now marked");
-                    break;
-                case Device.iOS:
-                    CrossToastPopUp.Current.ShowToastMessage("Post #" + temp + " is now marked");
-                    break;
-                default:
-                    break;
+                int temp = int.Parse((sender as Button).AutomationId);
+                PostListElement refElement = GlobalFuncs.fvm.RemovePost(temp);
+                GPSFetcher.mvm.AddPost(refElement);
+
+                switch (Device.RuntimePlatform)
+                {
+                    case Device.Android:
+                        DependencyService.Get<SnackInterface>().SnackbarShow("Post #" + temp + " is now marked");
+                        break;
+                    case Device.iOS:
+                        CrossToastPopUp.Current.ShowToastMessage("Post #" + temp + " is now marked");
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch(ArgumentNullException error)
+            {
+                Console.WriteLine("You're pushing the mark button very fast: " + error.Message);
             }
 
 
