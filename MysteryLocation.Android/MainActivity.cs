@@ -1,21 +1,13 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
-using MysteryLocation;
 using System.IO;
 using System.Threading.Tasks;
 using Android.Content;
 using Plugin.CurrentActivity;
-using Android.Support.V4.Content;
+
 using Xamarin.Forms;
-using Android;
-using Android.Support.V4.App;
-using Android.Util;
-using Android.Support.Design.Widget;
+
 
 namespace MysteryLocation.Droid
 {
@@ -35,13 +27,6 @@ namespace MysteryLocation.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             Forms.Init(this, savedInstanceState);
-           
-            //ActivityCompat.RequestPermissions(this, permissionArray, requestCode);
-            // App.ScreenWidth = Resources.DisplayMetrics.WidthPixels / Resources.DisplayMetrics.Density;
-            // App.ScreenHeight = Resources.DisplayMetrics.HeightPixels / Resources.DisplayMetrics.Density;
-
-
-
          
             LoadApplication(new App());
         }
@@ -78,61 +63,7 @@ namespace MysteryLocation.Droid
             }
         }
 
-    /*public static bool hasPermissions(Context context, String[] permissions)
-    {
-        if (context != null && permissions != null)
-        {
-            foreach(string permission in permissions)
-            {
-                if (ActivityCompat.CheckSelfPermission(context, permission) != Permission.Granted)
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-       int PERMISSION_ALL = 1;
-            String[] PERMISSIONS = {
-                Manifest.Permission.AccessFineLocation,
-                Manifest.Permission.AccessCoarseLocation,
-                Manifest.Permission.Camera, 
-                Manifest.Permission.ReadExternalStorage, 
-                Manifest.Permission.WriteExternalStorage
-            };
-
-            if (!hasPermissions(this, PERMISSIONS))
-            {
-                ActivityCompat.RequestPermissions(this, PERMISSIONS, PERMISSION_ALL);
-            }
-
-           private async void handlePermission(int requestCode)
-          {
-              switch (requestCode)
-              {
-                  case CAMERA:
-                      if (ActivityCompat.CheckSelfPermission(this, Manifest.Permission.Camera) != Permission.Granted)
-                      {
-                          if (ActivityCompat.ShouldShowRequestPermissionRationale(this, Manifest.Permission.Camera))
-                          {
-                              await Navigation.DisplayAlert("Need location", "Gunna need that location", "OK");
-                          }
-                      }
-                      break;
-              }
-          }
-
-           private String[] PERMISSIONS = {
-                  Manifest.Permission.AccessFineLocation,
-                  Manifest.Permission.AccessCoarseLocation,
-                  Manifest.Permission.Camera,
-                  Manifest.Permission.ReadExternalStorage,
-                  Manifest.Permission.WriteExternalStorage };
-
-          private const int CAMERA = 1, STORAGE = 2, LOCATION = 25;
-       */
-            
      
-}
+    }
 }
     
