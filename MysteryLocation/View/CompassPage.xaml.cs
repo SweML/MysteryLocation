@@ -1,6 +1,4 @@
 ﻿using MysteryLocation.Model;
-using System;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 
 
@@ -21,8 +19,6 @@ namespace MysteryLocation
             this.BindingContext = vm;
 
             vm.Start();
-            ///versionsTracking Hadi
-
         }
     }
 }

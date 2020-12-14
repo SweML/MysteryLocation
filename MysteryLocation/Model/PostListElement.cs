@@ -1,8 +1,5 @@
 ﻿using Plugin.Geolocator.Abstractions;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
 using Xamarin.Forms;
 
 namespace MysteryLocation.Model
@@ -14,7 +11,6 @@ namespace MysteryLocation.Model
         public String body;
         public String created;
         public String lastUpdated;
-        //public Coordinate position;
         public Position position;
         public String dist;
         public String color;

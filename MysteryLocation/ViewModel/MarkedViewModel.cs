@@ -143,6 +143,7 @@ namespace MysteryLocation.ViewModel
                     {
                         tracked = x;
                         GlobalFuncs.addTracker(x.Id);
+                        setMyPos(currentPos);
                     }
                 }
             }

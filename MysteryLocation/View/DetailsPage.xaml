@@ -71,7 +71,6 @@
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="1"/>
                                 </Grid.RowDefinitions>
-                                <!-- Add show image fullscreen?-->
                                 <Image  x:Name="image" HeightRequest="150" WidthRequest="100" Grid.Row="1" Opacity="1" Aspect="AspectFit"></Image>
                             </Grid>
                         </StackLayout>
@@ -104,25 +103,25 @@
                     <StackLayout>
                         <Grid>
                             <Grid.RowDefinitions>
-                                <!--Empty-->
+
                                 <RowDefinition Height="2"/>
-                                <!--Tallinn, Eesti - EE-->
-                                <RowDefinition Height="20"/>
-                                <!--Latitude-->
-                                <RowDefinition Height="17"/>
-                                <!--Longitude-->
-                                <RowDefinition Height="20"/>
-                                <!--Altitude-->
-                                <RowDefinition Height="17"/>
-                                <!--Timestamp-->
+
                                 <RowDefinition Height="20"/>
 
-                                <RowDefinition Height="17"/>
-                                <!--Latitude-->
+                                <RowDefinition Height="18"/>
+
                                 <RowDefinition Height="20"/>
-                                <!--Longitude-->
-                                <RowDefinition Height="17"/>
-                                <!--Altitude-->
+
+                                <RowDefinition Height="18"/>
+
+                                <RowDefinition Height="20"/>
+
+                                <RowDefinition Height="18"/>
+
+                                <RowDefinition Height="20"/>
+
+                                <RowDefinition Height="18"/>
+
                             </Grid.RowDefinitions>
                             <Label
                                     Text="Location"
@@ -168,8 +167,6 @@
                                     FontSize="15"
                                     TextColor="White"
                                     />
-
-                            
 
                             <Label
                                     Text="Date"

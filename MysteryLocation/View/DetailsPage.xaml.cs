@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using MysteryLocation.Model;
-using System.IO;
 using Plugin.Geolocator.Abstractions;
 using Xamarin.Essentials;
 
@@ -26,11 +23,9 @@ namespace MysteryLocation.View
         {
             this.id = id;
             this.user = user;
-            //uvm = new UnlockedViewModel(user);
 
 
-            /**/
-            
+
             InitializeComponent();
             foreach (PostListElement x in GlobalFuncs.uvm.Items)
             {
@@ -50,7 +45,6 @@ namespace MysteryLocation.View
                     });
                     
 
-                    //More to be added.
                 }
             }
         }

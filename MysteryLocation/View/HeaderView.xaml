@@ -27,16 +27,19 @@
                         FontFamily="Circular"
                         VerticalOptions="Center"
                         HorizontalOptions="Fill"/>
+
+                    <ImageButton 
+                        BackgroundColor="Black"
+                        Source="pluspublish.png"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        VerticalOptions="Center"
+                            HorizontalOptions="End"
+                        Margin="0,7,13,0"
+                        Clicked="ImageButton">
+                        
+                    </ImageButton>
                 
-                <ImageButton 
-                    BackgroundColor="Black"
-                    Source="pluspublish.png"
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    VerticalOptions="Center"
-                        HorizontalOptions="End"
-                    Margin="0,0,10,0"
-                    Clicked="ImageButton_Clicked"/>
                 <Label 
                         Grid.Row="2"
                         Text="{Binding PositionLocation}"
@@ -55,16 +58,7 @@
                         FontFamily="Circular"
                         VerticalOptions="Center"
                         HorizontalOptions="Start"/>
-                <!--    <Label 
-                        Grid.Row="2"
-                        Text="{Binding LocalArea}"
-                        TextColor="White"
-                        FontSize="10"
-                        Margin="20,0,0,0"
-                        FontFamily="Helvetica"
-                        VerticalOptions="Center"
-                        HorizontalOptions="Start"/>
-                -->
+
             </Grid>
         </StackLayout>
     </ContentView.Content>

@@ -74,6 +74,8 @@ namespace MysteryLocation
                 Console.WriteLine("Does this execute?");
             }
             GlobalFuncs.settingsActive = true;
+
+            //NavigationBar.CurrentPage = Children[2];
         }
 
 

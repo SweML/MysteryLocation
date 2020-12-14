@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:views="clr-namespace:MysteryLocation.View"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:views="clr-namespace:MysteryLocation.View"
              x:Class="MysteryLocation.View.CardViewTemp"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.BackButtonTitle="False"
              BackgroundImageSource="home.png">
-    <!--ControlTemplate="{StaticResource Template}">-->
 
     <ContentPage.Content>
         <Frame Padding="0" BackgroundColor="Black" Opacity="0.9">
@@ -25,18 +25,18 @@
                                   >
 
                             <ListView.ItemTemplate>
-                                <DataTemplate x:Name="SS">
+                                <DataTemplate>
                                     <ViewCell>
-                                        <ContentView x:Name="SSS" Margin="5,5,5,5">
+                                        <ContentView Margin="5,5,5,5">
                                             <Frame OutlineColor="#d9d9d8" CornerRadius="25" Padding="15" BackgroundColor="Black">
-                                                <StackLayout x:Name="DSL" Orientation="Horizontal">
+                                                <StackLayout Orientation="Horizontal">
                                                     <StackLayout Orientation="Horizontal">
                                                         <BoxView Color="DarkGray"
                                                                 WidthRequest="90"
                                                                 HeightRequest="90"
                                                                 HorizontalOptions="Center"
                                                                 VerticalOptions="Center"/>
-                                                        <StackLayout x:Name="SL" Padding="0">
+                                                        <StackLayout Padding="0">
                                                             <Label x:Name="Title" Text="{Binding Subject}"
                                                                 FontSize="22"
                                                                 FontFamily="Circular"
@@ -47,9 +47,9 @@
                                                         </StackLayout>
                                                     </StackLayout>
 
-                                                    <StackLayout x:Name="SLSL" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                                    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
 
-                                                        <StackLayout x:Name="SLmark" HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Orientation="Vertical" 
+                                                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Fill" Orientation="Vertical" 
                                                                                 Grid.Column="1" Grid.Row="0" Padding="0,0,0,0">
                                                             <StackLayout  HorizontalOptions="End" VerticalOptions="FillAndExpand" Orientation="Vertical">
                                                                 <Label x:Name="Category" Text="{Binding Dist}"
@@ -74,10 +74,6 @@
 
 
                                                             </StackLayout>
-
-
-
-
                                                         </StackLayout>
 
 

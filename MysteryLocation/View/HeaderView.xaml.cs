@@ -1,10 +1,5 @@
 ﻿using MysteryLocation.Model;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,7 +14,7 @@ namespace MysteryLocation.View
             InitializeComponent();
         }
 
-        private async void ImageButton_Clicked(object sender, EventArgs e)
+        private async void ImageButton(object sender, EventArgs e)
         {
             if (_isTapped)
                 return;

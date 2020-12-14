@@ -4,6 +4,7 @@
              x:Class="MysteryLocation.View.TermsView"
              BackgroundColor="Black"
              >
+
     <ContentPage.Content>
         <StackLayout>
             <Label Margin="15" Text="Terms and Conditions :" FontFamily="Circular" TextColor="White" FontAttributes="Bold" FontSize="Large"></Label>

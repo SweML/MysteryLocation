@@ -1,14 +1,10 @@
 ﻿using MysteryLocation.Model;
-using MysteryLocation.ViewModel;
 using Plugin.Connectivity;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Plugin.Toast;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -72,7 +68,7 @@ namespace MysteryLocation.View
             }
             catch(NullReferenceException)
             {
-                Console.WriteLine("Nullref exception, you didn't choose anything in browse");
+                
             }
             (sender as Button).IsEnabled = true;
         }
@@ -93,14 +89,9 @@ namespace MysteryLocation.View
                 {
                     if (entrySubject.SelectedIndex > -1)
                     {
-                        // Först publicera vanlig createPost
                         spinOn();
-
-                        ///hadi 
                         published = false;
                         startTiming();
-                        await Task.Delay(10000);   //Ta bort????????/// only to test  the  7 seconds delay
-                                                   //hadi
 
                         PostAttachment attach = null;
                         if (bytes != null)
@@ -121,7 +112,7 @@ namespace MysteryLocation.View
                         createPost pubPost = new createPost(title, entryBody.Text, GPSFetcher.currentPosition);
                         int status = -2;
                         status = await conn.testPublishPosts(pubPost);
-                        Console.WriteLine("post was much success");
+
                         // Sen skapa PostAttachment och publicera den
                         if (status >= 0 && bytes != null && attach != null)
                         {
@@ -132,10 +123,8 @@ namespace MysteryLocation.View
                                 imgCam.Source = null;
                                 entryBody.Text = "";
 
-                                ////
                                 published = true;
                                 spinOff();
-                                ////
                             }
                             else // Publication of attachment failed.
                             {
@@ -175,12 +164,21 @@ namespace MysteryLocation.View
                     }
                     else // Please choose a category for your post.
                     {
-
+                        switch (Device.RuntimePlatform)
+                        {
+                            case Device.Android:
+                                DependencyService.Get<SnackInterface>().SnackbarShow("Please choose a category before publishing");
+                                break;
+                            case Device.iOS:
+                                CrossToastPopUp.Current.ShowToastMessage("Please choose a category before publishing");
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
                 catch (NullReferenceException error)
                 {
-                    Console.WriteLine("nullreference in publishButton: " + error);
                 }
 
 
@@ -249,7 +247,6 @@ namespace MysteryLocation.View
 
 
 
-        /// hadis  timer  
         public void startTiming()
         {
             Device.StartTimer(new TimeSpan(0, 0, 7), () =>
@@ -276,7 +273,6 @@ namespace MysteryLocation.View
                 return false; // runs again, or false to stop
             });
         }
-        /// hadis Timer 
 
 
 

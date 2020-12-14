@@ -11,18 +11,16 @@
     <ContentPage.Content>
         <Frame Padding="0" BackgroundColor="#000000" Opacity="0.9">
             <StackLayout>
-                <!--stacklayout for the welcome message -->
+                
                 <views:HeaderView />
-                <!--Name and Visible were Added to control the welcome messaGES  -->
+             
                 <pv:PancakeView BackgroundColor="#001010" CornerRadius="30,30,30,30" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="1" Margin="0,0,0,0">
 
 
                     <StackLayout x:Name="layout">
                         <Grid>
-                            <!-- Text="{Binding CurrentPosition}"-->
 
                             <Grid>
-                                <!--Here we put compass for fun -->
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="5" />
                                     <RowDefinition Height="25" />
@@ -48,7 +46,8 @@
                                        VerticalOptions="StartAndExpand"	
                                        HorizontalOptions="Center"  
                                        FontFamily="Circular"/>
-                                <control:ProgressRing RingThickness="65" RingProgressColor="#eeb705" Opacity="0.7" Progress="{Binding DecimalD}" ScaleX="0.80" ScaleY="0.80" RingBaseColor="Transparent" Grid.Row="3"/>
+                                <control:ProgressRing RingThickness="65" 
+                                                      RingProgressColor="#eeb705" Opacity="0.7" Progress="{Binding DecimalD}" ScaleX="0.80" ScaleY="0.80" RingBaseColor="Transparent" Grid.Row="3"/>
                                 <Image HorizontalOptions="FillAndExpand" 
                                    VerticalOptions="Center" 
                                    Rotation="{Binding Heading}" 

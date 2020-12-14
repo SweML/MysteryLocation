@@ -22,10 +22,8 @@
     <None Remove="Resources\Fonts\AndersonGrotesk-Ultrabold.otf" />
     <None Remove="Resources\Fonts\CircularStd-Black.ttf" />
     <None Remove="Resources\Fonts\CircularStd-Book.otf" />
-    <None Remove="Resources\Fonts\Helvetica93.ttf" />
     <None Remove="Resources\Fonts\Lato-Black.ttf" />
     <None Remove="Resources\Fonts\Lato-Light.ttf" />
-    <None Remove="Resources\Fonts\Walkway_SemiBold.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,16 +36,10 @@
     <EmbeddedResource Include="Resources\Fonts\CircularStd-Book.otf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Fonts\Helvetica93.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Fonts\Lato-Black.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Fonts\Lato-Light.ttf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Fonts\Walkway_SemiBold.ttf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

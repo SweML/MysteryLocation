@@ -8,7 +8,6 @@
             BarBackgroundColor="#090909"
             android:TabbedPage.BarItemColor="#FCF6F5"
             android:TabbedPage.BarSelectedItemColor="#eeb705"
-            
 >
     <!--  <NavigationPage Title="Settings" IconImageSource="settingsIcon.png" >
         <x:Arguments>

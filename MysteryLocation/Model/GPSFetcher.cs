@@ -50,13 +50,7 @@ namespace MysteryLocation.Model
 
             //If updating the UI, ensure you invoke on main thread
             var position = e.Position;
-            var output = "Full: Lat: " + position.Latitude + " Long: " + position.Longitude;
-            output += "\n" + $"Time: {position.Timestamp}";
-            output += "\n" + $"Heading: {position.Heading}";
-            output += "\n" + $"Speed: {position.Speed}";
-            output += "\n" + $"Accuracy: {position.Accuracy}";
-            output += "\n" + $"Altitude: {position.Altitude}";
-            output += "\n" + $"Altitude Accuracy: {position.AltitudeAccuracy}";
+            
             setPositions(position);
             
             //Console.WriteLine(output);
@@ -68,10 +62,7 @@ namespace MysteryLocation.Model
             GlobalFuncs.gpsOn = true;
             string latitude = "" + Math.Round(position.Latitude, 5);
             string longitude = "" + Math.Round(position.Longitude, 5);
-            /*if (latitude.Length > 8)
-                latitude = latitude.Substring(0, 8);
-            if (longitude.Length > 8)
-                longitude = longitude.Substring(0, 8);*/
+         
             string writePosition = latitude + ", " + longitude;
             if (getNewPos) { 
             Task.Run(async () => {
@@ -124,6 +115,7 @@ namespace MysteryLocation.Model
                     }
                     else
                     {
+                        //TODO
                         vc.DecimalD = 1.0 - (b / a);
                     }
 
@@ -156,24 +148,22 @@ namespace MysteryLocation.Model
                     switch (Device.RuntimePlatform)
                     {
                         case Device.Android:
-                            DependencyService.Get<SnackInterface>().SnackbarShow("Post nr: " + GlobalFuncs.mvm.tracked.Id + " is unlocked");
+                            DependencyService.Get<SnackInterface>().SnackbarShow("Post #" + GlobalFuncs.mvm.tracked.Id + " is unlocked");
                             break;
                         case Device.iOS:
-                            CrossToastPopUp.Current.ShowToastMessage("Post nr: " + GlobalFuncs.mvm.tracked.Id + " is unlocked");
+                            CrossToastPopUp.Current.ShowToastMessage("Post #" + GlobalFuncs.mvm.tracked.Id + " is unlocked");
                             break;
                         default:
                             break;
                     }
 
 
-                    //Stop tracking
-                    //Remove from mList
                     Task.Run(async () => {
                         withinTwentyFive = true;
                         await GlobalFuncs.unlockTracker();
                         withinTwentyFive = false;
                     });
-                    // PostListElement refElement = GlobalFuncs.mvm.RemovePost(GlobalFuncs.mvm.tracked.Id);
+                  
 
                     //Add in unlocked
                 }

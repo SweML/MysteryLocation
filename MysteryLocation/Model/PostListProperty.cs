@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.ComponentModel;
-using System.Text;
+
 
 namespace MysteryLocation.Model
 {
@@ -11,7 +10,6 @@ namespace MysteryLocation.Model
 
         protected void OnPropertyChanged(string propertyName)
         {
-            //var handler = PropertyChanged;
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }

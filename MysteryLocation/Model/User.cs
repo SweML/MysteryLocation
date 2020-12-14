@@ -1,6 +1,4 @@
 ﻿using MysteryLocation.ViewModel;
-using Newtonsoft.Json;
-using Plugin.Geolocator.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,8 +15,6 @@ namespace MysteryLocation.Model
         public HashSet<int> forbiddenSet = new HashSet<int>(); // For feed
 
         public int category = 0;
-
-        //public Position currentPos;
 
         public int termsFlag = 0;
 
@@ -47,9 +43,7 @@ namespace MysteryLocation.Model
         public double distance = 0;
 
 
-        public Post tracking { get; set; }
         private APIConnection conn;
-
 
 
         public User(APIConnection conn)
@@ -77,33 +71,9 @@ namespace MysteryLocation.Model
             return distance;
         }
 
-        public void unlockCurrent()
-        {
-            //unlocked.Add(tracking);
-            unlockedSet.Add(tracking.getId());
-            Task.Run(async () =>
-            {
-                UnlockedPosts temp = await conn.getPostAttachmentAsync(tracking.getId());
-                temp.obsID = tracking.getId();
-                // uvm.addUnlockedPost(tracking, temp);
-                tracking = null;
-            });
-
-        }
-
-        public void testUnlockCurrent()
-        {
-            Task.Run(async () =>
-            {
-                await Task.Delay(15000);
-                UnlockedPosts temp = await conn.getPostAttachmentAsync(384);
-                temp.obsID = 384;
-                uvm.testAddUnlockedPost(384, temp);
-            });
-        }
 
         /**
-* Reads the cookie file for information about the user.
+* Reads the local file for information about the user.
 */
         public void ReadUser()
         {
@@ -154,7 +124,6 @@ namespace MysteryLocation.Model
                         }
                         else
                         {
-                           // GlobalFuncs.addTracker(int.Parse(ln));  // added 12/12
                             tracker = int.Parse(ln);
                             lineCounter++;
                         }
@@ -201,28 +170,6 @@ namespace MysteryLocation.Model
             var filename = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), obsId + ".dat");
             System.IO.File.WriteAllBytes(filename, image);
         }
-
-        // Method to set which post is being tracked.
-        /*   public void addTracker(int observationId)
-           {
-               Console.WriteLine("ENTERING ADD TRACKER");
-               foreach (Post x in marked)
-               {
-                   Console.WriteLine("jaja" + x.getId());
-                   if (x.getId() == observationId)
-                   {
-                       tracking = x;
-                       Console.WriteLine("Skriver du ut koordinaterna" + x.getCoordinate().Latitude + x.getCoordinate().Longitude);
-                       //marked.Remove(x);
-                   }
-               }
-               Console.WriteLine("count IN marked" +  marked.Count);
-               Console.WriteLine("count IN feed" + feed.Count);
-               Console.WriteLine("count IN unlock" + unlocked.Count);
-           }
-          */
-
-
 
         public byte[] readImage(int obsId)
         {
