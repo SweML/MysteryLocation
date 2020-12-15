@@ -1,13 +1,10 @@
 ﻿using MysteryLocation.Model;
-using Plugin.Geolocator.Abstractions;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 using Xamarin.Essentials;
-using Xamarin.Forms;
+
 
 namespace MysteryLocation
 {
@@ -143,9 +140,7 @@ namespace MysteryLocation
             
             try
             {
-                //var location = await Geolocation.GetLastKnownLocationAsync();
-                //Get position of post, släng in dem i sista 2 param nedan
-                // Beta = Heading + Bearing(location.Latitude, location.Longitude, GlobalFuncs.mvm.tracked.Position.Latitude, GlobalFuncs.mvm.tracked.Position.Longitude);
+              
 
 
                 if(GPSFetcher.currentPosition != null && GlobalFuncs.mvm.tracked != null) { 
@@ -174,7 +169,6 @@ namespace MysteryLocation
                 // Unable to get location
             }
         }
-        //Bäringsvinkel - Metodens sista 2 parametrar ska matas in med koordinater av ett valt inlägg
         public double Bearing(double myLA, double myLO, double destLatitude, double destLongitude)
         {
             double latA = DtR(myLA);

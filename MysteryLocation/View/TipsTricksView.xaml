@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MysteryLocation.View.TipsTricksView"
+             BackgroundImageSource="startbackground.png">
+    <ContentPage.Content>
+        <StackLayout  Padding="15" Orientation="Vertical" Opacity="0.85" BackgroundColor="Black">
+           
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="35"/>
+                            <!--Title-->
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="1"/>
+                            <!--Boxviw-->
+                            <RowDefinition Height="5"/>
+
+
+                        </Grid.RowDefinitions>
+
+
+                        <Label 
+                        Grid.Row="1"
+                        Text="Tips &amp; Tricks"
+                        TextColor="#eeb705"
+                        FontSize="30"
+                        Margin="20,0,0,0"
+                        FontFamily="Circular"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Fill"/>
+                        <BoxView Grid.Row="3"  HorizontalOptions="Fill" HeightRequest="0.5" Color="White" />
+                    </Grid>
+                    
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"/>
+                    <RowDefinition Height="1"/>
+                    <!--Title pic-->
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label 
+                    
+                    
+                        Grid.Row="0"
+                        Text="Hold the home button to publish!"
+                        TextColor="#eeb705"
+                        FontSize="20"
+                        Margin="20,0,0,0"
+                        FontFamily="Circular"
+                        VerticalOptions="Center"
+                        HorizontalOptions="End"/>
+                <BoxView Grid.Row="1"  HorizontalOptions="End" HeightRequest="0.5" Color="White" />
+                <Image Grid.Row="2"
+                       Source="publishInst.png"
+                       HorizontalOptions="End"
+                       VerticalOptions="FillAndExpand"
+                           HeightRequest="300"
+                           BackgroundColor="Blue"
+                    />
+
+                    </Grid>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"/>
+                    <RowDefinition Height="1"/>
+                    <!--Title pic-->
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label 
+                    
+                    
+                        Grid.Row="0"
+                        Text="Tap the header to dismiss the details"
+                        TextColor="#eeb705"
+                        FontSize="20"
+                        FontFamily="Circular"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"/>
+                <BoxView Grid.Row="1"  HorizontalOptions="Start" HeightRequest="0.5" Color="White" />
+                <Image Grid.Row="2"
+                       Source="detailInstr.png"
+                       HorizontalOptions="Start"
+                       VerticalOptions="FillAndExpand"
+                           HeightRequest="300"
+                           BackgroundColor="Blue"
+                    />
+
+
+
+                    </Grid>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="25"/>
+                    <RowDefinition Height="1"/>
+                    <!--Title pic-->
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label 
+                    
+                    
+                        Grid.Row="0"
+                        Text="Progressbar when tracking"
+                        TextColor="#eeb705"
+                        FontSize="20"
+                        FontFamily="Circular"
+                        VerticalOptions="Center"
+                        HorizontalOptions="End"/>
+                <BoxView Grid.Row="1"  HorizontalOptions="End" HeightRequest="0.5" Color="White" />
+                <Image Grid.Row="2"
+                       Source="compInstr.png"
+                       HorizontalOptions="End"
+                       VerticalOptions="FillAndExpand"
+                           HeightRequest="500"
+                           BackgroundColor="Blue"
+                    />
+                    </Grid>
+
+                    <Button Grid.Row="14"  Text="GOT IT!"
+                        Clicked="Clicked"
+                    BackgroundColor="#eeb705"
+                    TextColor="Black">
+
+                    </Button>
+                </StackLayout>
+
+           
+    </ContentPage.Content>
+</ContentPage>

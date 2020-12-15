@@ -1,30 +1,31 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace MysteryLocation.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TermsView : ContentPage
+    public partial class InstructionView : ContentPage
     {
         Boolean _isTapped = false;
-        public TermsView()
+        public TipsView()
         {
             InitializeComponent();
         }
 
-        private async void agreeButton_Clicked(object sender, EventArgs e)
+        private async void Instruction_Clicked(object sender, EventArgs e)
         {
             if (_isTapped)
                 return;
 
             _isTapped = true;
-            App.user.termsFlag = 1;
             await Navigation.PopModalAsync(true);
-
             _isTapped = false;
         }
-
-       
     }
 }

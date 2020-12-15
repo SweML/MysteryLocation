@@ -18,7 +18,10 @@ namespace MysteryLocation
             {
 
                 pageCreation();
+                pushTricks();
+                pushAboutApp();
                 pushTerms();
+                
             }
             else
             {
@@ -40,10 +43,17 @@ namespace MysteryLocation
             this.Children.Add(new MarkedPostsPage(user) { Title = "Marked", IconImageSource = "feedIcon.png" });
             this.Children.Add(new UnlockedPostsPage(user) { Title = "Unlocked", IconImageSource = "unlockedIcon.png" });
         }
-
+        private async void pushAboutApp()
+        {
+            await Navigation.PushModalAsync(new AboutView());
+        }
         private async void pushTerms()
         {
             await Navigation.PushModalAsync(new TermsView());
+        }
+        private async void pushTricks()
+        {
+            await Navigation.PushModalAsync(new TipsTricksView());
         }
     }
 }

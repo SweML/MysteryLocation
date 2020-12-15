@@ -300,7 +300,14 @@ namespace MysteryLocation.View
             {
                     GPSFetcher.pvm.stopTimer();
                     base.OnBackButtonPressed();
-                    await Navigation.PopModalAsync();
+
+                if (_isTapped)
+                    return;
+
+                _isTapped = true;
+                await Navigation.PopModalAsync();
+
+                _isTapped = false;
                 
             });
 

@@ -4,12 +4,10 @@ using Android.Support.Design.Widget;
 using Android.Views;
 using MysteryLocation;
 using System;
-using MysteryLocation.Droid;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms.Platform.Android.AppCompat;
 using MysteryLocation.View;
-using System.Diagnostics;
 using Android.Support.V4.View;
 using MysteryLocation.Model;
 

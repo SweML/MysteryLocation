@@ -1,0 +1,78 @@
+﻿<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MysteryLocation.View.AboutView"
+             
+             BackgroundImageSource="startbackground.png">
+    <ContentPage.Content>
+        <StackLayout  Padding="15" Orientation="Vertical" BackgroundColor="Black" Opacity="0.85">
+            <ScrollView>
+                <StackLayout   Padding="15" Orientation="Vertical">
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="35"/>
+                            <!--Title-->
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="1"/>
+                            <!--Boxviw-->
+                            <RowDefinition Height="5"/>
+
+
+                        </Grid.RowDefinitions>
+
+
+                        <Label 
+                        Grid.Row="1"
+                        Text="About MysteryLocation"
+                        TextColor="#eeb705"
+                        FontSize="27"
+                        Margin="20,0,0,0"
+                        FontFamily="Circular"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Fill"/>
+                        <BoxView Grid.Row="3"  HorizontalOptions="Fill" HeightRequest="0.5" Color="White" />
+                    </Grid>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1.5*"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" TextColor="White" Text="MysteryLocation is a geocaching application that allows users to share posts containing images attached with the GPS coordinates. The posts are displayed in the homepage, containing only a title and the distance to the coordinates of where it was taken, waiting to be unlocked by the user." 
+                        FontFamily="Circular"
+                               FontSize="18"
+                               VerticalOptions="StartAndExpand"
+                               LineHeight="1.1"
+                        />
+
+                        <Label Grid.Row="2" TextColor="White" Text="In order to be able to unlock a post as well as the post's image and text, the user must get within a 25 meter radius from the post's coordinate. The compass may be handy in this situation"
+                        FontFamily="Circular"
+                               FontSize="18"
+                               LineHeight="1.1"
+                               />
+                    </Grid>
+
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Button  Grid.Row="0" x:Name="Instruction" Text="CONTINUE"
+                        Clicked="Clicked"
+                    BackgroundColor="#eeb705"
+                    TextColor="Black"
+                              VerticalOptions="EndAndExpand">
+
+                        </Button>
+                    </Grid>
+
+
+                </StackLayout>
+
+            </ScrollView>
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

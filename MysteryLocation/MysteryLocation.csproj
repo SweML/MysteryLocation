@@ -16,6 +16,7 @@
     <Compile Remove="Model\NamedColor.cs" />
     <Compile Remove="Model\PostList.cs" />
     <Compile Remove="Model\UserHolder.cs" />
+    <Compile Remove="View\TipsView.xaml.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -64,6 +65,14 @@
     </Reference>
   </ItemGroup>
 
+  
+
+  <ItemGroup>
+    <Resource Include="View\TipsView.xaml.cs">
+      <DependentUpon>TipsView.xaml</DependentUpon>
+    </Resource>
+  </ItemGroup>
+
   <ItemGroup>
     <Compile Update="View\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -71,6 +80,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="View\AboutView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="View\CardViewTemp.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
@@ -97,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Update="View\TermsView.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="View\TipsTricksView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\UnlockedPostsPage.xaml">
       <Generator>MSBuild:Compile</Generator>

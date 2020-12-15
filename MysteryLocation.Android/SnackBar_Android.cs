@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
+﻿using Android.App;
 using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
@@ -27,7 +19,6 @@ namespace MysteryLocation.Droid
             Android.Views.View v = snacks.View;
             FrameLayout.LayoutParams param = (FrameLayout.LayoutParams)v.LayoutParameters;
             param.Gravity = GravityFlags.Top;
-            //v.StartAnimation(Android.Views.Animations.AnimationUtils.LoadAnimation(this, );
             v.LayoutParameters = param;
             v.SetBackgroundColor(Android.Graphics.Color.Rgb(128,117,116));
             snacks.Show();
@@ -42,7 +33,6 @@ namespace MysteryLocation.Droid
             Android.Views.View v = snacks.View;
             FrameLayout.LayoutParams param = (FrameLayout.LayoutParams)v.LayoutParameters;
             param.Gravity = GravityFlags.Top;
-            //v.StartAnimation(Android.Views.Animations.AnimationUtils.LoadAnimation(this, );
             v.LayoutParameters = param;
             v.SetBackgroundColor(Android.Graphics.Color.Rgb(128, 117, 116));
             snacks.Show();

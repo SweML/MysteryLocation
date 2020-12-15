@@ -5,11 +5,9 @@ using Plugin.Toast;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-[assembly: ExportFont("Helvetica93.ttf", Alias = "Helvetica")]
-[assembly: ExportFont("WalkWay_Semibold.ttf", Alias = "WalkWay")]
+
+
 [assembly: ExportFont("Lato-Light.ttf", Alias = "Latow")]
 [assembly: ExportFont("Lato-Black.ttf", Alias = "Latob")]
 [assembly: ExportFont("AndersonGrotesk-Ultrabold.otf", Alias = "Grotesk")]
@@ -26,8 +24,6 @@ namespace MysteryLocation
         public static APIConnection conn;
         private GPSFetcher gps;
 
-        //  public static double ScreenWidth;
-        //   public static double ScreenHeight;
         public App() // App starts here
         {
             
@@ -55,7 +51,6 @@ namespace MysteryLocation
             
             gps = new GPSFetcher();
             startGPS();
-            //List<Post> posts = null;
             Task.Run(async() => 
             {
                 if (!CrossConnectivity.Current.IsConnected)
@@ -106,44 +101,7 @@ namespace MysteryLocation
                 // Cares about both *ML and distance
             });
 
-         /*   Task.Run(async () =>
-            {
-                while (posts == null && !GlobalFuncs.gpsOn && !GlobalFuncs.settingsActive)
-                    await Task.Delay(25);
-                await updateFeed(posts);
-            });
-
-            Task.Run(async () =>
-            {
-                while (posts == null && !GlobalFuncs.gpsOn)
-                    await Task.Delay(25);
-                await updateMarked(posts);
-            });
-
-            Task.Run(async () =>
-            {
-                while (posts == null)
-                    await Task.Delay(25);
-                await updateUnlocked(posts);
-            });*/
         }
-
-        public async Task updateFeed(List<Post> temp)
-        {
-            
-            GlobalFuncs.fvm.updateListElements(temp);
-        }
-
-        public async Task updateMarked(List<Post> temp)
-        {
-            GlobalFuncs.mvm.updateListElements(temp);
-        }
-
-        public async Task updateUnlocked(List<Post> temp)
-        {
-            GlobalFuncs.mvm.updateListElements(temp);
-        }
-
 
         protected override void OnSleep()
         {
@@ -155,7 +113,6 @@ namespace MysteryLocation
         {
             if (gps == null) { 
                 gps = new GPSFetcher();
-                Console.WriteLine("New GPSFetcher onResume. If this happens we have to do something else with the fetches references to vm:s");
             }
             startGPS();
         }
